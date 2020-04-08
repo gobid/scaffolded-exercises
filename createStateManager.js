@@ -42,6 +42,9 @@ const ast = recast.parse(scriptString);
 /* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope */
 let scopeChain = [["Program"]];
 
+/* will be an array of objects, each with the location of the update in the source code + the update itself */
+let scriptUpdates = [];
+
 estraverse.traverse(ast.program, {
     enter: enter,
     leave: leave
@@ -54,6 +57,29 @@ fs.writeFileSync(`./state_manager_${fileKey}.json`, stateManagerStr);
 
 let scopeListStr = JSON.stringify(scopeList);
 fs.writeFileSync(`./scope_list_${fileKey}.json`, scopeListStr);
+
+function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
+    /* sort in descending order so we are modifying the file from the end to the beginning */
+    scriptUpdates = scriptUpdates.sort((a, b) => b["loc"] - a["loc"]);
+    let sourceArr = source.split("\n");
+    for (let update of scriptUpdates) {
+        const locs = update["loc"].split(".");
+        const line = locs[0];
+        // const col = locs[1];
+        sourceArr.splice(line, 0, update["autoStr"]);
+    }
+    /* add state manager object to top of file */
+    return `\n/* autogen added */ \nlet stateManager = ${stateManagerStr}\n/* end autogen added */\n\n${sourceArr.join(
+        "\n"
+    )}`;
+}
+
+const finalSource = addStateManagerUpdates(
+    scriptString,
+    scriptUpdates,
+    stateManagerStr
+);
+fs.writeFileSync(`./final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
 
 function enter(node) {
     let scopedFxnName = null;
@@ -83,13 +109,25 @@ function enter(node) {
     } else {
         spprint("enter", `curr scope: ${currentScope[0]}`);
     }
-
     if (node.type === "VariableDeclarator") {
         currentScope.push(node.id.name);
         addVarsToStateManager(node, currentScope);
     }
     if (node.type === "AssignmentExpression") {
         addVarsToStateManager(node, currentScope);
+    }
+    if (isVariableUpdate(node)) {
+        // let endLoc = meta.end.offset;
+        const endLoc = node.loc.end;
+        const locKey = `${endLoc["line"]}.${endLoc["column"]}`;
+
+        /* find var in state manager */
+        let nodeName = getVarName(node);
+        let stateManagerKey = `${currentScope[0]}:${nodeName}`;
+        /* add code in src to update the state manager */
+        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n`;
+
+        scriptUpdates.push({ loc: locKey, autoStr: updateStr });
     }
 }
 
@@ -123,6 +161,42 @@ function printScope(scope, node) {
             );
         }
     }
+}
+
+function isVariableUpdate(node) {
+    return (
+        (node.type === "ExpressionStatement" &&
+            node.expression.type === "AssignmentExpression") ||
+        node.type === "VariableDeclarator"
+    );
+}
+
+function getVarName(node) {
+    let varName = null;
+
+    switch (node.type) {
+        case "AssignmentExpression":
+            varName = node.left.name;
+            break;
+        case "VariableDeclarator":
+            varName = node.id.name;
+            break;
+        case "ExpressionStatement":
+            if (node.expression.left.type === "MemberExpression") {
+                if (typeof node.expression.left.name === "string") {
+                    varName = node.expression.left.name;
+                } else {
+                    varName = node.expression.left.object.name;
+                }
+                break;
+            } else {
+                varName = node.expression.left.name;
+                break;
+            }
+        default:
+            varName = `"DIDN'T CATCH CASE for type ${node.type}"`;
+    }
+    return varName;
 }
 
 function createsNewScope(node) {
