@@ -1,6 +1,7 @@
 /*
     Makes the following modifications to source code before rewriting it to `updated_<orig_file_name>.js`:
         - deanonymizes anonymous functions with variable declarators
+        - @TODO: make sure all variables have a let/var/const upon declaration
 */
 
 const recast = require("recast");
@@ -32,7 +33,7 @@ function parseTreeAndUpdate(source) {
             let startLoc = meta.start.offset;
             let endLoc = meta.end.offset;
 
-            // check to see if there is a variable declarator and remove it if so
+            /* check to see if there is a variable declarator and remove it if so */
             let possibleDeclaratorStartLoc = (startLoc - 5 > 0) ? startLoc - 5 : 0;
             const possibleDeclarator = source.slice(possibleDeclaratorStartLoc, startLoc);
             if (possibleDeclarator.includes('const') 
