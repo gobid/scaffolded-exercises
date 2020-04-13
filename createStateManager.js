@@ -34,7 +34,7 @@ const spprint = function (caller, info, isObj = false) {
     }
 };
 
-const fileKey = "xkcd_src2";
+const fileKey = "xkcd_src";
 const scriptString = fs
     .readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`))
     .toString();

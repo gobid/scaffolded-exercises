@@ -1,3 +1,5 @@
+/** Using es5 syntax because it seems that Theseus (related to Fondue) can't parse es6 */
+
 const express = require("express");
 const path = require("path");
 const fondue = require("fondue");
@@ -6,10 +8,10 @@ const app = express();
 app.use(express.static(path.join(__dirname, "xkcd/xkcd.com")));
 app.use(express.static(path.join(__dirname, "xkcd/imgs.xkcd.com")));
 app.use(express.static(path.join(__dirname, "xkcd")));
-app.use(require("fondue-middleware")()); // // @TODO: 17 in fondue-middleware. Try to update
 const PORT = 3000;
 
-app.get("/", (req, res) => {
+app.get("/", function (req, res) {
+    app.use(require("fondue-middleware")()); // // @TODO: 17 security issues in fondue-middleware. Try to update
     res.set("Content-Type", "text/html");
     res.send(
         Buffer.from(
@@ -18,25 +20,6 @@ app.get("/", (req, res) => {
     );
 });
 
-// app.get("/", (req, res, next) => {
-//     window.fondue = fondue;
-//     console.log("res", res);
-
-//     let sandbox = { __tracer: undefined, console: console, require: require };
-//     let tracer = sandbox.__tracer;
-
-//     let functions = {};
-//     let nodesHandle = tracer.trackNodes();
-//     tracer.newNodes(nodesHandle).forEach(function (n) {
-//         if (n.type === "function") {
-//             functions[n.name] = n;
-//         }
-//     });
-
-//     let fooNode = functions["foo"];
-//     console.log("foo started at", fooNode.start, "and ended at", fooNode.end);
-// });
-
-app.listen(PORT, () =>
-    console.log(`Example app listening at http://localhost:${PORT}`)
-);
+app.listen(PORT, function () {
+    console.log("Example app listening at http://localhost:" + "3000");
+});
