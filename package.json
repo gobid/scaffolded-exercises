@@ -12,7 +12,8 @@
     "jquery": "^3.5.0",
     "jsdom": "^16.2.2",
     "json-stringify-safe": "^5.0.1",
-    "recast": "^0.18.7"
+    "recast": "^0.18.7",
+    "stacktrace-js": "^2.0.2"
   },
   "devDependencies": {},
   "scripts": {

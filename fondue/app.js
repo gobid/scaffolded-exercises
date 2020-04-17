@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "xkcd")));
 const PORT = 3000;
 
 app.get("/", function (req, res) {
-    app.use(require("fondue-middleware")()); // // @TODO: 17 security issues in fondue-middleware. Try to update
+    // app.use(require("fondue-middleware")()); // // @TODO: 17 security issues in fondue-middleware. Try to update
     res.set("Content-Type", "text/html");
     res.send(
         Buffer.from(
