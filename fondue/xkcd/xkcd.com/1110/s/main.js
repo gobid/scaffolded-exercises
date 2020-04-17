@@ -14,9 +14,8 @@ var callback2 = (fnName) => stackframes => {
     }
 };
 
-
-var eventPos = StackTrace.instrument(eventPosOriginal, callback2("eventPos"));
-function eventPosOriginal(e) {
+eventPos = StackTrace.instrument(eventPos, callback2("eventpos"));
+function eventPos(e) {
     if (e.type.match(/^touch/)) {
         e = e.originalEvent.changedTouches[0];
     }
@@ -26,41 +25,38 @@ function eventPosOriginal(e) {
     };
 }
 
-// var Map = StackTrace.instrument(MapOriginal, callback2("Map"));
 function Map($container) {
-    // StackTrace.get().then();
-    var instrumentedcss = StackTrace.instrument($container.css, callback2("css"));
-    $container.css = instrumentedcss;
-    $container.css({
-        "z-index": 1,
-        overflow: "hidden",
-        width: "740px",
-        height: "694px",
-        margin: "0px auto 0",
-        background: "#fff",
-        position: "relative"
-    });
 
-    var $overlay = $container.children("img");
+    indirectcss = StackTrace.instrument(indirectcss, callback2("container-css"));
+    function indirectcss() {
+        $container.css({
+            "z-index": 1,
+            overflow: "hidden",
+            width: "740px",
+            height: "694px",
+            margin: "0px auto 0",
+            background: "#fff",
+            position: "relative"
+        });
+    }
+    indirectcss();
+
+    var $overlay = StackTrace.instrument(() => $container.children("img"), callback2("container-children-img"))();
 
     $overlay.css({
         background: "transparent",
         position: "relative"
     });
 
-    var sign = StackTrace.instrument(signOriginal, callback2("sign"));
-    function signOriginal(x) {
+    function sign(x) {
         return x > 0 ? +1 : x < 0 ? -1 : 0;
     }
 
-    var pow = StackTrace.instrument(powOriginal, callback2("pow"));
-    function powOriginal(x, y) {
+    function pow(x, y) {
         return Math.pow(Math.abs(x), y) * sign(x);
     }
 
-    var clamp = StackTrace.instrument(clampOriginal, callback2("clamp"));
-    function clampOriginal(x, min, max) {
-        // StackTrace.get().then(callback);
+    function clamp(x, min, max) {
         return Math.max(Math.min(x, max), min);
     }
 
@@ -91,19 +87,16 @@ function Map($container) {
         zIndex: -1,
         background: "#000"
     });
-    // StackTrace.get().then(callback);
 
     var centre = [-1, 0];
 
-    var update = StackTrace.instrument(updateOriginal, callback2("update"));
-    function updateOriginal() {
-        // StackTrace.get().then(callback);
-        var instrumentedcss = StackTrace.instrument($map.css, callback2("map-css"));
-        $map.css = instrumentedcss;
-        $map.css({
-            left: position[0],
-            top: position[1]
-        });
+    function update() {
+        StackTrace.instrument(() => {
+            $map.css({
+                left: position[0],
+                top: position[1]
+            });
+        }, callback2("map-css"))();
 
         var centre_last = centre;
         centre = [Math.floor(-position[0] / tilesize), Math.floor(-position[1] / tilesize)];
@@ -144,8 +137,7 @@ function Map($container) {
 
     update();
 
-    var drag = StackTrace.instrument(dragUninstrumented, callback2("drag"));
-    function dragUninstrumented(e, callback) {
+    function drag(e) {
         if (scroll_delta) {
             var pos = eventPos(e);
 
