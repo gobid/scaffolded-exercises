@@ -73,7 +73,14 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         sourceArr.splice(line, 0, update["autoStr"]);
     }
     /* compile the updated source code and add the state manager object to it */
-    return `\n/* autogen added */ \nlet stateManager = ${stateManagerStr}\n/* end autogen added */\n\n${sourceArr.join(
+
+    const fxnCallCallback = (fnName) => (stackframes) => {
+        console.log(fnName, " was called");
+    };
+
+    const fxnCallCallbackStr = `const fxnCallCallback = ${fxnCallCallback.toString()};`;
+
+    return `\n/* autogen added */ \nlet stateManager = ${stateManagerStr}\n ${fxnCallCallbackStr}\n/* end autogen added */\n\n${sourceArr.join(
         "\n"
     )}`;
 }
@@ -86,6 +93,19 @@ function enter(node) {
         spprint(
             `ERROR: function ${node.id.name} not deanonymized. Handle error in deanonymization script (rewriteCode.js).`
         );
+    }
+    if (node.type === "FunctionDeclaration") {
+        console.log(scriptString);
+        const fxnName = node.id.name;
+        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));`;
+
+        const startLine = node.loc.start.line - 1;
+        const locKey = `${startLine}.0`;
+
+        scriptUpdates.push({
+            loc: locKey,
+            autoStr: updateStr
+        });
     }
     if (createsNewScope(node)) {
         /* initialized the scopeChain to include the global "Program" state, so don't add it twice */
