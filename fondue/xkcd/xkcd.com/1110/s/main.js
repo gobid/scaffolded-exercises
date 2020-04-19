@@ -41,9 +41,6 @@ const fxnCallCallback = (fnName) => (stackframes) => {
 };
 /* end autogen added */
 
-/* autogen added */
-
-eventPos = StackTrace.instrument(eventPos, fxnCallCallback("eventPos"));
 function eventPos(e) {
     if (e.type.match(/^touch/)) {
         e = e.originalEvent.changedTouches[0];
@@ -57,19 +54,21 @@ function eventPos(e) {
         pageY: e.pageY
     };
 }
-
-/* autogen added */
-
 function Map($container) {
-    $container.css({
-        "z-index": 1,
-        overflow: "hidden",
-        width: "740px",
-        height: "694px",
-        margin: "0px auto 0",
-        background: "#fff",
-        position: "relative"
-    });
+    /* autogen added */
+
+    StackTrace.instrument(() => {
+        $container.css({
+            "z-index": 1,
+            overflow: "hidden",
+            width: "740px",
+            height: "694px",
+            margin: "0px auto 0",
+            background: "#fff",
+            position: "relative"
+        });
+    }, fxnCallCallback("$container.css"))();
+    /* end autogen added */
 
     var $overlay = $container.children("img");
 
@@ -77,10 +76,15 @@ function Map($container) {
 
     stateManager["Program:Map:$overlay"] = $overlay;
 
-    $overlay.css({
-        background: "transparent",
-        position: "relative"
-    });
+    /* autogen added */
+
+    StackTrace.instrument(() => {
+        $overlay.css({
+            background: "transparent",
+            position: "relative"
+        });
+    }, fxnCallCallback("$overlay.css"))();
+    /* end autogen added */
 
     /* autogen added */
 
@@ -151,21 +155,23 @@ function Map($container) {
 
     stateManager["Program:Map:$map"] = $map;
 
-    var map_size = [
-        (size[1] + size[3]) * tilesize,
-        (size[0] + size[2]) * tilesize
-    ];
+    var map_size = [(size[1] + size[3]) * tilesize, (size[0] + size[2]) * tilesize];
 
     /* autogen added */
 
     stateManager["Program:Map:map_size"] = map_size;
 
-    $map.css({
-        width: map_size[0],
-        height: map_size[1],
-        position: "absolute",
-        zIndex: -1
-    });
+    /* autogen added */
+
+    StackTrace.instrument(() => {
+        $map.css({
+            width: map_size[0],
+            height: map_size[1],
+            position: "absolute",
+            zIndex: -1
+        });
+    }, fxnCallCallback("$map.css"))();
+    /* end autogen added */
 
     var position = [-(size[3] + 0.03) * tilesize, -(size[0] - 0.55) * tilesize];
 
@@ -173,14 +179,19 @@ function Map($container) {
 
     stateManager["Program:Map:position"] = position;
 
-    $map.find(".ground").css({
-        top: size[0] * tilesize,
-        height: size[2] * tilesize,
-        position: "absolute",
-        width: "100%",
-        zIndex: -1,
-        background: "#000"
-    });
+    /* autogen added */
+
+    StackTrace.instrument(() => {
+        $map.find(".ground").css({
+            top: size[0] * tilesize,
+            height: size[2] * tilesize,
+            position: "absolute",
+            width: "100%",
+            zIndex: -1,
+            background: "#000"
+        });
+    }, fxnCallCallback("$map.find"))();
+    /* end autogen added */
 
     var centre = [-1, 0];
 
@@ -192,10 +203,15 @@ function Map($container) {
 
     update = StackTrace.instrument(update, fxnCallCallback("update"));
     function update() {
-        $map.css({
-            left: position[0],
-            top: position[1]
-        });
+        /* autogen added */
+
+        StackTrace.instrument(() => {
+            $map.css({
+                left: position[0],
+                top: position[1]
+            });
+        }, fxnCallCallback("$map.css"))();
+        /* end autogen added */
 
         var centre_last = centre;
 
@@ -203,10 +219,7 @@ function Map($container) {
 
         stateManager["Program:Map:update:centre_last"] = centre_last;
 
-        centre = [
-            Math.floor(-position[0] / tilesize),
-            Math.floor(-position[1] / tilesize)
-        ];
+        centre = [Math.floor(-position[0] / tilesize), Math.floor(-position[1] / tilesize)];
 
         /* autogen added */
 
@@ -225,10 +238,7 @@ function Map($container) {
 
             stateManager["Program:Map:update:y"] = y;
 
-            return (
-                (y >= 0 ? y + 1 + "s" : -y + "n") +
-                (x >= 0 ? x + 1 + "e" : -x + "w")
-            );
+            return (y >= 0 ? y + 1 + "s" : -y + "n") + (x >= 0 ? x + 1 + "e" : -x + "w");
         };
 
         /* autogen added */
@@ -287,19 +297,44 @@ function Map($container) {
 
                         stateManager["Program:Map:update:$image"] = $image;
 
-                        $image
-                            .load(function () {
-                                $(this).show();
-                            })
-                            .error(function () {
-                                $(this).remove();
-                            });
+                        /* autogen added */
 
-                        $map.append($image);
+                        StackTrace.instrument(() => {
+                            $image
+                                .load(function () {
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        $(this).show();
+                                    }, fxnCallCallback("$"))();
+                                    /* end autogen added */
+                                })
+                                .error(function () {
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        $(this).remove();
+                                    }, fxnCallCallback("$"))();
+                                    /* end autogen added */
+                                });
+                        }, fxnCallCallback("$image.load"))();
+                        /* end autogen added */
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {
+                            $map.append($image);
+                        }, fxnCallCallback("$map.append"))();
+                        /* end autogen added */
                     }
                 }
 
-            $remove.remove();
+            /* autogen added */
+
+            StackTrace.instrument(() => {
+                $remove.remove();
+            }, fxnCallCallback("$remove.remove"))();
+            /* end autogen added */
         }
     }
 
@@ -317,11 +352,7 @@ function Map($container) {
             stateManager["Program:Map:drag:pos"] = pos;
 
             position[0] = Math.round(
-                clamp(
-                    pos.pageX + scroll_delta[0],
-                    -(size[1] + size[3]) * tilesize + container_size[0],
-                    0
-                )
+                clamp(pos.pageX + scroll_delta[0], -(size[1] + size[3]) * tilesize + container_size[0], 0)
             );
 
             /* autogen added */
@@ -329,11 +360,7 @@ function Map($container) {
             stateManager["Program:Map:drag:position"] = position;
 
             position[1] = Math.round(
-                clamp(
-                    pos.pageY + scroll_delta[1],
-                    -(size[0] + size[2]) * tilesize + container_size[1],
-                    0
-                )
+                clamp(pos.pageY + scroll_delta[1], -(size[0] + size[2]) * tilesize + container_size[1], 0)
             );
 
             /* autogen added */
@@ -344,35 +371,60 @@ function Map($container) {
         }
     }
 
-    $container.on("mousedown touchstart", function (e) {
-        if (e.button && e.button >= 2) {
-            return;
-        }
+    /* autogen added */
 
-        var pos = eventPos(e);
+    StackTrace.instrument(() => {
+        $container.on("mousedown touchstart", function (e) {
+            if (e.button && e.button >= 2) {
+                return;
+            }
 
-        /* autogen added */
+            var pos = eventPos(e);
 
-        stateManager["Program:Map:pos"] = pos;
+            /* autogen added */
 
-        scroll_delta = [position[0] - pos.pageX, position[1] - pos.pageY];
+            stateManager["Program:Map:pos"] = pos;
 
-        /* autogen added */
+            scroll_delta = [position[0] - pos.pageX, position[1] - pos.pageY];
 
-        stateManager["Program:Map:scroll_delta"] = scroll_delta;
+            /* autogen added */
 
-        $(document).on(e.type == "mousedown" ? "mousemove" : "touchmove", drag);
-        e.preventDefault();
-    });
+            stateManager["Program:Map:scroll_delta"] = scroll_delta;
 
-    $(document).on("mouseup touchend", function (e) {
-        $(document).off("mousemove touchmove", drag);
-        scroll_delta = null;
+            /* autogen added */
 
-        /* autogen added */
+            StackTrace.instrument(() => {
+                $(document).on(e.type == "mousedown" ? "mousemove" : "touchmove", drag);
 
-        stateManager["Program:Map:scroll_delta"] = scroll_delta;
-    });
+                /* autogen added */
+
+                StackTrace.instrument(() => {}, fxnCallCallback("$"))();
+                /* end autogen added */
+                e.preventDefault();
+            }, fxnCallCallback("e.preventDefault"))();
+            /* end autogen added */
+        });
+    }, fxnCallCallback("$container.on"))();
+    /* end autogen added */
+
+    /* autogen added */
+
+    StackTrace.instrument(() => {
+        $(document).on("mouseup touchend", function (e) {
+            /* autogen added */
+
+            StackTrace.instrument(() => {
+                $(document).off("mousemove touchmove", drag);
+            }, fxnCallCallback("$"))();
+            /* end autogen added */
+            scroll_delta = null;
+
+            /* autogen added */
+
+            stateManager["Program:Map:scroll_delta"] = scroll_delta;
+        });
+    }, fxnCallCallback("$"))();
+    /* end autogen added */
 }
 
 /* 50:72:6f:50:75:6b:65:20:69:73:20:61:77:65:73:6f:6d:65 */

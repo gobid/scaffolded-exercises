@@ -35,12 +35,8 @@ function parseTreeAndUpdate(source) {
             let endLoc = meta.end.offset;
 
             /* check to see if there is a variable declarator and remove it if so */
-            let possibleDeclaratorStartLoc =
-                startLoc - 5 > 0 ? startLoc - 5 : 0;
-            const possibleDeclarator = source.slice(
-                possibleDeclaratorStartLoc,
-                startLoc
-            );
+            let possibleDeclaratorStartLoc = startLoc - 5 > 0 ? startLoc - 5 : 0;
+            const possibleDeclarator = source.slice(possibleDeclaratorStartLoc, startLoc);
             if (
                 possibleDeclarator.includes("const") ||
                 possibleDeclarator.includes("var") ||
@@ -50,22 +46,30 @@ function parseTreeAndUpdate(source) {
             }
 
             const deanonymizedFunction = deanonymizeFunctionExpr(node);
-            const deanonymizedFunctionStr = recast.print(deanonymizedFunction)
-                .code;
-            source =
-                source.slice(0, startLoc) +
-                deanonymizedFunctionStr +
-                source.slice(endLoc);
+            const deanonymizedFunctionStr = recast.print(deanonymizedFunction).code;
+            source = source.slice(0, startLoc) + deanonymizedFunctionStr + source.slice(endLoc);
             updates = true;
         }
+        // if (isMethodCall(node) && updates === false) {
+        //     const stringifiedNode = scriptString.slice(node.range[0], node.range[1] + 1);
+        //     const nodeNameRange = node.callee.range; // [charStartAt, charEndAt]
+        //     const nodeName = scriptString.slice(nodeNameRange[0], nodeNameRange[1] + 1);
+        //     const updateStr = `\n/* autogen added */ \n StackTrace.instrument(() => {
+        //                             \n${stringifiedNode}},
+        //                             fxnCallCallback("${nodeName}"))`;
+
+        //     let startLoc = meta.start.offset;
+        //     let endLoc = meta.end.offset;
+        //     source = source.slice(0, startLoc) + updateStr + source.slice(endLoc);
+        //     updates = true;
+        // }
     });
     return source;
 }
 
 function isAnonymizedFunction(node) {
     return (
-        (node.type === "VariableDeclarator" &&
-            node.init.type === "FunctionExpression") ||
+        (node.type === "VariableDeclarator" && node.init.type === "FunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")
@@ -75,17 +79,10 @@ function isAnonymizedFunction(node) {
 function deanonymizeFunctionExpr(node) {
     const functionName = node.id.name ? node.id.name : "REAL_ANON_SOS";
     const newId = b.identifier(functionName);
-    const newNode = b.functionDeclaration(
-        newId,
-        node.init.params,
-        node.init.body
-    );
+    const newNode = b.functionDeclaration(newId, node.init.params, node.init.body);
     const recastNode = recast.print(newNode).code;
     const recastNodeFunctionDeclaration = recastNode.split("\n")[0];
-    console.log(
-        "deanonymizeFunctionExpr: function deanonymized! ",
-        recastNodeFunctionDeclaration
-    );
+    console.log("deanonymizeFunctionExpr: function deanonymized! ", recastNodeFunctionDeclaration);
     return newNode;
 }
 
