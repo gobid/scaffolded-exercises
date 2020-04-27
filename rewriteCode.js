@@ -36,17 +36,26 @@ function parseTreeAndUpdate(source) {
 
             /* check to see if there is a variable declarator and remove it if so */
             let possibleDeclaratorStartLoc =
-                startLoc - 6 > 0 ? startLoc - 6 : 0;
-            const possibleDeclarator = source.slice(
+                startLoc - 4 > 0 ? startLoc - 4 : 0;
+            let possibleDeclarator = source.slice(
                 possibleDeclaratorStartLoc,
                 startLoc
-            );
+            ).trim();
+
             if (
-                possibleDeclarator.includes("const") ||
                 possibleDeclarator.includes("var") ||
                 possibleDeclarator.includes("let")
             ) {
                 startLoc = possibleDeclaratorStartLoc;
+            } else {
+                possibleDeclaratorStartLoc = startLoc - 6 > 0 ? startLoc - 6 : 0;
+                possibleDeclarator = source.slice(
+                        possibleDeclaratorStartLoc,
+                        startLoc
+                ).trim();
+                if (possibleDeclarator.includes("const")) {
+                    startLoc = possibleDeclaratorStartLoc;
+                }
             }
 
             const deanonymizedFunction = deanonymizeFunctionExpr(node);
