@@ -65,7 +65,8 @@ function parseTreeAndUpdate(source) {
 function isAnonymizedFunction(node) {
     return (
         (node.type === "VariableDeclarator" &&
-            node.init.type === "FunctionExpression") ||
+            node.init.type === "FunctionExpression"  ||
+            node.init.type === "ArrowFunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")
