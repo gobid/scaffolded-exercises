@@ -103,27 +103,31 @@ function enter(node) {
     }
     /** adding stacktrace instrumentation to library methods (ex: $map.css) */
     if (isMethodCall(node)) {
-        const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
-        let methodName = stringifiedNode.split("\n")[0];
-        const methodNameEnd = methodName.indexOf("(") > 0 ? methodName.indexOf("(") : methodName.indexOf("{");
-        methodName = methodName.slice(0, methodNameEnd);
+        if (node.type === "ExpressionStatement") {
+            const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
+            let methodName = stringifiedNode.split("\n")[0];
+            const methodNameEnd =
+                methodName.indexOf("(") > 0 ? methodName.indexOf("(") : methodName.indexOf("{");
+            methodName = methodName.slice(0, methodNameEnd);
 
-        const updateStartStr = `\n/* autogen added */ \n StackTrace.instrument(() => {`;
-        const updateEndStr = `\n }, fxnCallCallback("${methodName}"))() \n /* end autogen added */`;
+            const updateStartStr = `\n/* autogen added */ \n StackTrace.instrument(() => {`;
+            const updateEndStr = `\n }, fxnCallCallback("${methodName}"))() \n /* end autogen added */`;
 
-        const startLoc = node.loc.start;
-        const startLocKey = `${startLoc["line"] - 1}.${startLoc["column"]}`;
-        scriptUpdates.push({
-            loc: startLocKey,
-            autoStr: updateStartStr
-        });
+            const startLoc = node.loc.start;
+            const startLocKey = `${startLoc["line"] - 1}.${startLoc["column"]}`;
+            scriptUpdates.push({
+                loc: startLocKey,
+                autoStr: updateStartStr
+            });
 
-        const endLoc = node.loc.end;
-        const endLocKey = `${endLoc["line"]}.${endLoc["column"]}`;
-        scriptUpdates.push({
-            loc: endLocKey,
-            autoStr: updateEndStr
-        });
+            const endLoc = node.loc.end;
+            const endLocKey = `${endLoc["line"]}.${endLoc["column"]}`;
+            scriptUpdates.push({
+                loc: endLocKey,
+                autoStr: updateEndStr
+            });
+        } else if (node.type === "VariableDeclarator") {
+        }
     }
 
     if (createsNewScope(node)) {
@@ -214,9 +218,12 @@ function isFunctionDeclaration(node) {
 /** Check for instrumenting Stacktrace.js */
 function isMethodCall(node) {
     return (
-        node.type === "ExpressionStatement" &&
-        node.expression.type === "CallExpression" &&
-        node.expression.callee.type === "MemberExpression"
+        (node.type === "ExpressionStatement" &&
+            node.expression.type === "CallExpression" &&
+            node.expression.callee.type === "MemberExpression") ||
+        (node.type === "VariableDeclarator" &&
+            node.init.type === "CallExpression" &&
+            node.init.callee.type === "MemberExpression")
     );
 }
 
