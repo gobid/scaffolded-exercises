@@ -36,7 +36,7 @@ function parseTreeAndUpdate(source) {
 
             /* check to see if there is a variable declarator and remove it if so */
             let possibleDeclaratorStartLoc =
-                startLoc - 5 > 0 ? startLoc - 5 : 0;
+                startLoc - 6 > 0 ? startLoc - 6 : 0;
             const possibleDeclarator = source.slice(
                 possibleDeclaratorStartLoc,
                 startLoc
