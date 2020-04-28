@@ -35,9 +35,7 @@ const spprint = function (caller, info, isObj = false) {
 };
 
 const fileKey = "xkcd_src";
-const scriptString = fs
-    .readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`))
-    .toString();
+const scriptString = fs.readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`)).toString();
 const ast = recast.parse(scriptString);
 
 /* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope */
@@ -54,11 +52,7 @@ spprint("traversal results", programScopes);
 let stateManagerStr = JSON.stringify(stateManager);
 
 /* update the source code with the state manager */
-const finalSource = addStateManagerUpdates(
-    scriptString,
-    scriptUpdates,
-    stateManagerStr
-);
+const finalSource = addStateManagerUpdates(scriptString, scriptUpdates, stateManagerStr);
 fs.writeFileSync(`./final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
 
 /* after traversing through the source code's AST representation and collecting information about the places where variable updates are made, modify the source code so that it updates the stateManager every time a variable gets updated. */
@@ -73,7 +67,13 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         sourceArr.splice(line, 0, update["autoStr"]);
     }
     /* compile the updated source code and add the state manager object to it */
-    return `\n/* autogen added */ \nlet stateManager = ${stateManagerStr}\n/* end autogen added */\n\n${sourceArr.join(
+    const fxnCallCallback = (fnName) => (stackframes) => {
+        console.log(fnName, " was called");
+    };
+
+    const fxnCallCallbackStr = `const fxnCallCallback = ${fxnCallCallback.toString()};`;
+
+    return `\n/* autogen added */ \nlet stateManager = ${stateManagerStr}\n ${fxnCallCallbackStr}\n/* end autogen added */\n\n${sourceArr.join(
         "\n"
     )}`;
 }
@@ -86,6 +86,47 @@ function enter(node) {
         spprint(
             `ERROR: function ${node.id.name} not deanonymized. Handle error in deanonymization script (rewriteCode.js).`
         );
+    }
+    /** adding stacktrace instrumentation to functions */
+    if (isFunctionDeclaration(node)) {
+        const fxnName = node.id.name;
+        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));`;
+
+        const startLine = node.loc.start.line - 1;
+        const locKey = `${startLine}.0`;
+
+        scriptUpdates.push({
+            loc: locKey,
+            autoStr: updateStr
+        });
+    }
+    /** adding stacktrace instrumentation to library methods (ex: $map.css) */
+    if (isMethodCall(node)) {
+        if (node.type === "ExpressionStatement") {
+            const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
+            let methodName = stringifiedNode.split("\n")[0];
+            const methodNameEnd =
+                methodName.indexOf("(") > 0 ? methodName.indexOf("(") : methodName.indexOf("{");
+            methodName = methodName.slice(0, methodNameEnd);
+
+            const updateStartStr = `\n/* autogen added */ \n StackTrace.instrument(() => {`;
+            const updateEndStr = `\n }, fxnCallCallback("${methodName}"))() \n /* end autogen added */`;
+
+            const startLoc = node.loc.start;
+            const startLocKey = `${startLoc["line"] - 1}.${startLoc["column"]}`;
+            scriptUpdates.push({
+                loc: startLocKey,
+                autoStr: updateStartStr
+            });
+
+            const endLoc = node.loc.end;
+            const endLocKey = `${endLoc["line"]}.${endLoc["column"]}`;
+            scriptUpdates.push({
+                loc: endLocKey,
+                autoStr: updateEndStr
+            });
+        } else if (node.type === "VariableDeclarator") {
+        }
     }
     if (createsNewScope(node)) {
         /* initialized the scopeChain to include the global "Program" state, so don't add it twice */
@@ -148,33 +189,39 @@ function leave(node) {
 /** pretty printing for scope information */
 function printScope(scope, node) {
     const declaredVars = scope.slice(1);
-    const varsDisplay =
-        declaredVars.length === 0 ? "NONE" : declaredVars.join(", ");
+    const varsDisplay = declaredVars.length === 0 ? "NONE" : declaredVars.join(", ");
     if (node.type === "Program") {
-        spprint(
-            "printScope",
-            `Variables declared in the global scope: ${varsDisplay}`
-        );
+        spprint("printScope", `Variables declared in the global scope: ${varsDisplay}`);
     } else {
         if (node.id && node.id.name) {
-            spprint(
-                "printScope",
-                `Variables declared in the function ${node.id.name}(): ${varsDisplay}`
-            );
+            spprint("printScope", `Variables declared in the function ${node.id.name}(): ${varsDisplay}`);
         } else {
-            spprint(
-                "printScope",
-                `Variables declared in anonymous function: ${varsDisplay}`
-            );
+            spprint("printScope", `Variables declared in anonymous function: ${varsDisplay}`);
         }
     }
 }
 
 function isVariableUpdate(node) {
     return (
-        (node.type === "ExpressionStatement" &&
-            node.expression.type === "AssignmentExpression") ||
+        (node.type === "ExpressionStatement" && node.expression.type === "AssignmentExpression") ||
         node.type === "VariableDeclarator"
+    );
+}
+
+/** Also includes making sure it's not an es5 class definition */
+function isFunctionDeclaration(node) {
+    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name);
+}
+
+/** Check for instrumenting Stacktrace.js */
+function isMethodCall(node) {
+    return (
+        (node.type === "ExpressionStatement" &&
+            node.expression.type === "CallExpression" &&
+            node.expression.callee.type === "MemberExpression") ||
+        (node.type === "VariableDeclarator" &&
+            node.init.type === "CallExpression" &&
+            node.init.callee.type === "MemberExpression")
     );
 }
 
@@ -210,11 +257,7 @@ function getVarName(node) {
 }
 
 function createsNewScope(node) {
-    return (
-        node.type === "FunctionDeclaration" ||
-        isAnonymizedFunction(node) ||
-        node.type === "Program"
-    );
+    return node.type === "FunctionDeclaration" || isAnonymizedFunction(node) || node.type === "Program";
 }
 
 /** add function inputs to the state manager object. The changing values of
@@ -245,8 +288,7 @@ function addVarsToStateManager(node, scope) {
 
 function isAnonymizedFunction(node) {
     return (
-        (node.type === "VariableDeclarator" &&
-            node.init.type === "FunctionExpression") ||
+        (node.type === "VariableDeclarator" && node.init.type === "FunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")
