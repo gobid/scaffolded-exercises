@@ -35,36 +35,22 @@ function parseTreeAndUpdate(source) {
             let endLoc = meta.end.offset;
 
             /* check to see if there is a variable declarator and remove it if so */
-            let possibleDeclaratorStartLoc =
-                startLoc - 4 > 0 ? startLoc - 4 : 0;
-            let possibleDeclarator = source.slice(
-                possibleDeclaratorStartLoc,
-                startLoc
-            ).trim();
+            let possibleDeclaratorStartLoc = startLoc - 4 > 0 ? startLoc - 4 : 0;
+            let possibleDeclarator = source.slice(possibleDeclaratorStartLoc, startLoc).trim();
 
-            if (
-                possibleDeclarator.includes("var") ||
-                possibleDeclarator.includes("let")
-            ) {
+            if (possibleDeclarator.includes("var") || possibleDeclarator.includes("let")) {
                 startLoc = possibleDeclaratorStartLoc;
             } else {
                 possibleDeclaratorStartLoc = startLoc - 6 > 0 ? startLoc - 6 : 0;
-                possibleDeclarator = source.slice(
-                        possibleDeclaratorStartLoc,
-                        startLoc
-                ).trim();
+                possibleDeclarator = source.slice(possibleDeclaratorStartLoc, startLoc).trim();
                 if (possibleDeclarator.includes("const")) {
                     startLoc = possibleDeclaratorStartLoc;
                 }
             }
 
             const deanonymizedFunction = deanonymizeFunctionExpr(node);
-            const deanonymizedFunctionStr = recast.print(deanonymizedFunction)
-                .code;
-            source =
-                source.slice(0, startLoc) +
-                deanonymizedFunctionStr +
-                source.slice(endLoc);
+            const deanonymizedFunctionStr = recast.print(deanonymizedFunction).code;
+            source = source.slice(0, startLoc) + deanonymizedFunctionStr + source.slice(endLoc);
             updates = true;
         }
     });
@@ -73,9 +59,8 @@ function parseTreeAndUpdate(source) {
 
 function isAnonymizedFunction(node) {
     return (
-        (node.type === "VariableDeclarator" &&
-            node.init.type === "FunctionExpression"  ||
-            node.init.type === "ArrowFunctionExpression") ||
+        (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
+        (node.init && node.init.type === "ArrowFunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")
@@ -85,17 +70,10 @@ function isAnonymizedFunction(node) {
 function deanonymizeFunctionExpr(node) {
     const functionName = node.id.name ? node.id.name : "REAL_ANON_SOS";
     const newId = b.identifier(functionName);
-    const newNode = b.functionDeclaration(
-        newId,
-        node.init.params,
-        node.init.body
-    );
+    const newNode = b.functionDeclaration(newId, node.init.params, node.init.body);
     const recastNode = recast.print(newNode).code;
     const recastNodeFunctionDeclaration = recastNode.split("\n")[0];
-    console.log(
-        "deanonymizeFunctionExpr: function deanonymized! ",
-        recastNodeFunctionDeclaration
-    );
+    console.log("deanonymizeFunctionExpr: function deanonymized! ", recastNodeFunctionDeclaration);
     return newNode;
 }
 
