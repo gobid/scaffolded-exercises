@@ -34,6 +34,7 @@ const spprint = function (caller, info, isObj = false) {
     }
 };
 
+// const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`)).toString();
 const ast = recast.parse(scriptString, { range: true });
@@ -91,7 +92,7 @@ function enter(node) {
     /** adding stacktrace instrumentation to functions */
     if (isFunctionDeclaration(node)) {
         const fxnName = node.id.name;
-        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));`;
+        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));\n/* end autogen added */\n`;
 
         const startLine = node.loc.start.line - 1;
         const locKey = `${startLine}.0`;
@@ -101,8 +102,12 @@ function enter(node) {
             autoStr: updateStr
         });
     }
+    /** adding stacktrace documentation to program-defined (non-library) methods */
+    if (isClassMethodDeclaration(node)) {
+        console.log(`class method definition of: ${node.key.name}`);
+    }
     /** adding stacktrace instrumentation to library methods (ex: $map.css) */
-    if (isMethodCall(node)) {
+    if (isLibraryMethodCall(node)) {
         if (node.type === "ExpressionStatement") {
             const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
             let methodName = stringifiedNode.split("\n")[0];
@@ -168,7 +173,7 @@ function enter(node) {
         // updating the value of `position` in the drag function...)
         let stateManagerKey = `${currentScope[0]}:${nodeName}`;
         /* add code in src to update the state manager */
-        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n`;
+        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n/* end autogen added */\n`;
 
         /* add updates to the update collector so that we can insert all the updates to the source code at the same time at the end of the traversal */
         scriptUpdates.push({
@@ -215,13 +220,18 @@ function isFunctionDeclaration(node) {
     return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name);
 }
 
+function isClassMethodDeclaration(node) {
+    return node.type === "Property" && node.value.type === "FunctionExpression";
+}
+
 /** Check for instrumenting Stacktrace.js */
-function isMethodCall(node) {
+function isLibraryMethodCall(node) {
     return (
         (node.type === "ExpressionStatement" &&
             node.expression.type === "CallExpression" &&
             node.expression.callee.type === "MemberExpression") ||
         (node.type === "VariableDeclarator" &&
+            node.init &&
             node.init.type === "CallExpression" &&
             node.init.callee.type === "MemberExpression")
     );
@@ -259,7 +269,12 @@ function getVarName(node) {
 }
 
 function createsNewScope(node) {
-    return node.type === "FunctionDeclaration" || isAnonymizedFunction(node) || node.type === "Program";
+    return (
+        node.type === "FunctionDeclaration" ||
+        isAnonymizedFunction(node) ||
+        node.type === "Program" ||
+        (node.type === "Property" && node.value.type === "FunctionExpression") /** class method */
+    );
 }
 
 /** add function inputs to the state manager object. The changing values of
@@ -290,7 +305,7 @@ function addVarsToStateManager(node, scope) {
 
 function isAnonymizedFunction(node) {
     return (
-        (node.type === "VariableDeclarator" && node.init.type === "FunctionExpression") ||
+        (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")

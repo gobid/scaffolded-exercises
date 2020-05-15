@@ -1,32 +1,33 @@
 {
-  "name": "live-variable-values",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "dependencies": {
-    "esprima": "^4.0.1",
-    "estraverse": "^4.3.0",
-    "express": "^4.17.1",
-    "fondue": "^0.6.1",
-    "fondue-middleware": "0.0.2",
-    "jquery": "^3.5.0",
-    "jsdom": "^16.2.2",
-    "json-stringify-safe": "^5.0.1",
-    "recast": "^0.18.7",
-    "stacktrace-js": "^2.0.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maxine/variable-value-tracking.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/maxine/variable-value-tracking/issues"
-  },
-  "homepage": "https://github.com/maxine/variable-value-tracking#readme"
+    "name": "live-variable-values",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "dependencies": {
+        "esprima": "^4.0.1",
+        "estraverse": "^4.3.0",
+        "express": "^4.17.1",
+        "fondue": "^0.6.1",
+        "fondue-middleware": "0.0.2",
+        "jquery": "^3.5.0",
+        "jsdom": "^16.2.2",
+        "json-stringify-safe": "^5.0.1",
+        "recast": "^0.18.7",
+        "stacktrace-js": "^2.0.2"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node fondue/app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/maxine/variable-value-tracking.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/maxine/variable-value-tracking/issues"
+    },
+    "homepage": "https://github.com/maxine/variable-value-tracking#readme"
 }

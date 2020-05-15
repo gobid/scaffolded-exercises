@@ -9,6 +9,7 @@ const b = recast.types.builders;
 const fs = require("fs");
 const esprima = require("esprima");
 
+// const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(`./${fileKey}.js`).toString();
 // const scriptString = fs.readFileSync("./test_src.js", "utf-8");
