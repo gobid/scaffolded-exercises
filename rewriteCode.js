@@ -22,7 +22,7 @@ function deanonymizeFunctionExpressions(source) {
     while (!isTraveralComplete) {
         prevUpdated = updatedSrc;
         updatedSrc = parseTreeAndUpdate(updatedSrc);
-        isTraveralComplete = prevUpdated === updatedSrc ? true : false;
+        isTraveralComplete = prevUpdated === updatedSrc;
     }
     return updatedSrc;
 }
