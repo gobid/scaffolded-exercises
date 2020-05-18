@@ -1,0 +1,2330 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://www.mapstd.com/ -->
+<html slick-uniqueid="1">
+  <head>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/stacktrace.js/2.0.2/stacktrace.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <style>
+      .gm-style .gm-style-mtc label,
+      .gm-style .gm-style-mtc div {
+        font-weight: 400;
+      }
+    </style>
+    <style>
+      .gm-control-active > img {
+        box-sizing: content-box;
+        display: none;
+        left: 50%;
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .gm-control-active > img:nth-child(1) {
+        display: block;
+      }
+      .gm-control-active:hover > img:nth-child(1),
+      .gm-control-active:active > img:nth-child(1) {
+        display: none;
+      }
+      .gm-control-active:hover > img:nth-child(2),
+      .gm-control-active:active > img:nth-child(3) {
+        display: block;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="./MapsTD_files/css" />
+    <style>
+      .gm-ui-hover-effect {
+        opacity: 0.6;
+      }
+      .gm-ui-hover-effect:hover {
+        opacity: 1;
+      }
+    </style>
+    <style>
+      .gm-style .gm-style-cc span,
+      .gm-style .gm-style-cc a,
+      .gm-style .gm-style-mtc div {
+        font-size: 10px;
+        box-sizing: border-box;
+      }
+    </style>
+    <style>
+      @media print {
+        .gm-style .gmnoprint,
+        .gmnoprint {
+          display: none;
+        }
+      }
+      @media screen {
+        .gm-style .gmnoscreen,
+        .gmnoscreen {
+          display: none;
+        }
+      }
+    </style>
+    <style>
+      .gm-style-pbc {
+        transition: opacity ease-in-out;
+        background-color: rgba(0, 0, 0, 0.45);
+        text-align: center;
+      }
+      .gm-style-pbt {
+        font-size: 22px;
+        color: white;
+        font-family: Roboto, Arial, sans-serif;
+        position: relative;
+        margin: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    </style>
+    <style>
+      .gm-style img {
+        max-width: none;
+      }
+      .gm-style {
+        font: 400 11px Roboto, Arial, sans-serif;
+        text-decoration: none;
+      }
+    </style>
+    <title>MapsTD</title>
+    <script src="./MapsTD_files/all.js" async="" crossorigin="anonymous"></script>
+    <script type="text/javascript" async="" src="./MapsTD_files/ga.js"></script>
+    <script id="twitter-wjs" src="./MapsTD_files/widgets.js"></script>
+    <script id="facebook-jssdk" src="./MapsTD_files/all(1).js"></script>
+    <script type="text/javascript" src="./MapsTD_files/mootools-yui-compressed.js"></script>
+    <script type="text/javascript" src="./MapsTD_files/mootools-more-yui.js"></script>
+    <script type="text/javascript" src="./MapsTD_files/js"></script>
+    <script type="text/javascript" src="./MapsTD_files/mapstd-1.2.0.js"></script>
+    <link href="./MapsTD_files/mapstd-1.2.0.css" rel="stylesheet" type="text/css" />
+    <link id="favicon" href="https://www.mapstd.com/images/favicon.png" rel="icon" type="image/png" />
+    <meta name="og:site_name" content="MapsTD" />
+    <meta name="og:title" content="MapsTD" />
+    <meta name="og:url" content="http://www.MapsTD.com/" />
+    <meta name="og:image" content="http://www.mapstd.com/images/avatar.png" />
+    <meta name="og:type" content="game" />
+    <meta
+      name="og:description"
+      content="MapsTD is a tower defence game built on Google Maps. Play anywhere in the world!"
+    />
+    <meta
+      name="description"
+      content="MapsTD is a tower defence game built on Google Maps. Play anywhere in the world!"
+    />
+    <meta name="fb:admins" content="204502884" />
+    <meta name="fb:app_id" content="267555096654594" />
+    <script charset="utf-8" src="./MapsTD_files/button.93a0c25c2d2f3081c705c98c2d9dec0e.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./MapsTD_files/common.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./MapsTD_files/util.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./MapsTD_files/map.js"></script>
+    <style type="text/css">
+      .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001;
+      }
+      .fb_reposition {
+        overflow: hidden;
+        position: relative;
+      }
+      .fb_invisible {
+        display: none;
+      }
+      .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal;
+      }
+      .fb_reset > div {
+        overflow: hidden;
+      }
+      @keyframes fb_transform {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .fb_animate {
+        animation: fb_transform 0.3s forwards;
+      }
+      .fb_dialog {
+        background: rgba(82, 82, 82, 0.7);
+        position: absolute;
+        top: -10000px;
+        z-index: 10001;
+      }
+      .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .fb_dialog_content {
+        background: #fff;
+        color: #373737;
+      }
+      .fb_dialog_close_icon {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0
+          transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px;
+      }
+      .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px;
+      }
+      .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1;
+      }
+      .fb_dialog_close_icon:hover {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px
+          transparent;
+      }
+      .fb_dialog_close_icon:active {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px
+          transparent;
+      }
+      .fb_dialog_iframe {
+        line-height: 0;
+      }
+      .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0;
+      }
+      .fb_dialog_content .dialog_title > span {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px;
+      }
+      body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%;
+      }
+      .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none;
+      }
+      .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px;
+      }
+      #fb-root #fb_dialog_ipad_overlay {
+        background: rgba(0, 0, 0, 0.4);
+        bottom: 0;
+        left: 0;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10000;
+      }
+      #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none;
+      }
+      .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden;
+      }
+      .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0;
+      }
+      .fb_dialog_content .dialog_header {
+        background: linear-gradient(from(#738aba), to(#2c4987));
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: white 0 1px 1px -1px inset;
+        color: #fff;
+        font: bold 14px Helvetica, sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, 0.296875) 0 -1px 0;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+      .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%;
+      }
+      .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px;
+      }
+      .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px;
+      }
+      .fb_dialog_content .touchable_button {
+        background: linear-gradient(from(#4267b2), to(#2a4887));
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative;
+      }
+      .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font: bold 12px Helvetica, sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px 6px;
+        text-shadow: rgba(0, 30, 84, 0.296875) 0 -1px 0;
+      }
+      .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .fb_dialog_content .dialog_content {
+        background: url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px;
+      }
+      .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px;
+      }
+      #fb_dialog_loader_close {
+        float: left;
+      }
+      .fb_dialog.fb_dialog_mobile .fb_dialog_close_button {
+        text-shadow: rgba(0, 30, 84, 0.296875) 0 -1px 0;
+      }
+      .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden;
+      }
+      #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px;
+      }
+      @keyframes rotateSpinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .fb_iframe_widget {
+        display: inline-block;
+        position: relative;
+      }
+      .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify;
+      }
+      .fb_iframe_widget iframe {
+        position: absolute;
+      }
+      .fb_iframe_widget_fluid_desktop,
+      .fb_iframe_widget_fluid_desktop span,
+      .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%;
+      }
+      .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative;
+      }
+      .fb_iframe_widget_lift {
+        z-index: 1;
+      }
+      .fb_iframe_widget_fluid {
+        display: inline;
+      }
+      .fb_iframe_widget_fluid span {
+        width: 100%;
+      }
+    </style>
+    <script type="text/javascript" charset="UTF-8" src="./MapsTD_files/onion.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./MapsTD_files/controls.js"></script>
+  </head>
+  <body>
+    <div id="fb-root" class="fb_reset">
+      <div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div>
+    </div>
+    <div id="game">
+      <div class="controls">
+        <h1><span>M</span>aps<span>TD</span></h1>
+        <div class="next-round-container">
+          <div style="margin: 0px; position: static; overflow: hidden; height: 0px;">
+            <div class="next-round" style="margin: -104px 0px 0px; overflow: hidden;">
+              <p>Next Round!</p>
+              <div class="button">Start</div>
+            </div>
+          </div>
+          <div class="next-round-popup popup small">
+            <div class="content">When you're ready, click here to start the game!</div>
+          </div>
+        </div>
+        <div class="pause button on">Resume</div>
+        <div class="fast-forward button">&gt;&gt;</div>
+        <div class="c"></div>
+        <div class="info">
+          <div class="lives">
+            <div class="icon">&#10084;</div>
+            <span class="count large">0</span>
+          </div>
+          <div class="money"><span class="icon money-icon">�</span> <span class="amount large">0</span></div>
+          <div class="round">
+            <div class="icon">Round</div>
+            <span class="count large">1</span>
+          </div>
+        </div>
+        <ul class="towers">
+          <li>
+            <img
+              class="create-tower disabled"
+              name="alpha"
+              src="./MapsTD_files/transparent.png"
+              data-color="blue"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -64px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Blue Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">90</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">700</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">5</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">110</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img
+              class="create-tower disabled"
+              name="bravo"
+              src="./MapsTD_files/transparent.png"
+              data-color="green"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -96px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Green Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">100</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">500</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">7</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">180</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img
+              class="create-tower disabled"
+              name="charlie"
+              src="./MapsTD_files/transparent.png"
+              data-color="red"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -128px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Red Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">700</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">400</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">6</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">1000</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img
+              class="create-tower disabled"
+              name="delta"
+              src="./MapsTD_files/transparent.png"
+              data-color="yellow"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -160px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Yellow Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">500</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">700</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">9</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">1500</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img
+              class="create-tower disabled"
+              name="echo"
+              src="./MapsTD_files/transparent.png"
+              data-color="orange"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -192px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Orange Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">3500</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">500</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">7</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">4000</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li>
+            <img
+              class="create-tower disabled"
+              name="foxtrot"
+              src="./MapsTD_files/transparent.png"
+              data-color="purple"
+              style="
+                background-image: url('images/markers.png');
+                background-position: 0px -224px;
+                width: 32px;
+                height: 32px;
+                border: 0px;
+              "
+            />
+            <div class="popup">
+              <div class="content">
+                <h3 class="name value" data-name="name">Purple Tower</h3>
+                <dl>
+                  <dt>Damage:</dt>
+                  <dd class="value" data-name="damage">5000</dd>
+                  <dt>Attack Radius:</dt>
+                  <dd><span class="value" data-name="attackRadius">600</span> m</dd>
+                  <dt>Speed:</dt>
+                  <dd class="value" data-name="attackSpeed">3</dd>
+                  <dt>Cost:</dt>
+                  <dd><span class="money-icon">�</span> <span class="value" data-name="cost">4000</span></dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="c"></div>
+        <div class="tower-info-popup-container">
+          <div class="popup small tower-info-popup">
+            <div class="content">
+              <div>Drag these towers onto the map to attack enemies moving along the blue tracks.</div>
+              <p>The black circle shows the size of the tower, and blue shows their attack range.</p>
+            </div>
+          </div>
+        </div>
+        <div class="c"></div>
+        <div class="half-container">
+          <div class="help button">Help</div>
+          <div class="c"></div>
+        </div>
+        <div class="about button">About</div>
+        <div class="feedback button">Feedback</div>
+        <ul class="social">
+          <li>
+            <div
+              class="fb-like fb_iframe_widget"
+              data-href="http://www.facebook.com/pages/MapsTD/393175210707375"
+              data-send="false"
+              data-layout="box_count"
+              data-width="55"
+              data-show-faces="false"
+              fb-xfbml-state="rendered"
+              fb-iframe-plugin-query="app_id=267555096654594&amp;container_width=50&amp;href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FMapsTD%2F393175210707375&amp;layout=box_count&amp;locale=en_GB&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=55"
+            >
+              <span style="vertical-align: bottom; width: 59px; height: 40px;"
+                ><iframe
+                  name="f18460869af284"
+                  width="55px"
+                  height="1000px"
+                  data-testid="fb:like Facebook Social Plugin"
+                  title="fb:like Facebook Social Plugin"
+                  frameborder="0"
+                  allowtransparency="true"
+                  allowfullscreen="true"
+                  scrolling="no"
+                  allow="encrypted-media"
+                  src="./MapsTD_files/like.html"
+                  style="border: none; visibility: visible; width: 59px; height: 40px;"
+                  class=""
+                ></iframe
+              ></span>
+            </div>
+          </li>
+          <li>
+            <iframe
+              id="twitter-widget-0"
+              scrolling="no"
+              frameborder="0"
+              allowtransparency="true"
+              allowfullscreen="true"
+              class="twitter-share-button twitter-share-button-rendered twitter-tweet-button"
+              style="position: static; visibility: visible; width: 61px; height: 20px;"
+              title="Twitter Tweet Button"
+              src="./MapsTD_files/tweet_button.c63890edc4243ee77048d507b181eeec.en.html"
+              data-url="http://www.MapsTD.com"
+            ></iframe>
+          </li>
+          <li class="google"><div class="g-plusone" data-size="standard" data-annotation="bubble"></div></li>
+        </ul>
+        <div class="social-placeholder c"></div>
+        <div class="copyright">
+          <div>Version <a href="https://www.mapstd.com/changelog.txt" target="_blank">1.2.0</a></div>
+          <div><a href="https://www.mapstd.com/#" class="copyright-link">� (more info)</a></div>
+        </div>
+      </div>
+      <div class="tower-infowin-container"></div>
+      <div class="hidden-elements">
+        <div class="control-tower-mouseover">
+          <div class="content">
+            <h3 class="name value" data-name="name"></h3>
+            <dl>
+              <dt>Damage:</dt>
+              <dd class="value" data-name="damage"></dd>
+              <dt>Attack Radius:</dt>
+              <dd><span class="value" data-name="attackRadius"></span> m</dd>
+              <dt>Speed:</dt>
+              <dd class="value" data-name="attackSpeed"></dd>
+              <dt>Cost:</dt>
+              <dd><span class="money-icon">�</span> <span class="value" data-name="cost"></span></dd>
+            </dl>
+          </div>
+        </div>
+        <div class="control-tower-infowin">
+          <div class="content tower-infowin">
+            <div class="close default-close-button">x</div>
+            <h3 class="name value" data-name="name"></h3>
+            <dl>
+              <dt>Damage:</dt>
+              <dd class="value" data-name="damage"></dd>
+              <dt>Attack Radius:</dt>
+              <dd><span class="value" data-name="attackRadius"></span> m</dd>
+              <dt>Speed:</dt>
+              <dd class="value" data-name="attackSpeed"></dd>
+              <dt>Cost:</dt>
+              <dd><span class="money-icon">�</span> <span class="value" data-name="cost"></span></dd>
+            </dl>
+            <div class="sell button">
+              Sell ( <span class="money-icon">�</span>
+              <span class="special-value" data-name="sell-cost"></span> )
+            </div>
+            <h4 class="upgrade-message">Upgrades</h4>
+            <div class="upgrade"></div>
+            <div class="upgrade"></div>
+            <div class="c"></div>
+          </div>
+        </div>
+        <div class="control-tower-infowin-upgrade">
+          <div class="content tower-infowin-upgrade">
+            <h5 class="name value" data-name="name"></h5>
+            <dl>
+              <dt>Damage:</dt>
+              <dd class="add-value" data-name="damage"></dd>
+              <dt>Attack Radius:</dt>
+              <dd><span class="add-value" data-name="attackRadius"></span> m</dd>
+              <dt>Speed:</dt>
+              <dd class="add-value" data-name="attackSpeed"></dd>
+              <dt>Cost:</dt>
+              <dd><span class="money-icon">�</span> <span class="value" data-name="cost"></span></dd>
+            </dl>
+            <div class="button">Upgrade</div>
+          </div>
+        </div>
+        <div class="message-popup" id="message-element">
+          <div class="content"><div class="close default-close-button">x</div></div>
+        </div>
+        <div class="startup">
+          <h2>Welcome to MapsTD!</h2>
+          <div>Where in the world do you want to play this game?</div>
+          <div class="searcharea">
+            <div class="difficulty">
+              Difficulty: <br />
+              <select class="difficulty-picker button">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+                <option>Insane</option>
+              </select>
+            </div>
+            <input type="text" name="search" class="search action-enter" />
+            <div class="action button">Play</div>
+          </div>
+          <div class="error hidden"></div>
+          <div>
+            <p>Or, play in one of these places:</p>
+            <ul class="places-list">
+              <li class="small-button action-click known-location">Buckingham Palace</li>
+              <li class="small-button action-click known-location">The White House</li>
+              <li class="small-button action-click known-location">The Vatican</li>
+              <li class="small-button action-click known-location">Tower of London</li>
+              <li
+                class="small-button action-click known-location"
+                title="This is only here because I live in Bath."
+              >
+                Bath Abbey
+              </li>
+              <li class="small-button action-click known-location">Taj Mahal</li>
+              <li class="small-button action-click known-location">Giza</li>
+              <li class="small-button action-click known-location">Eiffel Tower</li>
+              <li class="small-button action-click known-location">Hagia Sophia</li>
+              <li class="small-button action-click known-location">Stonehenge</li>
+              <li class="small-button action-click known-location">Olympic Stadium, London</li>
+            </ul>
+            <div class="c"></div>
+          </div>
+          <div>
+            <div class="help button">Help</div>
+            <div class="about button">About</div>
+            <div class="feedback button">Contact</div>
+            <div class="c"></div>
+          </div>
+        </div>
+        <div class="game-over">
+          <h3>Game Over!</h3>
+          <div>
+            <p>You lost all your lives.</p>
+            <div class="social">
+              <img class="action-facebook" src="./MapsTD_files/facebook-share.png" />
+              <a
+                href="https://twitter.com/share"
+                class="action-twitter"
+                data-url="http://www.MapsTD.com/"
+                data-counturl="http://www.MapsTD.com/"
+                data-via="Maps_TD"
+                data-lang="en"
+                data-size="medium"
+                data-count="none"
+                >Share on Twitter</a
+              >
+              <g:plusone annotation="none" size="medium"></g:plusone>
+              <div class="c"></div>
+            </div>
+            <p>Why not try playing again, or try playing somewhere else?</p>
+            <div class="buttons"><span class="button action">Play again!</span></div>
+          </div>
+        </div>
+        <div class="win">
+          <h3>Congratulations!</h3>
+          <div>
+            <p>You've won the game!</p>
+            <div class="social">
+              <img class="action-facebook" src="./MapsTD_files/facebook-share.png" />
+              <a
+                href="https://twitter.com/share"
+                class="action-twitter"
+                data-url="http://www.MapsTD.com/"
+                data-counturl="http://www.MapsTD.com/"
+                data-via="Maps_TD"
+                data-lang="en"
+                data-size="medium"
+                data-count="none"
+                >Share on Twitter</a
+              >
+              <g:plusone annotation="none" size="medium"></g:plusone>
+              <div class="c"></div>
+            </div>
+            <div class="c"></div>
+            <p>You can either play somewhere else in the world, or carry on playing this level.</p>
+            <div class="buttons">
+              <span class="button action">Play somewhere else</span>
+              <span class="button close">Carry on playing</span>
+              <div class="c"></div>
+            </div>
+            <div class="c"></div>
+          </div>
+        </div>
+        <div class="about">
+          <h3>About</h3>
+          <div class="page-content">
+            <p>
+              This game was made by
+              <a href="https://twitter.com/_duncan_" target="_blank">Duncan Barclay</a> (<a
+                href="http://dro.me.uk/"
+                target="_blank"
+                >dro.me.uk</a
+              >).
+            </p>
+            <p>MapsTD relies on the following code:</p>
+            <ul>
+              <li>
+                <a href="https://code.google.com/apis/maps/documentation/javascript/" target="_blank"
+                  >Google Maps API</a
+                >
+              </li>
+              <li><a href="http://mootools.net/" target="_blank">Mootools</a></li>
+              <li>
+                <a href="https://davidwalsh.name/page-visibility" target="_blank"
+                  >Page visibility code by David Walsh</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://www.tonyhaddon.com/site/2011/03/vector-drawn-google-map-marker/"
+                  target="_blank"
+                  >Tony Haddon's Google Maps marker image (used on Facebook and Twitter)</a
+                >
+              </li>
+              <li>
+                <a href="http://maps.stamen.com/"
+                  >Watercolour tiles by Stamen Design (using OpenStreetMap data)</a
+                >
+              </li>
+            </ul>
+            <p></p>
+            <p>
+              Special thanks to everyone who helped test MapsTD, and balance all the creeps, towers and
+              levels.
+            </p>
+          </div>
+        </div>
+        <div class="help">
+          <h3>Help</h3>
+          <div class="page-content">
+            <h4>Select where you want to play.</h4>
+            <p>
+              Firstly, you need to find somewhere to play this game. You can do so either by searching for any
+              real place using the search box provided, or picking one of the ones we've decided could be fun.
+            </p>
+            <h4>How the game works</h4>
+            <p>
+              The aim of the game is to protect your base (the house icon) from the enemies, who move from the
+              flag along the blue routes. They'll only move along one route to start with (the bold one), but
+              that will change as the game progresses.
+            </p>
+            <p>You'll need to place towers along the routes to kill the enemies.</p>
+            <h4>Placing towers</h4>
+            <p>To place a tower, drag one of the markers from the right hand side onto the map</p>
+            <p>
+              The black circle represents the size of the tower, and the blue circle is the area it can
+              attack. If the tower turns red, it means you can't place it there.
+            </p>
+            <p>Towers can't be placed on top of other towers, or on the routes they are defending against.</p>
+            <p>If you want to upgrade a tower, click on it to see all the available upgrade options</p>
+            <h4>Starting the game</h4>
+            <p>
+              To start the game, click the "Start Round" button in the top right corner. This is also how to
+              progress from one round to the next.
+            </p>
+            <h4>When does the game end?</h4>
+            <p>At the end of round 50, but you can carry on playing afterwards.</p>
+          </div>
+        </div>
+        <div class="feedback">
+          <h3>Feedback</h3>
+          <div class="page-content">
+            <p>
+              Want to help make this game better? If you have a suggestion, you've found a bug or just want to
+              get in contact with MapsTD's creator, you can do so in any of the following ways:
+            </p>
+            <ul>
+              <li>Email: <a href="mailto:contact@mapstd.com" target="_blank">contact@mapstd.com</a></li>
+              <li>
+                Twitter: <a href="https://twitter.com/Maps_TD" target="_blank">@Maps_TD</a> or
+                <a href="https://twitter.com/_duncan_" target="_blank">@_duncan_</a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/pages/MapsTD/393175210707375" target="_blank">Facebook</a>
+              </li>
+              <li>Skype / MSN Messenger available upon request</li>
+            </ul>
+            <p>Thanks!</p>
+          </div>
+        </div>
+        <div class="copyright-popup">
+          <h3>Copyright information</h3>
+          <div class="page-content">
+            <p>
+              This game is � 2012 <a href="http://dro.me.uk/" target="_blank">Duncan Barclay</a>, and is
+              currently closed source.
+            </p>
+            <p>Some content is owned by other sources:</p>
+            <ul>
+              <li>
+                Google Maps and the associated map data is owned by Google or the relevant data provider.
+              </li>
+              <li>Quest view is copyright Square Enix</li>
+              <li>
+                Watercolour view is by <a href="http://stamen.com/" target="_blank">Stamen Design</a>, under
+                <a href="https://creativecommons.org/licenses/by/3.0" target="_blank">CC BY 3.0</a>. Data by
+                <a href="https://openstreetmap.org/" target="_blank">OpenStreetMap</a>, under
+                <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank">CC BY SA</a>.
+              </li>
+              <li>
+                Routes are generated using
+                <a href="https://openrouteservice.org/">Open Route Service</a> (using Open Street Map data)
+                and Google Maps
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="map" style="position: relative; overflow: hidden;">
+        <div
+          style="
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: rgb(229, 227, 223);
+          "
+        >
+          <div
+            class="gm-style"
+            style="
+              position: absolute;
+              z-index: 0;
+              left: 0px;
+              top: 0px;
+              height: 100%;
+              width: 100%;
+              padding: 0px;
+              border-width: 0px;
+              margin: 0px;
+            "
+          >
+            <div
+              tabindex="0"
+              style="
+                position: absolute;
+                z-index: 0;
+                left: 0px;
+                top: 0px;
+                height: 100%;
+                width: 100%;
+                padding: 0px;
+                border-width: 0px;
+                margin: 0px;
+                cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default;
+                touch-action: none;
+              "
+            >
+              <div
+                style="
+                  z-index: 1;
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  width: 100%;
+                  transform: translate(0px, 0px);
+                "
+              >
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
+                  <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                    <div style="position: absolute; z-index: 994; transform: matrix(1, 0, 0, 1, -110, -102);">
+                      <div style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div
+                        style="position: absolute; left: -256px; top: -256px; width: 256px; height: 256px;"
+                      >
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 0px; top: -256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 256px; top: -256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 256px; top: 256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 0px; top: 256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: -256px; top: 256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: -512px; top: 256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: -512px; top: 0px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div
+                        style="position: absolute; left: -512px; top: -256px; width: 256px; height: 256px;"
+                      >
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div
+                        style="position: absolute; left: -512px; top: -512px; width: 256px; height: 256px;"
+                      >
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div
+                        style="position: absolute; left: -256px; top: -512px; width: 256px; height: 256px;"
+                      >
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 0px; top: -512px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 256px; top: -512px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 512px; top: -512px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 512px; top: -256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                      <div style="position: absolute; left: 512px; top: 256px; width: 256px; height: 256px;">
+                        <div style="width: 256px; height: 256px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div>
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div>
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div>
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                  <div style="position: absolute; z-index: 994; transform: matrix(1, 0, 0, 1, -110, -102);">
+                    <div
+                      style="
+                        position: absolute;
+                        left: 256px;
+                        top: -256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -256px;
+                        top: -256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(1)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 0px;
+                        top: -256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(2)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -256px;
+                        top: 0px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(3)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(4)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -512px;
+                        top: 0px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(5)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 256px;
+                        top: 0px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(6)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -256px;
+                        top: 256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(7)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -512px;
+                        top: 256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(8)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 0px;
+                        top: -512px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(9)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -512px;
+                        top: -256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(10)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 256px;
+                        top: 256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(11)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -512px;
+                        top: -512px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(12)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: -256px;
+                        top: -512px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(13)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 256px;
+                        top: -512px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(14)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 512px;
+                        top: 256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(15)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 0px;
+                        top: 256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(16)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 512px;
+                        top: -256px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(17)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 512px;
+                        top: 0px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(18)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        position: absolute;
+                        left: 512px;
+                        top: -512px;
+                        width: 256px;
+                        height: 256px;
+                        transition: opacity 200ms linear 0s;
+                      "
+                    >
+                      <img
+                        draggable="false"
+                        alt=""
+                        role="presentation"
+                        src="./MapsTD_files/vt(19)"
+                        style="
+                          width: 256px;
+                          height: 256px;
+                          user-select: none;
+                          border: 0px;
+                          padding: 0px;
+                          margin: 0px;
+                          max-width: none;
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="gm-style-pbc"
+                style="
+                  z-index: 2;
+                  position: absolute;
+                  height: 100%;
+                  width: 100%;
+                  padding: 0px;
+                  border-width: 0px;
+                  margin: 0px;
+                  left: 0px;
+                  top: 0px;
+                  opacity: 0;
+                "
+              >
+                <p class="gm-style-pbt"></p>
+              </div>
+              <div
+                style="
+                  z-index: 3;
+                  position: absolute;
+                  height: 100%;
+                  width: 100%;
+                  padding: 0px;
+                  border-width: 0px;
+                  margin: 0px;
+                  left: 0px;
+                  top: 0px;
+                  touch-action: pan-x pan-y;
+                "
+              >
+                <div
+                  style="
+                    z-index: 4;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 100%;
+                    transform: translate(0px, 0px);
+                  "
+                >
+                  <div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div>
+                  <div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div>
+                  <div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div>
+                  <div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <iframe
+              aria-hidden="true"
+              frameborder="0"
+              tabindex="-1"
+              style="
+                z-index: -1;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0px;
+                left: 0px;
+                border: none;
+              "
+              src="./MapsTD_files/saved_resource.html"
+            ></iframe>
+            <div
+              style="
+                margin-left: 5px;
+                margin-right: 5px;
+                z-index: 1000000;
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+              "
+            >
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://maps.google.com/maps?ll=54.5,-3.2&amp;z=6&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3"
+                title="Open this area in Google Maps (opens a new window)"
+                style="position: static; overflow: visible; float: none; display: inline;"
+                ><div style="width: 66px; height: 26px; cursor: pointer;">
+                  <img
+                    alt=""
+                    src="./MapsTD_files/google4_hdpi.png"
+                    draggable="false"
+                    style="
+                      position: absolute;
+                      left: 0px;
+                      top: 0px;
+                      width: 66px;
+                      height: 26px;
+                      user-select: none;
+                      border: 0px;
+                      padding: 0px;
+                      margin: 0px;
+                    "
+                  /></div
+              ></a>
+            </div>
+            <div
+              style="
+                background-color: white;
+                padding: 15px 21px;
+                border: 1px solid rgb(171, 171, 171);
+                font-family: Roboto, Arial, sans-serif;
+                color: rgb(34, 34, 34);
+                box-sizing: border-box;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px;
+                z-index: 10000002;
+                display: none;
+                width: 300px;
+                height: 180px;
+                position: absolute;
+                left: 434px;
+                top: 240px;
+              "
+            >
+              <div style="padding: 0px 0px 10px; font-size: 16px; box-sizing: border-box;">Map Data</div>
+              <div style="font-size: 13px;">
+                Map data �2020 GeoBasis-DE/BKG (�2009), Google, Inst. Geogr. Nacional
+              </div>
+              <button
+                draggable="false"
+                title="Close"
+                aria-label="Close"
+                type="button"
+                class="gm-ui-hover-effect"
+                style="
+                  background: none;
+                  display: block;
+                  border: 0px;
+                  margin: 0px;
+                  padding: 0px;
+                  position: absolute;
+                  cursor: pointer;
+                  user-select: none;
+                  top: 0px;
+                  right: 0px;
+                  width: 37px;
+                  height: 37px;
+                "
+              >
+                <img
+                  src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23000000%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M19%206.41L17.59%205%2012%2010.59%206.41%205%205%206.41%2010.59%2012%205%2017.59%206.41%2019%2012%2013.41%2017.59%2019%2019%2017.59%2013.41%2012z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                  style="pointer-events: none; display: block; width: 13px; height: 13px; margin: 12px;"
+                />
+              </button>
+            </div>
+            <div
+              class="gmnoprint"
+              style="z-index: 1000001; position: absolute; right: 71px; bottom: 0px; width: 342px;"
+            >
+              <div
+                draggable="false"
+                class="gm-style-cc"
+                style="user-select: none; height: 14px; line-height: 14px;"
+              >
+                <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                  <div style="width: 1px;"></div>
+                  <div
+                    style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    position: relative;
+                    padding-right: 6px;
+                    padding-left: 6px;
+                    box-sizing: border-box;
+                    font-family: Roboto, Arial, sans-serif;
+                    font-size: 10px;
+                    color: rgb(68, 68, 68);
+                    white-space: nowrap;
+                    direction: ltr;
+                    text-align: right;
+                    vertical-align: middle;
+                    display: inline-block;
+                  "
+                >
+                  <a style="text-decoration: none; cursor: pointer; display: none;">Map Data</a
+                  ><span>Map data �2020 GeoBasis-DE/BKG (�2009), Google, Inst. Geogr. Nacional</span>
+                </div>
+              </div>
+            </div>
+            <div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;">
+              <div
+                style="
+                  font-family: Roboto, Arial, sans-serif;
+                  font-size: 11px;
+                  color: rgb(68, 68, 68);
+                  direction: ltr;
+                  text-align: right;
+                  background-color: rgb(245, 245, 245);
+                "
+              >
+                Map data �2020 GeoBasis-DE/BKG (�2009), Google, Inst. Geogr. Nacional
+              </div>
+            </div>
+            <div
+              class="gmnoprint gm-style-cc"
+              draggable="false"
+              style="
+                z-index: 1000001;
+                user-select: none;
+                height: 14px;
+                line-height: 14px;
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+              "
+            >
+              <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                <div style="width: 1px;"></div>
+                <div
+                  style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"
+                ></div>
+              </div>
+              <div
+                style="
+                  position: relative;
+                  padding-right: 6px;
+                  padding-left: 6px;
+                  box-sizing: border-box;
+                  font-family: Roboto, Arial, sans-serif;
+                  font-size: 10px;
+                  color: rgb(68, 68, 68);
+                  white-space: nowrap;
+                  direction: ltr;
+                  text-align: right;
+                  vertical-align: middle;
+                  display: inline-block;
+                "
+              >
+                <a
+                  href="https://www.google.com/intl/en-US_US/help/terms_maps.html"
+                  target="_blank"
+                  rel="noopener"
+                  style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);"
+                  >Terms of Use</a
+                >
+              </div>
+            </div>
+            <button
+              draggable="false"
+              title="Toggle fullscreen view"
+              aria-label="Toggle fullscreen view"
+              type="button"
+              class="gm-control-active gm-fullscreen-control"
+              style="
+                background: none rgb(255, 255, 255);
+                border: 0px;
+                margin: 10px;
+                padding: 0px;
+                position: absolute;
+                cursor: pointer;
+                user-select: none;
+                border-radius: 2px;
+                height: 40px;
+                width: 40px;
+                box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                overflow: hidden;
+                top: 0px;
+                right: 0px;
+              "
+            >
+              <img
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%20018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%2C0v2v4h2V2h4V0H2H0z%20M16%2C0h-4v2h4v4h2V2V0H16z%20M16%2C16h-4v2h4h2v-2v-4h-2V16z%20M2%2C12H0v4v2h2h4v-2H2V12z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                style="height: 18px; width: 18px;"
+              /><img
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%2C0v2v4h2V2h4V0H2H0z%20M16%2C0h-4v2h4v4h2V2V0H16z%20M16%2C16h-4v2h4h2v-2v-4h-2V16z%20M2%2C12H0v4v2h2h4v-2H2V12z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                style="height: 18px; width: 18px;"
+              /><img
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%2C0v2v4h2V2h4V0H2H0z%20M16%2C0h-4v2h4v4h2V2V0H16z%20M16%2C16h-4v2h4h2v-2v-4h-2V16z%20M2%2C12H0v4v2h2h4v-2H2V12z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                style="height: 18px; width: 18px;"
+              />
+            </button>
+            <div id="copyright-control" style="z-index: 0; position: absolute; right: 413px; bottom: 0px;">
+              Game � Duncan Barclay. <a class="copyright-link">(full info)</a>
+            </div>
+            <div
+              draggable="false"
+              class="gm-style-cc"
+              style="
+                user-select: none;
+                height: 14px;
+                line-height: 14px;
+                display: none;
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+              "
+            >
+              <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                <div style="width: 1px;"></div>
+                <div
+                  style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"
+                ></div>
+              </div>
+              <div
+                style="
+                  position: relative;
+                  padding-right: 6px;
+                  padding-left: 6px;
+                  box-sizing: border-box;
+                  font-family: Roboto, Arial, sans-serif;
+                  font-size: 10px;
+                  color: rgb(68, 68, 68);
+                  white-space: nowrap;
+                  direction: ltr;
+                  text-align: right;
+                  vertical-align: middle;
+                  display: inline-block;
+                "
+              >
+                <a
+                  target="_blank"
+                  rel="noopener"
+                  title="Report errors in the road map or imagery to Google"
+                  href="https://www.google.com/maps/@54.5,-3.2,6z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3"
+                  style="
+                    font-family: Roboto, Arial, sans-serif;
+                    font-size: 10px;
+                    color: rgb(68, 68, 68);
+                    text-decoration: none;
+                    position: relative;
+                  "
+                  >Report a map error</a
+                >
+              </div>
+            </div>
+            <div
+              class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom"
+              draggable="false"
+              controlwidth="40"
+              controlheight="81"
+              style="margin: 10px; user-select: none; position: absolute; bottom: 95px; right: 40px;"
+            >
+              <div
+                class="gmnoprint"
+                controlwidth="40"
+                controlheight="81"
+                style="position: absolute; left: 0px; top: 0px;"
+              >
+                <div
+                  draggable="false"
+                  style="
+                    user-select: none;
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    background-color: rgb(255, 255, 255);
+                    width: 40px;
+                    height: 81px;
+                  "
+                >
+                  <button
+                    draggable="false"
+                    title="Zoom in"
+                    aria-label="Zoom in"
+                    type="button"
+                    class="gm-control-active"
+                    style="
+                      background: none;
+                      display: block;
+                      border: 0px;
+                      margin: 0px;
+                      padding: 0px;
+                      position: relative;
+                      cursor: pointer;
+                      user-select: none;
+                      overflow: hidden;
+                      width: 40px;
+                      height: 40px;
+                      top: 0px;
+                      left: 0px;
+                    "
+                  >
+                    <img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpolygon%20fill%3D%22%23666%22%20points%3D%2218%2C7%2011%2C7%2011%2C0%207%2C0%207%2C7%200%2C7%200%2C11%207%2C11%207%2C18%2011%2C18%2011%2C11%2018%2C11%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpolygon%20fill%3D%22%23333%22%20points%3D%2218%2C7%2011%2C7%2011%2C0%207%2C0%207%2C7%200%2C7%200%2C11%207%2C11%207%2C18%2011%2C18%2011%2C11%2018%2C11%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpolygon%20fill%3D%22%23111%22%20points%3D%2218%2C7%2011%2C7%2011%2C0%207%2C0%207%2C7%200%2C7%200%2C11%207%2C11%207%2C18%2011%2C18%2011%2C11%2018%2C11%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    />
+                  </button>
+                  <div
+                    style="
+                      position: relative;
+                      overflow: hidden;
+                      width: 30px;
+                      height: 1px;
+                      margin: 0px 5px;
+                      background-color: rgb(230, 230, 230);
+                      top: 0px;
+                    "
+                  ></div>
+                  <button
+                    draggable="false"
+                    title="Zoom out"
+                    aria-label="Zoom out"
+                    type="button"
+                    class="gm-control-active"
+                    style="
+                      background: none;
+                      display: block;
+                      border: 0px;
+                      margin: 0px;
+                      padding: 0px;
+                      position: relative;
+                      cursor: pointer;
+                      user-select: none;
+                      overflow: hidden;
+                      width: 40px;
+                      height: 40px;
+                      top: 0px;
+                      left: 0px;
+                    "
+                  >
+                    <img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%2C7h18v4H0V7z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%2C7h18v4H0V7z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%0A%20%20%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%2C7h18v4H0V7z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    />
+                  </button>
+                </div>
+              </div>
+              <div
+                class="gmnoprint"
+                controlwidth="40"
+                controlheight="40"
+                style="display: none; position: absolute;"
+              >
+                <div style="width: 40px; height: 40px;">
+                  <button
+                    draggable="false"
+                    title="Rotate map 90 degrees"
+                    aria-label="Rotate map 90 degrees"
+                    type="button"
+                    class="gm-control-active"
+                    style="
+                      background: none rgb(255, 255, 255);
+                      display: none;
+                      border: 0px;
+                      margin: 0px 0px 32px;
+                      padding: 0px;
+                      position: relative;
+                      cursor: pointer;
+                      user-select: none;
+                      width: 40px;
+                      height: 40px;
+                      top: 0px;
+                      left: 0px;
+                      overflow: hidden;
+                      box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                      border-radius: 2px;
+                    "
+                  >
+                    <img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2022%22%3E%0A%20%20%3Cpath%20fill%3D%22%23666%22%20fill-rule%3D%22evenodd%22%20d%3D%22M20%2010c0-5.52-4.48-10-10-10s-10%204.48-10%2010v5h5v-5c0-2.76%202.24-5%205-5s5%202.24%205%205v5h-4l6.5%207%206.5-7h-4v-5z%22%20clip-rule%3D%22evenodd%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2022%22%3E%0A%20%20%3Cpath%20fill%3D%22%23333%22%20fill-rule%3D%22evenodd%22%20d%3D%22M20%2010c0-5.52-4.48-10-10-10s-10%204.48-10%2010v5h5v-5c0-2.76%202.24-5%205-5s5%202.24%205%205v5h-4l6.5%207%206.5-7h-4v-5z%22%20clip-rule%3D%22evenodd%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2022%22%3E%0A%20%20%3Cpath%20fill%3D%22%23111%22%20fill-rule%3D%22evenodd%22%20d%3D%22M20%2010c0-5.52-4.48-10-10-10s-10%204.48-10%2010v5h5v-5c0-2.76%202.24-5%205-5s5%202.24%205%205v5h-4l6.5%207%206.5-7h-4v-5z%22%20clip-rule%3D%22evenodd%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="height: 18px; width: 18px;"
+                    /></button
+                  ><button
+                    draggable="false"
+                    title="Tilt map"
+                    aria-label="Tilt map"
+                    type="button"
+                    class="gm-tilt gm-control-active"
+                    style="
+                      background: none rgb(255, 255, 255);
+                      display: block;
+                      border: 0px;
+                      margin: 0px;
+                      padding: 0px;
+                      position: relative;
+                      cursor: pointer;
+                      user-select: none;
+                      width: 40px;
+                      height: 40px;
+                      top: 0px;
+                      left: 0px;
+                      overflow: hidden;
+                      box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                      border-radius: 2px;
+                    "
+                  >
+                    <img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2018%2016%22%3E%0A%20%20%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%2C16h8V9H0V16z%20M10%2C16h8V9h-8V16z%20M0%2C7h8V0H0V7z%20M10%2C0v7h8V0H10z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2018%2016%22%3E%0A%20%20%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%2C16h8V9H0V16z%20M10%2C16h8V9h-8V16z%20M0%2C7h8V0H0V7z%20M10%2C0v7h8V0H10z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="width: 18px;"
+                    /><img
+                      src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218px%22%20height%3D%2216px%22%20viewBox%3D%220%200%2018%2016%22%3E%0A%20%20%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%2C16h8V9H0V16z%20M10%2C16h8V9h-8V16z%20M0%2C7h8V0H0V7z%20M10%2C0v7h8V0H10z%22%2F%3E%0A%3C%2Fsvg%3E%0A"
+                      style="width: 18px;"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gmnoprint"
+              style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; left: 0px; top: 0px;"
+            >
+              <div class="gm-style-mtc" style="float: left; position: relative;">
+                <div
+                  role="button"
+                  tabindex="0"
+                  title="Show street map"
+                  aria-label="Show street map"
+                  aria-pressed="true"
+                  draggable="false"
+                  style="
+                    direction: ltr;
+                    overflow: hidden;
+                    text-align: center;
+                    height: 40px;
+                    display: table-cell;
+                    vertical-align: middle;
+                    position: relative;
+                    color: rgb(0, 0, 0);
+                    font-family: Roboto, Arial, sans-serif;
+                    user-select: none;
+                    font-size: 18px;
+                    background-color: rgb(255, 255, 255);
+                    padding: 0px 17px;
+                    border-bottom-left-radius: 2px;
+                    border-top-left-radius: 2px;
+                    background-clip: padding-box;
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                    min-width: 36px;
+                    font-weight: 500;
+                  "
+                >
+                  Map
+                </div>
+              </div>
+              <div class="gm-style-mtc" style="float: left; position: relative;">
+                <div
+                  role="button"
+                  tabindex="0"
+                  title=""
+                  aria-label=""
+                  aria-pressed="false"
+                  draggable="false"
+                  style="
+                    direction: ltr;
+                    overflow: hidden;
+                    text-align: center;
+                    height: 40px;
+                    display: table-cell;
+                    vertical-align: middle;
+                    position: relative;
+                    color: rgb(86, 86, 86);
+                    font-family: Roboto, Arial, sans-serif;
+                    user-select: none;
+                    font-size: 18px;
+                    background-color: rgb(255, 255, 255);
+                    padding: 0px 17px;
+                    background-clip: padding-box;
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                    min-width: 98px;
+                    border-left: 0px;
+                  "
+                >
+                  Watercolour
+                </div>
+              </div>
+              <div class="gm-style-mtc" style="float: left; position: relative;">
+                <div
+                  role="button"
+                  tabindex="0"
+                  title="Show satellite imagery"
+                  aria-label="Show satellite imagery"
+                  aria-pressed="false"
+                  draggable="false"
+                  style="
+                    direction: ltr;
+                    overflow: hidden;
+                    text-align: center;
+                    height: 40px;
+                    display: table-cell;
+                    vertical-align: middle;
+                    position: relative;
+                    color: rgb(86, 86, 86);
+                    font-family: Roboto, Arial, sans-serif;
+                    user-select: none;
+                    font-size: 18px;
+                    background-color: rgb(255, 255, 255);
+                    padding: 0px 17px;
+                    border-bottom-right-radius: 2px;
+                    border-top-right-radius: 2px;
+                    background-clip: padding-box;
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+                    min-width: 66px;
+                    border-left: 0px;
+                  "
+                >
+                  Satellite
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <iframe
+      scrolling="no"
+      frameborder="0"
+      allowtransparency="true"
+      src="./MapsTD_files/widget_iframe.c63890edc4243ee77048d507b181eeec.html"
+      title="Twitter settings iframe"
+      style="display: none;"
+    ></iframe>
+    <div class="message-popup fullscreen no-default-close-button" style="opacity: 1;">
+      <div class="content info" style="margin-top: 110px;">
+        <div class="close default-close-button">x</div>
+        <div class="startup">
+          <h2>Welcome to MapsTD!</h2>
+          <div>Where in the world do you want to play this game?</div>
+          <div class="searcharea">
+            <div class="difficulty">
+              Difficulty: <br />
+              <select class="difficulty-picker button">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+                <option>Insane</option>
+              </select>
+            </div>
+            <input type="text" name="search" class="search action-enter" />
+            <div class="action button">Play</div>
+          </div>
+          <div class="error hidden"></div>
+          <div>
+            <p>Or, play in one of these places:</p>
+            <ul class="places-list">
+              <li class="small-button action-click known-location">Buckingham Palace</li>
+              <li class="small-button action-click known-location">The White House</li>
+              <li class="small-button action-click known-location">The Vatican</li>
+              <li class="small-button action-click known-location">Tower of London</li>
+              <li
+                class="small-button action-click known-location"
+                title="This is only here because I live in Bath."
+              >
+                Bath Abbey
+              </li>
+              <li class="small-button action-click known-location">Taj Mahal</li>
+              <li class="small-button action-click known-location">Giza</li>
+              <li class="small-button action-click known-location">Eiffel Tower</li>
+              <li class="small-button action-click known-location">Hagia Sophia</li>
+              <li class="small-button action-click known-location">Stonehenge</li>
+              <li class="small-button action-click known-location">Olympic Stadium, London</li>
+            </ul>
+            <div class="c"></div>
+          </div>
+          <div>
+            <div class="help button">Help</div>
+            <div class="about button">About</div>
+            <div class="feedback button">Contact</div>
+            <div class="c"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
