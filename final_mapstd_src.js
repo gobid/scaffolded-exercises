@@ -1,9 +1,89 @@
+/* autogen added */
 
-/* autogen added */ 
-let stateManager = {"Program:Message":null,"Program:undefined":null,"Program:d":null,"Program:e":null,"Program:a":null,"Program:LocationSearch":null,"Program:Game":null,"Program:b":null,"Program:a:h":null,"Program:a:e":null,"Program:a:d":null,"Program:a:g":null,"Program:a:c":null,"Program:a:f":null,"Program:copyrightNode":null,"Program:c":null,"Program:GameInterface":null,"Program:f":null,"Program:g":null,"Program:k":null,"Program:l":null,"Program:j":null,"Program:n":null,"Program:p:q":null,"Program:p:xPos":null,"Program:p:yPos":null,"Program:o":null,"Program:m":null,"Program:iconX":null,"Program:iconY":null,"Program:controlSize":null,"Program:i":null,"Program:t":null,"Program:s":null,"Program:u":null,"Program:q":null,"Program:upgradeValue":null,"Program:RouteBuilder":null,"Program:RoutePath":null,"Program:Route":null,"Program:p":null,"Program:r":null,"Program:v":null,"Program:response":null,"Program:Creep":null,"Program:CreepAlpha":null,"Program:CreepBravo":null,"Program:CreepCharlie":null,"Program:CreepDelta":null,"Program:CreepEcho":null,"Program:CreepFoxtrot":null,"Program:CreepGolf":null,"Program:CreepHotel":null,"Program:CreepIndia":null,"Program:Tower":null,"Program:TowerAlpha":null,"Program:TowerBravo":null,"Program:TowerCharlie":null,"Program:TowerDelta":null,"Program:TowerEcho":null,"Program:TowerFoxtrot":null,"Program:Timer":null,"Program:GameRound":null,"Program:GameRoundRoute":null,"Program:Rounds":null,"Program:roundNum":null,"Program:roundData":null,"Program:creepType":null,"Program:times":null,"Program:routeIndex":null,"Program:timerCount":null,"Program:creeps":null,"Program:twitter:e":null,"Program:twitter:a":null,"Program:twitter:f":null,"Program:twitter:c":null,"Program:twitter:b":null,"Program:twitter:undefined":null,"Program:_gaq":null}
- const fxnCallCallback = (fnName) => (stackframes) => {
-        console.log(fnName, " was called");
-    };
+let stateManager = {
+    "Program:Message": null,
+    "Program:undefined": null,
+    "Program:d": null,
+    "Program:e": null,
+    "Program:a": null,
+    "Program:LocationSearch": null,
+    "Program:Game": null,
+    "Program:b": null,
+    "Program:a:h": null,
+    "Program:a:e": null,
+    "Program:a:d": null,
+    "Program:a:g": null,
+    "Program:a:c": null,
+    "Program:a:f": null,
+    "Program:copyrightNode": null,
+    "Program:c": null,
+    "Program:GameInterface": null,
+    "Program:f": null,
+    "Program:g": null,
+    "Program:k": null,
+    "Program:l": null,
+    "Program:j": null,
+    "Program:n": null,
+    "Program:p:q": null,
+    "Program:p:xPos": null,
+    "Program:p:yPos": null,
+    "Program:o": null,
+    "Program:m": null,
+    "Program:iconX": null,
+    "Program:iconY": null,
+    "Program:controlSize": null,
+    "Program:i": null,
+    "Program:t": null,
+    "Program:s": null,
+    "Program:u": null,
+    "Program:q": null,
+    "Program:upgradeValue": null,
+    "Program:RouteBuilder": null,
+    "Program:RoutePath": null,
+    "Program:Route": null,
+    "Program:p": null,
+    "Program:r": null,
+    "Program:v": null,
+    "Program:response": null,
+    "Program:Creep": null,
+    "Program:CreepAlpha": null,
+    "Program:CreepBravo": null,
+    "Program:CreepCharlie": null,
+    "Program:CreepDelta": null,
+    "Program:CreepEcho": null,
+    "Program:CreepFoxtrot": null,
+    "Program:CreepGolf": null,
+    "Program:CreepHotel": null,
+    "Program:CreepIndia": null,
+    "Program:Tower": null,
+    "Program:TowerAlpha": null,
+    "Program:TowerBravo": null,
+    "Program:TowerCharlie": null,
+    "Program:TowerDelta": null,
+    "Program:TowerEcho": null,
+    "Program:TowerFoxtrot": null,
+    "Program:Timer": null,
+    "Program:GameRound": null,
+    "Program:GameRoundRoute": null,
+    "Program:Rounds": null,
+    "Program:roundNum": null,
+    "Program:roundData": null,
+    "Program:creepType": null,
+    "Program:times": null,
+    "Program:routeIndex": null,
+    "Program:timerCount": null,
+    "Program:creeps": null,
+    "Program:twitter:e": null,
+    "Program:twitter:a": null,
+    "Program:twitter:f": null,
+    "Program:twitter:c": null,
+    "Program:twitter:b": null,
+    "Program:twitter:undefined": null,
+    "Program:_gaq": null
+};
+const fxnCallCallback = (fnName) => (stackframes) => {
+    console.log(fnName, " was called");
+};
 /* end autogen added */
 
 var Message = new Class({
@@ -12,285 +92,274 @@ var Message = new Class({
     action: null,
     position: "top",
     initialize: function (a, c, e, b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.setOptions(b);
-
- }, fxnCallCallback("this.setOptions"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.setOptions(b);
+        }, fxnCallCallback("this.setOptions"))();
+        /* end autogen added */
         this.position = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.container = $("message-element").clone();
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.addClass(a);
+        /* autogen added */
 
- }, fxnCallCallback("this.container.addClass"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.addClass(a);
+        }, fxnCallCallback("this.container.addClass"))();
+        /* end autogen added */
         var d = this.container.getElement(".content");
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+        /* autogen added */
 
+        stateManager["Program:d"] = d;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        d.addClass(c);
+        /* autogen added */
 
- }, fxnCallCallback("d.addClass"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            d.addClass(c);
+        }, fxnCallCallback("d.addClass"))();
+        /* end autogen added */
         if (typeof e == "string") {
             e = new Element("div").set("html", e);
 
-/* autogen added */ 
-stateManager["Program:e"] = e
+            /* autogen added */
 
+            stateManager["Program:e"] = e;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        e.inject(d);
+        /* autogen added */
 
- }, fxnCallCallback("e.inject"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            e.inject(d);
+        }, fxnCallCallback("e.inject"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addEvents();
+        /* autogen added */
 
- }, fxnCallCallback("this._addEvents"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addEvents();
+        }, fxnCallCallback("this._addEvents"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.inject(document.body);
+        /* autogen added */
 
- }, fxnCallCallback("this.container.inject"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.inject(document.body);
+        }, fxnCallCallback("this.container.inject"))();
+        /* end autogen added */
         if (this.container.hasClass("fullscreen")) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            d.setStyle(
-                "margin-top",
-                Math.max(10, document.body.getSize().y / 2 - d.getSize().y / 2 - 50) + "px"
-            );
-
- }, fxnCallCallback("d.setStyle"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                d.setStyle(
+                    "margin-top",
+                    Math.max(10, document.body.getSize().y / 2 - d.getSize().y / 2 - 50) + "px"
+                );
+            }, fxnCallCallback("d.setStyle"))();
+            /* end autogen added */
             if (d.getSize().y > document.body.getSize().y - 100 && e.getElement(".page-content")) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                e.getElement(".page-content").setStyles({
-                    overflow: "auto",
-                    height: Math.max(10, document.body.getSize().y - 100) + "px"
-                });
-
- }, fxnCallCallback("e.getElement"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    e.getElement(".page-content").setStyles({
+                        overflow: "auto",
+                        height: Math.max(10, document.body.getSize().y - 100) + "px"
+                    });
+                }, fxnCallCallback("e.getElement"))();
+                /* end autogen added */
             }
         }
         if (a == "top") {
             this.action = new Fx.Slide(d, { hideOverflow: false });
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            this.action.hide();
+                stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                this.action.hide();
 
- }, fxnCallCallback("this.action.hide"))() 
- /* end autogen added */
-            this.action.slideIn();
+                /* autogen added */
 
- }, fxnCallCallback("this.action.slideIn"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.action.hide"))();
+                /* end autogen added */
+                this.action.slideIn();
+            }, fxnCallCallback("this.action.slideIn"))();
+            /* end autogen added */
         } else {
             this.action = new Fx.Tween(this.container, { property: "opacity" });
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            this.action.set(0);
+                stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                this.action.set(0);
 
- }, fxnCallCallback("this.action.set"))() 
- /* end autogen added */
-            this.action.start(1);
+                /* autogen added */
 
- }, fxnCallCallback("this.action.start"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.action.set"))();
+                /* end autogen added */
+                this.action.start(1);
+            }, fxnCallCallback("this.action.start"))();
+            /* end autogen added */
         }
         if (this.options.autoHide) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.close.delay(this.options.autoHide, this);
-
- }, fxnCallCallback("this.close.delay"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.close.delay(this.options.autoHide, this);
+            }, fxnCallCallback("this.close.delay"))();
+            /* end autogen added */
         }
         if (this.options.noCloseButton) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.container.addClass("no-default-close-button");
-
- }, fxnCallCallback("this.container.addClass"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.container.addClass("no-default-close-button");
+            }, fxnCallCallback("this.container.addClass"))();
+            /* end autogen added */
         }
     },
     _addEvents: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".close").addEvent("click", this.close.bind(this));
+        StackTrace.instrument(() => {
+            this.container.getElements(".close").addEvent("click", this.close.bind(this));
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
-        this.container.getElements(".action").addEvent(
-            "click",
-            function () {
+            StackTrace.instrument(() => {}, fxnCallCallback("this.container.getElements"))();
+            /* end autogen added */
+            this.container.getElements(".action").addEvent(
+                "click",
+                function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.fireEvent("action", this.container);
+                    StackTrace.instrument(() => {
+                        this.fireEvent("action", this.container);
+                    }, fxnCallCallback("this.fireEvent"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+        /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElements(".action-enter").addEvent(
+                "keyup",
+                function (a) {
+                    if (a.key == "enter") {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".action-enter").addEvent(
-            "keyup",
-            function (a) {
-                if (a.key == "enter") {
+                        StackTrace.instrument(() => {
+                            this.fireEvent("action", this.container);
+                        }, fxnCallCallback("this.fireEvent"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.fireEvent("action", this.container);
+        /* autogen added */
 
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
+        StackTrace.instrument(() => {
+            this.container.getElements(".action-click").addEvent(
+                "click",
+                function (a) {
+                    /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.fireEvent("action", [this.container, a.target]);
+                    }, fxnCallCallback("this.fireEvent"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".action-click").addEvent(
-            "click",
-            function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.fireEvent("action", [this.container, a.target]);
+        StackTrace.instrument(() => {
+            this.container.getElements(".action-facebook").addEvent(
+                "click",
+                function (a) {
+                    /* autogen added */
 
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".action-facebook").addEvent(
-            "click",
-            function (a) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.fireEvent("social", "facebook");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.fireEvent("social", "facebook");
+                    }, fxnCallCallback("this.fireEvent"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     close: function () {
         var a;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (this.position == "top") {
             a = this.action.slideOut();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+            /* autogen added */
 
+            stateManager["Program:a"] = a;
         } else {
             a = this.action.start(1, 0);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+            /* autogen added */
 
+            stateManager["Program:a"] = a;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.chain(
-            function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.container.destroy();
+        StackTrace.instrument(() => {
+            a.chain(
+                function () {
+                    /* autogen added */
 
- }, fxnCallCallback("this.container.destroy"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                    StackTrace.instrument(() => {
+                        this.container.destroy();
+                    }, fxnCallCallback("this.container.destroy"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.chain"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.chain"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.fireEvent("closed");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.fireEvent("closed");
+        }, fxnCallCallback("this.fireEvent"))();
+        /* end autogen added */
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Message"] = Message
+/* autogen added */
+
+stateManager["Program:Message"] = Message;
 
 var LocationSearch = new Class({
     g: null,
@@ -303,9 +372,9 @@ var LocationSearch = new Class({
     initialize: function (a) {
         this.g = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     search: function (a) {
         switch (a.toLowerCase()) {
@@ -315,8 +384,9 @@ stateManager["Program:undefined"] = undefined
             case "blue bolt":
                 this.image.home = this.image.towers = "images/markers/blubolt.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(51.38355, -2.363772);
             case "riot":
@@ -325,29 +395,33 @@ stateManager["Program:undefined"] = undefined
             case "theriothq":
                 this.image.home = this.image.towers = "images/markers/riot.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(51.383366, -2.36249);
             case "buckingham palace":
                 this.image.home = "images/markers/buckingham-palace.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(51.501994, -0.139952);
             case "the white house":
                 this.image.home = "images/markers/white-house.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(38.897702, -77.036522);
             case "the vatican":
                 this.image.home = "images/markers/vatican.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(41.9022573, 12.4581314);
             case "tower of london":
@@ -371,8 +445,9 @@ stateManager["Program:undefined"] = undefined
             case "rangers fc":
                 this.image.home = "images/markers/ibrox.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(55.853206, -4.309256);
             case "cats":
@@ -383,8 +458,9 @@ stateManager["Program:undefined"] = undefined
             case "troll":
                 this.image.towers = "images/markers/cats.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(51.381416, -2.358924);
             case "cheezburger":
@@ -393,13 +469,15 @@ stateManager["Program:undefined"] = undefined
             case "fail blog":
                 this.image.towers = "images/markers/cats.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 this.image.home = "images/markers/cheezburger.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(47.62104, -122.35935);
             case "olympic stadium":
@@ -407,31 +485,33 @@ stateManager["Program:undefined"] = undefined
             case "olympic stadium, london":
                 this.image.towers = "images/markers/olympics.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 this.image.home = "images/markers/olympics.png";
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                /* autogen added */
+
+                stateManager["Program:undefined"] = undefined;
 
                 return new google.maps.LatLng(51.5386, -0.01645);
         }
         return false;
     },
     setLocation: function (a, b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.ui.updateTowerImages();
-
- }, fxnCallCallback("this.g.ui.updateTowerImages"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.ui.updateTowerImages();
+        }, fxnCallCallback("this.g.ui.updateTowerImages"))();
+        /* end autogen added */
     }
 });
 
-/* autogen added */ 
-stateManager["Program:LocationSearch"] = LocationSearch
+/* autogen added */
+
+stateManager["Program:LocationSearch"] = LocationSearch;
 
 var Game = new Class({
     container: null,
@@ -453,311 +533,304 @@ var Game = new Class({
     initialize: function (a) {
         this.timer = new Timer().pause();
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.container = $(a);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.initMap();
+        /* autogen added */
 
- }, fxnCallCallback("this.initMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.initMap();
+        }, fxnCallCallback("this.initMap"))();
+        /* end autogen added */
         this.search = new LocationSearch(this);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.ui = new GameInterface(this, this.container);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.updateCopyrights();
+        /* autogen added */
 
- }, fxnCallCallback("this.updateCopyrights"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.updateCopyrights();
+        }, fxnCallCallback("this.updateCopyrights"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.startGame(
-            function (d, c, b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.search.setLocation(c, d);
+        StackTrace.instrument(() => {
+            this.ui.startGame(
+                function (d, c, b) {
+                    /* autogen added */
 
- }, fxnCallCallback("this.search.setLocation"))() 
- /* end autogen added */
-                this.stronghold = d;
+                    StackTrace.instrument(() => {
+                        this.search.setLocation(c, d);
+                    }, fxnCallCallback("this.search.setLocation"))();
+                    /* end autogen added */
+                    this.stronghold = d;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                    /* autogen added */
 
-                this.foundRoutes = b;
+                    stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    this.foundRoutes = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                    /* autogen added */
 
-                this.showStronghold();
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.showStronghold"))() 
- /* end autogen added */
-                this.rounds = new Rounds(b);
+                        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        this.showStronghold();
+                    }, fxnCallCallback("this.showStronghold"))();
+                    /* end autogen added */
+                    this.rounds = new Rounds(b);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                    /* autogen added */
 
-                this.nextRound();
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        stateManager["Program:undefined"] = undefined;
 
- }, fxnCallCallback("this.nextRound"))() 
- /* end autogen added */
-                _gaq.push(["_trackEvent", "game", "play", d.lat() + "," + d.lng()]);
+                        this.nextRound();
 
- }, fxnCallCallback("_gaq.push"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                        /* autogen added */
 
- }, fxnCallCallback("this.ui.startGame"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.nextRound"))();
+                        /* end autogen added */
+                        _gaq.push(["_trackEvent", "game", "play", d.lat() + "," + d.lng()]);
+                    }, fxnCallCallback("_gaq.push"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.ui.startGame"))();
+        /* end autogen added */
     },
     nextRound: function () {
         var a = this.rounds.get(++this.currentRound);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (!a) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.win();
-
- }, fxnCallCallback("this.win"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.win();
+            }, fxnCallCallback("this.win"))();
+            /* end autogen added */
             return;
         }
         a.g = this;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent("roundOver", this.nextRound.bind(this));
+        /* autogen added */
 
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.addEvent("roundOver", this.nextRound.bind(this));
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
         if (a.type == "normal") {
             if (this.moneyRounds++ && !this.hasWon) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.addMoney(this.moneyRounds * 4 + 50);
-
- }, fxnCallCallback("this.addMoney"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this.addMoney(this.moneyRounds * 4 + 50);
+                }, fxnCallCallback("this.addMoney"))();
+                /* end autogen added */
             }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.routes.each(function (c) {
-                c.creeps = [];
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+            StackTrace.instrument(() => {
+                this.routes.each(function (c) {
+                    c.creeps = [];
 
-            });
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    stateManager["Program:c"] = c;
+                });
 
- }, fxnCallCallback("this.routes.each"))() 
- /* end autogen added */
-            this.ui.nextRound();
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                StackTrace.instrument(() => {}, fxnCallCallback("this.routes.each"))();
+                /* end autogen added */
+                this.ui.nextRound();
 
- }, fxnCallCallback("this.ui.nextRound"))() 
- /* end autogen added */
-            this.ui.fastForwardOff();
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                StackTrace.instrument(() => {}, fxnCallCallback("this.ui.nextRound"))();
+                /* end autogen added */
+                this.ui.fastForwardOff();
 
- }, fxnCallCallback("this.ui.fastForwardOff"))() 
- /* end autogen added */
-            this.timer.pause();
+                /* autogen added */
 
- }, fxnCallCallback("this.timer.pause"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.ui.fastForwardOff"))();
+                /* end autogen added */
+                this.timer.pause();
+            }, fxnCallCallback("this.timer.pause"))();
+            /* end autogen added */
         }
         if (this.currentRound == 54) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.win();
-
- }, fxnCallCallback("this.win"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.win();
+            }, fxnCallCallback("this.win"))();
+            /* end autogen added */
         }
         var b = this.currentRound - 54;
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
+
+        stateManager["Program:b"] = b;
 
         if (b > 0 && b % 5 == 0) {
             this.difficultyMultiplier += 0.2;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
 
+            stateManager["Program:undefined"] = undefined;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.run();
+        /* autogen added */
 
- }, fxnCallCallback("a.run"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.run();
+        }, fxnCallCallback("a.run"))();
+        /* end autogen added */
     },
     geocode: function (b, e, c) {
         var a = this.search.search(b);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (a) {
             return e(a, b);
         }
         var d = new google.maps.Geocoder();
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+        /* autogen added */
 
+        stateManager["Program:d"] = d;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        d.geocode({ address: b }, function (g, f) {
-            if (f == google.maps.GeocoderStatus.OK) {
-                e(g[0].geometry.location, b);
-            } else {
-                c();
-            }
-        });
+        /* autogen added */
 
- }, fxnCallCallback("d.geocode"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            d.geocode({ address: b }, function (g, f) {
+                if (f == google.maps.GeocoderStatus.OK) {
+                    e(g[0].geometry.location, b);
+                } else {
+                    c();
+                }
+            });
+        }, fxnCallCallback("d.geocode"))();
+        /* end autogen added */
     },
     addRoute: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routes.push(a);
+        StackTrace.instrument(() => {
+            this.routes.push(a);
+        }, fxnCallCallback("this.routes.push"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.towers.each(function (c) {
+        StackTrace.instrument(() => {
+            this.towers.each(function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            c.calculateRouteOverlap();
+                StackTrace.instrument(() => {
+                    c.calculateRouteOverlap();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    /* autogen added */
 
- }, fxnCallCallback("c.calculateRouteOverlap"))() 
- /* end autogen added */
-            c.removePathEvents();
+                    StackTrace.instrument(() => {}, fxnCallCallback("c.calculateRouteOverlap"))();
+                    /* end autogen added */
+                    c.removePathEvents();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    /* autogen added */
 
- }, fxnCallCallback("c.removePathEvents"))() 
- /* end autogen added */
-            c.addPathEvents();
+                    StackTrace.instrument(() => {}, fxnCallCallback("c.removePathEvents"))();
+                    /* end autogen added */
+                    c.addPathEvents();
+                }, fxnCallCallback("c.addPathEvents"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("this.towers.each"))();
+        /* end autogen added */
 
- }, fxnCallCallback("c.addPathEvents"))() 
- /* end autogen added */
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.towers.each"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.enable();
-
- }, fxnCallCallback("a.enable"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.enable();
+        }, fxnCallCallback("a.enable"))();
+        /* end autogen added */
         if (a.addMessage) {
             new Message(a.addMessage[0], a.addMessage[1], a.addMessage[2], a.addMessage[3]);
         }
         var b = new google.maps.LatLngBounds();
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
+        stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routes.each(function (c) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            c.path.each(function (d) {
+        StackTrace.instrument(() => {
+            this.routes.each(function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                b.extend(d.latLng);
+                StackTrace.instrument(() => {
+                    c.path.each(function (d) {
+                        /* autogen added */
 
- }, fxnCallCallback("b.extend"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {
+                            b.extend(d.latLng);
+                        }, fxnCallCallback("b.extend"))();
+                        /* end autogen added */
+                    });
+                }, fxnCallCallback("c.path.each"))();
+                /* end autogen added */
             });
+        }, fxnCallCallback("this.routes.each"))();
+        /* end autogen added */
 
- }, fxnCallCallback("c.path.each"))() 
- /* end autogen added */
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.routes.each"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.map.fitBounds(b);
-
- }, fxnCallCallback("this.map.fitBounds"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.map.fitBounds(b);
+        }, fxnCallCallback("this.map.fitBounds"))();
+        /* end autogen added */
         return a;
     },
     initMap: function () {
         var a = this._getMapTypes();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         this.map = new google.maps.Map(this.container.getElement(".map"), {
             center: new google.maps.LatLng(54.5, -3.2),
@@ -767,58 +840,63 @@ stateManager["Program:a"] = a
             mapTypeControlOptions: { mapTypeIds: a }
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addMapTypes();
+        /* autogen added */
 
- }, fxnCallCallback("this._addMapTypes"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addMapTypes();
+        }, fxnCallCallback("this._addMapTypes"))();
+        /* end autogen added */
     },
     _getMapTypes: function () {
         return [google.maps.MapTypeId.ROADMAP, "watercolor", google.maps.MapTypeId.SATELLITE];
     },
     _addMapTypes: function () {
+        /* autogen added */
 
-/* autogen added */ 
- a = StackTrace.instrument(a, fxnCallCallback("a"));
+        a = StackTrace.instrument(a, fxnCallCallback("a"));
         function a(h, e, d) {
-    var g = h.y;
+            var g = h.y;
 
-/* autogen added */ 
-stateManager["Program:a:g"] = g
+            /* autogen added */
 
-    var c = h.x;
+            stateManager["Program:a:g"] = g;
 
-/* autogen added */ 
-stateManager["Program:a:c"] = c
+            var c = h.x;
 
-    var f = 1 << e;
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:a:f"] = f
+            stateManager["Program:a:c"] = c;
 
+            var f = 1 << e;
 
-    if (g < 0 || g >= f) {
-        return null;
-    }
+            /* autogen added */
 
-    if (c < 0 || c >= f) {
-        c = (c % f + f) % f;
+            stateManager["Program:a:f"] = f;
 
-/* autogen added */ 
-stateManager["Program:a:c"] = c
+            if (g < 0 || g >= f) {
+                return null;
+            }
 
-    }
+            if (c < 0 || c >= f) {
+                c = ((c % f) + f) % f;
 
-    return d({
-        x: c,
-        y: g
-    }, e);
-};
+                /* autogen added */
+
+                stateManager["Program:a:c"] = c;
+            }
+
+            return d(
+                {
+                    x: c,
+                    y: g
+                },
+                e
+            );
+        }
         var b = {
             getTileUrl: function (d, c) {
                 return a(d, c, function (f, e) {
@@ -834,52 +912,53 @@ stateManager["Program:a:c"] = c
             credit: "Stamen"
         };
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        StackTrace.instrument(() => {
+            /* autogen added */
 
-        this.map.mapTypes.set("watercolor", new google.maps.ImageMapType(b));
+            stateManager["Program:b"] = b;
 
- }, fxnCallCallback("this.map.mapTypes.set"))() 
- /* end autogen added */
+            this.map.mapTypes.set("watercolor", new google.maps.ImageMapType(b));
+        }, fxnCallCallback("this.map.mapTypes.set"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        google.maps.event.addListener(this.map, "maptypeid_changed", this.updateCopyrights.bind(this));
+        /* autogen added */
 
- }, fxnCallCallback("google.maps.event.addListener"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            google.maps.event.addListener(this.map, "maptypeid_changed", this.updateCopyrights.bind(this));
+        }, fxnCallCallback("google.maps.event.addListener"))();
+        /* end autogen added */
         copyrightNode = document.createElement("div");
 
-/* autogen added */ 
-stateManager["Program:copyrightNode"] = copyrightNode
+        /* autogen added */
 
+        stateManager["Program:copyrightNode"] = copyrightNode;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        copyrightNode.set("id", "copyright-control");
+        /* autogen added */
 
- }, fxnCallCallback("copyrightNode.set"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            copyrightNode.set("id", "copyright-control");
+        }, fxnCallCallback("copyrightNode.set"))();
+        /* end autogen added */
         copyrightNode.index = 0;
 
-/* autogen added */ 
-stateManager["Program:copyrightNode"] = copyrightNode
+        /* autogen added */
+
+        stateManager["Program:copyrightNode"] = copyrightNode;
 
         this.copyright = copyrightNode;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightNode);
+        /* autogen added */
 
- }, fxnCallCallback("this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightNode);
+        }, fxnCallCallback("this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push"))();
+        /* end autogen added */
         var b = {
             getTileUrl: function (d, c) {
                 return a(d, c, function (f, e) {
@@ -897,52 +976,54 @@ stateManager["Program:undefined"] = undefined
             credit: "Google"
         };
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        StackTrace.instrument(() => {
+            /* autogen added */
 
-        this.map.mapTypes.set("treasure", new google.maps.ImageMapType(b));
+            stateManager["Program:b"] = b;
 
- }, fxnCallCallback("this.map.mapTypes.set"))() 
- /* end autogen added */
+            this.map.mapTypes.set("treasure", new google.maps.ImageMapType(b));
+        }, fxnCallCallback("this.map.mapTypes.set"))();
+        /* end autogen added */
     },
     updateCopyrights: function () {
         var a = "Game &copy; Duncan Barclay. ";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         switch (this.map.getMapTypeId()) {
             case "watercolor":
                 a +=
                     'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.';
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
         }
         a += ' <a class="copyright-link">(full info)</a>';
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.copyright.set("html", a);
+        /* autogen added */
 
- }, fxnCallCallback("this.copyright.set"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.copyright.set("html", a);
+        }, fxnCallCallback("this.copyright.set"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.initMiscButtons(this.copyright);
+        /* autogen added */
 
- }, fxnCallCallback("this.ui.initMiscButtons"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.ui.initMiscButtons(this.copyright);
+        }, fxnCallCallback("this.ui.initMiscButtons"))();
+        /* end autogen added */
     },
     showStronghold: function () {
         new google.maps.Marker({
@@ -960,201 +1041,196 @@ stateManager["Program:a"] = a
     addLives: function (a) {
         this.lives += a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .lives .count").set("text", this.lives);
+        /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .lives .count").set("text", this.lives);
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     removeLife: function (a) {
         this.lives -= a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .lives .count").set("text", this.lives);
+        /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .lives .count").set("text", this.lives);
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
         if (this.lives <= 0) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.lose();
-
- }, fxnCallCallback("this.lose"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.lose();
+            }, fxnCallCallback("this.lose"))();
+            /* end autogen added */
         }
     },
     win: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.win();
-
- }, fxnCallCallback("this.ui.win"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.ui.win();
+        }, fxnCallCallback("this.ui.win"))();
+        /* end autogen added */
         this.hasWon = true;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.analytics("win", this.moneyRounds);
+        /* autogen added */
 
- }, fxnCallCallback("this.analytics"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.analytics("win", this.moneyRounds);
+        }, fxnCallCallback("this.analytics"))();
+        /* end autogen added */
     },
     lose: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.gameOver();
+        StackTrace.instrument(() => {
+            this.gameOver();
+        }, fxnCallCallback("this.gameOver"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.gameOver"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.lose();
+        StackTrace.instrument(() => {
+            this.ui.lose();
+        }, fxnCallCallback("this.ui.lose"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.ui.lose"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.analytics("lose", this.moneyRounds);
-
- }, fxnCallCallback("this.analytics"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.analytics("lose", this.moneyRounds);
+        }, fxnCallCallback("this.analytics"))();
+        /* end autogen added */
     },
     gameOver: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.timer.pause();
-
- }, fxnCallCallback("this.timer.pause"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.timer.pause();
+        }, fxnCallCallback("this.timer.pause"))();
+        /* end autogen added */
     },
     addMoney: function (b, a) {
         if (this.hasWon && !a) {
             var c = Math.max(10, 25 - (this.moneyRounds - 54)) / 100;
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+            /* autogen added */
+
+            stateManager["Program:c"] = c;
 
             b = Math.floor(b * c);
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            /* autogen added */
 
+            stateManager["Program:b"] = b;
         }
         this.money += b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.updateMoney();
+        /* autogen added */
 
- }, fxnCallCallback("this.ui.updateMoney"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.ui.updateMoney();
+        }, fxnCallCallback("this.ui.updateMoney"))();
+        /* end autogen added */
         return this;
     },
     removeMoney: function (a) {
         if (this.money >= a) {
             this.money -= a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            this.ui.updateMoney();
+                stateManager["Program:undefined"] = undefined;
 
- }, fxnCallCallback("this.ui.updateMoney"))() 
- /* end autogen added */
+                this.ui.updateMoney();
+            }, fxnCallCallback("this.ui.updateMoney"))();
+            /* end autogen added */
             return true;
         } else {
             return false;
         }
     },
     analytics: function (a, b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        _gaq.push(["_trackEvent", "game", a, "", b]);
-
- }, fxnCallCallback("_gaq.push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            _gaq.push(["_trackEvent", "game", a, "", b]);
+        }, fxnCallCallback("_gaq.push"))();
+        /* end autogen added */
     },
     restart: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.towers.each(function (b) {
+        StackTrace.instrument(() => {
+            this.towers.each(function (b) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            b.remove();
+                StackTrace.instrument(() => {
+                    b.remove();
+                }, fxnCallCallback("b.remove"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("this.towers.each"))();
+        /* end autogen added */
 
- }, fxnCallCallback("b.remove"))() 
- /* end autogen added */
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.towers.each"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.routes.each(function (b) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routes.each(function (b) {
+                StackTrace.instrument(() => {
+                    b.remove();
+                }, fxnCallCallback("b.remove"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("this.routes.each"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            b.remove();
+        /* autogen added */
 
- }, fxnCallCallback("b.remove"))() 
- /* end autogen added */
-        });
-
- }, fxnCallCallback("this.routes.each"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.ui.restart();
-
- }, fxnCallCallback("this.ui.restart"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.ui.restart();
+        }, fxnCallCallback("this.ui.restart"))();
+        /* end autogen added */
         var a = new this.gameClass(this.container);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.gameClass = this.gameClass;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Game"] = Game
+/* autogen added */
+
+stateManager["Program:Game"] = Game;
 
 var GameInterface = new Class({
     g: null,
@@ -1165,1636 +1241,1607 @@ var GameInterface = new Class({
     initialize: function (b, a) {
         this.g = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.container = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.content = this.container.get("html");
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addDocumentPauseEvents();
+        /* autogen added */
 
- }, fxnCallCallback("this._addDocumentPauseEvents"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addDocumentPauseEvents();
+        }, fxnCallCallback("this._addDocumentPauseEvents"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._initTowers();
+        /* autogen added */
 
- }, fxnCallCallback("this._initTowers"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._initTowers();
+        }, fxnCallCallback("this._initTowers"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._initPause();
+        /* autogen added */
 
- }, fxnCallCallback("this._initPause"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._initPause();
+        }, fxnCallCallback("this._initPause"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._initFastForward();
+        /* autogen added */
 
- }, fxnCallCallback("this._initFastForward"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._initFastForward();
+        }, fxnCallCallback("this._initFastForward"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._initNextRound();
+        /* autogen added */
 
- }, fxnCallCallback("this._initNextRound"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._initNextRound();
+        }, fxnCallCallback("this._initNextRound"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.initMiscButtons(this.container);
+        /* autogen added */
 
- }, fxnCallCallback("this.initMiscButtons"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.initMiscButtons(this.container);
+        }, fxnCallCallback("this.initMiscButtons"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.updateLives();
+        /* autogen added */
 
- }, fxnCallCallback("this.updateLives"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.updateLives();
+        }, fxnCallCallback("this.updateLives"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.updateMoney();
+        /* autogen added */
 
- }, fxnCallCallback("this.updateMoney"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.updateMoney();
+        }, fxnCallCallback("this.updateMoney"))();
+        /* end autogen added */
     },
     startGame: function (b) {
         var a = this._fullscreenPopup("info", "startup", { noCloseButton: true });
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         this.startLock = false;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent(
-            "action",
-            function (c, e) {
-                if (this.startLock) {
-                    return;
-                }
-                this.startLock = true;
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
-
-                var f = function (i, h) {
-                    var g = new RouteBuilder(this.g, i);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
-/* autogen added */ 
-stateManager["Program:g"] = g
-
-                    g.generate(
-                        function () {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            a.close();
-
- }, fxnCallCallback("a.close"))() 
- /* end autogen added */
-                            for (var k = g.routes.length; k-- > 0; ) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
-/* autogen added */ 
-stateManager["Program:k"] = k
-
-                                g.routes[k].show();
-
- }, fxnCallCallback("g.routes[k].show"))() 
- /* end autogen added */
-                            }
-                            var l = 200;
-
-/* autogen added */ 
-stateManager["Program:l"] = l
-
-                            var j = 100;
-
-/* autogen added */ 
-stateManager["Program:j"] = j
-
-                            switch (a.container.getElement(".difficulty-picker").get("value").toLowerCase()) {
-                                case "insane":
-                                    j = 10;
-
-/* autogen added */ 
-stateManager["Program:j"] = j
-
-                                case "hard":
-                                    this.g.difficultyMultiplier = 1.6;
-
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
-
-                                    break;
-                                case "medium":
-                                    this.g.difficultyMultiplier = 1.3;
-
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
-
-                                    break;
-                            }
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            this.g.addMoney(l);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("this.g.addMoney"))() 
- /* end autogen added */
-                            this.g.addLives(j);
-
- }, fxnCallCallback("this.g.addLives"))() 
- /* end autogen added */
-                            b(i, h, g);
-                        }.bind(this),
-                        function () {
-                            this.startLock = false;
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
-
-                            c.getElement(".error").set(
-                                "html",
-                                "We couldn't find any roads around that location for creeps to move along.  Please try somewhere else."
-                            );
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("c.getElement"))() 
- /* end autogen added */
-                            c.getElement(".error").show();
-
- }, fxnCallCallback("c.getElement"))() 
- /* end autogen added */
-                        }.bind(this)
-                    );
-
- }, fxnCallCallback("g.generate"))() 
- /* end autogen added */
-                }.bind(this);
-
-/* autogen added */ 
-stateManager["Program:f"] = f
-
-                var d = "";
-
-/* autogen added */ 
-stateManager["Program:d"] = d
-
-                if (e && e.hasClass("known-location")) {
-                    d = e.get("text");
-
-/* autogen added */ 
-stateManager["Program:d"] = d
-
-                    if (this.g.map.getMapTypeId() == google.maps.MapTypeId.ROADMAP) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        this.g.map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-
- }, fxnCallCallback("this.g.map.setMapTypeId"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.addEvent(
+                "action",
+                function (c, e) {
+                    if (this.startLock) {
+                        return;
                     }
-                } else {
-                    d = c.getElement(".search").get("value");
+                    this.startLock = true;
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                    /* autogen added */
 
-                }
+                    stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.geocode(
-                    d,
-                    f,
-                    function () {
-                        this.startLock = false;
+                    var f = function (i, h) {
+                        var g = new RouteBuilder(this.g, i);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                        StackTrace.instrument(() => {
+                            /* autogen added */
 
-                        c.getElement(".error").set(
-                            "html",
-                            "We couldn't find that location.  Please try to be more specific, or search for somewhere else."
+                            stateManager["Program:g"] = g;
+
+                            g.generate(
+                                function () {
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        a.close();
+                                    }, fxnCallCallback("a.close"))();
+                                    /* end autogen added */
+                                    for (var k = g.routes.length; k-- > 0; ) {
+                                        /* autogen added */
+
+                                        StackTrace.instrument(() => {
+                                            /* autogen added */
+
+                                            stateManager["Program:k"] = k;
+
+                                            g.routes[k].show();
+                                        }, fxnCallCallback("g.routes[k].show"))();
+                                        /* end autogen added */
+                                    }
+                                    var l = 200;
+
+                                    /* autogen added */
+
+                                    stateManager["Program:l"] = l;
+
+                                    var j = 100;
+
+                                    /* autogen added */
+
+                                    stateManager["Program:j"] = j;
+
+                                    switch (
+                                        a.container
+                                            .getElement(".difficulty-picker")
+                                            .get("value")
+                                            .toLowerCase()
+                                    ) {
+                                        case "insane":
+                                            j = 10;
+
+                                            /* autogen added */
+
+                                            stateManager["Program:j"] = j;
+
+                                        case "hard":
+                                            this.g.difficultyMultiplier = 1.6;
+
+                                            /* autogen added */
+
+                                            stateManager["Program:undefined"] = undefined;
+
+                                            break;
+                                        case "medium":
+                                            this.g.difficultyMultiplier = 1.3;
+
+                                            /* autogen added */
+
+                                            stateManager["Program:undefined"] = undefined;
+
+                                            break;
+                                    }
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        this.g.addMoney(l);
+
+                                        /* autogen added */
+
+                                        StackTrace.instrument(() => {}, fxnCallCallback("this.g.addMoney"))();
+                                        /* end autogen added */
+                                        this.g.addLives(j);
+                                    }, fxnCallCallback("this.g.addLives"))();
+                                    /* end autogen added */
+                                    b(i, h, g);
+                                }.bind(this),
+                                function () {
+                                    this.startLock = false;
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        /* autogen added */
+
+                                        stateManager["Program:undefined"] = undefined;
+
+                                        c.getElement(".error").set(
+                                            "html",
+                                            "We couldn't find any roads around that location for creeps to move along.  Please try somewhere else."
+                                        );
+
+                                        /* autogen added */
+
+                                        StackTrace.instrument(() => {}, fxnCallCallback("c.getElement"))();
+                                        /* end autogen added */
+                                        c.getElement(".error").show();
+                                    }, fxnCallCallback("c.getElement"))();
+                                    /* end autogen added */
+                                }.bind(this)
+                            );
+                        }, fxnCallCallback("g.generate"))();
+                        /* end autogen added */
+                    }.bind(this);
+
+                    /* autogen added */
+
+                    stateManager["Program:f"] = f;
+
+                    var d = "";
+
+                    /* autogen added */
+
+                    stateManager["Program:d"] = d;
+
+                    if (e && e.hasClass("known-location")) {
+                        d = e.get("text");
+
+                        /* autogen added */
+
+                        stateManager["Program:d"] = d;
+
+                        if (this.g.map.getMapTypeId() == google.maps.MapTypeId.ROADMAP) {
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {
+                                this.g.map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+                            }, fxnCallCallback("this.g.map.setMapTypeId"))();
+                            /* end autogen added */
+                        }
+                    } else {
+                        d = c.getElement(".search").get("value");
+
+                        /* autogen added */
+
+                        stateManager["Program:d"] = d;
+                    }
+
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        this.g.geocode(
+                            d,
+                            f,
+                            function () {
+                                this.startLock = false;
+
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    /* autogen added */
+
+                                    stateManager["Program:undefined"] = undefined;
+
+                                    c.getElement(".error").set(
+                                        "html",
+                                        "We couldn't find that location.  Please try to be more specific, or search for somewhere else."
+                                    );
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {}, fxnCallCallback("c.getElement"))();
+                                    /* end autogen added */
+                                    c.getElement(".error").show();
+                                }, fxnCallCallback("c.getElement"))();
+                                /* end autogen added */
+                            }.bind(this)
                         );
+                    }, fxnCallCallback("this.g.geocode"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
- }, fxnCallCallback("c.getElement"))() 
- /* end autogen added */
-                        c.getElement(".error").show();
-
- }, fxnCallCallback("c.getElement"))() 
- /* end autogen added */
-                    }.bind(this)
-                );
-
- }, fxnCallCallback("this.g.geocode"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.initMiscButtons(a.container);
-
- }, fxnCallCallback("this.initMiscButtons"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.initMiscButtons(a.container);
+        }, fxnCallCallback("this.initMiscButtons"))();
+        /* end autogen added */
         if (window.location.hash) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            a.container.getElement(".search").set("value", window.location.hash.substring(1));
+            StackTrace.instrument(() => {
+                a.container.getElement(".search").set("value", window.location.hash.substring(1));
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                /* autogen added */
 
- }, fxnCallCallback("a.container.getElement"))() 
- /* end autogen added */
-            a.container.getElement(".action").fireEvent("click");
-
- }, fxnCallCallback("a.container.getElement"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("a.container.getElement"))();
+                /* end autogen added */
+                a.container.getElement(".action").fireEvent("click");
+            }, fxnCallCallback("a.container.getElement"))();
+            /* end autogen added */
         }
     },
     _addDocumentPauseEvents: function () {
         var a = "";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (typeof document.hidden !== "undefined") {
             a = "visibilitychange";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+            /* autogen added */
 
+            stateManager["Program:a"] = a;
         } else {
             if (typeof document.mozHidden !== "undefined") {
                 a = "mozvisibilitychange";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
 
+                stateManager["Program:a"] = a;
             } else {
                 if (typeof document.msHidden !== "undefined") {
                     a = "msvisibilitychange";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                    /* autogen added */
 
+                    stateManager["Program:a"] = a;
                 } else {
                     if (typeof document.webkitHidden !== "undefined") {
                         a = "webkitvisibilitychange";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                        /* autogen added */
 
+                        stateManager["Program:a"] = a;
                     }
                 }
             }
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        document.addEventListener(
-            a,
-            function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.pause();
+        StackTrace.instrument(() => {
+            document.addEventListener(
+                a,
+                function () {
+                    /* autogen added */
 
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("document.addEventListener"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.pause();
+                    }, fxnCallCallback("this.pause"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("document.addEventListener"))();
+        /* end autogen added */
     },
     _initPause: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .pause").addEvent(
-            "click",
-            function (a) {
-                if (this.g.timer.paused) {
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .pause").addEvent(
+                "click",
+                function (a) {
+                    if (this.g.timer.paused) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.g.timer.resume();
+                        StackTrace.instrument(() => {
+                            this.g.timer.resume();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                            /* autogen added */
 
- }, fxnCallCallback("this.g.timer.resume"))() 
- /* end autogen added */
-                    this._stopPause();
+                            StackTrace.instrument(() => {}, fxnCallCallback("this.g.timer.resume"))();
+                            /* end autogen added */
+                            this._stopPause();
+                        }, fxnCallCallback("this._stopPause"))();
+                        /* end autogen added */
+                    } else {
+                        /* autogen added */
 
- }, fxnCallCallback("this._stopPause"))() 
- /* end autogen added */
-                } else {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.pause();
-
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {
+                            this.pause();
+                        }, fxnCallCallback("this.pause"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     _stopPause: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .pause").removeClass("on");
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .pause").removeClass("on");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .pause").set("text", "Pause");
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .pause").set("text", "Pause");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     pause: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.pause();
+        StackTrace.instrument(() => {
+            this.g.timer.pause();
+        }, fxnCallCallback("this.g.timer.pause"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.g.timer.pause"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .pause").addClass("on");
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .pause").addClass("on");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .pause").set("text", "Resume");
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .pause").set("text", "Resume");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     fastForwardOff: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.setMultiplier(1);
+        StackTrace.instrument(() => {
+            this.g.timer.setMultiplier(1);
+        }, fxnCallCallback("this.g.timer.setMultiplier"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.g.timer.setMultiplier"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .fast-forward").removeClass("on");
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .fast-forward").removeClass("on");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     _initFastForward: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .fast-forward").addEvent(
-            "click",
-            function (a) {
-                if (this.g.timer.multiplier > 1) {
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .fast-forward").addEvent(
+                "click",
+                function (a) {
+                    if (this.g.timer.multiplier > 1) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.fastForwardOff();
+                        StackTrace.instrument(() => {
+                            this.fastForwardOff();
+                        }, fxnCallCallback("this.fastForwardOff"))();
+                        /* end autogen added */
+                    } else {
+                        /* autogen added */
 
- }, fxnCallCallback("this.fastForwardOff"))() 
- /* end autogen added */
-                } else {
+                        StackTrace.instrument(() => {
+                            this.g.timer.setMultiplier(this.timerMultiplier);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.g.timer.setMultiplier(this.timerMultiplier);
+                            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("this.g.timer.setMultiplier"))() 
- /* end autogen added */
-                    a.target.addClass("on");
-
- }, fxnCallCallback("a.target.addClass"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+                            StackTrace.instrument(() => {}, fxnCallCallback("this.g.timer.setMultiplier"))();
+                            /* end autogen added */
+                            a.target.addClass("on");
+                        }, fxnCallCallback("a.target.addClass"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     updateLives: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .lives .count").set("text", this.g.lives);
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .lives .count").set("text", this.g.lives);
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     updateRound: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .round .count").set("text", a);
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .round .count").set("text", a);
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     updateMoney: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .money .amount").set("text", this.g.money);
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .money .amount").set("text", this.g.money);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
-        this.container.getElements(".controls .create-tower").each(
-            function (b) {
-                var a = this._getTowerType(b);
+            StackTrace.instrument(() => {}, fxnCallCallback("this.container.getElements"))();
+            /* end autogen added */
+            this.container.getElements(".controls .create-tower").each(
+                function (b) {
+                    var a = this._getTowerType(b);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                    /* autogen added */
 
-                if (a.prototype.cost > this.g.money) {
+                    stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    b.addClass("disabled");
+                    if (a.prototype.cost > this.g.money) {
+                        /* autogen added */
 
- }, fxnCallCallback("b.addClass"))() 
- /* end autogen added */
-                } else {
+                        StackTrace.instrument(() => {
+                            b.addClass("disabled");
+                        }, fxnCallCallback("b.addClass"))();
+                        /* end autogen added */
+                    } else {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    b.removeClass("disabled");
-
- }, fxnCallCallback("b.removeClass"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {
+                            b.removeClass("disabled");
+                        }, fxnCallCallback("b.removeClass"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
         if (this.openTowerInfoWin) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.updateTowerInfoWin();
-
- }, fxnCallCallback("this.updateTowerInfoWin"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.updateTowerInfoWin();
+            }, fxnCallCallback("this.updateTowerInfoWin"))();
+            /* end autogen added */
         }
     },
     _initNextRound: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container
-            .getElement(".controls .next-round")
-            .set("slide", { duration: 1, transition: false })
-            .slide("out");
+        StackTrace.instrument(() => {
+            this.container
+                .getElement(".controls .next-round")
+                .set("slide", { duration: 1, transition: false })
+                .slide("out");
+        }, fxnCallCallback("this.containe"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.containe"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .next-round .button").addEvent(
-            "click",
-            function () {
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .next-round .button").addEvent(
+                "click",
+                function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.container.getElement(".controls .next-round-popup").hide();
+                    StackTrace.instrument(() => {
+                        this.container.getElement(".controls .next-round-popup").hide();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
-                this.container
-                    .getElement(".controls .next-round")
-                    .set("slide", { duration: "short", transition: "expo:out" });
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.container.getElement"))();
+                        /* end autogen added */
+                        this.container
+                            .getElement(".controls .next-round")
+                            .set("slide", { duration: "short", transition: "expo:out" });
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.containe"))() 
- /* end autogen added */
-                this.container.getElement(".controls .next-round").slide("out");
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.containe"))();
+                        /* end autogen added */
+                        this.container.getElement(".controls .next-round").slide("out");
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
-                this.g.timer.resume();
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.container.getElement"))();
+                        /* end autogen added */
+                        this.g.timer.resume();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.g.timer.resume"))() 
- /* end autogen added */
-                this._stopPause();
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.g.timer.resume"))();
+                        /* end autogen added */
+                        this._stopPause();
+                    }, fxnCallCallback("this._stopPause"))();
+                    /* end autogen added */
+                    if ((this.g.moneyRounds + 1) % 2) {
+                        /* autogen added */
 
- }, fxnCallCallback("this._stopPause"))() 
- /* end autogen added */
-                if ((this.g.moneyRounds + 1) % 2) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.g.analytics("nextRound", this.g.moneyRounds);
-
- }, fxnCallCallback("this.g.analytics"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {
+                            this.g.analytics("nextRound", this.g.moneyRounds);
+                        }, fxnCallCallback("this.g.analytics"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     nextRound: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container
-            .getElement(".controls .next-round")
-            .setStyle("visibility", "visible")
-            .set("slide", { duration: "long", transition: "bounce:out" });
+        StackTrace.instrument(() => {
+            this.container
+                .getElement(".controls .next-round")
+                .setStyle("visibility", "visible")
+                .set("slide", { duration: "long", transition: "bounce:out" });
+        }, fxnCallCallback("this.containe"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.containe"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".controls .next-round").slide("in");
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElement(".controls .next-round").slide("in");
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
         if (this.g.currentRound == 1) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.container.getElement(".controls .next-round-popup").show();
+            StackTrace.instrument(() => {
+                this.container.getElement(".controls .next-round-popup").show();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                /* autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
-            this.container.getElement(".tower-info-popup").show();
-
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.container.getElement"))();
+                /* end autogen added */
+                this.container.getElement(".tower-info-popup").show();
+            }, fxnCallCallback("this.container.getElement"))();
+            /* end autogen added */
         }
     },
     _getTowerType: function (b) {
         var a = false;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         switch (b.get("name")) {
             case "alpha":
                 a = TowerAlpha;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
             case "bravo":
                 a = TowerBravo;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
             case "charlie":
                 a = TowerCharlie;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
             case "delta":
                 a = TowerDelta;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
             case "echo":
                 a = TowerEcho;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
             case "foxtrot":
                 a = TowerFoxtrot;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                /* autogen added */
+
+                stateManager["Program:a"] = a;
 
                 break;
         }
         return a;
     },
     _initTowers: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.updateTowerImages();
+        StackTrace.instrument(() => {
+            this.updateTowerImages();
 
-/* autogen added */ 
- b = StackTrace.instrument(b, fxnCallCallback("b"));
+            /* autogen added */
 
- }, fxnCallCallback("this.updateTowerImages"))() 
- /* end autogen added */
-        function b() {};
+            b = StackTrace.instrument(b, fxnCallCallback("b"));
+        }, fxnCallCallback("this.updateTowerImages"))();
+        /* end autogen added */
+        function b() {}
         b.prototype = new google.maps.OverlayView();
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
+
+        stateManager["Program:b"] = b;
 
         b.prototype.onAdd = function () {};
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         b.prototype.onRemove = function () {};
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         b.prototype.draw = function () {};
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         var a = new b();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .create-tower").each(
-            function (h) {
-                var f = this._getTowerType(h);
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .create-tower").each(
+                function (h) {
+                    var f = this._getTowerType(h);
 
-                if (!f) {
-                    return;
-                }
-                var e = this.container
-                    .getElement(".hidden-elements .control-tower-mouseover .content")
-                    .clone();
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    stateManager["Program:f"] = f;
 
-/* autogen added */ 
-stateManager["Program:e"] = e
-
-                e.inject(h.getSiblings(".popup")[0]);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("e.inject"))() 
- /* end autogen added */
-                e.getElements(".value").each(function (i) {
-                    if (i.getAttribute("data-name") && f.prototype[i.getAttribute("data-name")]) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        i.set("text", f.prototype[i.getAttribute("data-name")]);
-
- }, fxnCallCallback("i.set"))() 
- /* end autogen added */
+                    if (!f) {
+                        return;
                     }
-                });
+                    var e = this.container
+                        .getElement(".hidden-elements .control-tower-mouseover .content")
+                        .clone();
 
- }, fxnCallCallback("e.getElements"))() 
- /* end autogen added */
-                var d = function (i) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    h.getSiblings(".popup").show();
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("h.getSiblings"))() 
- /* end autogen added */
-                }.bind(this);
+                        stateManager["Program:e"] = e;
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                        e.inject(h.getSiblings(".popup")[0]);
 
-                var c = function (i) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    h.getSiblings(".popup").hide();
+                        StackTrace.instrument(() => {}, fxnCallCallback("e.inject"))();
+                        /* end autogen added */
+                        e.getElements(".value").each(function (i) {
+                            if (i.getAttribute("data-name") && f.prototype[i.getAttribute("data-name")]) {
+                                /* autogen added */
 
- }, fxnCallCallback("h.getSiblings"))() 
- /* end autogen added */
-                }.bind(this);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
-/* autogen added */ 
-stateManager["Program:c"] = c
-
-                h.addEvent("mouseenter", d);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                h.addEvent("mouseout", c);
-
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                var g = function (l) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    l.stop();
-
- }, fxnCallCallback("l.stop"))() 
- /* end autogen added */
-                    c();
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    h.removeEvent("mouseenter", d);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("h.removeEvent"))() 
- /* end autogen added */
-                    a.setMap(this.g.map);
-
- }, fxnCallCallback("a.setMap"))() 
- /* end autogen added */
-                    var n = new f(this.g, this.g.stronghold);
-
-/* autogen added */ 
-stateManager["Program:n"] = n
-
-                    var j = this.g.map.getDiv().getPosition();
-
-/* autogen added */ 
-stateManager["Program:j"] = j
-
-                    var k = this.g.map.getDiv().getSize();
-
-/* autogen added */ 
- p = StackTrace.instrument(p, fxnCallCallback("p"));
-
-/* autogen added */ 
-stateManager["Program:k"] = k
-
-                    function p(q) {
-    xPos = q.event.clientX - j.x;
-
-/* autogen added */ 
-stateManager["Program:p:xPos"] = xPos
-
-    yPos = q.event.clientY - j.y;
-
-/* autogen added */ 
-stateManager["Program:p:yPos"] = yPos
-
-    return xPos > 0 && xPos < k.x && yPos > 0 && yPos < k.y;
-};
-                    var o = l.event.clientX || l.event.touches[0].clientX;
-
-/* autogen added */ 
-stateManager["Program:o"] = o
-
-                    var m = l.event.clientY || l.event.touches[0].clientY;
-
-/* autogen added */ 
-stateManager["Program:m"] = m
-
-                    iconX = o - h.getPosition().x;
-
-/* autogen added */ 
-stateManager["Program:iconX"] = iconX
-
-                    iconY = m - h.getPosition().y;
-
-/* autogen added */ 
-stateManager["Program:iconY"] = iconY
-
-                    controlSize = h.getSize();
-
-/* autogen added */ 
-stateManager["Program:controlSize"] = controlSize
-
-                    var i = {};
-
-/* autogen added */ 
-stateManager["Program:i"] = i
-
-                    i = {
-                        mouseup: function (q) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            document.removeEvents(i);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("document.removeEvents"))() 
- /* end autogen added */
-                            h.setStyles({ position: "static", visibility: "visible" });
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("h.setStyles"))() 
- /* end autogen added */
-                            h.addEvent("mouseenter", d);
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                            a.setMap(null);
-
- }, fxnCallCallback("a.setMap"))() 
- /* end autogen added */
-                            if (!p(q) || !n.checkDroppable()) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                                n.remove();
-
- }, fxnCallCallback("n.remove"))() 
- /* end autogen added */
-                            } else {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                                n.drop();
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("n.drop"))() 
- /* end autogen added */
-                                this.g.towers.push(n);
-
- }, fxnCallCallback("this.g.towers.push"))() 
- /* end autogen added */
+                                StackTrace.instrument(() => {
+                                    i.set("text", f.prototype[i.getAttribute("data-name")]);
+                                }, fxnCallCallback("i.set"))();
+                                /* end autogen added */
                             }
-                        }.bind(this),
-                        mousemove: function (r) {
+                        });
+                    }, fxnCallCallback("e.getElements"))();
+                    /* end autogen added */
+                    var d = function (i) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            r.stop();
+                        StackTrace.instrument(() => {
+                            h.getSiblings(".popup").show();
+                        }, fxnCallCallback("h.getSiblings"))();
+                        /* end autogen added */
+                    }.bind(this);
 
- }, fxnCallCallback("r.stop"))() 
- /* end autogen added */
-                            var t = r.event.clientX || r.event.touches[0].clientX;
+                    /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:t"] = t
+                    stateManager["Program:d"] = d;
 
-                            var s = r.event.clientY || r.event.touches[0].clientY;
+                    var c = function (i) {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:s"] = s
+                        StackTrace.instrument(() => {
+                            h.getSiblings(".popup").hide();
+                        }, fxnCallCallback("h.getSiblings"))();
+                        /* end autogen added */
+                    }.bind(this);
 
-                            var u = a
-                                .getProjection()
-                                .fromContainerPixelToLatLng(
-                                    new google.maps.Point(
-                                        t - j.x + (controlSize.x / 2 - iconX),
-                                        s - j.y + (controlSize.y - iconY)
-                                    )
-                                );
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:u"] = u
+                        stateManager["Program:c"] = c;
 
-                            n.move(u).show().showAttackRadius();
+                        h.addEvent("mouseenter", d);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("n.move"))() 
- /* end autogen added */
-                            n.checkDroppable();
+                        StackTrace.instrument(() => {}, fxnCallCallback("h.addEvent"))();
+                        /* end autogen added */
+                        h.addEvent("mouseout", c);
+                    }, fxnCallCallback("h.addEvent"))();
+                    /* end autogen added */
+                    var g = function (l) {
+                        /* autogen added */
 
- }, fxnCallCallback("n.checkDroppable"))() 
- /* end autogen added */
-                            var q = {
-                                position: "absolute",
-                                left: t - iconX,
-                                top: s - iconY,
-                                zIndex: 100,
-                                visibility: p(r) ? "hidden" : "visible"
-                            };
+                        StackTrace.instrument(() => {
+                            l.stop();
+                        }, fxnCallCallback("l.stop"))();
+                        /* end autogen added */
+                        c();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:q"] = q
+                        StackTrace.instrument(() => {
+                            h.removeEvent("mouseenter", d);
 
-                            h.setStyles(q);
+                            /* autogen added */
 
- }, fxnCallCallback("h.setStyles"))() 
- /* end autogen added */
-                        }.bind(this)
-                    };
+                            StackTrace.instrument(() => {}, fxnCallCallback("h.removeEvent"))();
+                            /* end autogen added */
+                            a.setMap(this.g.map);
+                        }, fxnCallCallback("a.setMap"))();
+                        /* end autogen added */
+                        var n = new f(this.g, this.g.stronghold);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:i"] = i
+                        stateManager["Program:n"] = n;
 
-                    document.addEvent("mouseup", i.mouseup);
+                        var j = this.g.map.getDiv().getPosition();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("document.addEvent"))() 
- /* end autogen added */
-                    document.addEvent("mousemove", i.mousemove);
+                        stateManager["Program:j"] = j;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        var k = this.g.map.getDiv().getSize();
 
- }, fxnCallCallback("document.addEvent"))() 
- /* end autogen added */
-                    document.addEvent("touchend", i.mouseup);
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        p = StackTrace.instrument(p, fxnCallCallback("p"));
 
- }, fxnCallCallback("document.addEvent"))() 
- /* end autogen added */
-                    document.addEvent("touchmove", i.mousemove);
+                        /* autogen added */
 
- }, fxnCallCallback("document.addEvent"))() 
- /* end autogen added */
-                    if (this.container.getElement(".tower-info-popup")) {
+                        stateManager["Program:k"] = k;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        this.container.getElement(".tower-info-popup").destroy();
+                        function p(q) {
+                            xPos = q.event.clientX - j.x;
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
-                    }
-                }.bind(this);
+                            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                            stateManager["Program:p:xPos"] = xPos;
 
-/* autogen added */ 
-stateManager["Program:g"] = g
+                            yPos = q.event.clientY - j.y;
 
-                h.addEvent("mousedown", g);
+                            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                            stateManager["Program:p:yPos"] = yPos;
 
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                h.addEvent("touchstart", g);
+                            return xPos > 0 && xPos < k.x && yPos > 0 && yPos < k.y;
+                        }
+                        var o = l.event.clientX || l.event.touches[0].clientX;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                h.addEvent("mouseup", function (i) {
+                        stateManager["Program:o"] = o;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    h.addEvent("mouseenter", d);
+                        var m = l.event.clientY || l.event.touches[0].clientY;
 
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-                });
+                        /* autogen added */
 
- }, fxnCallCallback("h.addEvent"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                        stateManager["Program:m"] = m;
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                        iconX = o - h.getPosition().x;
+
+                        /* autogen added */
+
+                        stateManager["Program:iconX"] = iconX;
+
+                        iconY = m - h.getPosition().y;
+
+                        /* autogen added */
+
+                        stateManager["Program:iconY"] = iconY;
+
+                        controlSize = h.getSize();
+
+                        /* autogen added */
+
+                        stateManager["Program:controlSize"] = controlSize;
+
+                        var i = {};
+
+                        /* autogen added */
+
+                        stateManager["Program:i"] = i;
+
+                        i = {
+                            mouseup: function (q) {
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    document.removeEvents(i);
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {},
+                                    fxnCallCallback("document.removeEvents"))();
+                                    /* end autogen added */
+                                    h.setStyles({ position: "static", visibility: "visible" });
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {}, fxnCallCallback("h.setStyles"))();
+                                    /* end autogen added */
+                                    h.addEvent("mouseenter", d);
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {}, fxnCallCallback("h.addEvent"))();
+                                    /* end autogen added */
+                                    a.setMap(null);
+                                }, fxnCallCallback("a.setMap"))();
+                                /* end autogen added */
+                                if (!p(q) || !n.checkDroppable()) {
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        n.remove();
+                                    }, fxnCallCallback("n.remove"))();
+                                    /* end autogen added */
+                                } else {
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {
+                                        n.drop();
+
+                                        /* autogen added */
+
+                                        StackTrace.instrument(() => {}, fxnCallCallback("n.drop"))();
+                                        /* end autogen added */
+                                        this.g.towers.push(n);
+                                    }, fxnCallCallback("this.g.towers.push"))();
+                                    /* end autogen added */
+                                }
+                            }.bind(this),
+                            mousemove: function (r) {
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    r.stop();
+                                }, fxnCallCallback("r.stop"))();
+                                /* end autogen added */
+                                var t = r.event.clientX || r.event.touches[0].clientX;
+
+                                /* autogen added */
+
+                                stateManager["Program:t"] = t;
+
+                                var s = r.event.clientY || r.event.touches[0].clientY;
+
+                                /* autogen added */
+
+                                stateManager["Program:s"] = s;
+
+                                var u = a
+                                    .getProjection()
+                                    .fromContainerPixelToLatLng(
+                                        new google.maps.Point(
+                                            t - j.x + (controlSize.x / 2 - iconX),
+                                            s - j.y + (controlSize.y - iconY)
+                                        )
+                                    );
+
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    /* autogen added */
+
+                                    stateManager["Program:u"] = u;
+
+                                    n.move(u).show().showAttackRadius();
+
+                                    /* autogen added */
+
+                                    StackTrace.instrument(() => {}, fxnCallCallback("n.move"))();
+                                    /* end autogen added */
+                                    n.checkDroppable();
+                                }, fxnCallCallback("n.checkDroppable"))();
+                                /* end autogen added */
+                                var q = {
+                                    position: "absolute",
+                                    left: t - iconX,
+                                    top: s - iconY,
+                                    zIndex: 100,
+                                    visibility: p(r) ? "hidden" : "visible"
+                                };
+
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    /* autogen added */
+
+                                    stateManager["Program:q"] = q;
+
+                                    h.setStyles(q);
+                                }, fxnCallCallback("h.setStyles"))();
+                                /* end autogen added */
+                            }.bind(this)
+                        };
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {
+                            /* autogen added */
+
+                            stateManager["Program:i"] = i;
+
+                            document.addEvent("mouseup", i.mouseup);
+
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {}, fxnCallCallback("document.addEvent"))();
+                            /* end autogen added */
+                            document.addEvent("mousemove", i.mousemove);
+
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {}, fxnCallCallback("document.addEvent"))();
+                            /* end autogen added */
+                            document.addEvent("touchend", i.mouseup);
+
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {}, fxnCallCallback("document.addEvent"))();
+                            /* end autogen added */
+                            document.addEvent("touchmove", i.mousemove);
+                        }, fxnCallCallback("document.addEvent"))();
+                        /* end autogen added */
+                        if (this.container.getElement(".tower-info-popup")) {
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {
+                                this.container.getElement(".tower-info-popup").destroy();
+                            }, fxnCallCallback("this.container.getElement"))();
+                            /* end autogen added */
+                        }
+                    }.bind(this);
+
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        /* autogen added */
+
+                        stateManager["Program:g"] = g;
+
+                        h.addEvent("mousedown", g);
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {}, fxnCallCallback("h.addEvent"))();
+                        /* end autogen added */
+                        h.addEvent("touchstart", g);
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {}, fxnCallCallback("h.addEvent"))();
+                        /* end autogen added */
+                        h.addEvent("mouseup", function (i) {
+                            /* autogen added */
+
+                            StackTrace.instrument(() => {
+                                h.addEvent("mouseenter", d);
+                            }, fxnCallCallback("h.addEvent"))();
+                            /* end autogen added */
+                        });
+                    }, fxnCallCallback("h.addEvent"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     showTowerInfoWin: function (b) {
         if (this.openTowerInfoWin) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.openTowerInfoWin.deselected();
-
- }, fxnCallCallback("this.openTowerInfoWin.deselected"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.openTowerInfoWin.deselected();
+            }, fxnCallCallback("this.openTowerInfoWin.deselected"))();
+            /* end autogen added */
         }
         this.openTowerInfoWin = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         var a = this.container.getElement(".hidden-elements .control-tower-infowin .content").clone();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".value").each(function (c) {
-            if (c.getAttribute("data-name") && b[c.getAttribute("data-name")]) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                c.set("text", b[c.getAttribute("data-name")]);
+        StackTrace.instrument(() => {
+            a.getElements(".value").each(function (c) {
+                if (c.getAttribute("data-name") && b[c.getAttribute("data-name")]) {
+                    /* autogen added */
 
- }, fxnCallCallback("c.set"))() 
- /* end autogen added */
-            }
-        });
-
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".special-value").each(function (c) {
-            var e = "";
-
-/* autogen added */ 
-stateManager["Program:e"] = e
-
-            switch (c.getAttribute("data-name")) {
-                case "sell-cost":
-                    e = b.getSellCost();
-
-/* autogen added */ 
-stateManager["Program:e"] = e
-
-                    break;
-            }
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-            c.set("text", e);
-
- }, fxnCallCallback("c.set"))() 
- /* end autogen added */
-        });
-
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElement(".sell").addEvent("click", function (c) {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-            b.sell();
-
- }, fxnCallCallback("b.sell"))() 
- /* end autogen added */
-        });
-
- }, fxnCallCallback("a.getElement"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".upgrade").each(
-            function (c, e) {
-                if (!b.upgrades[e]) {
-                    return;
+                    StackTrace.instrument(() => {
+                        c.set("text", b[c.getAttribute("data-name")]);
+                    }, fxnCallCallback("c.set"))();
+                    /* end autogen added */
                 }
-                var g = { attackRadius: b.attackRadius, damage: b.damage, attackSpeed: b.attackSpeed };
+            });
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
-/* autogen added */ 
-stateManager["Program:g"] = g
+        /* autogen added */
 
-                var f = true;
+        StackTrace.instrument(() => {
+            a.getElements(".special-value").each(function (c) {
+                var e = "";
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+                stateManager["Program:e"] = e;
 
-                b.upgrades[e].each(
-                    function (h) {
-                        if (h.applied) {
-                            return;
-                        }
-                        var i = this.container
-                            .getElement(".hidden-elements .control-tower-infowin-upgrade .content")
-                            .clone();
+                switch (c.getAttribute("data-name")) {
+                    case "sell-cost":
+                        e = b.getSellCost();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:i"] = i
+                        stateManager["Program:e"] = e;
 
-                        i.getElements(".value").each(function (j) {
-                            if (j.getAttribute("data-name") && h[j.getAttribute("data-name")]) {
+                        break;
+                }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                                j.set("text", h[j.getAttribute("data-name")]);
+                /* autogen added */
 
- }, fxnCallCallback("j.set"))() 
- /* end autogen added */
-                            }
-                        });
+                StackTrace.instrument(() => {
+                    c.set("text", e);
+                }, fxnCallCallback("c.set"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
- }, fxnCallCallback("i.getElements"))() 
- /* end autogen added */
-                        i.getElements(".add-value").each(function (j) {
-                            if (j.getAttribute("data-name") && b[j.getAttribute("data-name")]) {
-                                upgradeValue = h[j.getAttribute("data-name")];
+        StackTrace.instrument(() => {
+            a.getElement(".sell").addEvent("click", function (c) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:upgradeValue"] = upgradeValue
+                StackTrace.instrument(() => {
+                    b.sell();
+                }, fxnCallCallback("b.sell"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("a.getElement"))();
+        /* end autogen added */
 
-                                if (!upgradeValue) {
-                                    upgradeValue = 0;
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:upgradeValue"] = upgradeValue
+        StackTrace.instrument(() => {
+            a.getElements(".upgrade").each(
+                function (c, e) {
+                    if (!b.upgrades[e]) {
+                        return;
+                    }
+                    var g = { attackRadius: b.attackRadius, damage: b.damage, attackSpeed: b.attackSpeed };
 
+                    /* autogen added */
+
+                    stateManager["Program:g"] = g;
+
+                    var f = true;
+
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        /* autogen added */
+
+                        stateManager["Program:f"] = f;
+
+                        b.upgrades[e].each(
+                            function (h) {
+                                if (h.applied) {
+                                    return;
                                 }
-                                g[j.getAttribute("data-name")] += upgradeValue;
+                                var i = this.container
+                                    .getElement(".hidden-elements .control-tower-infowin-upgrade .content")
+                                    .clone();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:g"] = g
+                                StackTrace.instrument(() => {
+                                    /* autogen added */
 
-                                j.set("text", g[j.getAttribute("data-name")]);
+                                    stateManager["Program:i"] = i;
 
- }, fxnCallCallback("j.set"))() 
- /* end autogen added */
-                            }
-                        });
+                                    i.getElements(".value").each(function (j) {
+                                        if (j.getAttribute("data-name") && h[j.getAttribute("data-name")]) {
+                                            /* autogen added */
 
- }, fxnCallCallback("i.getElements"))() 
- /* end autogen added */
-                        if (h.applied) {
+                                            StackTrace.instrument(() => {
+                                                j.set("text", h[j.getAttribute("data-name")]);
+                                            }, fxnCallCallback("j.set"))();
+                                            /* end autogen added */
+                                        }
+                                    });
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            i.addClass("applied");
+                                    /* autogen added */
 
- }, fxnCallCallback("i.addClass"))() 
- /* end autogen added */
-                        }
+                                    StackTrace.instrument(() => {}, fxnCallCallback("i.getElements"))();
+                                    /* end autogen added */
+                                    i.getElements(".add-value").each(function (j) {
+                                        if (j.getAttribute("data-name") && b[j.getAttribute("data-name")]) {
+                                            upgradeValue = h[j.getAttribute("data-name")];
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        i.getElement(".button").addClass("disabled").set("disabled", true);
+                                            /* autogen added */
 
- }, fxnCallCallback("i.getElement"))() 
- /* end autogen added */
-                        if (f) {
+                                            stateManager["Program:upgradeValue"] = upgradeValue;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            i.getElement(".button").setAttribute("data-cost", h.cost);
+                                            if (!upgradeValue) {
+                                                upgradeValue = 0;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                                                /* autogen added */
 
- }, fxnCallCallback("i.getElement"))() 
- /* end autogen added */
-                            i.getElement(".button").addEvent(
-                                "click",
-                                function (j) {
+                                                stateManager["Program:upgradeValue"] = upgradeValue;
+                                            }
+                                            g[j.getAttribute("data-name")] += upgradeValue;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                                    b.upgrade(h);
+                                            /* autogen added */
 
- }, fxnCallCallback("b.upgrade"))() 
- /* end autogen added */
-                                }.bind(this)
-                            );
+                                            StackTrace.instrument(() => {
+                                                /* autogen added */
 
- }, fxnCallCallback("i.getElement"))() 
- /* end autogen added */
-                            f = false;
+                                                stateManager["Program:g"] = g;
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+                                                j.set("text", g[j.getAttribute("data-name")]);
+                                            }, fxnCallCallback("j.set"))();
+                                            /* end autogen added */
+                                        }
+                                    });
+                                }, fxnCallCallback("i.getElements"))();
+                                /* end autogen added */
+                                if (h.applied) {
+                                    /* autogen added */
 
-                        } else {
+                                    StackTrace.instrument(() => {
+                                        i.addClass("applied");
+                                    }, fxnCallCallback("i.addClass"))();
+                                    /* end autogen added */
+                                }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            i.getElement(".button").setAttribute("data-cost", 0);
+                                /* autogen added */
 
- }, fxnCallCallback("i.getElement"))() 
- /* end autogen added */
-                        }
+                                StackTrace.instrument(() => {
+                                    i.getElement(".button").addClass("disabled").set("disabled", true);
+                                }, fxnCallCallback("i.getElement"))();
+                                /* end autogen added */
+                                if (f) {
+                                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        i.inject(c);
+                                    StackTrace.instrument(() => {
+                                        i.getElement(".button").setAttribute("data-cost", h.cost);
 
- }, fxnCallCallback("i.inject"))() 
- /* end autogen added */
-                    }.bind(this)
-                );
+                                        /* autogen added */
 
- }, fxnCallCallback("b.upgrades[e].each"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                                        StackTrace.instrument(() => {}, fxnCallCallback("i.getElement"))();
+                                        /* end autogen added */
+                                        i.getElement(".button").addEvent(
+                                            "click",
+                                            function (j) {
+                                                /* autogen added */
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                                                StackTrace.instrument(() => {
+                                                    b.upgrade(h);
+                                                }, fxnCallCallback("b.upgrade"))();
+                                                /* end autogen added */
+                                            }.bind(this)
+                                        );
+                                    }, fxnCallCallback("i.getElement"))();
+                                    /* end autogen added */
+                                    f = false;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".upgrade").each(function (c, e) {
-            if (!c.getChildren().length) {
+                                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                c.destroy();
+                                    stateManager["Program:f"] = f;
+                                } else {
+                                    /* autogen added */
 
- }, fxnCallCallback("c.destroy"))() 
- /* end autogen added */
-            }
-        });
+                                    StackTrace.instrument(() => {
+                                        i.getElement(".button").setAttribute("data-cost", 0);
+                                    }, fxnCallCallback("i.getElement"))();
+                                    /* end autogen added */
+                                }
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                                /* autogen added */
+
+                                StackTrace.instrument(() => {
+                                    i.inject(c);
+                                }, fxnCallCallback("i.inject"))();
+                                /* end autogen added */
+                            }.bind(this)
+                        );
+                    }, fxnCallCallback("b.upgrades[e].each"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
+
+        /* autogen added */
+
+        StackTrace.instrument(() => {
+            a.getElements(".upgrade").each(function (c, e) {
+                if (!c.getChildren().length) {
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        c.destroy();
+                    }, fxnCallCallback("c.destroy"))();
+                    /* end autogen added */
+                }
+            });
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
         if (!a.getElements(".upgrade").length) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            a.getElement(".upgrade-message").set("text", "No upgrades available");
-
- }, fxnCallCallback("a.getElement"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                a.getElement(".upgrade-message").set("text", "No upgrades available");
+            }, fxnCallCallback("a.getElement"))();
+            /* end autogen added */
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        b.selected();
+        /* autogen added */
 
- }, fxnCallCallback("b.selected"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            b.selected();
+        }, fxnCallCallback("b.selected"))();
+        /* end autogen added */
         var d = this.container.getElement(".tower-infowin-container");
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+        /* autogen added */
 
+        stateManager["Program:d"] = d;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".close").addEvent(
-            "click",
-            function (c) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.closeTowerInfoWin(b);
+        StackTrace.instrument(() => {
+            a.getElements(".close").addEvent(
+                "click",
+                function (c) {
+                    /* autogen added */
 
- }, fxnCallCallback("this.closeTowerInfoWin"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                    StackTrace.instrument(() => {
+                        this.closeTowerInfoWin(b);
+                    }, fxnCallCallback("this.closeTowerInfoWin"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        d.set("html", "");
+        StackTrace.instrument(() => {
+            d.set("html", "");
+        }, fxnCallCallback("d.set"))();
+        /* end autogen added */
 
- }, fxnCallCallback("d.set"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.inject(d);
+        StackTrace.instrument(() => {
+            a.inject(d);
+        }, fxnCallCallback("a.inject"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.inject"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        d.show();
+        StackTrace.instrument(() => {
+            d.show();
+        }, fxnCallCallback("d.show"))();
+        /* end autogen added */
 
- }, fxnCallCallback("d.show"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.updateTowerInfoWin();
-
- }, fxnCallCallback("this.updateTowerInfoWin"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.updateTowerInfoWin();
+        }, fxnCallCallback("this.updateTowerInfoWin"))();
+        /* end autogen added */
     },
     updateTowerInfoWin: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".tower-infowin-container .upgrade .button").each(
-            function (a) {
-                var b = a.getAttribute("data-cost");
+        StackTrace.instrument(() => {
+            this.container.getElements(".tower-infowin-container .upgrade .button").each(
+                function (a) {
+                    var b = a.getAttribute("data-cost");
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+                    /* autogen added */
 
-                if (b <= 0) {
-                    return;
-                }
-                if (this.g.money >= b) {
-                    if (a.hasClass("disabled")) {
+                    stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        a.removeClass("disabled").set("disabled", false);
-
- }, fxnCallCallback("a.removeClass"))() 
- /* end autogen added */
+                    if (b <= 0) {
+                        return;
                     }
-                } else {
-                    if (!a.hasClass("disabled")) {
+                    if (this.g.money >= b) {
+                        if (a.hasClass("disabled")) {
+                            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        a.addClass("disabled").set("disabled", true);
+                            StackTrace.instrument(() => {
+                                a.removeClass("disabled").set("disabled", false);
+                            }, fxnCallCallback("a.removeClass"))();
+                            /* end autogen added */
+                        }
+                    } else {
+                        if (!a.hasClass("disabled")) {
+                            /* autogen added */
 
- }, fxnCallCallback("a.addClass"))() 
- /* end autogen added */
+                            StackTrace.instrument(() => {
+                                a.addClass("disabled").set("disabled", true);
+                            }, fxnCallCallback("a.addClass"))();
+                            /* end autogen added */
+                        }
                     }
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     closeTowerInfoWin: function (a) {
         if (this.openTowerInfoWin != a) {
             return;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.openTowerInfoWin.deselected();
+        /* autogen added */
 
- }, fxnCallCallback("this.openTowerInfoWin.deselected"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.openTowerInfoWin.deselected();
+        }, fxnCallCallback("this.openTowerInfoWin.deselected"))();
+        /* end autogen added */
         this.openTowerInfoWin = null;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElement(".tower-infowin-container").hide();
+        /* autogen added */
 
- }, fxnCallCallback("this.container.getElement"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.getElement(".tower-infowin-container").hide();
+        }, fxnCallCallback("this.container.getElement"))();
+        /* end autogen added */
     },
     win: function () {
         var a = this._fullscreenPopup("success", "win");
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent(
-            "action",
-            function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.restart();
+        StackTrace.instrument(() => {
+            a.addEvent(
+                "action",
+                function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    StackTrace.instrument(() => {
+                        this.g.restart();
 
- }, fxnCallCallback("this.g.restart"))() 
- /* end autogen added */
-                a.close();
+                        /* autogen added */
 
- }, fxnCallCallback("a.close"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.g.restart"))();
+                        /* end autogen added */
+                        a.close();
+                    }, fxnCallCallback("a.close"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.container
-            .getElement(".action-twitter")
-            .set("data-text", "I made it to round 50 on #MapsTowerDefence!")
-            .addClass("twitter-share-button");
-
- }, fxnCallCallback("a.containe"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.container
+                .getElement(".action-twitter")
+                .set("data-text", "I made it to round 50 on #MapsTowerDefence!")
+                .addClass("twitter-share-button");
+        }, fxnCallCallback("a.containe"))();
+        /* end autogen added */
         twitter(document, "script", "twitter-wjs-" + new Date());
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent(
-            "social",
-            function (b) {
-                switch (b) {
-                    case "facebook":
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        this.publishFacebook("I made it to round 50 on Maps Tower Defence!");
+        StackTrace.instrument(() => {
+            a.addEvent(
+                "social",
+                function (b) {
+                    switch (b) {
+                        case "facebook":
+                            /* autogen added */
 
- }, fxnCallCallback("this.publishFacebook"))() 
- /* end autogen added */
-                        break;
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
+                            StackTrace.instrument(() => {
+                                this.publishFacebook("I made it to round 50 on Maps Tower Defence!");
+                            }, fxnCallCallback("this.publishFacebook"))();
+                            /* end autogen added */
+                            break;
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
     },
     lose: function () {
         var a = this._fullscreenPopup("error", "game-over");
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent(
-            "action",
-            function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.restart();
+        StackTrace.instrument(() => {
+            a.addEvent(
+                "action",
+                function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    StackTrace.instrument(() => {
+                        this.g.restart();
 
- }, fxnCallCallback("this.g.restart"))() 
- /* end autogen added */
-                a.close();
+                        /* autogen added */
 
- }, fxnCallCallback("a.close"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.g.restart"))();
+                        /* end autogen added */
+                        a.close();
+                    }, fxnCallCallback("a.close"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.container
-            .getElement(".action-twitter")
-            .set("data-text", "I made it to round " + this.g.moneyRounds + " on #MapsTowerDefence!")
-            .addClass("twitter-share-button");
-
- }, fxnCallCallback("a.containe"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.container
+                .getElement(".action-twitter")
+                .set("data-text", "I made it to round " + this.g.moneyRounds + " on #MapsTowerDefence!")
+                .addClass("twitter-share-button");
+        }, fxnCallCallback("a.containe"))();
+        /* end autogen added */
         twitter(document, "script", "twitter-wjs-" + new Date());
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.addEvent(
-            "social",
-            function (b) {
-                switch (b) {
-                    case "facebook":
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        this.publishFacebook(
-                            "I made it to round " + this.g.moneyRounds + " on Maps Tower Defence!"
-                        );
+        StackTrace.instrument(() => {
+            a.addEvent(
+                "social",
+                function (b) {
+                    switch (b) {
+                        case "facebook":
+                            /* autogen added */
 
- }, fxnCallCallback("this.publishFacebook"))() 
- /* end autogen added */
-                        break;
-                }
-            }.bind(this)
-        );
-
- }, fxnCallCallback("a.addEvent"))() 
- /* end autogen added */
+                            StackTrace.instrument(() => {
+                                this.publishFacebook(
+                                    "I made it to round " + this.g.moneyRounds + " on Maps Tower Defence!"
+                                );
+                            }, fxnCallCallback("this.publishFacebook"))();
+                            /* end autogen added */
+                            break;
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.addEvent"))();
+        /* end autogen added */
     },
     _fullscreenPopup: function (b, c, a) {
         return new Message(
@@ -2808,193 +2855,181 @@ stateManager["Program:a"] = a
         );
     },
     initMiscButtons: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".button.help").addEvent(
-            "click",
-            function (b) {
+        StackTrace.instrument(() => {
+            a.getElements(".button.help").addEvent(
+                "click",
+                function (b) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.pause();
+                    StackTrace.instrument(() => {
+                        this.pause();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-                this._fullscreenPopup("info", "help");
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.pause"))();
+                        /* end autogen added */
+                        this._fullscreenPopup("info", "help");
+                    }, fxnCallCallback("this._fullscreenPopup"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this._fullscreenPopup"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+        /* autogen added */
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            a.getElements(".button.about").addEvent(
+                "click",
+                function (b) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".button.about").addEvent(
-            "click",
-            function (b) {
+                    StackTrace.instrument(() => {
+                        this.pause();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.pause();
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.pause"))();
+                        /* end autogen added */
+                        this._fullscreenPopup("info", "about");
+                    }, fxnCallCallback("this._fullscreenPopup"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-                this._fullscreenPopup("info", "about");
+        /* autogen added */
 
- }, fxnCallCallback("this._fullscreenPopup"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+        StackTrace.instrument(() => {
+            a.getElements(".button.feedback").addEvent(
+                "click",
+                function (b) {
+                    /* autogen added */
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.pause();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".button.feedback").addEvent(
-            "click",
-            function (b) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.pause();
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.pause"))();
+                        /* end autogen added */
+                        this._fullscreenPopup("info", "feedback");
+                    }, fxnCallCallback("this._fullscreenPopup"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-                this._fullscreenPopup("info", "feedback");
+        StackTrace.instrument(() => {
+            a.getElements(".button.chat").addEvent(
+                "click",
+                function (b) {
+                    var c = window.open(
+                        "http://webchat.quakenet.org/?channels=MapsTD&uio=d4",
+                        "MapsTD Chat",
+                        "width=647,height=400"
+                    );
 
- }, fxnCallCallback("this._fullscreenPopup"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                    /* autogen added */
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                    stateManager["Program:c"] = c;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".button.chat").addEvent(
-            "click",
-            function (b) {
-                var c = window.open(
-                    "http://webchat.quakenet.org/?channels=MapsTD&uio=d4",
-                    "MapsTD Chat",
-                    "width=647,height=400"
-                );
+                    if (window.focus) {
+                        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+                        StackTrace.instrument(() => {
+                            c.focus();
+                        }, fxnCallCallback("c.focus"))();
+                        /* end autogen added */
+                    }
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
 
-                if (window.focus) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    c.focus();
+        StackTrace.instrument(() => {
+            a.getElements(".copyright-link").addEvent(
+                "click",
+                function (b) {
+                    /* autogen added */
 
- }, fxnCallCallback("c.focus"))() 
- /* end autogen added */
-                }
-            }.bind(this)
-        );
+                    StackTrace.instrument(() => {
+                        b.stop();
 
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.getElements(".copyright-link").addEvent(
-            "click",
-            function (b) {
+                        StackTrace.instrument(() => {}, fxnCallCallback("b.stop"))();
+                        /* end autogen added */
+                        this.pause();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                b.stop();
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("b.stop"))() 
- /* end autogen added */
-                this.pause();
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
-                this._fullscreenPopup("info", "copyright-popup");
-
- }, fxnCallCallback("this._fullscreenPopup"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("a.getElements"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.pause"))();
+                        /* end autogen added */
+                        this._fullscreenPopup("info", "copyright-popup");
+                    }, fxnCallCallback("this._fullscreenPopup"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.getElements"))();
+        /* end autogen added */
     },
     updateTowerImages: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.getElements(".controls .create-tower").each(
-            function (b) {
-                var a = this._getTowerType(b);
+        StackTrace.instrument(() => {
+            this.container.getElements(".controls .create-tower").each(
+                function (b) {
+                    var a = this._getTowerType(b);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                    /* autogen added */
 
-                if (!a) {
-                    return;
-                }
+                    stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                b.setStyles({
-                    "background-image": 'url("' + this.g.search.image.towers + '")',
-                    "background-position": "0 -" + (a.prototype.markerOffset + 2) * 32 + "px",
-                    width: "32px",
-                    height: "32px",
-                    border: "0"
-                });
+                    if (!a) {
+                        return;
+                    }
 
- }, fxnCallCallback("b.setStyles"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                    /* autogen added */
 
- }, fxnCallCallback("this.container.getElements"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        b.setStyles({
+                            "background-image": 'url("' + this.g.search.image.towers + '")',
+                            "background-position": "0 -" + (a.prototype.markerOffset + 2) * 32 + "px",
+                            width: "32px",
+                            height: "32px",
+                            border: "0"
+                        });
+                    }, fxnCallCallback("b.setStyles"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.container.getElements"))();
+        /* end autogen added */
     },
     restart: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.container.set("html", this.content);
-
- }, fxnCallCallback("this.container.set"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.container.set("html", this.content);
+        }, fxnCallCallback("this.container.set"))();
+        /* end autogen added */
     },
     publishFacebook: function (b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        FB.init({ appId: "267555096654594", status: true, cookie: true });
-
- }, fxnCallCallback("FB.init"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            FB.init({ appId: "267555096654594", status: true, cookie: true });
+        }, fxnCallCallback("FB.init"))();
+        /* end autogen added */
         var a = {
             method: "feed",
             link: "http://www.mapstd.com/",
@@ -3005,22 +3040,23 @@ stateManager["Program:a"] = a
             redirect_uri: "http://www.mapstd.com/close.html"
         };
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        StackTrace.instrument(() => {
+            /* autogen added */
 
-        FB.ui(a, function () {});
+            stateManager["Program:a"] = a;
 
- }, fxnCallCallback("FB.ui"))() 
- /* end autogen added */
+            FB.ui(a, function () {});
+        }, fxnCallCallback("FB.ui"))();
+        /* end autogen added */
     },
     publishTwitter: function (a) {}
 });
 
-/* autogen added */ 
-stateManager["Program:GameInterface"] = GameInterface
+/* autogen added */
+
+stateManager["Program:GameInterface"] = GameInterface;
 
 var RouteBuilder = new Class({
     routes: [],
@@ -3032,52 +3068,54 @@ var RouteBuilder = new Class({
     initialize: function (a, b) {
         this.g = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.start = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     generate: function (b, a) {
         this.actions = { success: b, failure: a };
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.searchedRoutes += 4;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.tmpRoutes = {};
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         new Route(
             this.g,
             this.start,
             new google.maps.LatLng(this.start.lat() + 0.02, this.start.lng()),
             function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._add(c, "north");
-
- }, fxnCallCallback("this._add"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._add(c, "north");
+                }, fxnCallCallback("this._add"))();
+                /* end autogen added */
             }.bind(this),
             function () {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._fail();
-
- }, fxnCallCallback("this._fail"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._fail();
+                }, fxnCallCallback("this._fail"))();
+                /* end autogen added */
             }.bind(this)
         );
         new Route(
@@ -3085,22 +3123,20 @@ stateManager["Program:undefined"] = undefined
             this.start,
             new google.maps.LatLng(this.start.lat(), this.start.lng() + 0.04),
             function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._add(c, "east");
-
- }, fxnCallCallback("this._add"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._add(c, "east");
+                }, fxnCallCallback("this._add"))();
+                /* end autogen added */
             }.bind(this),
             function () {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._fail();
-
- }, fxnCallCallback("this._fail"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._fail();
+                }, fxnCallCallback("this._fail"))();
+                /* end autogen added */
             }.bind(this)
         );
         new Route(
@@ -3108,22 +3144,20 @@ stateManager["Program:undefined"] = undefined
             this.start,
             new google.maps.LatLng(this.start.lat() - 0.02, this.start.lng()),
             function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._add(c, "south");
-
- }, fxnCallCallback("this._add"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._add(c, "south");
+                }, fxnCallCallback("this._add"))();
+                /* end autogen added */
             }.bind(this),
             function () {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._fail();
-
- }, fxnCallCallback("this._fail"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._fail();
+                }, fxnCallCallback("this._fail"))();
+                /* end autogen added */
             }.bind(this)
         );
         new Route(
@@ -3131,52 +3165,50 @@ stateManager["Program:undefined"] = undefined
             this.start,
             new google.maps.LatLng(this.start.lat(), this.start.lng() - 0.04),
             function (c) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._add(c, "west");
-
- }, fxnCallCallback("this._add"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._add(c, "west");
+                }, fxnCallCallback("this._add"))();
+                /* end autogen added */
             }.bind(this),
             function () {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this._fail();
-
- }, fxnCallCallback("this._fail"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this._fail();
+                }, fxnCallCallback("this._fail"))();
+                /* end autogen added */
             }.bind(this)
         );
     },
     _add: function (a, b) {
         this.tmpRoutes[b] = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         a.compass = b;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addedRoute();
+        /* autogen added */
 
- }, fxnCallCallback("this._addedRoute"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addedRoute();
+        }, fxnCallCallback("this._addedRoute"))();
+        /* end autogen added */
     },
     _fail: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addedRoute();
-
- }, fxnCallCallback("this._addedRoute"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addedRoute();
+        }, fxnCallCallback("this._addedRoute"))();
+        /* end autogen added */
     },
     _addedRoute: function () {
         this.searchedRoutes--;
@@ -3184,48 +3216,44 @@ stateManager["Program:a"] = a
             return;
         }
         if (this.tmpRoutes.north) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.routes.push(this.tmpRoutes.north);
-
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.routes.push(this.tmpRoutes.north);
+            }, fxnCallCallback("this.routes.push"))();
+            /* end autogen added */
         }
         if (this.tmpRoutes.east) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.routes.push(this.tmpRoutes.east);
-
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.routes.push(this.tmpRoutes.east);
+            }, fxnCallCallback("this.routes.push"))();
+            /* end autogen added */
         }
         if (this.tmpRoutes.south) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.routes.push(this.tmpRoutes.south);
-
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.routes.push(this.tmpRoutes.south);
+            }, fxnCallCallback("this.routes.push"))();
+            /* end autogen added */
         }
         if (this.tmpRoutes.west) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.routes.push(this.tmpRoutes.west);
-
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.routes.push(this.tmpRoutes.west);
+            }, fxnCallCallback("this.routes.push"))();
+            /* end autogen added */
         }
         if (!this.routes.length) {
             return this.actions.failure();
         }
         for (var a = 1; a < this.routes.length; a++) {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+            stateManager["Program:a"] = a;
 
             this.routes[a].addMessage = [
                 "top",
@@ -3236,20 +3264,22 @@ stateManager["Program:a"] = a
                 { autoHide: 15000 }
             ];
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
 
+            stateManager["Program:undefined"] = undefined;
         }
         var a = 0;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         while (this.routes.length < 4) {
             var b = this.routes[a++].clone();
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            /* autogen added */
+
+            stateManager["Program:b"] = b;
 
             b.addMessage = [
                 "top",
@@ -3260,16 +3290,16 @@ stateManager["Program:b"] = b
                 { autoHide: 10000 }
             ];
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            this.routes.push(b);
+                stateManager["Program:b"] = b;
 
- }, fxnCallCallback("this.routes.push"))() 
- /* end autogen added */
+                this.routes.push(b);
+            }, fxnCallCallback("this.routes.push"))();
+            /* end autogen added */
         }
         return this.actions.success();
     },
@@ -3278,8 +3308,9 @@ stateManager["Program:b"] = b
     }
 });
 
-/* autogen added */ 
-stateManager["Program:RouteBuilder"] = RouteBuilder
+/* autogen added */
+
+stateManager["Program:RouteBuilder"] = RouteBuilder;
 
 var RoutePath = new Class({
     latLng: null,
@@ -3288,71 +3319,67 @@ var RoutePath = new Class({
     initialize: function (a) {
         this.latLng = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     addTower: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.towers.push(a);
-
- }, fxnCallCallback("this.towers.push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.towers.push(a);
+        }, fxnCallCallback("this.towers.push"))();
+        /* end autogen added */
     },
     removeTower: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.towers.erase(a);
-
- }, fxnCallCallback("this.towers.erase"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.towers.erase(a);
+        }, fxnCallCallback("this.towers.erase"))();
+        /* end autogen added */
     },
     addCreep: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.creeps.push(a);
-
- }, fxnCallCallback("this.creeps.push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.creeps.push(a);
+        }, fxnCallCallback("this.creeps.push"))();
+        /* end autogen added */
         if (this.towers.length) {
             var b = this.towers[0];
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            b.removePathEvents();
+                stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                b.removePathEvents();
 
- }, fxnCallCallback("b.removePathEvents"))() 
- /* end autogen added */
-            b.attack();
+                /* autogen added */
 
- }, fxnCallCallback("b.attack"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("b.removePathEvents"))();
+                /* end autogen added */
+                b.attack();
+            }, fxnCallCallback("b.attack"))();
+            /* end autogen added */
         }
     },
     removeCreep: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.creeps.erase(a);
-
- }, fxnCallCallback("this.creeps.erase"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.creeps.erase(a);
+        }, fxnCallCallback("this.creeps.erase"))();
+        /* end autogen added */
     }
 });
 
-/* autogen added */ 
-stateManager["Program:RoutePath"] = RoutePath
+/* autogen added */
+
+stateManager["Program:RoutePath"] = RoutePath;
 
 var Route = new Class({
     g: null,
@@ -3373,365 +3400,393 @@ var Route = new Class({
         }
         this.g = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         var f = new google.maps.DirectionsService();
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+        /* autogen added */
+
+        stateManager["Program:f"] = f;
 
         var e = { origin: a, destination: h, travelMode: google.maps.TravelMode.DRIVING };
 
-/* autogen added */ 
-stateManager["Program:e"] = e
+        /* autogen added */
+
+        stateManager["Program:e"] = e;
 
         var g = function (l, j) {
             var q = [];
 
-/* autogen added */ 
-stateManager["Program:q"] = q
+            /* autogen added */
+
+            stateManager["Program:q"] = q;
 
             var p = null;
 
-/* autogen added */ 
-stateManager["Program:p"] = p
+            /* autogen added */
+
+            stateManager["Program:p"] = p;
 
             for (var m = 0; m < j.path.length; m++) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:m"] = m
+                stateManager["Program:m"] = m;
 
                 var r = j.path[m];
 
-/* autogen added */ 
-stateManager["Program:r"] = r
+                /* autogen added */
+
+                stateManager["Program:r"] = r;
 
                 if (p) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    q.push({
-                        distance: google.maps.geometry.spherical.computeDistanceBetween(p, r),
-                        start: p,
-                        end: r
-                    });
-
- }, fxnCallCallback("q.push"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        q.push({
+                            distance: google.maps.geometry.spherical.computeDistanceBetween(p, r),
+                            start: p,
+                            end: r
+                        });
+                    }, fxnCallCallback("q.push"))();
+                    /* end autogen added */
                 }
                 p = r;
 
-/* autogen added */ 
-stateManager["Program:p"] = p
+                /* autogen added */
 
+                stateManager["Program:p"] = p;
             }
             var k = j.distance / this.totalPoints;
 
-/* autogen added */ 
-stateManager["Program:k"] = k
+            /* autogen added */
+
+            stateManager["Program:k"] = k;
 
             var o = k;
 
-/* autogen added */ 
-stateManager["Program:o"] = o
+            /* autogen added */
+
+            stateManager["Program:o"] = o;
 
             for (var m = 0; m < q.length; m++) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:m"] = m
+                stateManager["Program:m"] = m;
 
                 var s = q[m];
 
-/* autogen added */ 
-stateManager["Program:s"] = s
+                /* autogen added */
+
+                stateManager["Program:s"] = s;
 
                 var u = (s.start.lat() - s.end.lat()) / s.distance;
 
-/* autogen added */ 
-stateManager["Program:u"] = u
+                /* autogen added */
+
+                stateManager["Program:u"] = u;
 
                 var t = (s.start.lng() - s.end.lng()) / s.distance;
 
-/* autogen added */ 
-stateManager["Program:t"] = t
+                /* autogen added */
+
+                stateManager["Program:t"] = t;
 
                 var r = s.start;
 
-/* autogen added */ 
-stateManager["Program:r"] = r
+                /* autogen added */
+
+                stateManager["Program:r"] = r;
 
                 var n = s.distance;
 
-/* autogen added */ 
-stateManager["Program:n"] = n
+                /* autogen added */
+
+                stateManager["Program:n"] = n;
 
                 while (o + n >= k) {
                     var v = k - o;
 
-/* autogen added */ 
-stateManager["Program:v"] = v
+                    /* autogen added */
+
+                    stateManager["Program:v"] = v;
 
                     if (v != 0) {
                         r = new google.maps.LatLng(r.lat() - u * v, r.lng() - t * v);
 
-/* autogen added */ 
-stateManager["Program:r"] = r
+                        /* autogen added */
+
+                        stateManager["Program:r"] = r;
 
                         n -= v;
 
-/* autogen added */ 
-stateManager["Program:n"] = n
+                        /* autogen added */
 
+                        stateManager["Program:n"] = n;
                     }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.path.push(new RoutePath(r));
+                    /* autogen added */
 
- }, fxnCallCallback("this.path.push"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.path.push(new RoutePath(r));
+                    }, fxnCallCallback("this.path.push"))();
+                    /* end autogen added */
                     o = 0;
 
-/* autogen added */ 
-stateManager["Program:o"] = o
+                    /* autogen added */
 
+                    stateManager["Program:o"] = o;
                 }
                 o += n;
 
-/* autogen added */ 
-stateManager["Program:o"] = o
+                /* autogen added */
 
+                stateManager["Program:o"] = o;
             }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.path.push(new RoutePath(q[q.length - 1].end));
+            /* autogen added */
 
- }, fxnCallCallback("this.path.push"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.path.push(new RoutePath(q[q.length - 1].end));
+            }, fxnCallCallback("this.path.push"))();
+            /* end autogen added */
             this.start = this.path[0];
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
+
+            stateManager["Program:undefined"] = undefined;
 
             this.end = this.path[this.path.length - 1];
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
+
+            stateManager["Program:undefined"] = undefined;
 
             this.serviceResponse = l;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
+
+            stateManager["Program:undefined"] = undefined;
 
             if (d) {
                 d(this);
             }
         }.bind(this);
 
-/* autogen added */ 
-stateManager["Program:g"] = g
+        /* autogen added */
 
+        stateManager["Program:g"] = g;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        new Request({
-            url:
-                "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62488d20864d79704057b53a3dd46ed49c46&start=" +
-                a.lng() +
-                "," +
-                a.lat() +
-                "&end=" +
-                h.lng() +
-                "," +
-                h.lat(),
-            urlEncoded: false,
-            method: "GET",
-            headers: { "content-type": "application/json;charset=UTF-8" },
-            onSuccess: function (o) {
-                var n = JSON.parse(o);
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:n"] = n
+        StackTrace.instrument(() => {
+            new Request({
+                url:
+                    "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62488d20864d79704057b53a3dd46ed49c46&start=" +
+                    a.lng() +
+                    "," +
+                    a.lat() +
+                    "&end=" +
+                    h.lng() +
+                    "," +
+                    h.lat(),
+                urlEncoded: false,
+                method: "GET",
+                headers: { "content-type": "application/json;charset=UTF-8" },
+                onSuccess: function (o) {
+                    var n = JSON.parse(o);
 
-                if (!n || !n.features || !n.features.length) {
-                    return c(this);
-                }
-                var m = n.features[0];
+                    /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:m"] = m
+                    stateManager["Program:n"] = n;
 
-                var k = {
-                    bounds: new google.maps.LatLngBounds(
-                        new google.maps.LatLng(m.bbox[1], m.bbox[0]),
-                        new google.maps.LatLng(m.bbox[3], m.bbox[2])
-                    ),
-                    copyrights: n.metadata["attribution"],
-                    legs: [
-                        {
-                            distance: m.properties["summary"]["distance"],
-                            start_location: a,
-                            end_location: h,
-                            steps: [
-                                {
-                                    distance: m.properties["summary"]["distance"],
-                                    start_location: a,
-                                    end_location: h,
-                                    instructions: "",
-                                    path: [],
-                                    travel_mode: google.maps.TravelMode.DRIVING
-                                }
-                            ]
-                        }
-                    ],
-                    overview_path: [],
-                    overview_polyline: "",
-                    warnings: [],
-                    waypoint_order: []
-                };
-
-/* autogen added */ 
-stateManager["Program:k"] = k
-
-                for (var l in m.geometry["coordinates"]) {
-
-/* autogen added */ 
-stateManager["Program:l"] = l
-
-                    var j = m.geometry["coordinates"][l];
-
-/* autogen added */ 
-stateManager["Program:j"] = j
-
-                    if (isNaN(j[0]) || isNaN(j[1])) {
-                        continue;
+                    if (!n || !n.features || !n.features.length) {
+                        return c(this);
                     }
+                    var m = n.features[0];
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    k.overview_path.push(new google.maps.LatLng(j[1], j[0]));
+                    /* autogen added */
 
- }, fxnCallCallback("k.overview_path.push"))() 
- /* end autogen added */
-                }
-                k.legs[0]["steps"][0]["path"] = k.overview_path;
+                    stateManager["Program:m"] = m;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
-
-                response = {
-                    routes: [k],
-                    request: {
-                        travelMode: google.maps.TravelMode.DRIVING,
-                        end_location: h,
-                        start_location: a
-                    }
-                };
-
-/* autogen added */ 
-stateManager["Program:response"] = response
-
-                var p = { path: k.overview_path, distance: m.properties["summary"]["distance"] };
-
-/* autogen added */ 
-stateManager["Program:p"] = p
-
-                return g(response, p);
-            }.bind(this),
-            onFailure: function () {
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                console.log("Using Google Maps for directions");
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
- }, fxnCallCallback("console.log"))() 
- /* end autogen added */
-                f.route(e, function (j, i) {
-                    var k = {};
-
-/* autogen added */ 
-stateManager["Program:k"] = k
-
-                    switch (i) {
-                        case google.maps.DirectionsStatus.OK:
-                            k = {
-                                path: j.routes[0].overview_path,
-                                distance: j.routes[0].legs[0].distance.value
-                            };
-
-/* autogen added */ 
-stateManager["Program:k"] = k
-
-                            if (k.distance > this.maxRouteLength) {
-                                return c(this);
+                    var k = {
+                        bounds: new google.maps.LatLngBounds(
+                            new google.maps.LatLng(m.bbox[1], m.bbox[0]),
+                            new google.maps.LatLng(m.bbox[3], m.bbox[2])
+                        ),
+                        copyrights: n.metadata["attribution"],
+                        legs: [
+                            {
+                                distance: m.properties["summary"]["distance"],
+                                start_location: a,
+                                end_location: h,
+                                steps: [
+                                    {
+                                        distance: m.properties["summary"]["distance"],
+                                        start_location: a,
+                                        end_location: h,
+                                        instructions: "",
+                                        path: [],
+                                        travel_mode: google.maps.TravelMode.DRIVING
+                                    }
+                                ]
                             }
-                            break;
-                        case google.maps.DirectionsStatus.ZERO_RESULTS:
-                        default:
-                            return c(this);
+                        ],
+                        overview_path: [],
+                        overview_polyline: "",
+                        warnings: [],
+                        waypoint_order: []
+                    };
+
+                    /* autogen added */
+
+                    stateManager["Program:k"] = k;
+
+                    for (var l in m.geometry["coordinates"]) {
+                        /* autogen added */
+
+                        stateManager["Program:l"] = l;
+
+                        var j = m.geometry["coordinates"][l];
+
+                        /* autogen added */
+
+                        stateManager["Program:j"] = j;
+
+                        if (isNaN(j[0]) || isNaN(j[1])) {
+                            continue;
+                        }
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {
+                            k.overview_path.push(new google.maps.LatLng(j[1], j[0]));
+                        }, fxnCallCallback("k.overview_path.push"))();
+                        /* end autogen added */
                     }
-                    return g(j, k);
-                });
+                    k.legs[0]["steps"][0]["path"] = k.overview_path;
 
- }, fxnCallCallback("f.route"))() 
- /* end autogen added */
-            }.bind(this)
-        }).send();
+                    /* autogen added */
 
- }, fxnCallCallback("new Request"))() 
- /* end autogen added */
+                    stateManager["Program:undefined"] = undefined;
+
+                    response = {
+                        routes: [k],
+                        request: {
+                            travelMode: google.maps.TravelMode.DRIVING,
+                            end_location: h,
+                            start_location: a
+                        }
+                    };
+
+                    /* autogen added */
+
+                    stateManager["Program:response"] = response;
+
+                    var p = { path: k.overview_path, distance: m.properties["summary"]["distance"] };
+
+                    /* autogen added */
+
+                    stateManager["Program:p"] = p;
+
+                    return g(response, p);
+                }.bind(this),
+                onFailure: function () {
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        console.log("Using Google Maps for directions");
+
+                        /* autogen added */
+
+                        StackTrace.instrument(() => {}, fxnCallCallback("console.log"))();
+                        /* end autogen added */
+                        f.route(e, function (j, i) {
+                            var k = {};
+
+                            /* autogen added */
+
+                            stateManager["Program:k"] = k;
+
+                            switch (i) {
+                                case google.maps.DirectionsStatus.OK:
+                                    k = {
+                                        path: j.routes[0].overview_path,
+                                        distance: j.routes[0].legs[0].distance.value
+                                    };
+
+                                    /* autogen added */
+
+                                    stateManager["Program:k"] = k;
+
+                                    if (k.distance > this.maxRouteLength) {
+                                        return c(this);
+                                    }
+                                    break;
+                                case google.maps.DirectionsStatus.ZERO_RESULTS:
+                                default:
+                                    return c(this);
+                            }
+                            return g(j, k);
+                        });
+                    }, fxnCallCallback("f.route"))();
+                    /* end autogen added */
+                }.bind(this)
+            }).send();
+        }, fxnCallCallback("new Request"))();
+        /* end autogen added */
     },
     clone: function () {
         var a = new Route();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.g = this.g;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.start = this.start;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.end = this.end;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.serviceResponse = this.serviceResponse;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.compass = this.compass;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.path.each(function (b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            a.path.push(new RoutePath(b.latLng));
+        StackTrace.instrument(() => {
+            this.path.each(function (b) {
+                /* autogen added */
 
- }, fxnCallCallback("a.path.push"))() 
- /* end autogen added */
-        });
-
- }, fxnCallCallback("this.path.each"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    a.path.push(new RoutePath(b.latLng));
+                }, fxnCallCallback("a.path.push"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("this.path.each"))();
+        /* end autogen added */
         return a;
     },
     show: function () {
@@ -3741,41 +3796,40 @@ stateManager["Program:a"] = a
             polylineOptions: { strokeColor: "#0000ff", strokeOpacity: 0.5 }
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.directionsRenderer.setMap(this.g.map);
+        /* autogen added */
 
- }, fxnCallCallback("this.directionsRenderer.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.directionsRenderer.setMap(this.g.map);
+        }, fxnCallCallback("this.directionsRenderer.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.directionsRenderer.setDirections(this.serviceResponse);
+        /* autogen added */
 
- }, fxnCallCallback("this.directionsRenderer.setDirections"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.directionsRenderer.setDirections(this.serviceResponse);
+        }, fxnCallCallback("this.directionsRenderer.setDirections"))();
+        /* end autogen added */
     },
     enable: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.directionsRenderer.setOptions({
-            polylineOptions: { strokeColor: "#0000ff", strokeOpacity: 1, strokeWeight: 5 }
-        });
+        StackTrace.instrument(() => {
+            this.directionsRenderer.setOptions({
+                polylineOptions: { strokeColor: "#0000ff", strokeOpacity: 1, strokeWeight: 5 }
+            });
+        }, fxnCallCallback("this.directionsRenderer.setOptions"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.directionsRenderer.setOptions"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.directionsRenderer.setMap(this.g.map);
-
- }, fxnCallCallback("this.directionsRenderer.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.directionsRenderer.setMap(this.g.map);
+        }, fxnCallCallback("this.directionsRenderer.setMap"))();
+        /* end autogen added */
         this.marker = new google.maps.Marker({
             position: this.start.latLng,
             map: this.g.map,
@@ -3787,68 +3841,68 @@ stateManager["Program:undefined"] = undefined
             )
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         return this;
     },
     remove: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.creeps.each(function (a) {
+        StackTrace.instrument(() => {
+            this.creeps.each(function (a) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            a.remove();
+                StackTrace.instrument(() => {
+                    a.remove();
+                }, fxnCallCallback("a.remove"))();
+                /* end autogen added */
+            });
+        }, fxnCallCallback("this.creeps.each"))();
+        /* end autogen added */
 
- }, fxnCallCallback("a.remove"))() 
- /* end autogen added */
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.creeps.each"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.marker.setMap(null);
+        }, fxnCallCallback("this.marker.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setMap(null);
+        /* autogen added */
 
- }, fxnCallCallback("this.marker.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.directionsRenderer.setMap(null);
+        }, fxnCallCallback("this.directionsRenderer.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.directionsRenderer.setMap(null);
+        /* autogen added */
 
- }, fxnCallCallback("this.directionsRenderer.setMap"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.routes.erase(this);
-
- }, fxnCallCallback("this.g.routes.erase"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.routes.erase(this);
+        }, fxnCallCallback("this.g.routes.erase"))();
+        /* end autogen added */
     },
     addCreep: function (b) {
         var a = new b(this.g, this);
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.creeps.push(a);
+        /* autogen added */
 
- }, fxnCallCallback("this.creeps.push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.creeps.push(a);
+        }, fxnCallCallback("this.creeps.push"))();
+        /* end autogen added */
         return a;
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Route"] = Route
+/* autogen added */
+
+stateManager["Program:Route"] = Route;
 
 var Creep = new Class({
     Implements: [Events],
@@ -3865,24 +3919,27 @@ var Creep = new Class({
     initialize: function (b, a) {
         this.g = b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.route = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.health = Math.floor(this.health * this.g.difficultyMultiplier);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.maxHealth = this.health;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     show: function () {
         this.marker = new google.maps.Marker({
@@ -3902,8 +3959,9 @@ stateManager["Program:undefined"] = undefined
             )
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         return this;
     },
@@ -3912,183 +3970,188 @@ stateManager["Program:undefined"] = undefined
             return;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.route.path[this.distanceTravelled].removeCreep(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.route.path[this.distanceTravelled].removeCreep"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.route.path[this.distanceTravelled].removeCreep(this);
+        }, fxnCallCallback("this.route.path[this.distanceTravelled].removeCreep"))();
+        /* end autogen added */
         if (this.distanceTravelled >= this.route.path.length - 1) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.endOfRoute();
-
- }, fxnCallCallback("this.endOfRoute"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.endOfRoute();
+            }, fxnCallCallback("this.endOfRoute"))();
+            /* end autogen added */
             return this;
         }
         this.distanceTravelled++;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.route.path[this.distanceTravelled].addCreep(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.route.path[this.distanceTravelled].addCreep"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.route.path[this.distanceTravelled].addCreep(this);
+        }, fxnCallCallback("this.route.path[this.distanceTravelled].addCreep"))();
+        /* end autogen added */
         if (this.g.timer.multiplier == 1 || !(this.distanceTravelled % this.showMoveModulus)) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.marker.setPosition(this.route.path[this.distanceTravelled].latLng);
-
- }, fxnCallCallback("this.marker.setPosition"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.marker.setPosition(this.route.path[this.distanceTravelled].latLng);
+            }, fxnCallCallback("this.marker.setPosition"))();
+            /* end autogen added */
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.start(this, this.move, this.speed * 2);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.timer.start"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.timer.start(this, this.move, this.speed * 2);
+        }, fxnCallCallback("this.g.timer.start"))();
+        /* end autogen added */
         return this;
     },
     remove: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.route.path[this.distanceTravelled].removeCreep(this);
+        StackTrace.instrument(() => {
+            this.route.path[this.distanceTravelled].removeCreep(this);
+        }, fxnCallCallback("this.route.path[this.distanceTravelled].removeCreep"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.route.path[this.distanceTravelled].removeCreep"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setMap(null);
-
- }, fxnCallCallback("this.marker.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.marker.setMap(null);
+        }, fxnCallCallback("this.marker.setMap"))();
+        /* end autogen added */
     },
     endOfRoute: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.remove();
+        StackTrace.instrument(() => {
+            this.remove();
+        }, fxnCallCallback("this.remove"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.remove"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.removeLife(1);
+        StackTrace.instrument(() => {
+            this.g.removeLife(1);
+        }, fxnCallCallback("this.g.removeLife"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.g.removeLife"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.fireEvent("killed");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.fireEvent("killed");
+        }, fxnCallCallback("this.fireEvent"))();
+        /* end autogen added */
     },
     hit: function (b) {
         this.health -= b;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         var a = this.marker.getShadow();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         a.origin.y = Math.round((1 - this.health / this.maxHealth) * 14, 0) * 8;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        StackTrace.instrument(() => {
+            /* autogen added */
 
-        this.marker.setShadow(a);
+            stateManager["Program:undefined"] = undefined;
 
- }, fxnCallCallback("this.marker.setShadow"))() 
- /* end autogen added */
+            this.marker.setShadow(a);
+        }, fxnCallCallback("this.marker.setShadow"))();
+        /* end autogen added */
         if (this.health <= 0) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.addMoney(this.reward);
+            StackTrace.instrument(() => {
+                this.g.addMoney(this.reward);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                /* autogen added */
 
- }, fxnCallCallback("this.g.addMoney"))() 
- /* end autogen added */
-            this.remove();
+                StackTrace.instrument(() => {}, fxnCallCallback("this.g.addMoney"))();
+                /* end autogen added */
+                this.remove();
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                /* autogen added */
 
- }, fxnCallCallback("this.remove"))() 
- /* end autogen added */
-            this.fireEvent("killed");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.remove"))();
+                /* end autogen added */
+                this.fireEvent("killed");
+            }, fxnCallCallback("this.fireEvent"))();
+            /* end autogen added */
         }
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Creep"] = Creep
+/* autogen added */
+
+stateManager["Program:Creep"] = Creep;
 
 var CreepAlpha = new Class({ Extends: Creep, markerOffset: 0, health: 150, speed: 50, reward: 1 });
 
-/* autogen added */ 
-stateManager["Program:CreepAlpha"] = CreepAlpha
+/* autogen added */
+
+stateManager["Program:CreepAlpha"] = CreepAlpha;
 
 var CreepBravo = new Class({ Extends: Creep, markerOffset: 1, health: 250, speed: 50, reward: 3 });
 
-/* autogen added */ 
-stateManager["Program:CreepBravo"] = CreepBravo
+/* autogen added */
+
+stateManager["Program:CreepBravo"] = CreepBravo;
 
 var CreepCharlie = new Class({ Extends: Creep, markerOffset: 2, health: 500, speed: 40, reward: 6 });
 
-/* autogen added */ 
-stateManager["Program:CreepCharlie"] = CreepCharlie
+/* autogen added */
+
+stateManager["Program:CreepCharlie"] = CreepCharlie;
 
 var CreepDelta = new Class({ Extends: Creep, markerOffset: 3, health: 1000, speed: 50, reward: 12 });
 
-/* autogen added */ 
-stateManager["Program:CreepDelta"] = CreepDelta
+/* autogen added */
+
+stateManager["Program:CreepDelta"] = CreepDelta;
 
 var CreepEcho = new Class({ Extends: Creep, markerOffset: 4, health: 2000, speed: 60, reward: 20 });
 
-/* autogen added */ 
-stateManager["Program:CreepEcho"] = CreepEcho
+/* autogen added */
+
+stateManager["Program:CreepEcho"] = CreepEcho;
 
 var CreepFoxtrot = new Class({ Extends: Creep, markerOffset: 5, health: 3000, speed: 70, reward: 30 });
 
-/* autogen added */ 
-stateManager["Program:CreepFoxtrot"] = CreepFoxtrot
+/* autogen added */
+
+stateManager["Program:CreepFoxtrot"] = CreepFoxtrot;
 
 var CreepGolf = new Class({ Extends: Creep, markerOffset: 6, health: 5000, speed: 90, reward: 35 });
 
-/* autogen added */ 
-stateManager["Program:CreepGolf"] = CreepGolf
+/* autogen added */
+
+stateManager["Program:CreepGolf"] = CreepGolf;
 
 var CreepHotel = new Class({ Extends: Creep, markerOffset: 7, health: 8000, speed: 100, reward: 35 });
 
-/* autogen added */ 
-stateManager["Program:CreepHotel"] = CreepHotel
+/* autogen added */
+
+stateManager["Program:CreepHotel"] = CreepHotel;
 
 var CreepIndia = new Class({ Extends: Creep, markerOffset: 8, health: 75000, speed: 150, reward: 35 });
 
-/* autogen added */ 
-stateManager["Program:CreepIndia"] = CreepIndia
+/* autogen added */
+
+stateManager["Program:CreepIndia"] = CreepIndia;
 
 var Tower = new Class({
     g: null,
@@ -4110,8 +4173,9 @@ var Tower = new Class({
     initialize: function (a, b) {
         this.g = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.marker = new google.maps.Marker({
             icon: new google.maps.MarkerImage(
@@ -4125,8 +4189,9 @@ stateManager["Program:undefined"] = undefined
             map: this.g.map
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.attackRadiusCircle = new google.maps.Circle({
             center: b,
@@ -4139,8 +4204,9 @@ stateManager["Program:undefined"] = undefined
             strokeOpacity: 0.2
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.sizeCircle = new google.maps.Circle({
             center: b,
@@ -4153,592 +4219,568 @@ stateManager["Program:undefined"] = undefined
             strokeOpacity: 0.4
         });
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     show: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setVisible(true);
-
- }, fxnCallCallback("this.marker.setVisible"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.marker.setVisible(true);
+        }, fxnCallCallback("this.marker.setVisible"))();
+        /* end autogen added */
         return this;
     },
     hide: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setVisible(false);
+        StackTrace.instrument(() => {
+            this.marker.setVisible(false);
+        }, fxnCallCallback("this.marker.setVisible"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.marker.setVisible"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.hideAttackRadius();
-
- }, fxnCallCallback("this.hideAttackRadius"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.hideAttackRadius();
+        }, fxnCallCallback("this.hideAttackRadius"))();
+        /* end autogen added */
         return this;
     },
     move: function (a) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setPosition(a);
+        StackTrace.instrument(() => {
+            this.marker.setPosition(a);
+        }, fxnCallCallback("this.marker.setPosition"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.marker.setPosition"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setCenter(a);
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setCenter(a);
+        }, fxnCallCallback("this.attackRadiusCircle.setCenter"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.attackRadiusCircle.setCenter"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setCenter(a);
-
- }, fxnCallCallback("this.sizeCircle.setCenter"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.sizeCircle.setCenter(a);
+        }, fxnCallCallback("this.sizeCircle.setCenter"))();
+        /* end autogen added */
         return this;
     },
     remove: function () {
         this.removed = true;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.marker.setMap(null);
+        /* autogen added */
 
- }, fxnCallCallback("this.marker.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.marker.setMap(null);
+        }, fxnCallCallback("this.marker.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setMap(null);
+        /* autogen added */
 
- }, fxnCallCallback("this.attackRadiusCircle.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setMap(null);
+        }, fxnCallCallback("this.attackRadiusCircle.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setMap(null);
+        /* autogen added */
 
- }, fxnCallCallback("this.sizeCircle.setMap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.sizeCircle.setMap(null);
+        }, fxnCallCallback("this.sizeCircle.setMap"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.stopAll(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.timer.stopAll"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.timer.stopAll(this);
+        }, fxnCallCallback("this.g.timer.stopAll"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.ui.closeTowerInfoWin(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.ui.closeTowerInfoWin"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.ui.closeTowerInfoWin(this);
+        }, fxnCallCallback("this.g.ui.closeTowerInfoWin"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.towers.erase(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.towers.erase"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.towers.erase(this);
+        }, fxnCallCallback("this.g.towers.erase"))();
+        /* end autogen added */
     },
     showAttackRadius: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setVisible(true);
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setVisible(true);
+        }, fxnCallCallback("this.attackRadiusCircle.setVisible"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.attackRadiusCircle.setVisible"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setVisible(true);
-
- }, fxnCallCallback("this.sizeCircle.setVisible"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.sizeCircle.setVisible(true);
+        }, fxnCallCallback("this.sizeCircle.setVisible"))();
+        /* end autogen added */
         return this;
     },
     hideAttackRadius: function () {
         return this;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setVisible(false);
+        /* autogen added */
 
- }, fxnCallCallback("this.attackRadiusCircle.setVisible"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setVisible(false);
+        }, fxnCallCallback("this.attackRadiusCircle.setVisible"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setVisible(false);
+        /* autogen added */
 
- }, fxnCallCallback("this.sizeCircle.setVisible"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.sizeCircle.setVisible(false);
+        }, fxnCallCallback("this.sizeCircle.setVisible"))();
+        /* end autogen added */
         return this;
     },
     selected: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setOptions({ fillColor: "#ffffff" });
+        StackTrace.instrument(() => {
+            this.sizeCircle.setOptions({ fillColor: "#ffffff" });
+        }, fxnCallCallback("this.sizeCircle.setOptions"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.sizeCircle.setOptions"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setOptions({ strokeOpacity: 0.8 });
-
- }, fxnCallCallback("this.attackRadiusCircle.setOptions"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setOptions({ strokeOpacity: 0.8 });
+        }, fxnCallCallback("this.attackRadiusCircle.setOptions"))();
+        /* end autogen added */
     },
     deselected: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.sizeCircle.setOptions({ fillColor: "#000000" });
+        StackTrace.instrument(() => {
+            this.sizeCircle.setOptions({ fillColor: "#000000" });
+        }, fxnCallCallback("this.sizeCircle.setOptions"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.sizeCircle.setOptions"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setOptions({ strokeOpacity: 0.2 });
-
- }, fxnCallCallback("this.attackRadiusCircle.setOptions"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setOptions({ strokeOpacity: 0.2 });
+        }, fxnCallCallback("this.attackRadiusCircle.setOptions"))();
+        /* end autogen added */
     },
     attack: function (d) {
         if (this.removed) {
             return;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.stopAll(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.timer.stopAll"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.timer.stopAll(this);
+        }, fxnCallCallback("this.g.timer.stopAll"))();
+        /* end autogen added */
         var c = [];
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+        /* autogen added */
 
+        stateManager["Program:c"] = c;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routeOverlap.each(
-            function (e) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                e.each(
-                    function (f) {
+        StackTrace.instrument(() => {
+            this.routeOverlap.each(
+                function (e) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        f.creeps.each(
-                            function (g) {
+                    StackTrace.instrument(() => {
+                        e.each(
+                            function (f) {
+                                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                                c.push(g);
+                                StackTrace.instrument(() => {
+                                    f.creeps.each(
+                                        function (g) {
+                                            /* autogen added */
 
- }, fxnCallCallback("c.push"))() 
- /* end autogen added */
+                                            StackTrace.instrument(() => {
+                                                c.push(g);
+                                            }, fxnCallCallback("c.push"))();
+                                            /* end autogen added */
+                                        }.bind(this)
+                                    );
+                                }, fxnCallCallback("f.creeps.each"))();
+                                /* end autogen added */
                             }.bind(this)
                         );
+                    }, fxnCallCallback("e.each"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.routeOverlap.each"))();
+        /* end autogen added */
 
- }, fxnCallCallback("f.creeps.each"))() 
- /* end autogen added */
-                    }.bind(this)
+        /* autogen added */
+
+        StackTrace.instrument(() => {
+            c.sort(function (f, e) {
+                return (
+                    f.route.path.length - f.distanceTravelled - (e.route.path.length - e.distanceTravelled)
                 );
-
- }, fxnCallCallback("e.each"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.routeOverlap.each"))() 
- /* end autogen added */
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-        c.sort(function (f, e) {
-            return f.route.path.length - f.distanceTravelled - (e.route.path.length - e.distanceTravelled);
-        });
-
- }, fxnCallCallback("c.sort"))() 
- /* end autogen added */
+            });
+        }, fxnCallCallback("c.sort"))();
+        /* end autogen added */
         var b = 0;
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
+        stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        c.each(
-            function (e) {
-                if (b >= 1) {
-                    return;
-                }
-                b++;
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                e.hit(this.damage);
+        StackTrace.instrument(() => {
+            c.each(
+                function (e) {
+                    if (b >= 1) {
+                        return;
+                    }
+                    b++;
 
- }, fxnCallCallback("e.hit"))() 
- /* end autogen added */
-            }.bind(this)
-        );
+                    /* autogen added */
 
- }, fxnCallCallback("c.each"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        e.hit(this.damage);
+                    }, fxnCallCallback("e.hit"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("c.each"))();
+        /* end autogen added */
         var a = (10 - this.attackSpeed + 1) * 200;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (b) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.timer.start(this, this.attack, a);
-
- }, fxnCallCallback("this.g.timer.start"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.g.timer.start(this, this.attack, a);
+            }, fxnCallCallback("this.g.timer.start"))();
+            /* end autogen added */
         } else {
             if (d && d.failAddEvents) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.addPathEvents();
-
- }, fxnCallCallback("this.addPathEvents"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this.addPathEvents();
+                }, fxnCallCallback("this.addPathEvents"))();
+                /* end autogen added */
             } else {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.timer.start(this, this.attack, a, { failAddEvents: true });
-
- }, fxnCallCallback("this.g.timer.start"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this.g.timer.start(this, this.attack, a, { failAddEvents: true });
+                }, fxnCallCallback("this.g.timer.start"))();
+                /* end autogen added */
             }
         }
     },
     addPathEvents: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routeOverlap.each(
-            function (a) {
+        StackTrace.instrument(() => {
+            this.routeOverlap.each(
+                function (a) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                a.each(
-                    function (b) {
+                    StackTrace.instrument(() => {
+                        a.each(
+                            function (b) {
+                                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        b.addTower(this);
-
- }, fxnCallCallback("b.addTower"))() 
- /* end autogen added */
-                    }.bind(this)
-                );
-
- }, fxnCallCallback("a.each"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.routeOverlap.each"))() 
- /* end autogen added */
+                                StackTrace.instrument(() => {
+                                    b.addTower(this);
+                                }, fxnCallCallback("b.addTower"))();
+                                /* end autogen added */
+                            }.bind(this)
+                        );
+                    }, fxnCallCallback("a.each"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.routeOverlap.each"))();
+        /* end autogen added */
     },
     removePathEvents: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.routeOverlap.each(
-            function (a) {
+        StackTrace.instrument(() => {
+            this.routeOverlap.each(
+                function (a) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                a.each(
-                    function (b) {
+                    StackTrace.instrument(() => {
+                        a.each(
+                            function (b) {
+                                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                        b.removeTower(this);
-
- }, fxnCallCallback("b.removeTower"))() 
- /* end autogen added */
-                    }.bind(this)
-                );
-
- }, fxnCallCallback("a.each"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.routeOverlap.each"))() 
- /* end autogen added */
+                                StackTrace.instrument(() => {
+                                    b.removeTower(this);
+                                }, fxnCallCallback("b.removeTower"))();
+                                /* end autogen added */
+                            }.bind(this)
+                        );
+                    }, fxnCallCallback("a.each"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.routeOverlap.each"))();
+        /* end autogen added */
     },
     drop: function () {
         if (!this.g.removeMoney(this.cost)) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.remove();
-
- }, fxnCallCallback("this.remove"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.remove();
+            }, fxnCallCallback("this.remove"))();
+            /* end autogen added */
             return;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.hideAttackRadius();
+        /* autogen added */
 
- }, fxnCallCallback("this.hideAttackRadius"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.hideAttackRadius();
+        }, fxnCallCallback("this.hideAttackRadius"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this._addClickEvent();
+        /* autogen added */
 
- }, fxnCallCallback("this._addClickEvent"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this._addClickEvent();
+        }, fxnCallCallback("this._addClickEvent"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.calculateRouteOverlap();
+        /* autogen added */
 
- }, fxnCallCallback("this.calculateRouteOverlap"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.calculateRouteOverlap();
+        }, fxnCallCallback("this.calculateRouteOverlap"))();
+        /* end autogen added */
         if (this.g.ui.openTowerInfoWin) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.ui.closeTowerInfoWin(this.g.ui.openTowerInfoWin);
-
- }, fxnCallCallback("this.g.ui.closeTowerInfoWin"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.g.ui.closeTowerInfoWin(this.g.ui.openTowerInfoWin);
+            }, fxnCallCallback("this.g.ui.closeTowerInfoWin"))();
+            /* end autogen added */
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.start(this, this.attack, 0);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.timer.start"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.timer.start(this, this.attack, 0);
+        }, fxnCallCallback("this.g.timer.start"))();
+        /* end autogen added */
         if (this.g.towers.length == 0) {
             new Message("top", "info", "Click on the tower to view upgrade options.", { autoHide: 30000 });
         }
     },
     _addClickEvent: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        google.maps.event.addListener(
-            this.marker,
-            "click",
-            function () {
+        StackTrace.instrument(() => {
+            google.maps.event.addListener(
+                this.marker,
+                "click",
+                function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.ui.showTowerInfoWin(this);
-
- }, fxnCallCallback("this.g.ui.showTowerInfoWin"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("google.maps.event.addListener"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.g.ui.showTowerInfoWin(this);
+                    }, fxnCallCallback("this.g.ui.showTowerInfoWin"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("google.maps.event.addListener"))();
+        /* end autogen added */
     },
     calculateRouteOverlap: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.routes.each(
-            function (b, a) {
+        StackTrace.instrument(() => {
+            this.g.routes.each(
+                function (b, a) {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.routeOverlap.push([]);
+                    StackTrace.instrument(() => {
+                        this.routeOverlap.push([]);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.routeOverlap.push"))() 
- /* end autogen added */
-                b.path.each(
-                    function (c) {
-                        if (
-                            google.maps.geometry.spherical.computeDistanceBetween(
-                                c.latLng,
-                                this.marker.getPosition()
-                            ) < this.attackRadius
-                        ) {
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.routeOverlap.push"))();
+                        /* end autogen added */
+                        b.path.each(
+                            function (c) {
+                                if (
+                                    google.maps.geometry.spherical.computeDistanceBetween(
+                                        c.latLng,
+                                        this.marker.getPosition()
+                                    ) < this.attackRadius
+                                ) {
+                                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                            this.routeOverlap[a].push(c);
-
- }, fxnCallCallback("this.routeOverlap[a].push"))() 
- /* end autogen added */
-                        }
-                    }.bind(this)
-                );
-
- }, fxnCallCallback("b.path.each"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("this.g.routes.each"))() 
- /* end autogen added */
+                                    StackTrace.instrument(() => {
+                                        this.routeOverlap[a].push(c);
+                                    }, fxnCallCallback("this.routeOverlap[a].push"))();
+                                    /* end autogen added */
+                                }
+                            }.bind(this)
+                        );
+                    }, fxnCallCallback("b.path.each"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.g.routes.each"))();
+        /* end autogen added */
     },
     checkDroppable: function () {
         var a = true;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (this.g.money < this.cost) {
             a = false;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+            /* autogen added */
 
+            stateManager["Program:a"] = a;
         }
         if (a) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.towers.each(
-                function (b) {
-                    if (b.removed) {
-                        return;
-                    }
-                    if (
-                        google.maps.geometry.spherical.computeDistanceBetween(
-                            b.marker.getPosition(),
-                            this.marker.getPosition()
-                        ) <
-                        this.size + b.size
-                    ) {
-                        a = false;
+            StackTrace.instrument(() => {
+                this.g.towers.each(
+                    function (b) {
+                        if (b.removed) {
+                            return;
+                        }
+                        if (
+                            google.maps.geometry.spherical.computeDistanceBetween(
+                                b.marker.getPosition(),
+                                this.marker.getPosition()
+                            ) <
+                            this.size + b.size
+                        ) {
+                            a = false;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                            /* autogen added */
 
-                    }
-                }.bind(this)
-            );
-
- }, fxnCallCallback("this.g.towers.each"))() 
- /* end autogen added */
+                            stateManager["Program:a"] = a;
+                        }
+                    }.bind(this)
+                );
+            }, fxnCallCallback("this.g.towers.each"))();
+            /* end autogen added */
         }
         if (a) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.foundRoutes.routes.each(
-                function (b) {
+            StackTrace.instrument(() => {
+                this.g.foundRoutes.routes.each(
+                    function (b) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    b.path.each(
-                        function (c) {
-                            if (
-                                google.maps.geometry.spherical.computeDistanceBetween(
-                                    c.latLng,
-                                    this.marker.getPosition()
-                                ) < this.size
-                            ) {
-                                a = false;
+                        StackTrace.instrument(() => {
+                            b.path.each(
+                                function (c) {
+                                    if (
+                                        google.maps.geometry.spherical.computeDistanceBetween(
+                                            c.latLng,
+                                            this.marker.getPosition()
+                                        ) < this.size
+                                    ) {
+                                        a = false;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                                        /* autogen added */
 
-                            }
-                        }.bind(this)
-                    );
-
- }, fxnCallCallback("b.path.each"))() 
- /* end autogen added */
-                }.bind(this)
-            );
-
- }, fxnCallCallback("this.g.foundRoutes.routes.each"))() 
- /* end autogen added */
+                                        stateManager["Program:a"] = a;
+                                    }
+                                }.bind(this)
+                            );
+                        }, fxnCallCallback("b.path.each"))();
+                        /* end autogen added */
+                    }.bind(this)
+                );
+            }, fxnCallCallback("this.g.foundRoutes.routes.each"))();
+            /* end autogen added */
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.attackRadiusCircle.setOptions({
-            fillColor: a ? "#0000AA" : "#AA0000",
-            fillOpacity: a ? 0.1 : 0.7
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.attackRadiusCircle.setOptions"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.attackRadiusCircle.setOptions({
+                fillColor: a ? "#0000AA" : "#AA0000",
+                fillOpacity: a ? 0.1 : 0.7
+            });
+        }, fxnCallCallback("this.attackRadiusCircle.setOptions"))();
+        /* end autogen added */
         return a;
     },
     upgrade: function (d) {
         var c = [];
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+        /* autogen added */
+
+        stateManager["Program:c"] = c;
 
         for (var b = 0; b < this.upgrades.length; b++) {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            stateManager["Program:b"] = b;
 
             for (var a = 0; a < this.upgrades[b].length; a++) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+                stateManager["Program:a"] = a;
 
                 if (this.upgrades[b][a].applied) {
                     continue;
                 }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                c.push(this.upgrades[b][a]);
+                /* autogen added */
 
- }, fxnCallCallback("c.push"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    c.push(this.upgrades[b][a]);
+                }, fxnCallCallback("c.push"))();
+                /* end autogen added */
                 break;
             }
         }
         for (var b = 0; b < c.length; b++) {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            stateManager["Program:b"] = b;
 
             if (c[b] == d) {
                 return this._applyUpgrade(c[b]);
@@ -4752,81 +4794,82 @@ stateManager["Program:b"] = b
         }
         this.cost += a.cost;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         a.applied = true;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         if (a.damage) {
             this.damage += a.damage;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
 
+            stateManager["Program:undefined"] = undefined;
         }
         if (a.attackSpeed) {
             this.attackSpeed += a.attackSpeed;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
 
+            stateManager["Program:undefined"] = undefined;
         }
         if (a.attackRadius) {
             this.attackRadius += a.attackRadius;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            StackTrace.instrument(() => {
+                /* autogen added */
 
-            this.attackRadiusCircle.setRadius(this.attackRadius);
+                stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                this.attackRadiusCircle.setRadius(this.attackRadius);
 
- }, fxnCallCallback("this.attackRadiusCircle.setRadius"))() 
- /* end autogen added */
-            this.calculateRouteOverlap();
+                /* autogen added */
 
- }, fxnCallCallback("this.calculateRouteOverlap"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {}, fxnCallCallback("this.attackRadiusCircle.setRadius"))();
+                /* end autogen added */
+                this.calculateRouteOverlap();
+            }, fxnCallCallback("this.calculateRouteOverlap"))();
+            /* end autogen added */
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.ui.showTowerInfoWin(this);
+        /* autogen added */
 
- }, fxnCallCallback("this.g.ui.showTowerInfoWin"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.g.ui.showTowerInfoWin(this);
+        }, fxnCallCallback("this.g.ui.showTowerInfoWin"))();
+        /* end autogen added */
         return true;
     },
     getSellCost: function () {
         return Math.round(this.cost * 0.7, 0);
     },
     sell: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.addMoney(this.getSellCost(), true);
+        StackTrace.instrument(() => {
+            this.g.addMoney(this.getSellCost(), true);
+        }, fxnCallCallback("this.g.addMoney"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.g.addMoney"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.remove();
-
- }, fxnCallCallback("this.remove"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.remove();
+        }, fxnCallCallback("this.remove"))();
+        /* end autogen added */
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Tower"] = Tower
+/* autogen added */
+
+stateManager["Program:Tower"] = Tower;
 
 var TowerAlpha = new Class({
     Extends: Tower,
@@ -4850,8 +4893,9 @@ var TowerAlpha = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerAlpha"] = TowerAlpha
+/* autogen added */
+
+stateManager["Program:TowerAlpha"] = TowerAlpha;
 
 var TowerBravo = new Class({
     Extends: Tower,
@@ -4876,8 +4920,9 @@ var TowerBravo = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerBravo"] = TowerBravo
+/* autogen added */
+
+stateManager["Program:TowerBravo"] = TowerBravo;
 
 var TowerCharlie = new Class({
     Extends: Tower,
@@ -4901,8 +4946,9 @@ var TowerCharlie = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerCharlie"] = TowerCharlie
+/* autogen added */
+
+stateManager["Program:TowerCharlie"] = TowerCharlie;
 
 var TowerDelta = new Class({
     Extends: Tower,
@@ -4926,8 +4972,9 @@ var TowerDelta = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerDelta"] = TowerDelta
+/* autogen added */
+
+stateManager["Program:TowerDelta"] = TowerDelta;
 
 var TowerEcho = new Class({
     Extends: Tower,
@@ -4950,8 +4997,9 @@ var TowerEcho = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerEcho"] = TowerEcho
+/* autogen added */
+
+stateManager["Program:TowerEcho"] = TowerEcho;
 
 var TowerFoxtrot = new Class({
     Extends: Tower,
@@ -4974,8 +5022,9 @@ var TowerFoxtrot = new Class({
     ]
 });
 
-/* autogen added */ 
-stateManager["Program:TowerFoxtrot"] = TowerFoxtrot
+/* autogen added */
+
+stateManager["Program:TowerFoxtrot"] = TowerFoxtrot;
 
 var Timer = new Class({
     timers: [],
@@ -4984,72 +5033,74 @@ var Timer = new Class({
     start: function (a, f, c, d) {
         f = f.bind(a);
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+        /* autogen added */
+
+        stateManager["Program:f"] = f;
 
         var e = { object: a, callback: f, duration: c, params: d, start: new Date().getTime(), timer: null };
 
-/* autogen added */ 
-stateManager["Program:e"] = e
+        /* autogen added */
+
+        stateManager["Program:e"] = e;
 
         if (!this.paused) {
             var b = setTimeout(
                 function () {
+                    /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                    this.timers.erase(e);
+                    StackTrace.instrument(() => {
+                        this.timers.erase(e);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("this.timers.erase"))() 
- /* end autogen added */
-                    e.callback(e.params);
-
- }, fxnCallCallback("e.callback"))() 
- /* end autogen added */
+                        StackTrace.instrument(() => {}, fxnCallCallback("this.timers.erase"))();
+                        /* end autogen added */
+                        e.callback(e.params);
+                    }, fxnCallCallback("e.callback"))();
+                    /* end autogen added */
                 }.bind(this),
                 c / this.multiplier
             );
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            /* autogen added */
+
+            stateManager["Program:b"] = b;
 
             e.timer = b;
 
-/* autogen added */ 
-stateManager["Program:e"] = e
+            /* autogen added */
 
+            stateManager["Program:e"] = e;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.timers.push(e);
+        /* autogen added */
 
- }, fxnCallCallback("this.timers.push"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.timers.push(e);
+        }, fxnCallCallback("this.timers.push"))();
+        /* end autogen added */
     },
     stopAll: function (a) {
         for (var b = 0; b < this.timers.length; b++) {
+            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+            stateManager["Program:b"] = b;
 
             var c = this.timers[b];
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+            /* autogen added */
+
+            stateManager["Program:c"] = c;
 
             if (c.object == a) {
                 clearTimeout(c.timer);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.timers.erase(c);
+                /* autogen added */
 
- }, fxnCallCallback("this.timers.erase"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this.timers.erase(c);
+                }, fxnCallCallback("this.timers.erase"))();
+                /* end autogen added */
                 b--;
             }
         }
@@ -5060,50 +5111,52 @@ stateManager["Program:c"] = c
         }
         this.paused = true;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         var a = new Date().getTime();
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
+        stateManager["Program:a"] = a;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.timers.each(function (b) {
-            clearTimeout(b.timer);
-        });
+        /* autogen added */
 
- }, fxnCallCallback("this.timers.each"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.timers.each(function (b) {
+                clearTimeout(b.timer);
+            });
+        }, fxnCallCallback("this.timers.each"))();
+        /* end autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.timers.each(
-            function (d, c) {
-                var b = d.duration - (a - d.start) * this.multiplier;
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        StackTrace.instrument(() => {
+            this.timers.each(
+                function (d, c) {
+                    var b = d.duration - (a - d.start) * this.multiplier;
 
-                if (b <= 0) {
-                    b = 1;
+                    /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+                    stateManager["Program:b"] = b;
 
-                }
-                this.timers[c].duration = b;
+                    if (b <= 0) {
+                        b = 1;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+                        /* autogen added */
 
-            }.bind(this)
-        );
+                        stateManager["Program:b"] = b;
+                    }
+                    this.timers[c].duration = b;
 
- }, fxnCallCallback("this.timers.each"))() 
- /* end autogen added */
+                    /* autogen added */
+
+                    stateManager["Program:undefined"] = undefined;
+                }.bind(this)
+            );
+        }, fxnCallCallback("this.timers.each"))();
+        /* end autogen added */
         return this;
     },
     resume: function () {
@@ -5112,72 +5165,75 @@ stateManager["Program:undefined"] = undefined
         }
         var a = this.timers;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
+
+        stateManager["Program:a"] = a;
 
         this.timers = [];
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
+
+        stateManager["Program:undefined"] = undefined;
 
         this.paused = false;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        a.each(
-            function (b) {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.start(b.object, b.callback, b.duration, b.params);
+        StackTrace.instrument(() => {
+            a.each(
+                function (b) {
+                    /* autogen added */
 
- }, fxnCallCallback("this.start"))() 
- /* end autogen added */
-            }.bind(this)
-        );
-
- }, fxnCallCallback("a.each"))() 
- /* end autogen added */
+                    StackTrace.instrument(() => {
+                        this.start(b.object, b.callback, b.duration, b.params);
+                    }, fxnCallCallback("this.start"))();
+                    /* end autogen added */
+                }.bind(this)
+            );
+        }, fxnCallCallback("a.each"))();
+        /* end autogen added */
         return this;
     },
     setMultiplier: function (a) {
         if (this.paused) {
             this.multiplier = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
+
+            stateManager["Program:undefined"] = undefined;
 
             return this;
         }
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.pause();
+        /* autogen added */
 
- }, fxnCallCallback("this.pause"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.pause();
+        }, fxnCallCallback("this.pause"))();
+        /* end autogen added */
         this.multiplier = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.resume();
+        /* autogen added */
 
- }, fxnCallCallback("this.resume"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.resume();
+        }, fxnCallCallback("this.resume"))();
+        /* end autogen added */
         return this;
     }
 });
 
-/* autogen added */ 
-stateManager["Program:Timer"] = Timer
+/* autogen added */
+
+stateManager["Program:Timer"] = Timer;
 
 var GameRound = new Class({
     Implements: [Events],
@@ -5192,79 +5248,78 @@ var GameRound = new Class({
             a.bind(this)();
             this.showMoveModulus = Math.min(3, Math.max(1, Math.ceil((this.creeps - 20) / 30)));
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+            /* autogen added */
 
+            stateManager["Program:undefined"] = undefined;
         }.bind(this);
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     addCreep: function (a, c, b) {
         this.creeps++;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.timer.start(
-            this,
-            function () {
-                var d = a.addCreep(c);
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        StackTrace.instrument(() => {
+            this.g.timer.start(
+                this,
+                function () {
+                    var d = a.addCreep(c);
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                    /* autogen added */
 
-                d.addEvent("killed", this.removeCreep.bind(this));
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("d.addEvent"))() 
- /* end autogen added */
-                d.showMoveModulus = this.showMoveModulus;
+                        stateManager["Program:d"] = d;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        d.addEvent("killed", this.removeCreep.bind(this));
+                    }, fxnCallCallback("d.addEvent"))();
+                    /* end autogen added */
+                    d.showMoveModulus = this.showMoveModulus;
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                    /* autogen added */
 
-                d.show().move();
+                    StackTrace.instrument(() => {
+                        /* autogen added */
 
- }, fxnCallCallback("d.show"))() 
- /* end autogen added */
-            }.bind(this),
-            b
-        );
+                        stateManager["Program:d"] = d;
 
- }, fxnCallCallback("this.g.timer.start"))() 
- /* end autogen added */
+                        d.show().move();
+                    }, fxnCallCallback("d.show"))();
+                    /* end autogen added */
+                }.bind(this),
+                b
+            );
+        }, fxnCallCallback("this.g.timer.start"))();
+        /* end autogen added */
     },
     removeCreep: function () {
         this.creeps--;
         if (this.creeps <= 0) {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.timer.stopAll(this);
-
- }, fxnCallCallback("this.g.timer.stopAll"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.g.timer.stopAll(this);
+            }, fxnCallCallback("this.g.timer.stopAll"))();
+            /* end autogen added */
             if (this.g.lives > 0) {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.fireEvent("roundOver");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
+                StackTrace.instrument(() => {
+                    this.fireEvent("roundOver");
+                }, fxnCallCallback("this.fireEvent"))();
+                /* end autogen added */
             }
         }
     }
 });
 
-/* autogen added */ 
-stateManager["Program:GameRound"] = GameRound
+/* autogen added */
+
+stateManager["Program:GameRound"] = GameRound;
 
 var GameRoundRoute = new Class({
     Extends: GameRound,
@@ -5274,30 +5329,30 @@ var GameRoundRoute = new Class({
     initialize: function (a) {
         this.routeBuilder = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     run: function () {
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.g.addRoute(this.routeBuilder.getNextRoute());
+        StackTrace.instrument(() => {
+            this.g.addRoute(this.routeBuilder.getNextRoute());
+        }, fxnCallCallback("this.g.addRoute"))();
+        /* end autogen added */
 
- }, fxnCallCallback("this.g.addRoute"))() 
- /* end autogen added */
+        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        this.fireEvent("roundOver");
-
- }, fxnCallCallback("this.fireEvent"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            this.fireEvent("roundOver");
+        }, fxnCallCallback("this.fireEvent"))();
+        /* end autogen added */
     }
 });
 
-/* autogen added */ 
-stateManager["Program:GameRoundRoute"] = GameRoundRoute
+/* autogen added */
+
+stateManager["Program:GameRoundRoute"] = GameRoundRoute;
 
 var Rounds = new Class({
     roundNumModifier: 0,
@@ -5306,9 +5361,9 @@ var Rounds = new Class({
     initialize: function (a) {
         this.routeBuilder = a;
 
-/* autogen added */ 
-stateManager["Program:undefined"] = undefined
+        /* autogen added */
 
+        stateManager["Program:undefined"] = undefined;
     },
     get: function (roundNum) {
         switch (roundNum) {
@@ -5326,86 +5381,94 @@ stateManager["Program:undefined"] = undefined
         }
         roundNum -= this.roundNumModifier;
 
-/* autogen added */ 
-stateManager["Program:roundNum"] = roundNum
+        /* autogen added */
+
+        stateManager["Program:roundNum"] = roundNum;
 
         var roundData = this.getRoundData(roundNum);
 
-/* autogen added */ 
-stateManager["Program:roundData"] = roundData
+        /* autogen added */
+
+        stateManager["Program:roundData"] = roundData;
 
         if (roundData) {
             return new GameRound(function () {
+                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-                this.g.ui.updateRound(roundNum);
+                StackTrace.instrument(() => {
+                    this.g.ui.updateRound(roundNum);
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                    /* autogen added */
 
- }, fxnCallCallback("this.g.ui.updateRound"))() 
- /* end autogen added */
-                Object.each(
-                    roundData,
-                    function (timerData, creepType) {
-                        creepType = eval("Creep" + creepType);
+                    StackTrace.instrument(() => {}, fxnCallCallback("this.g.ui.updateRound"))();
+                    /* end autogen added */
+                    Object.each(
+                        roundData,
+                        function (timerData, creepType) {
+                            creepType = eval("Creep" + creepType);
 
-/* autogen added */ 
-stateManager["Program:creepType"] = creepType
+                            /* autogen added */
 
-                        var times = this.g.rounds.parseTimer(timerData);
+                            stateManager["Program:creepType"] = creepType;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                            var times = this.g.rounds.parseTimer(timerData);
 
-/* autogen added */ 
-stateManager["Program:times"] = times
+                            /* autogen added */
 
-                        times.each(
-                            function (time) {
-                                for (var routeIndex = 0; routeIndex < this.g.routes.length; routeIndex++) {
+                            StackTrace.instrument(() => {
+                                /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                                stateManager["Program:times"] = times;
 
-/* autogen added */ 
-stateManager["Program:routeIndex"] = routeIndex
+                                times.each(
+                                    function (time) {
+                                        for (
+                                            var routeIndex = 0;
+                                            routeIndex < this.g.routes.length;
+                                            routeIndex++
+                                        ) {
+                                            /* autogen added */
 
-                                    this.addCreep(this.g.routes[routeIndex], creepType, 500 * time);
+                                            StackTrace.instrument(() => {
+                                                /* autogen added */
 
- }, fxnCallCallback("this.addCreep"))() 
- /* end autogen added */
-                                }
-                            }.bind(this)
-                        );
+                                                stateManager["Program:routeIndex"] = routeIndex;
 
- }, fxnCallCallback("times.each"))() 
- /* end autogen added */
-                    }.bind(this)
-                );
-
- }, fxnCallCallback("Object.each"))() 
- /* end autogen added */
+                                                this.addCreep(
+                                                    this.g.routes[routeIndex],
+                                                    creepType,
+                                                    500 * time
+                                                );
+                                            }, fxnCallCallback("this.addCreep"))();
+                                            /* end autogen added */
+                                        }
+                                    }.bind(this)
+                                );
+                            }, fxnCallCallback("times.each"))();
+                            /* end autogen added */
+                        }.bind(this)
+                    );
+                }, fxnCallCallback("Object.each"))();
+                /* end autogen added */
             });
         }
         return new GameRound(function () {
+            /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-            this.g.ui.updateRound(roundNum + 1);
-
- }, fxnCallCallback("this.g.ui.updateRound"))() 
- /* end autogen added */
+            StackTrace.instrument(() => {
+                this.g.ui.updateRound(roundNum + 1);
+            }, fxnCallCallback("this.g.ui.updateRound"))();
+            /* end autogen added */
             var timerCount = [0, 0, 0, 0];
 
-/* autogen added */ 
-stateManager["Program:timerCount"] = timerCount
+            /* autogen added */
+
+            stateManager["Program:timerCount"] = timerCount;
 
             for (var creepType = 1; creepType <= this.g.rounds.creepTypes.length; creepType++) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:creepType"] = creepType
+                stateManager["Program:creepType"] = creepType;
 
                 if (roundNum < (creepType - 1) * 5) {
                     continue;
@@ -5423,30 +5486,30 @@ stateManager["Program:creepType"] = creepType
                     0
                 );
 
-/* autogen added */ 
-stateManager["Program:creeps"] = creeps
+                /* autogen added */
+
+                stateManager["Program:creeps"] = creeps;
 
                 for (var routeIndex = 0; routeIndex < this.g.routes.length; routeIndex++) {
+                    /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:routeIndex"] = routeIndex
+                    stateManager["Program:routeIndex"] = routeIndex;
 
                     for (var i = 0; i < creeps; i++) {
+                        /* autogen added */
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+                        StackTrace.instrument(() => {
+                            /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:i"] = i
+                            stateManager["Program:i"] = i;
 
-                        this.addCreep(
-                            this.g.routes[routeIndex],
-                            this.g.rounds.creepTypes[creepType - 1],
-                            500 * ++timerCount[routeIndex]
-                        );
-
- }, fxnCallCallback("this.addCreep"))() 
- /* end autogen added */
+                            this.addCreep(
+                                this.g.routes[routeIndex],
+                                this.g.rounds.creepTypes[creepType - 1],
+                                500 * ++timerCount[routeIndex]
+                            );
+                        }, fxnCallCallback("this.addCreep"))();
+                        /* end autogen added */
                     }
                 }
             }
@@ -5597,219 +5660,237 @@ stateManager["Program:i"] = i
     parseTimer: function (a) {
         var c = [];
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+        /* autogen added */
+
+        stateManager["Program:c"] = c;
 
         if (!a) {
             return c;
         }
         var b = a.match(/([0-9]+@[0-9]+(\+[0-9]+)?)/g);
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
+        stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        b.each(function (e) {
-            var g = e.match(/([0-9]+)@([0-9]+)(\+([0-9]+))?/);
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:g"] = g
+        StackTrace.instrument(() => {
+            b.each(function (e) {
+                var g = e.match(/([0-9]+)@([0-9]+)(\+([0-9]+))?/);
 
-            for (var f = 0; f < g[1]; f++) {
+                /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:f"] = f
+                stateManager["Program:g"] = g;
 
-                var d = 0;
+                for (var f = 0; f < g[1]; f++) {
+                    /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                    stateManager["Program:f"] = f;
 
-                if (g[4]) {
-                    d = parseInt(g[4]);
+                    var d = 0;
 
-/* autogen added */ 
-stateManager["Program:d"] = d
+                    /* autogen added */
 
+                    stateManager["Program:d"] = d;
+
+                    if (g[4]) {
+                        d = parseInt(g[4]);
+
+                        /* autogen added */
+
+                        stateManager["Program:d"] = d;
+                    }
+
+                    /* autogen added */
+
+                    StackTrace.instrument(() => {
+                        c.push(f * g[2] + d);
+                    }, fxnCallCallback("c.push"))();
+                    /* end autogen added */
                 }
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-                c.push(f * g[2] + d);
-
- }, fxnCallCallback("c.push"))() 
- /* end autogen added */
-            }
-        });
-
- }, fxnCallCallback("b.each"))() 
- /* end autogen added */
+            });
+        }, fxnCallCallback("b.each"))();
+        /* end autogen added */
         return c;
     }
 });
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+/* autogen added */
 
-/* autogen added */ 
-stateManager["Program:Rounds"] = Rounds
+StackTrace.instrument(() => {
+    /* autogen added */
 
-window.addEvent("load", function () {
-    var a = new Game($("game"));
+    stateManager["Program:Rounds"] = Rounds;
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+    window.addEvent("load", function () {
+        var a = new Game($("game"));
 
-    a.gameClass = Game;
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        stateManager["Program:a"] = a;
 
-    Game = null;
+        a.gameClass = Game;
 
-/* autogen added */ 
-stateManager["Program:Game"] = Game
+        /* autogen added */
 
-});
+        stateManager["Program:a"] = a;
 
- }, fxnCallCallback("window.addEvent"))() 
- /* end autogen added */
-(function (e, a, f) {
-    var c,
+        Game = null;
 
-/* autogen added */ 
-stateManager["Program:c"] = c
+        /* autogen added */
 
-        b = e.getElementsByTagName(a)[0];
+        stateManager["Program:Game"] = Game;
+    });
+}, fxnCallCallback("window.addEvent"))()(
+    /* end autogen added */
+    function (e, a, f) {
+        var c,
+            b = e.getElementsByTagName(a)[0];
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
-    if (e.getElementById(f)) {
-        return;
+        stateManager["Program:c"] = c;
+
+        /* autogen added */
+
+        stateManager["Program:b"] = b;
+
+        if (e.getElementById(f)) {
+            return;
+        }
+        c = e.createElement(a);
+
+        /* autogen added */
+
+        stateManager["Program:c"] = c;
+
+        c.id = f;
+
+        /* autogen added */
+
+        stateManager["Program:c"] = c;
+
+        c.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=267555096654594";
+
+        /* autogen added */
+
+        StackTrace.instrument(() => {
+            /* autogen added */
+
+            stateManager["Program:c"] = c;
+
+            b.parentNode.insertBefore(c, b);
+        }, fxnCallCallback("b.parentNode.insertBefore"))();
+        /* end autogen added */
     }
-    c = e.createElement(a);
-
-/* autogen added */ 
-stateManager["Program:c"] = c
-
-    c.id = f;
-
-/* autogen added */ 
-stateManager["Program:c"] = c
-
-    c.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=267555096654594";
-
-/* autogen added */ 
- StackTrace.instrument(() => {
-
-/* autogen added */ 
-stateManager["Program:c"] = c
-
-    b.parentNode.insertBefore(c, b);
-
- }, fxnCallCallback("b.parentNode.insertBefore"))() 
- /* end autogen added */
-})(document, "script", "facebook-jssdk");
+)(document, "script", "facebook-jssdk");
 window.___gcfg = { lang: "en-GB" };
 
-/* autogen added */ 
- twitter = StackTrace.instrument(twitter, fxnCallCallback("twitter"));
+/* autogen added */
 
-/* autogen added */ 
-stateManager["Program:window"] = window
+twitter = StackTrace.instrument(twitter, fxnCallCallback("twitter"));
+
+/* autogen added */
+
+stateManager["Program:window"] = window;
 
 function twitter(e, a, f) {
-    var c, b = e.getElementsByTagName(a)[0];
+    var c,
+        b = e.getElementsByTagName(a)[0];
 
-/* autogen added */ 
-stateManager["Program:twitter:b"] = b
+    /* autogen added */
 
+    stateManager["Program:twitter:b"] = b;
 
-/* autogen added */ 
-stateManager["Program:twitter:c"] = c
+    /* autogen added */
 
+    stateManager["Program:twitter:c"] = c;
 
     if (!e.getElementById(f)) {
         c = e.createElement(a);
 
-/* autogen added */ 
-stateManager["Program:twitter:c"] = c
+        /* autogen added */
+
+        stateManager["Program:twitter:c"] = c;
 
         c.id = f;
 
-/* autogen added */ 
-stateManager["Program:twitter:c"] = c
+        /* autogen added */
+
+        stateManager["Program:twitter:c"] = c;
 
         c.src = "//platform.twitter.com/widgets.js";
 
-/* autogen added */ 
-stateManager["Program:twitter:c"] = c
+        /* autogen added */
 
+        stateManager["Program:twitter:c"] = c;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
-        b.parentNode.insertBefore(c, b);
+        /* autogen added */
 
- }, fxnCallCallback("b.parentNode.insertBefore"))() 
- /* end autogen added */
+        StackTrace.instrument(() => {
+            b.parentNode.insertBefore(c, b);
+        }, fxnCallCallback("b.parentNode.insertBefore"))();
+        /* end autogen added */
     }
-};
+}
 twitter(document, "script", "twitter-wjs");
 var _gaq = _gaq || [];
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+/* autogen added */
 
-/* autogen added */ 
-stateManager["Program:_gaq"] = _gaq
+StackTrace.instrument(() => {
+    /* autogen added */
 
-_gaq.push(["_setAccount", "UA-29746608-1"]);
+    stateManager["Program:_gaq"] = _gaq;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+    _gaq.push(["_setAccount", "UA-29746608-1"]);
 
- }, fxnCallCallback("_gaq.push"))() 
- /* end autogen added */
-_gaq.push(["_trackPageview"]);
+    /* autogen added */
 
- }, fxnCallCallback("_gaq.push"))() 
- /* end autogen added */
-(function () {
-    var b = document.createElement("script");
+    StackTrace.instrument(() => {}, fxnCallCallback("_gaq.push"))();
+    /* end autogen added */
+    _gaq.push(["_trackPageview"]);
+}, fxnCallCallback("_gaq.push"))()(
+    /* end autogen added */
+    function () {
+        var b = document.createElement("script");
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
-    b.type = "text/javascript";
+        stateManager["Program:b"] = b;
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        b.type = "text/javascript";
 
-    b.async = true;
+        /* autogen added */
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        stateManager["Program:b"] = b;
 
-    b.src =
-        ("https:" == document.location.protocol ? "https://ssl" : "http://www") +
-        ".google-analytics.com/ga.js";
+        b.async = true;
 
-/* autogen added */ 
-stateManager["Program:b"] = b
+        /* autogen added */
 
-    var a = document.getElementsByTagName("script")[0];
+        stateManager["Program:b"] = b;
 
-/* autogen added */ 
- StackTrace.instrument(() => {
+        b.src =
+            ("https:" == document.location.protocol ? "https://ssl" : "http://www") +
+            ".google-analytics.com/ga.js";
 
-/* autogen added */ 
-stateManager["Program:a"] = a
+        /* autogen added */
 
-    a.parentNode.insertBefore(b, a);
+        stateManager["Program:b"] = b;
 
- }, fxnCallCallback("a.parentNode.insertBefore"))() 
- /* end autogen added */
-})();
+        var a = document.getElementsByTagName("script")[0];
+
+        /* autogen added */
+
+        StackTrace.instrument(() => {
+            /* autogen added */
+
+            stateManager["Program:a"] = a;
+
+            a.parentNode.insertBefore(b, a);
+        }, fxnCallCallback("a.parentNode.insertBefore"))();
+        /* end autogen added */
+    }
+)();
