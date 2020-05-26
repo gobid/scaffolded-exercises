@@ -48,22 +48,20 @@ function parseTreeAndUpdate(source) {
 
             const deanonymizedFunction = deanonymizeFunctionExpr(node);
             const deanonymizedFunctionStr = recast.print(deanonymizedFunction).code;
+            /** replaces the anonymous function with the deanonymized function; this happens recursively
+             * so the most up to date souce script is always modified
+             */
             source = source.slice(0, startLoc) + deanonymizedFunctionStr + source.slice(endLoc);
             updates = true;
         }
-        // if (isMethodCall(node) && updates === false) {
-        //     const stringifiedNode = scriptString.slice(node.range[0], node.range[1] + 1);
-        //     const nodeNameRange = node.callee.range; // [charStartAt, charEndAt]
-        //     const nodeName = scriptString.slice(nodeNameRange[0], nodeNameRange[1] + 1);
-        //     const updateStr = `\n/* autogen added */ \n StackTrace.instrument(() => {
-        //                             \n${stringifiedNode}},
-        //                             fxnCallCallback("${nodeName}"))`;
-
-        //     let startLoc = meta.start.offset;
-        //     let endLoc = meta.end.offset;
-        //     source = source.slice(0, startLoc) + updateStr + source.slice(endLoc);
-        //     updates = true;
-        // }
+        /* SOURCE SCRIPT EXAMPLE (PSEUDOCODE):
+            function..
+            function..
+            variable..
+            CURR NODE TO BE REPLACED
+            variable...
+            function...
+        */
     });
     return source;
 }
@@ -76,17 +74,32 @@ function isAnonymizedFunction(node) {
             node.expression.right === "FunctionExpression")
     );
 }
+/* SOME FUNCTIONS SHOULD STAY ANONYMOUS... SEE EXAMPLE: 
+    var foo = function() {
 
+    } 
+    // want to turn ^this variable declaration into a function declaration:
+    function foo() {
+
+    }
+
+    // want to keep this function how it is; it is not a named function
+    (function() {
+
+    })
+*/
 function deanonymizeFunctionExpr(node) {
     const functionName = node.id.name ? node.id.name : "REAL_ANON_SOS";
     const newId = b.identifier(functionName);
     const newNode = b.functionDeclaration(newId, node.init.params, node.init.body);
+    /** next three lines for debugging purposes to be able to see the deanonymized function printed */
     const recastNode = recast.print(newNode).code;
     const recastNodeFunctionDeclaration = recastNode.split("\n")[0];
     console.log("deanonymizeFunctionExpr: function deanonymized! ", recastNodeFunctionDeclaration);
     return newNode;
 }
 
+/** calls the functions above in order to write the updated source code to a file */
 let finalUpdate = deanonymizeFunctionExpressions(scriptString);
 console.log("updated src");
 console.log(finalUpdate);
