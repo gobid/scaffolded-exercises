@@ -42,7 +42,6 @@ const spprint = function (caller, info, isObj = false) {
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`)).toString();
 const ast = recast.parse(scriptString, { range: true });
-console.log(ast);
 
 /* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope. TEMP OBJECT used to track CURRENT program scopes AS YOU TRAVERSE. @TODO: update for clarity */
 let scopeChain = [["Program"]];
@@ -155,7 +154,9 @@ function enter(node) {
         }
     }
 
-    /** ENDED REVIEW HERE */
+    /** If the node creates a new scope, add it as a new element in the scopeChain array, which
+     * maintains information about the current program scope we are in as we are traversing through the AST.
+     */
     if (createsNewScope(node)) {
         /* initialized the scopeChain to include the global "Program" state, so don't add it twice */
         if (node.type !== "Program") {
