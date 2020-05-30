@@ -12,10 +12,13 @@ const path = require("path");
 /* Initialize state manager. This will be inserted into the source code at the very end of its creation/the source code's modification (see scriptUpdates array comment) and will be the definitive source for every variable's value in the program. */
 let stateManager = {};
 
-/* Initialize scope collector. This will be an array of arrays where the 0th item in each entry is the current scope's nested scope. */
+/* Initialize scope collector. This will be an array of arrays. Each inner array corresponds to a new scope (a function or a class). The 0th item in each inner array is the current scope. The remaining items in each inner array are list of variables defined in that scope. Example for XKCD `update` function: ["Program:Map:update", "centre_last", "$remove", ...] */
 let programScopes = [];
 
-/* Initialize script update collector. This will be an array of objects representing the lines to be added to the original source code in order to update the stateManager in real time. Each entry will have the location that the update should go as well as the update itself */
+/* Initialize script update collector. This will be an array of objects representing the lines to be added to the original source code in order to update the stateManager in real time. Each entry will have the location that the update should go as well as the update itself. EX: {loc: "3.46", autoStr: ""} 
+
+Each time a variable value is updated, we want to update the stateManager to reflect that value change. This array collects the places where code should be added (i.e. where the variable changes in the source code) in order to update the stateManager.
+*/
 let scriptUpdates = [];
 
 /* turn on/off debug printing */
@@ -34,14 +37,16 @@ const spprint = function (caller, info, isObj = false) {
     }
 };
 
+/** change the file key to load in different source code */
+// const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
-const scriptString = fs.readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`)).toString();
-const ast = recast.parse(scriptString);
+const scriptString = fs.readFileSync(path.resolve(__dirname, `./temp/updated_${fileKey}.js`)).toString();
+const ast = recast.parse(scriptString, { range: true });
 
-/* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope */
+/* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope. TEMP OBJECT used to track CURRENT program scopes AS YOU TRAVERSE. @TODO: update for clarity */
 let scopeChain = [["Program"]];
 
-/* traverse the AST */
+/* traverse the AST, do something to each node on enter and on exit */
 estraverse.traverse(ast.program, {
     enter: enter,
     leave: leave
@@ -53,7 +58,7 @@ let stateManagerStr = JSON.stringify(stateManager);
 
 /* update the source code with the state manager */
 const finalSource = addStateManagerUpdates(scriptString, scriptUpdates, stateManagerStr);
-fs.writeFileSync(`./final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
+fs.writeFileSync(`./temp/final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
 
 /* after traversing through the source code's AST representation and collecting information about the places where variable updates are made, modify the source code so that it updates the stateManager every time a variable gets updated. */
 function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
@@ -67,6 +72,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         sourceArr.splice(line, 0, update["autoStr"]);
     }
     /* compile the updated source code and add the state manager object to it */
+
     const fxnCallCallback = (fnName) => (stackframes) => {
         console.log(fnName, " was called");
     };
@@ -82,6 +88,7 @@ function enter(node) {
     let scopedFxnName = null;
     let currentScope = scopeChain[scopeChain.length - 1];
 
+    /** Handling errors from rewriteCode.js */
     if (isAnonymizedFunction(node)) {
         spprint(
             `ERROR: function ${node.id.name} not deanonymized. Handle error in deanonymization script (rewriteCode.js).`
@@ -90,9 +97,11 @@ function enter(node) {
     /** adding stacktrace instrumentation to functions */
     if (isFunctionDeclaration(node)) {
         const fxnName = node.id.name;
-        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));`;
+        const updateStr = `\n/* autogen added */ \n ${fxnName} = StackTrace.instrument(${fxnName}, fxnCallCallback("${fxnName}"));\n/* end autogen added */\n`;
 
+        /** Add the autogenerated code one line before the start of the function */
         const startLine = node.loc.start.line - 1;
+        /** lockey = <startLine>.<positionInLine to start> */
         const locKey = `${startLine}.0`;
 
         scriptUpdates.push({
@@ -100,11 +109,26 @@ function enter(node) {
             autoStr: updateStr
         });
     }
-    /** adding stacktrace instrumentation to library methods (ex: $map.css) */
-    if (isMethodCall(node)) {
+    /** WIP @TODO MAXINE CLARIFY. adding stacktrace documentation to program-defined (non-library) methods */
+    if (isClassMethodDeclaration(node)) {
+        console.log(`class method definition of: ${node.key.name}`);
+    }
+    /** WIP @TODO MAXINE clarify nested method issue. adding stacktrace instrumentation to library methods (ex: $map.css)
+     *
+     * WiP explanation of limitation: can instrument over functions, can instrument over methods within classes, can't instrument over nested methods / methods called on attributes of classes.
+     * EXAMPLE: works on $map.css, not on $map.position.auto
+     */
+    if (isLibraryMethodCall(node)) {
         if (node.type === "ExpressionStatement") {
+            /** EX:  
+             * $map.css({
+                left: position[0],
+                top: position[1]
+            }); */
+            /** Grabs the stringified node by its position */
             const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
             let methodName = stringifiedNode.split("\n")[0];
+            /** @TODO Maxine is there ever a case where there is a curly brace w/o a paren? if not, remove */
             const methodNameEnd =
                 methodName.indexOf("(") > 0 ? methodName.indexOf("(") : methodName.indexOf("{");
             methodName = methodName.slice(0, methodNameEnd);
@@ -125,9 +149,15 @@ function enter(node) {
                 loc: endLocKey,
                 autoStr: updateEndStr
             });
-        } else if (node.type === "VariableDeclarator") {
         }
+        // else if (node.type === "VariableDeclarator") {
+        //  /** what would this case look like? is this ever a thing? */
+        // }
     }
+
+    /** If the node creates a new scope, add it as a new element in the scopeChain array, which
+     * maintains information about the current program scope we are in as we are traversing through the AST.
+     */
     if (createsNewScope(node)) {
         /* initialized the scopeChain to include the global "Program" state, so don't add it twice */
         if (node.type !== "Program") {
@@ -147,26 +177,31 @@ function enter(node) {
     } else {
         spprint("enter", `curr scope: ${currentScope[0]}`);
     }
+    /** If the node is a variable declaration, add the variable to the current scope and update
+     * the state manager */
     if (node.type === "VariableDeclarator") {
         currentScope.push(node.id.name);
         addVarsToStateManager(node, currentScope);
     }
+    /**
+     * @TODO: how is this different than `isVariableUpdate`?
+     */
     if (node.type === "AssignmentExpression") {
         addVarsToStateManager(node, currentScope);
     }
     if (isVariableUpdate(node)) {
-        /* nodes in recast tree have location objects that specify their location by line and column in the source code. This creates unique location keys from the given information. */
+        /* nodes from an AST parsed by recast have location objects that specify their location in the source code by line and column. This creates unique location keys from the given information so that when it comes time to rewrite the code with the stateManager update lines, we know where those lines should go. */
         const endLoc = node.loc.end;
         const locKey = `${endLoc["line"]}.${endLoc["column"]}`;
 
         /* find var in state manager */
         let nodeName = getVarName(node);
-        // @TODO: make sure that this still works when you're updating the
+        // MAXINE @TODO: make sure that this still works when you're updating the
         // value of a variable that is outside of your current scope (ex:
         // updating the value of `position` in the drag function...)
         let stateManagerKey = `${currentScope[0]}:${nodeName}`;
         /* add code in src to update the state manager */
-        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n`;
+        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n/* end autogen added */\n`;
 
         /* add updates to the update collector so that we can insert all the updates to the source code at the same time at the end of the traversal */
         scriptUpdates.push({
@@ -201,6 +236,7 @@ function printScope(scope, node) {
     }
 }
 
+/** checking if an expression statement updates a variable value */
 function isVariableUpdate(node) {
     return (
         (node.type === "ExpressionStatement" && node.expression.type === "AssignmentExpression") ||
@@ -208,18 +244,26 @@ function isVariableUpdate(node) {
     );
 }
 
-/** Also includes making sure it's not an es5 class definition */
+/** Check if a node is a function declaration, not an es5 class definition */
 function isFunctionDeclaration(node) {
-    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name);
+    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name[0]);
+}
+
+/** check if a node is a class method declaration */
+function isClassMethodDeclaration(node) {
+    return node.type === "Property" && node.value.type === "FunctionExpression";
 }
 
 /** Check for instrumenting Stacktrace.js */
-function isMethodCall(node) {
+// @TODO: does this hold for user-defined class methods? do MemberExpressions only capture
+// library expressions?
+function isLibraryMethodCall(node) {
     return (
         (node.type === "ExpressionStatement" &&
             node.expression.type === "CallExpression" &&
             node.expression.callee.type === "MemberExpression") ||
         (node.type === "VariableDeclarator" &&
+            node.init &&
             node.init.type === "CallExpression" &&
             node.init.callee.type === "MemberExpression")
     );
@@ -256,8 +300,14 @@ function getVarName(node) {
     return varName;
 }
 
+/** Check if the node creates a new scope */
 function createsNewScope(node) {
-    return node.type === "FunctionDeclaration" || isAnonymizedFunction(node) || node.type === "Program";
+    return (
+        node.type === "FunctionDeclaration" ||
+        isAnonymizedFunction(node) ||
+        node.type === "Program" ||
+        (node.type === "Property" && node.value.type === "FunctionExpression") /** class method */
+    );
 }
 
 /** add function inputs to the state manager object. The changing values of
@@ -270,6 +320,7 @@ function addInputsToStateManager(node, fxnName) {
     }
 }
 
+/** Add variables to the state manager object. */
 function addVarsToStateManager(node, scope) {
     let varName = null;
     spprint("addVarsToStateManager", `node val type ${node.type}`);
@@ -282,13 +333,20 @@ function addVarsToStateManager(node, scope) {
 
     const stateManagerVarName = `${scope[0]}:${varName}`;
     if (stateManager[stateManagerVarName] === undefined) {
-        stateManager[stateManagerVarName] = null;
+        stateManager[stateManagerVarName] = null; // @todo: set init vals in statemanager to be init vals of vars
     }
 }
 
+/**
+ * This check purposefully excludes "truly" anonymous functions like (function() {
+ *      ...
+ * })
+ * because these functions do not have variable declarators or expression statements as their
+ * LHS declarators
+ */
 function isAnonymizedFunction(node) {
     return (
-        (node.type === "VariableDeclarator" && node.init.type === "FunctionExpression") ||
+        (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
         (node.type === "ExpressionStatement" &&
             node.expression === "AssignmentExpression" &&
             node.expression.right === "FunctionExpression")

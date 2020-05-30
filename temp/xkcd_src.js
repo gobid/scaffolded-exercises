@@ -46,10 +46,7 @@ var Map = function ($container) {
 
     var $map = $container.children(".map");
 
-    var map_size = [
-        (size[1] + size[3]) * tilesize,
-        (size[0] + size[2]) * tilesize
-    ];
+    var map_size = [(size[1] + size[3]) * tilesize, (size[0] + size[2]) * tilesize];
     $map.css({
         width: map_size[0],
         height: map_size[1],
@@ -77,30 +74,25 @@ var Map = function ($container) {
         });
 
         var centre_last = centre;
-        centre = [
-            Math.floor(-position[0] / tilesize),
-            Math.floor(-position[1] / tilesize)
-        ];
+        centre = [Math.floor(-position[0] / tilesize), Math.floor(-position[1] / tilesize)];
 
-        tile_name = function (x, y) {
+        var tile_name = function (x, y) {
             x -= size[3];
             y -= size[0];
-            return (
-                (y >= 0 ? y + 1 + "s" : -y + "n") +
-                (x >= 0 ? x + 1 + "e" : -x + "w")
-            );
+            return (y >= 0 ? y + 1 + "s" : -y + "n") + (x >= 0 ? x + 1 + "e" : -x + "w");
         };
 
         if (centre[0] != centre_last[0] || centre[1] != centre_last[1]) {
             var $remove = $map.children().not(".ground");
 
-            for (var y = -1; y <= +1; y++)
+            for (var y = -1; y <= +1; y++) {
                 for (var x = -1; x <= +1; x++) {
                     var name = tile_name(centre[0] + x, centre[1] + y);
                     var tile = $map.find(".tile" + name);
-                    if (tile.length) $remove = $remove.not(tile);
-                    else {
-                        $image = $(
+                    if (tile.length) {
+                        $remove = $remove.not(tile);
+                    } else {
+                        var $image = $(
                             '<img class="tile' +
                                 name +
                                 '" src="http://imgs.xkcd.com/clickdrag/' +
@@ -121,6 +113,7 @@ var Map = function ($container) {
                         $map.append($image);
                     }
                 }
+            }
 
             $remove.remove();
         }
@@ -132,18 +125,10 @@ var Map = function ($container) {
         if (scroll_delta) {
             var pos = eventPos(e);
             position[0] = Math.round(
-                clamp(
-                    pos.pageX + scroll_delta[0],
-                    -(size[1] + size[3]) * tilesize + container_size[0],
-                    0
-                )
+                clamp(pos.pageX + scroll_delta[0], -(size[1] + size[3]) * tilesize + container_size[0], 0)
             );
             position[1] = Math.round(
-                clamp(
-                    pos.pageY + scroll_delta[1],
-                    -(size[0] + size[2]) * tilesize + container_size[1],
-                    0
-                )
+                clamp(pos.pageY + scroll_delta[1], -(size[0] + size[2]) * tilesize + container_size[1], 0)
             );
             update();
         }
