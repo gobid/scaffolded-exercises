@@ -301,7 +301,7 @@ var Game = new Class({
         x: c,
         y: g
     }, e);
-};
+}
         var b = {
             getTileUrl: function (d, c) {
                 return a(d, c, function (f, e) {
@@ -658,7 +658,7 @@ var GameInterface = new Class({
     },
     _initTowers: function () {
         this.updateTowerImages();
-        function b() {};
+        function b() {}
         b.prototype = new google.maps.OverlayView();
         b.prototype.onAdd = function () {};
         b.prototype.onRemove = function () {};
@@ -699,7 +699,7 @@ var GameInterface = new Class({
     xPos = q.event.clientX - j.x;
     yPos = q.event.clientY - j.y;
     return xPos > 0 && xPos < k.x && yPos > 0 && yPos < k.y;
-};
+}
                     var o = l.event.clientX || l.event.touches[0].clientX;
                     var m = l.event.clientY || l.event.touches[0].clientY;
                     iconX = o - h.getPosition().x;
@@ -2256,7 +2256,7 @@ function twitter(e, a, f) {
         c.src = "//platform.twitter.com/widgets.js";
         b.parentNode.insertBefore(c, b);
     }
-};
+}
 twitter(document, "script", "twitter-wjs");
 var _gaq = _gaq || [];
 _gaq.push(["_setAccount", "UA-29746608-1"]);

@@ -1,0 +1,4 @@
+# start by ignoring everything
+**/*.js
+# add back temp file
+!temp/*.js

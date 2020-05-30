@@ -280,7 +280,7 @@ function Map($container) {
             /* end autogen added */
 
             for (var y = -1; y <= +1; y++)
-                for (var x = -1; x <= +1; x++) {
+                {for (var x = -1; x <= +1; x++) {
                     /* autogen added */
 
                     stateManager["Program:Map:update:y"] = y;
@@ -360,7 +360,7 @@ function Map($container) {
                         }, fxnCallCallback("$map.append"))();
                         /* end autogen added */
                     }
-                }
+                }}
 
             /* autogen added */
 

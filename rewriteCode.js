@@ -103,4 +103,4 @@ function deanonymizeFunctionExpr(node) {
 let finalUpdate = deanonymizeFunctionExpressions(scriptString);
 console.log("updated src");
 console.log(finalUpdate);
-fs.writeFileSync(`./updated_${fileKey}.js`, finalUpdate);
+fs.writeFileSync(`./temp/updated_${fileKey}.js`, finalUpdate);

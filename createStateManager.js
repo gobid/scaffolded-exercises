@@ -58,7 +58,7 @@ let stateManagerStr = JSON.stringify(stateManager);
 
 /* update the source code with the state manager */
 const finalSource = addStateManagerUpdates(scriptString, scriptUpdates, stateManagerStr);
-fs.writeFileSync(`./final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
+fs.writeFileSync(`./temp/final_${fileKey}.js`, finalSource); // @TODO: should these modifications be on the orig script so that anonymous functions are still accurately represented? or could re-anonymize functions at the very end of this so that the script runs in the exact same way it did before just with the state manager added
 
 /* after traversing through the source code's AST representation and collecting information about the places where variable updates are made, modify the source code so that it updates the stateManager every time a variable gets updated. */
 function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
@@ -252,6 +252,8 @@ function isClassMethodDeclaration(node) {
 }
 
 /** Check for instrumenting Stacktrace.js */
+// @TODO: does this hold for user-defined class methods? do MemberExpressions only capture
+// library expressions?
 function isLibraryMethodCall(node) {
     return (
         (node.type === "ExpressionStatement" &&
@@ -328,7 +330,7 @@ function addVarsToStateManager(node, scope) {
 
     const stateManagerVarName = `${scope[0]}:${varName}`;
     if (stateManager[stateManagerVarName] === undefined) {
-        stateManager[stateManagerVarName] = null;
+        stateManager[stateManagerVarName] = null; // @todo: set init vals in statemanager to be init vals of vars
     }
 }
 
