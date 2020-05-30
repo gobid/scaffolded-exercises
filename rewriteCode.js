@@ -8,16 +8,17 @@ const b = recast.types.builders;
 const fs = require("fs");
 const esprima = require("esprima");
 
-// const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(`./temp/${fileKey}.js`).toString();
-// const scriptString = fs.readFileSync("./test_src.js", "utf-8");
 
 function deanonymizeFunctionExpressions(source) {
     let prevUpdated,
         updatedSrc = source;
     let isTraveralComplete = false;
-    /* parseTreeAndUpdate makes one change at a time since it shifts around the locations/features of different items in the source code, so need to call it iteratively until all changes are made */
+    /** parseTreeAndUpdate makes one change at a time since it shifts around the locations/features
+     * of different items in the source code, so need to call it iteratively until all changes are made.
+     * Traversal is complete when the previous version of the code is the same as current version of the code;
+     * i.e. when no more changes need to be made. */
     while (!isTraveralComplete) {
         prevUpdated = updatedSrc;
         updatedSrc = parseTreeAndUpdate(updatedSrc);
@@ -34,7 +35,7 @@ function parseTreeAndUpdate(source) {
             let startLoc = meta.start.offset;
             let endLoc = meta.end.offset;
 
-            /* check to see if there is a variable declarator and remove it if so */
+            /* check to see if there is a variable declarator (var, let, const) and remove it if so */
             let possibleDeclaratorStartLoc = startLoc - 4 > 0 ? startLoc - 4 : 0;
             let possibleDeclarator = source.slice(possibleDeclaratorStartLoc, startLoc).trim();
 
@@ -56,7 +57,7 @@ function parseTreeAndUpdate(source) {
             source = source.slice(0, startLoc) + deanonymizedFunctionStr + source.slice(endLoc);
             updates = true;
         }
-        /* SOURCE SCRIPT EXAMPLE (PSEUDOCODE):
+        /* Source script example (pseudocode):
             function..
             function..
             variable..
@@ -77,25 +78,26 @@ function isAnonymizedFunction(node) {
             node.expression.right === "FunctionExpression")
     );
 }
-/* SOME FUNCTIONS SHOULD STAY ANONYMOUS... SEE EXAMPLE: 
-    var foo = function() {
-
-    } 
-    // want to turn ^this variable declaration into a function declaration:
-    function foo() {
-
-    }
-
-    // want to keep this function how it is; it is not a named function
-    (function() {
-
-    })
-*/
+/** Some functions should be deanonymied, but some should stay anonymous. Example:
+ * var foo = function() {
+ *      ...
+ * }
+ * We want to turn ^this variable declaration with an anonymous function as the assignment
+ * into a function declaration that looks like:
+ * function foo() {
+ *      ...
+ * }
+ *
+ * However, we want to keep the following function how it is since it is not a named function:
+ * (function() {
+ *      ...
+ * })
+ */
 function deanonymizeFunctionExpr(node) {
     const functionName = node.id.name ? node.id.name : "REAL_ANON_SOS";
     const newId = b.identifier(functionName);
     const newNode = b.functionDeclaration(newId, node.init.params, node.init.body);
-    /** next three lines for debugging purposes to be able to see the deanonymized function printed */
+    /** next three lines for debugging purposes only (to be able to see the deanonymized function printed) */
     const recastNode = recast.print(newNode).code;
     const recastNodeFunctionDeclaration = recastNode.split("\n")[0];
     console.log("deanonymizeFunctionExpr: function deanonymized! ", recastNodeFunctionDeclaration);
