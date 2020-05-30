@@ -23,10 +23,11 @@ let stateManager = {
     "Program:Map:centre": null,
     "Program:Map:update:centre_last": null,
     "Program:Map:update:centre": null,
-    "Program:Map:update:tile_name": null,
-    "Program:Map:update:x": null,
-    "Program:Map:update:y": null,
+    "Program:Map:update:tile_name:x": null,
+    "Program:Map:update:tile_name:y": null,
     "Program:Map:update:$remove": null,
+    "Program:Map:update:y": null,
+    "Program:Map:update:x": null,
     "Program:Map:update:name": null,
     "Program:Map:update:tile": null,
     "Program:Map:update:$image": null,
@@ -39,6 +40,11 @@ let stateManager = {
 const fxnCallCallback = (fnName) => (stackframes) => {
     console.log(fnName, " was called");
 };
+/* end autogen added */
+
+/* autogen added */
+
+eventPos = StackTrace.instrument(eventPos, fxnCallCallback("eventPos"));
 /* end autogen added */
 
 function eventPos(e) {
@@ -248,28 +254,28 @@ function Map($container) {
         stateManager["Program:Map:update:centre"] = centre;
         /* end autogen added */
 
-        tile_name = function (x, y) {
+        /* autogen added */
+
+        tile_name = StackTrace.instrument(tile_name, fxnCallCallback("tile_name"));
+        /* end autogen added */
+
+        function tile_name(x, y) {
             x -= size[3];
 
             /* autogen added */
 
-            stateManager["Program:Map:update:x"] = x;
+            stateManager["Program:Map:update:tile_name:x"] = x;
             /* end autogen added */
 
             y -= size[0];
 
             /* autogen added */
 
-            stateManager["Program:Map:update:y"] = y;
+            stateManager["Program:Map:update:tile_name:y"] = y;
             /* end autogen added */
 
             return (y >= 0 ? y + 1 + "s" : -y + "n") + (x >= 0 ? x + 1 + "e" : -x + "w");
-        };
-
-        /* autogen added */
-
-        stateManager["Program:Map:update:tile_name"] = tile_name;
-        /* end autogen added */
+        }
 
         if (centre[0] != centre_last[0] || centre[1] != centre_last[1]) {
             var $remove = $map.children().not(".ground");
@@ -279,13 +285,13 @@ function Map($container) {
             stateManager["Program:Map:update:$remove"] = $remove;
             /* end autogen added */
 
-            for (var y = -1; y <= +1; y++)
-                {for (var x = -1; x <= +1; x++) {
-                    /* autogen added */
+            for (var y = -1; y <= +1; y++) {
+                /* autogen added */
 
-                    stateManager["Program:Map:update:y"] = y;
-                    /* end autogen added */
+                stateManager["Program:Map:update:y"] = y;
+                /* end autogen added */
 
+                for (var x = -1; x <= +1; x++) {
                     /* autogen added */
 
                     stateManager["Program:Map:update:x"] = x;
@@ -313,7 +319,7 @@ function Map($container) {
                         stateManager["Program:Map:update:$remove"] = $remove;
                         /* end autogen added */
                     } else {
-                        $image = $(
+                        var $image = $(
                             '<img class="tile' +
                                 name +
                                 '" src="http://imgs.xkcd.com/clickdrag/' +
@@ -350,7 +356,7 @@ function Map($container) {
                                     }, fxnCallCallback("$"))();
                                     /* end autogen added */
                                 });
-                        }, fxnCallCallback("$image.load"))();
+                        }, fxnCallCallback("$imag"))();
                         /* end autogen added */
 
                         /* autogen added */
@@ -360,7 +366,8 @@ function Map($container) {
                         }, fxnCallCallback("$map.append"))();
                         /* end autogen added */
                     }
-                }}
+                }
+            }
 
             /* autogen added */
 

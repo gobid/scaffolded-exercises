@@ -15,6 +15,7 @@ var Message = new Class({
         }
         e.inject(d);
         this._addEvents();
+        1;
         this.container.inject(document.body);
         if (this.container.hasClass("fullscreen")) {
             d.setStyle(
@@ -459,6 +460,7 @@ var GameInterface = new Class({
                             switch (a.container.getElement(".difficulty-picker").get("value").toLowerCase()) {
                                 case "insane":
                                     j = 10;
+                                    break;
                                 case "hard":
                                     this.g.difficultyMultiplier = 1.6;
                                     break;

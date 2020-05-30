@@ -40,7 +40,7 @@ const spprint = function (caller, info, isObj = false) {
 /** change the file key to load in different source code */
 // const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
-const scriptString = fs.readFileSync(path.resolve(__dirname, `./updated_${fileKey}.js`)).toString();
+const scriptString = fs.readFileSync(path.resolve(__dirname, `./temp/updated_${fileKey}.js`)).toString();
 const ast = recast.parse(scriptString, { range: true });
 
 /* referenced: https://github.com/airportyh/esprima_fun/blob/master/scope_chain.js. Creating a list of scopes where 0th item in each scope list is the function name or null if function is anonymous. Initialized with global 'Program' scope. TEMP OBJECT used to track CURRENT program scopes AS YOU TRAVERSE. @TODO: update for clarity */
@@ -149,9 +149,10 @@ function enter(node) {
                 loc: endLocKey,
                 autoStr: updateEndStr
             });
-        } else if (node.type === "VariableDeclarator") {
-            /** @TODO handle this */
         }
+        // else if (node.type === "VariableDeclarator") {
+        //  /** what would this case look like? is this ever a thing? */
+        // }
     }
 
     /** If the node creates a new scope, add it as a new element in the scopeChain array, which
@@ -182,7 +183,9 @@ function enter(node) {
         currentScope.push(node.id.name);
         addVarsToStateManager(node, currentScope);
     }
-    /** MAXINE @TODO explain this case */
+    /**
+     * @TODO: how is this different than `isVariableUpdate`?
+     */
     if (node.type === "AssignmentExpression") {
         addVarsToStateManager(node, currentScope);
     }
@@ -243,7 +246,7 @@ function isVariableUpdate(node) {
 
 /** Check if a node is a function declaration, not an es5 class definition */
 function isFunctionDeclaration(node) {
-    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name);
+    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name[0]);
 }
 
 /** check if a node is a class method declaration */

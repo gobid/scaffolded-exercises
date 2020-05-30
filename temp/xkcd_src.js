@@ -76,7 +76,7 @@ var Map = function ($container) {
         var centre_last = centre;
         centre = [Math.floor(-position[0] / tilesize), Math.floor(-position[1] / tilesize)];
 
-        tile_name = function (x, y) {
+        var tile_name = function (x, y) {
             x -= size[3];
             y -= size[0];
             return (y >= 0 ? y + 1 + "s" : -y + "n") + (x >= 0 ? x + 1 + "e" : -x + "w");
@@ -92,7 +92,7 @@ var Map = function ($container) {
                     if (tile.length) {
                         $remove = $remove.not(tile);
                     } else {
-                        $image = $(
+                        var $image = $(
                             '<img class="tile' +
                                 name +
                                 '" src="http://imgs.xkcd.com/clickdrag/' +

@@ -1,7 +1,6 @@
 /*
     Makes the following modifications to source code before rewriting it to `updated_<orig_file_name>.js`:
         - deanonymizes anonymous functions with variable declarators
-        - @TODO: make sure all variables have a let/var/const upon declaration
 */
 
 const recast = require("recast");
@@ -11,7 +10,7 @@ const esprima = require("esprima");
 
 // const fileKey = "mapstd_src";
 const fileKey = "xkcd_src";
-const scriptString = fs.readFileSync(`./${fileKey}.js`).toString();
+const scriptString = fs.readFileSync(`./temp/${fileKey}.js`).toString();
 // const scriptString = fs.readFileSync("./test_src.js", "utf-8");
 
 function deanonymizeFunctionExpressions(source) {
