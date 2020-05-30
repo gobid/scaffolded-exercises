@@ -31,7 +31,6 @@ Deanonymizes named functions (ex: `var foo = function(x, y) { ... }` turns into 
 After the source code is modified by `rewriteCode.js` (see above^ for information on function deanonymization for scoping purposes), `createStateManager.js` creates the _state manager_ (`stateManager`) object and instruments over the modified source code in order to add in code that updates the `stateManager` object in real-time. This `stateManager` object is inputted at the top of the client-side JS file it modifies.
 
 ### WiP: Exercise Breakdown
-
 -   using [Stacktrace](https://www.stacktracejs.com/#!/docs/stacktrace-js) to trace function calls
 -   using abstract syntax trees for static code analysis to decide the amount of code to be included in a given exercise + which exercises to present earlier in the sequence (see [breakdown methodology explanation video](https://www.youtube.com/watch?v=frKHF048qSg) for more info)
 
