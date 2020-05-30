@@ -40,10 +40,10 @@ let stateManager = {
 const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) => {
     const nodeLoc = sourceCodeMap[fnName];
     /** get all lines of the node */
-    const nodeCodeLines = sourceCodeArr.slice(nodeLoc.start.line, nodeLoc.end.line + 1);
+    const nodeCodeLines = sourceCodeArr.slice(nodeLoc.start.line - 1, nodeLoc.end.line + 1);
     /** get the specific characters of the node within the lines */
     nodeCodeLines[0].slice(nodeLoc.start.column);
-    nodeCodeLines[length(nodeCodeLines) - 1].slice(0, nodeLoc.end.column + 1);
+    nodeCodeLines[nodeCodeLines.length - 1].slice(0, nodeLoc.end.column + 1);
     const nodeCodeStr = nodeCodeLines.join("\n");
     console.log(fnName, " was called. Source code =", nodeCodeStr);
 };
@@ -219,10 +219,22 @@ const sourceCodeMap = {
         start: { line: 11, column: 4, token: 52 },
         end: { line: 19, column: 7, token: 87 }
     },
+    "rhs-method-$overlay": {
+        start: { line: 21, column: 8, token: 88 },
+        end: { line: 21, column: 45, token: 96 }
+    },
     "$overlay.css({": { start: { line: 23, column: 4, token: 97 }, end: { line: 26, column: 7, token: 112 } },
     sign: { start: { line: 28, column: 4, token: 112 }, end: { line: 30, column: 5, token: 136 } },
     pow: { start: { line: 32, column: 4, token: 136 }, end: { line: 34, column: 5, token: 165 } },
     clamp: { start: { line: 36, column: 4, token: 165 }, end: { line: 38, column: 5, token: 193 } },
+    "rhs-method-offset": {
+        start: { line: 40, column: 8, token: 194 },
+        end: { line: 40, column: 36, token: 201 }
+    },
+    "rhs-method-$map": {
+        start: { line: 47, column: 8, token: 254 },
+        end: { line: 47, column: 42, token: 262 }
+    },
     "$map.css({": { start: { line: 71, column: 8, token: 417 }, end: { line: 74, column: 11, token: 438 } },
     '$map.find(".ground").css({': {
         start: { line: 59, column: 4, token: 355 },
@@ -230,6 +242,14 @@ const sourceCodeMap = {
     },
     update: { start: { line: 70, column: 4, token: 412 }, end: { line: 123, column: 5, token: 751 } },
     tile_name: { start: { line: 79, column: 8, token: 473 }, end: { line: 83, column: 9, token: 531 } },
+    "rhs-method-$remove": {
+        start: { line: 86, column: 16, token: 555 },
+        end: { line: 86, column: 56, token: 567 }
+    },
+    "rhs-method-tile": {
+        start: { line: 91, column: 24, token: 623 },
+        end: { line: 91, column: 56, token: 633 }
+    },
     $image: { start: { line: 108, column: 24, token: 695 }, end: { line: 114, column: 31, token: 733 } },
     "$(this).show();": {
         start: { line: 110, column: 32, token: 703 },
@@ -306,6 +326,12 @@ function Map($container) {
     }, fxnCallCallback(`$container.css({`, sourceCodeArr, sourceCodeMap))();
     /* end autogen added */
 
+    /* autogen added */
+    $overlay = StackTrace.instrument(() => {
+        $container.children("img");
+    }, fxnCallCallback(`rhs-method-$overlay`, sourceCodeArr, sourceCodeMap))();
+    /* end autogen added */
+
     var $overlay = $container.children("img");
 
     /* autogen added */
@@ -350,6 +376,12 @@ function Map($container) {
         return Math.max(Math.min(x, max), min);
     }
 
+    /* autogen added */
+    offset = StackTrace.instrument(() => {
+        $container.offset();
+    }, fxnCallCallback(`rhs-method-offset`, sourceCodeArr, sourceCodeMap))();
+    /* end autogen added */
+
     var offset = $container.offset();
 
     /* autogen added */
@@ -393,6 +425,12 @@ function Map($container) {
     /* end autogen added */
 
     var scroll_delta = null;
+
+    /* autogen added */
+    $map = StackTrace.instrument(() => {
+        $container.children(".map");
+    }, fxnCallCallback(`rhs-method-$map`, sourceCodeArr, sourceCodeMap))();
+    /* end autogen added */
 
     /* autogen added */
 
@@ -510,6 +548,12 @@ function Map($container) {
         }
 
         if (centre[0] != centre_last[0] || centre[1] != centre_last[1]) {
+            /* autogen added */
+            $remove = StackTrace.instrument(() => {
+                $map.children().not(".ground");
+            }, fxnCallCallback(`rhs-method-$remove`, sourceCodeArr, sourceCodeMap))();
+            /* end autogen added */
+
             var $remove = $map.children().not(".ground");
 
             /* autogen added */
@@ -530,6 +574,12 @@ function Map($container) {
                     /* end autogen added */
 
                     var name = tile_name(centre[0] + x, centre[1] + y);
+
+                    /* autogen added */
+                    tile = StackTrace.instrument(() => {
+                        $map.find(".tile" + name);
+                    }, fxnCallCallback(`rhs-method-tile`, sourceCodeArr, sourceCodeMap))();
+                    /* end autogen added */
 
                     /* autogen added */
 
