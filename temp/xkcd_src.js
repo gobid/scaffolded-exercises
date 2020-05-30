@@ -6,7 +6,7 @@ function eventPos(e) {
         pageX: e.pageX,
         pageY: e.pageY
     };
-}
+} // here is a comment
 
 var Map = function ($container) {
     $container.css({
@@ -17,7 +17,7 @@ var Map = function ($container) {
         margin: "0px auto 0",
         background: "#fff",
         position: "relative"
-    });
+    }); /** another comment */
 
     var $overlay = $container.children("img");
     $overlay.css({
