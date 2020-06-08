@@ -2,3 +2,4 @@
 node_modules/
 localhost.crt
 localhost.key
+logs/[0-9]*
