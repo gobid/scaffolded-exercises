@@ -86,26 +86,64 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         /* insert the update into the correct position */
         sourceArr.splice(line, 0, update["autoStr"]);
     }
+
+    /** find the scope that the variable is defined in by removing one scope item at a time
+     * until there is corresponding value in the stateManager. EX: updating `position` var
+     * in drag will lead to a key of "Program:Map:drag:position", but the `position` variable
+     * is actually defined one scope up and the correct entry to update in the stateManager
+     * is "Program:Map:position".
+     * s = scopeOptions.length - 2 because we don't want to splice the current variable's
+     * name, which is the last item in the array
+     */
+    const updateStateManager = function (key, node) {
+        if (stateManager[key]) {
+            stateManager[key][1] = node;
+        } else {
+            let scopeOptions = key.split(":");
+            let s = scopeOptions.length - 2;
+            let currKey = key;
+            while (stateManager[currKey] === undefined && s >= 0) {
+                scopeOptions.splice(s, 1);
+                currKey = scopeOptions.join(":");
+                s--;
+            }
+            if (stateManager[currKey]) {
+                stateManager[currKey][1] = node;
+            } else {
+                /** if the variable wasn't previously declared but the developer didn't put
+                 * a variable declarator keyword in front of it (var, let, const), add the new
+                 * variable to the stateManager. This shouldn't happen because an error like this
+                 * should have been fixed in the linting process */
+                console.log(`ERROR: New variable declaration ${key} without keyword.`);
+                stateManager[key] = [null, node];
+            }
+        }
+    };
     /* compile the updated source code and add the state manager object to it */
     const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) => {
-        const nodeLoc = sourceCodeMap[fnName];
-        /** get all lines of the node */
-        const nodeCodeLines = sourceCodeArr.slice(nodeLoc.start.line - 1, nodeLoc.end.line + 1);
-        /** get the specific characters of the node within the lines */
-        nodeCodeLines[0].slice(nodeLoc.start.column);
-        nodeCodeLines[nodeCodeLines.length - 1].slice(0, nodeLoc.end.column + 1);
-        const nodeCodeStr = nodeCodeLines.join("\n");
-        console.log(fnName, " was called. Source code =", nodeCodeStr);
+        if (verbosePrint) {
+            const nodeLoc = sourceCodeMap[fnName];
+            /** get all lines of the node */
+            const nodeCodeLines = sourceCodeArr.slice(nodeLoc.start.line - 1, nodeLoc.end.line + 1);
+            /** get the specific characters of the node within the lines */
+            nodeCodeLines[0].slice(nodeLoc.start.column);
+            nodeCodeLines[nodeCodeLines.length - 1].slice(0, nodeLoc.end.column + 1);
+            const nodeCodeStr = nodeCodeLines.join("\n");
+            console.log(fnName, " was called. Source code =", nodeCodeStr);
+        }
     };
 
     return `\n/* autogen added */ 
-    let stateManager = ${stateManagerStr} 
-    const fxnCallCallback = ${fxnCallCallback.toString()} 
-    const sourceCode = \`${scriptString}\`;
-    const sourceCodeArr = sourceCode.split("\\n");
-    const sourceCodeMap = ${JSON.stringify(sourceCodeMap)}
+    \nlet verbosePrint = false;
+    \nlet stateManager = ${stateManagerStr}
+    \nlet domObjects = [];
+    \nconst updateStateManager = ${updateStateManager.toString()}
+    \nconst fxnCallCallback = ${fxnCallCallback.toString()} 
+    \nconst sourceCode = \`${scriptString}\`;
+    \nconst sourceCodeArr = sourceCode.split("\\n");
+    \nconst sourceCodeMap = ${JSON.stringify(sourceCodeMap)}
     /* end autogen added */
-    \n${sourceArr.join("\n")}`;
+    \n${sourceArr.join("")}`;
 }
 
 function enter(node) {
@@ -198,7 +236,7 @@ function enter(node) {
         // }
     }
 
-    /** WiP: if a method is called when assigning a value to a variable, it also should be traced.
+    /** If a method is called when assigning a value to a variable, it also should be traced.
      * Example:  `var $overlay = $container.children("img");` should be traced to become
      * `var $overlay =  StackTrace.instrument(() => {
      *      $container.children("img")
@@ -248,11 +286,31 @@ function enter(node) {
     } else {
         spprint("enter", `curr scope: ${currentScope[0]}`);
     }
-    /** If the node is a variable declaration, add the variable to the current scope and update
-     * the state manager */
+    /** If the node is a variable declaration, chceck if the item is a DOM object, add the variable to
+     * the current scope and update the state manager */
     if (node.type === "VariableDeclarator") {
-        currentScope.push(node.id.name);
+        const nodeName = node.id.name;
+        currentScope.push(nodeName);
         addVarsToStateManager(node, currentScope);
+
+        /** Add updates in the script that check whether the variable is a DOM object and update the
+         * state manager accordingly. UPDATE: The stateManager entry is an array where the 0th value is
+         * a boolean indicating whether the item is a dom object or not and the 1st value is the actual value
+         * current value of the variable.
+         */
+        const endLoc = node.loc.end;
+        const locKey = `${endLoc["line"]}.${endLoc["column"]}`;
+        const stateManagerKey = `${currentScope[0]}:${nodeName}`;
+        const updateStr = `
+            \n/* autogen added */ 
+            let isDomObj_${nodeName} = ${nodeName} instanceof jQuery || ${nodeName} instanceof HTMLElement;
+            \nstateManager["${stateManagerKey}"][0] = isDomObj_${nodeName};
+            \n if (isDomObj_${nodeName}) domObjects.push(${nodeName})
+            \n/* end autogen added */\n`;
+        scriptUpdates.push({
+            loc: locKey,
+            autoStr: updateStr
+        });
     }
     /**
      * @TODO: how is this different than `isVariableUpdate`?
@@ -264,7 +322,6 @@ function enter(node) {
         /* nodes from an AST parsed by recast have location objects that specify their location in the source code by line and column. This creates unique location keys from the given information so that when it comes time to rewrite the code with the stateManager update lines, we know where those lines should go. */
         const endLoc = node.loc.end;
         const locKey = `${endLoc["line"]}.${endLoc["column"]}`;
-
         /* find var in state manager */
         let nodeName = getVarName(node);
         // MAXINE @TODO: make sure that this still works when you're updating the
@@ -272,7 +329,10 @@ function enter(node) {
         // updating the value of `position` in the drag function...)
         let stateManagerKey = `${currentScope[0]}:${nodeName}`;
         /* add code in src to update the state manager */
-        const updateStr = `\n/* autogen added */ \nstateManager["${stateManagerKey}"] = ${nodeName}\n/* end autogen added */\n`;
+        const updateStr = `
+            /* autogen added */
+            updateStateManager("${stateManagerKey}", ${nodeName});
+            /* end autogen added */\n`;
 
         /* add updates to the update collector so that we can insert all the updates to the source code at the same time at the end of the traversal */
         scriptUpdates.push({
@@ -397,8 +457,11 @@ function addInputsToStateManager(node, fxnName) {
     const params = isAnonymizedFunction(node) ? node.init.params : node.params;
 
     for (let param of params) {
-        stateManager[`${fxnName}:${param.name}`] = null;
+        stateManager[`${fxnName}:${param.name}`] = [null, null];
     }
+    /** @TODO MAXINE: add checks for each input right under the function definition to see if any input
+     * is a variable value
+     */
 }
 
 /** Add variables to the state manager object. */
@@ -414,7 +477,7 @@ function addVarsToStateManager(node, scope) {
 
     const stateManagerVarName = `${scope[0]}:${varName}`;
     if (stateManager[stateManagerVarName] === undefined) {
-        stateManager[stateManagerVarName] = null; // @todo: set init vals in statemanager to be init vals of vars
+        stateManager[stateManagerVarName] = [null, null]; // @todo: set init vals in statemanager to be init vals of vars
     }
 }
 
