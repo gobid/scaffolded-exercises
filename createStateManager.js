@@ -121,6 +121,11 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     };
     /* compile the updated source code and add the state manager object to it */
     const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) => {
+        if (callCounts[fnName] === undefined) {
+            callCounts[fnName] = 1;
+        } else {
+            callCounts[fnName] += 1;
+        }
         const nodeLoc = sourceCodeMap[fnName];
         /** get all lines of the node */
         const nodeCodeLines = sourceCodeArr.slice(nodeLoc.start.line - 1, nodeLoc.end.line + 1);
@@ -147,7 +152,32 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     \nlet stateManager = ${stateManagerStr}
     \nlet domObjects = [];
     \nconst updateStateManager = ${updateStateManager.toString()}
+    \nlet callCounts = {};
     \nconst fxnCallCallback = ${fxnCallCallback.toString()} 
+    document.onreadystatechange = () => {
+        if (document.readyState === "complete") {
+            fetch("/1110/log", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ data: "PAGE LOADED HERE!" })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        }
+    };
+    document.getElementById("readytolearnbtn").addEventListener("click", () => {
+        fetch("/1110/exercisedata", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager })
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    });
     \nconst sourceCode = \`${scriptString}\`;
     \nconst sourceCodeArr = sourceCode.split("\\n");
     \nconst sourceCodeMap = ${JSON.stringify(sourceCodeMap)}

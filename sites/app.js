@@ -27,7 +27,8 @@ function writeToFile(str) {
     /** If I want to write each function with a timestamp to its own file */
     // fs.writeFile(`./logs/${timestamp}.js`, str, () => console.log(`${timestamp} done`));
     /** If I want to write each function to the same log file */
-    fs.appendFileSync("./logs/runLog.js", `\n~~~~\n${str}\n~~~~\n`, (err) => {
+    let codeSnippet = { time: timestamp, code: str };
+    fs.appendFileSync("./logs/runLog.js", `/*~~~~*/\n${str}\n/*~~~~*/\n`, (err) => {
         if (err) {
             console.log("Error: ", err);
         } else {
@@ -41,6 +42,23 @@ app.post("/1110/log", function (req, res) {
     res.send({ message: "wrote to file" });
 });
 
+app.post("/1110/exercisedata", function (req, res) {
+    const timestamp = Date.now();
+    const dir = `./exercise-data/${timestamp}`;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+    // let runLog = fs.readFileSync("./logs/runLog.js", "utf8").split("~~~~\n\n~~~~");
+    // const codeRun = runLog.map((r) => r.replace(/^\s+|\s+$/g, ""));
+    fs.copyFileSync("./logs/runLog.js", `${dir}/runLog.js`);
+    fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
+    fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));
+
+    res.send({ message: `data in directory: ${dir}` });
+});
+
 app.listen(PORT, function () {
+    // clear out log file before new run
+    fs.writeFileSync(`./logs/runLog.js`, "");
     console.log("Example app listening at http://localhost:" + "3000");
 });

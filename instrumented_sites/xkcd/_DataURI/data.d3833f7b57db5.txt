@@ -1,1 +1,0 @@
-chrome-extension://bmnlcjabgnpnenekpadlanbbkooimhnj/h1-check.js
