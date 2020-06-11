@@ -22,13 +22,13 @@ app.get("/", function (req, res) {
     );
 });
 
-function writeToFile(str) {
+function writeToFile(name, codeStr) {
     const timestamp = Date.now();
     /** If I want to write each function with a timestamp to its own file */
     // fs.writeFile(`./logs/${timestamp}.js`, str, () => console.log(`${timestamp} done`));
     /** If I want to write each function to the same log file */
-    let codeSnippet = { time: timestamp, code: str };
-    fs.appendFileSync("./logs/runLog.js", `/*~~~~*/\n${str}\n/*~~~~*/\n`, (err) => {
+    let codeSnippet = { time: timestamp, code: codeStr };
+    fs.appendFileSync("./logs/runLog.js", `/*~~~~*/\n/* ${name} */\n${codeStr}\n/*~~~~*/\n`, (err) => {
         if (err) {
             console.log("Error: ", err);
         } else {
@@ -38,7 +38,7 @@ function writeToFile(str) {
 }
 
 app.post("/1110/log", function (req, res) {
-    writeToFile(req.body.data);
+    writeToFile(req.body.name, req.body.data);
     res.send({ message: "wrote to file" });
 });
 
@@ -59,6 +59,6 @@ app.post("/1110/exercisedata", function (req, res) {
 
 app.listen(PORT, function () {
     // clear out log file before new run
-    fs.writeFileSync(`./logs/runLog.js`, "");
+    fs.writeFileSync(`./logs/runLog.js`, "/*~~~~*/");
     console.log("Example app listening at http://localhost:" + "3000");
 });

@@ -1,5 +1,4 @@
 /*~~~~*/
-/*~~~~*/
 /* $container.css({:11:19 */
     $container.css({
         "z-index": 1,

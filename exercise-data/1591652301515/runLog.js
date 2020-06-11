@@ -374,7 +374,7 @@ function Map($container) {
                                 $(this).remove();
                             });
 /*~~~~*//*~~~~*/
-LOADED HERE!
+/* DOM LOADED HERE! */
 /*~~~~*//*~~~~*/
 function eventPos(e) {
     if (e.type.match(/^touch/)) {

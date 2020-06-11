@@ -90,7 +90,7 @@ const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) 
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ data: nodeCodeStr })
+        body: JSON.stringify({ data: nodeCodeStr, name: fnName })
     })
         .then((response) => response.json())
         .then((data) => console.log(data));
@@ -103,7 +103,7 @@ document.onreadystatechange = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ data: "LOADED HERE!" })
+            body: JSON.stringify({ data: "/* DOM LOADED HERE! */" })
         })
             .then((response) => response.json())
             .then((data) => console.log(data));

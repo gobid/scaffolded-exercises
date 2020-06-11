@@ -141,7 +141,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ data: nodeCodeStr })
+            body: JSON.stringify({ data: nodeCodeStr, name: fnName })
         })
             .then((response) => response.json())
             .then((data) => console.log(data));
@@ -161,7 +161,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ data: "PAGE LOADED HERE!" })
+                body: JSON.stringify({ data: "/* DOM LOADED HERE! */" })
             })
             .then((response) => response.json())
             .then((data) => console.log(data));
