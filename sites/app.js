@@ -37,14 +37,13 @@ function writeToFile(name, codeStr) {
     });
 }
 
-let idKeyCounter = 1;
 function addObserver(name, data) {
     let selector = null;
     let objId = name; // data[0].id;
     if (objId !== undefined && objId !== "") {
         selector = `document.getElementById(${objId})`;
     } else {
-        console.log("ERROR: no ID on DOM element: ", data);
+        console.log("ERROR: no ID on DOM element: ", name, " data: ", data);
         return;
     }
     let observer = `
@@ -61,13 +60,15 @@ function addObserver(name, data) {
     });
 }
 
+function saveDomInfo(name, data) {}
+
 app.post("/1110/log", function (req, res) {
     writeToFile(req.body.name, req.body.data);
     res.send({ message: "wrote to file" });
 });
 
 app.post("/1110/dominfo", function (req, res) {
-    addObserver(req.body.name, req.body.data);
+    // addObserver(req.body.name, req.body.data);
     res.send({ message: "added observer" });
 });
 
@@ -92,25 +93,9 @@ app.post("/1110/exercisedata", function (req, res) {
 app.listen(PORT, function () {
     // clear out log file before new run
     fs.writeFileSync(`./logs/runLog.js`, "/*~~~~*/");
-    fs.writeFileSync(
-        `./sites/xkcd/xkcd.com/1110/s/observers.js`,
-        `function postLogInfo(name, data) {
-            fetch("/1110/log", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name: name, data: data })
-            })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
-            }
-            const callback = function (mutationsList, observer) {
-                for (let mutation of mutationsList) {
-                    postLogInfo("FOUND MUTATION", mutation.type);
-                }
-            };
-            const config = { attributes: true, childList: true, subtree: true };`
+    fs.copyFileSync(
+        "./sites/xkcd/xkcd.com/1110/s/observersTemplate.js",
+        "./sites/xkcd/xkcd.com/1110/s/observers.js"
     );
     console.log("Example app listening at http://localhost:" + "3000");
 });

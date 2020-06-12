@@ -91,43 +91,9 @@ const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) 
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ data: nodeCodeStr, name: fnName })
-    }).then((response) => response.json());
-    // .then((data) => console.log(data));
-};
-
-function postLogInfo(name, data) {
-    fetch("/1110/log", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name: name, data: data })
     })
         .then((response) => response.json())
         .then((data) => console.log(data));
-}
-
-function postDomObjInfo(name, data) {
-    fetch("/1110/dominfo", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name: name, data: data })
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-}
-function reloadScript(id) {
-    var $el = $("#" + id);
-    $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
-}
-
-document.onreadystatechange = () => {
-    if (document.readyState === "complete") {
-        postLogInfo("DOM STATUS", "/* DOM LOADED HERE! */");
-        reloadScript("observers");
-    }
 };
 
 const makeId = function (len) {
@@ -140,6 +106,42 @@ const makeId = function (len) {
     return result;
 };
 
+/* TODO - maybe take out if can use same fxn in observers.js */
+
+const postLogInfo2 = function (name, data) {
+    fetch("/1110/log", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name, data: data })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+};
+
+const postDomObjInfo = function (name, data) {
+    fetch("/1110/dominfo", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name, data: data })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+};
+
+const reloadScript = function (id) {
+    var $el = $("#" + id);
+    $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
+};
+document.onreadystatechange = () => {
+    if (document.readyState === "complete") {
+        postLogInfo2("DOM STATUS", "/* DOM LOADED HERE! */");
+        reloadScript("observers");
+    }
+};
 document.getElementById("readytolearnbtn").addEventListener("click", () => {
     fetch("/1110/exercisedata", {
         method: "POST",
@@ -151,23 +153,6 @@ document.getElementById("readytolearnbtn").addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => console.log(data));
 });
-
-// const targetNode = document.getElementById("comic").children[1];
-// const config = { attributes: true, childList: true, subtree: true };
-// const callback = function (mutationsList, observer) {
-//     for (let mutation of mutationsList) {
-//         fetch("/1110/log", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({ name: "FIND MUTATION", data: mutation.type })
-//         });
-//     }
-// };
-
-// const observer = new MutationObserver(callback);
-// observer.observe(targetNode, config);
 
 const sourceCode = `function eventPos(e) {
     if (e.type.match(/^touch/)) {
@@ -481,19 +466,21 @@ function Map($container) {
     let isDomObj_$overlay = $overlay instanceof jQuery || $overlay instanceof HTMLElement;
     stateManager["Program:Map:$overlay"][0] = isDomObj_$overlay;
     if (isDomObj_$overlay) {
-        domObjects.push($overlay);
-        console.log(
-            "is jquery OBJ? ",
-            $overlay instanceof jQuery,
-            " is HTML obj? ",
-            $overlay instanceof HTMLElement,
-            " item is named $overlay: ",
-            $overlay
-        );
-        if ($overlay[0].id === "") {
-            $overlay[0].id = makeId(7);
+        if ($overlay instanceof jQuery) {
+            for (let c = 0; c < $overlay.length; c++) {
+                let child = $overlay[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            $overlay.id = makeId(7);
+            postDomObjInfo($overlay.id, $overlay);
+            domObjects.push($overlay);
         }
-        postDomObjInfo($overlay[0].id, $overlay);
     }
     /* end autogen added */
 
@@ -545,15 +532,21 @@ function Map($container) {
     let isDomObj_offset = offset instanceof jQuery || offset instanceof HTMLElement;
     stateManager["Program:Map:offset"][0] = isDomObj_offset;
     if (isDomObj_offset) {
-        console.log(
-            "is jquery OBJ? ",
-            offset instanceof jQuery,
-            " is HTML obj? ",
-            offset instanceof HTMLElement,
-            `Item is named offset, `,
-            offset
-        );
-        domObjects.push(offset);
+        if (offset instanceof jQuery) {
+            for (let c = 0; c < offset.length; c++) {
+                let child = offset[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            offset.id = makeId(7);
+            postDomObjInfo(offset.id, offset);
+            domObjects.push(offset);
+        }
     }
     /* end autogen added */
 
@@ -565,15 +558,21 @@ function Map($container) {
     let isDomObj_padding_top = padding_top instanceof jQuery || padding_top instanceof HTMLElement;
     stateManager["Program:Map:padding_top"][0] = isDomObj_padding_top;
     if (isDomObj_padding_top) {
-        domObjects.push(padding_top);
-        console.log(
-            "is jquery OBJ? ",
-            padding_top instanceof jQuery,
-            " is HTML obj? ",
-            padding_top instanceof HTMLElement,
-            " item is named padding_top: ",
-            padding_top
-        );
+        if (padding_top instanceof jQuery) {
+            for (let c = 0; c < padding_top.length; c++) {
+                let child = padding_top[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            padding_top.id = makeId(7);
+            postDomObjInfo(padding_top.id, padding_top);
+            domObjects.push(padding_top);
+        }
     }
     /* end autogen added */
 
@@ -584,7 +583,23 @@ function Map($container) {
 
     let isDomObj_size = size instanceof jQuery || size instanceof HTMLElement;
     stateManager["Program:Map:size"][0] = isDomObj_size;
-    if (isDomObj_size) domObjects.push(size);
+    if (isDomObj_size) {
+        if (size instanceof jQuery) {
+            for (let c = 0; c < size.length; c++) {
+                let child = size[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            size.id = makeId(7);
+            postDomObjInfo(size.id, size);
+            domObjects.push(size);
+        }
+    }
     /* end autogen added */
 
     var tilesize = 2048;
@@ -594,7 +609,23 @@ function Map($container) {
 
     let isDomObj_tilesize = tilesize instanceof jQuery || tilesize instanceof HTMLElement;
     stateManager["Program:Map:tilesize"][0] = isDomObj_tilesize;
-    if (isDomObj_tilesize) domObjects.push(tilesize);
+    if (isDomObj_tilesize) {
+        if (tilesize instanceof jQuery) {
+            for (let c = 0; c < tilesize.length; c++) {
+                let child = tilesize[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            tilesize.id = makeId(7);
+            postDomObjInfo(tilesize.id, tilesize);
+            domObjects.push(tilesize);
+        }
+    }
     /* end autogen added */
 
     var visible = [];
@@ -604,7 +635,23 @@ function Map($container) {
 
     let isDomObj_visible = visible instanceof jQuery || visible instanceof HTMLElement;
     stateManager["Program:Map:visible"][0] = isDomObj_visible;
-    if (isDomObj_visible) domObjects.push(visible);
+    if (isDomObj_visible) {
+        if (visible instanceof jQuery) {
+            for (let c = 0; c < visible.length; c++) {
+                let child = visible[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            visible.id = makeId(7);
+            postDomObjInfo(visible.id, visible);
+            domObjects.push(visible);
+        }
+    }
     /* end autogen added */
 
     var container_size = [$container.width(), $container.height()];
@@ -617,7 +664,23 @@ function Map($container) {
 
     let isDomObj_container_size = container_size instanceof jQuery || container_size instanceof HTMLElement;
     stateManager["Program:Map:container_size"][0] = isDomObj_container_size;
-    if (isDomObj_container_size) domObjects.push(container_size);
+    if (isDomObj_container_size) {
+        if (container_size instanceof jQuery) {
+            for (let c = 0; c < container_size.length; c++) {
+                let child = container_size[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            container_size.id = makeId(7);
+            postDomObjInfo(container_size.id, container_size);
+            domObjects.push(container_size);
+        }
+    }
     /* end autogen added */
 
     var scroll_delta = null;
@@ -634,7 +697,23 @@ function Map($container) {
 
     let isDomObj_scroll_delta = scroll_delta instanceof jQuery || scroll_delta instanceof HTMLElement;
     stateManager["Program:Map:scroll_delta"][0] = isDomObj_scroll_delta;
-    if (isDomObj_scroll_delta) domObjects.push(scroll_delta);
+    if (isDomObj_scroll_delta) {
+        if (scroll_delta instanceof jQuery) {
+            for (let c = 0; c < scroll_delta.length; c++) {
+                let child = scroll_delta[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            scroll_delta.id = makeId(7);
+            postDomObjInfo(scroll_delta.id, scroll_delta);
+            domObjects.push(scroll_delta);
+        }
+    }
     /* end autogen added */
 
     var $map = $container.children(".map");
@@ -645,19 +724,21 @@ function Map($container) {
     let isDomObj_$map = $map instanceof jQuery || $map instanceof HTMLElement;
     stateManager["Program:Map:$map"][0] = isDomObj_$map;
     if (isDomObj_$map) {
-        domObjects.push($map);
-        console.log(
-            "is jquery OBJ? ",
-            $map instanceof jQuery,
-            " is HTML obj? ",
-            $map instanceof HTMLElement,
-            " item is named $map: ",
-            $map
-        );
-        if ($map[0].id === "") {
-            $map[0].id = makeId(7);
+        if ($map instanceof jQuery) {
+            for (let c = 0; c < $map.length; c++) {
+                let child = $map[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            $map.id = makeId(7);
+            postDomObjInfo($map.id, $map);
+            domObjects.push($map);
         }
-        postDomObjInfo($map[0].id, $map);
     }
     /* end autogen added */
 
@@ -668,7 +749,23 @@ function Map($container) {
 
     let isDomObj_map_size = map_size instanceof jQuery || map_size instanceof HTMLElement;
     stateManager["Program:Map:map_size"][0] = isDomObj_map_size;
-    if (isDomObj_map_size) domObjects.push(map_size);
+    if (isDomObj_map_size) {
+        if (map_size instanceof jQuery) {
+            for (let c = 0; c < map_size.length; c++) {
+                let child = map_size[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            map_size.id = makeId(7);
+            postDomObjInfo(map_size.id, map_size);
+            domObjects.push(map_size);
+        }
+    }
     /* end autogen added */
 
     /* autogen added */
@@ -690,7 +787,23 @@ function Map($container) {
 
     let isDomObj_position = position instanceof jQuery || position instanceof HTMLElement;
     stateManager["Program:Map:position"][0] = isDomObj_position;
-    if (isDomObj_position) domObjects.push(position);
+    if (isDomObj_position) {
+        if (position instanceof jQuery) {
+            for (let c = 0; c < position.length; c++) {
+                let child = position[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            position.id = makeId(7);
+            postDomObjInfo(position.id, position);
+            domObjects.push(position);
+        }
+    }
     /* end autogen added */
 
     /* autogen added */
@@ -714,7 +827,23 @@ function Map($container) {
 
     let isDomObj_centre = centre instanceof jQuery || centre instanceof HTMLElement;
     stateManager["Program:Map:centre"][0] = isDomObj_centre;
-    if (isDomObj_centre) domObjects.push(centre);
+    if (isDomObj_centre) {
+        if (centre instanceof jQuery) {
+            for (let c = 0; c < centre.length; c++) {
+                let child = centre[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            centre.id = makeId(7);
+            postDomObjInfo(centre.id, centre);
+            domObjects.push(centre);
+        }
+    }
     /* end autogen added */
 
     /* autogen added */
@@ -742,7 +871,23 @@ function Map($container) {
 
         let isDomObj_centre_last = centre_last instanceof jQuery || centre_last instanceof HTMLElement;
         stateManager["Program:Map:update:centre_last"][0] = isDomObj_centre_last;
-        if (isDomObj_centre_last) domObjects.push(centre_last);
+        if (isDomObj_centre_last) {
+            if (centre_last instanceof jQuery) {
+                for (let c = 0; c < centre_last.length; c++) {
+                    let child = centre_last[c];
+                    if (!child.id || child.id === "") {
+                        child.id = makeId(7);
+                        postDomObjInfo(child.id, child);
+                        domObjects.push(child);
+                    }
+                }
+            } else {
+                // html elem, not jQuery elem
+                centre_last.id = makeId(7);
+                postDomObjInfo(centre_last.id, centre_last);
+                domObjects.push(centre_last);
+            }
+        }
         /* end autogen added */
 
         centre = [Math.floor(-position[0] / tilesize), Math.floor(-position[1] / tilesize)];
@@ -789,19 +934,21 @@ function Map($container) {
             let isDomObj_$remove = $remove instanceof jQuery || $remove instanceof HTMLElement;
             stateManager["Program:Map:update:$remove"][0] = isDomObj_$remove;
             if (isDomObj_$remove) {
-                domObjects.push($remove);
-                console.log(
-                    "is jquery OBJ? ",
-                    $remove instanceof jQuery,
-                    " is HTML obj? ",
-                    $remove instanceof HTMLElement,
-                    " item is named $remove: ",
-                    $remove
-                );
-                if ($remove.id === "") {
+                if ($remove instanceof jQuery) {
+                    for (let c = 0; c < $remove.length; c++) {
+                        let child = $remove[c];
+                        if (!child.id || child.id === "") {
+                            child.id = makeId(7);
+                            postDomObjInfo(child.id, child);
+                            domObjects.push(child);
+                        }
+                    }
+                } else {
+                    // html elem, not jQuery elem
                     $remove.id = makeId(7);
+                    postDomObjInfo($remove.id, $remove);
+                    domObjects.push($remove);
                 }
-                postDomObjInfo($remove.id, $remove);
             }
             /* end autogen added */
 
@@ -812,7 +959,23 @@ function Map($container) {
 
                 let isDomObj_y = y instanceof jQuery || y instanceof HTMLElement;
                 stateManager["Program:Map:update:y"][0] = isDomObj_y;
-                if (isDomObj_y) domObjects.push(y);
+                if (isDomObj_y) {
+                    if (y instanceof jQuery) {
+                        for (let c = 0; c < y.length; c++) {
+                            let child = y[c];
+                            if (!child.id || child.id === "") {
+                                child.id = makeId(7);
+                                postDomObjInfo(child.id, child);
+                                domObjects.push(child);
+                            }
+                        }
+                    } else {
+                        // html elem, not jQuery elem
+                        y.id = makeId(7);
+                        postDomObjInfo(y.id, y);
+                        domObjects.push(y);
+                    }
+                }
                 /* end autogen added */
 
                 for (var x = -1; x <= +1; x++) {
@@ -822,7 +985,23 @@ function Map($container) {
 
                     let isDomObj_x = x instanceof jQuery || x instanceof HTMLElement;
                     stateManager["Program:Map:update:x"][0] = isDomObj_x;
-                    if (isDomObj_x) domObjects.push(x);
+                    if (isDomObj_x) {
+                        if (x instanceof jQuery) {
+                            for (let c = 0; c < x.length; c++) {
+                                let child = x[c];
+                                if (!child.id || child.id === "") {
+                                    child.id = makeId(7);
+                                    postDomObjInfo(child.id, child);
+                                    domObjects.push(child);
+                                }
+                            }
+                        } else {
+                            // html elem, not jQuery elem
+                            x.id = makeId(7);
+                            postDomObjInfo(x.id, x);
+                            domObjects.push(x);
+                        }
+                    }
                     /* end autogen added */
 
                     var name = tile_name(centre[0] + x, centre[1] + y);
@@ -842,7 +1021,23 @@ function Map($container) {
 
                     let isDomObj_name = name instanceof jQuery || name instanceof HTMLElement;
                     stateManager["Program:Map:update:name"][0] = isDomObj_name;
-                    if (isDomObj_name) domObjects.push(name);
+                    if (isDomObj_name) {
+                        if (name instanceof jQuery) {
+                            for (let c = 0; c < name.length; c++) {
+                                let child = name[c];
+                                if (!child.id || child.id === "") {
+                                    child.id = makeId(7);
+                                    postDomObjInfo(child.id, child);
+                                    domObjects.push(child);
+                                }
+                            }
+                        } else {
+                            // html elem, not jQuery elem
+                            name.id = makeId(7);
+                            postDomObjInfo(name.id, name);
+                            domObjects.push(name);
+                        }
+                    }
                     /* end autogen added */
 
                     var tile = $map.find(".tile" + name);
@@ -856,19 +1051,21 @@ function Map($container) {
                     let isDomObj_tile = tile instanceof jQuery || tile instanceof HTMLElement;
                     stateManager["Program:Map:update:tile"][0] = isDomObj_tile;
                     if (isDomObj_tile) {
-                        domObjects.push(tile);
-                        console.log(
-                            "is jquery OBJ? ",
-                            tile instanceof jQuery,
-                            " is HTML obj? ",
-                            tile instanceof HTMLElement,
-                            " item is named tile: ",
-                            tile
-                        );
-                        if (tile.id === "") {
+                        if (tile instanceof jQuery) {
+                            for (let c = 0; c < tile.length; c++) {
+                                let child = tile[c];
+                                if (!child.id || child.id === "") {
+                                    child.id = makeId(7);
+                                    postDomObjInfo(child.id, child);
+                                    domObjects.push(child);
+                                }
+                            }
+                        } else {
+                            // html elem, not jQuery elem
                             tile.id = makeId(7);
+                            postDomObjInfo(tile.id, tile);
+                            domObjects.push(tile);
                         }
-                        postDomObjInfo(tile.id, tile);
                     }
                     /* end autogen added */
 
@@ -900,19 +1097,21 @@ function Map($container) {
                         let isDomObj_$image = $image instanceof jQuery || $image instanceof HTMLElement;
                         stateManager["Program:Map:update:$image"][0] = isDomObj_$image;
                         if (isDomObj_$image) {
-                            domObjects.push($image);
-                            console.log(
-                                "is jquery OBJ? ",
-                                $image instanceof jQuery,
-                                " is HTML obj? ",
-                                $image instanceof HTMLElement,
-                                " item is named $image: ",
-                                $image
-                            );
-                            if ($image[0].id === "") {
-                                $image[0].id = makeId(7);
+                            if ($image instanceof jQuery) {
+                                for (let c = 0; c < $image.length; c++) {
+                                    let child = $image[c];
+                                    if (!child.id || child.id === "") {
+                                        child.id = makeId(7);
+                                        postDomObjInfo(child.id, child);
+                                        domObjects.push(child);
+                                    }
+                                }
+                            } else {
+                                // html elem, not jQuery elem
+                                $image.id = makeId(7);
+                                postDomObjInfo($image.id, $image);
+                                domObjects.push($image);
                             }
-                            postDomObjInfo($image[0].id, $image);
                         }
                         /* end autogen added */
 
@@ -973,7 +1172,23 @@ function Map($container) {
 
             let isDomObj_pos = pos instanceof jQuery || pos instanceof HTMLElement;
             stateManager["Program:Map:drag:pos"][0] = isDomObj_pos;
-            if (isDomObj_pos) domObjects.push(pos);
+            if (isDomObj_pos) {
+                if (pos instanceof jQuery) {
+                    for (let c = 0; c < pos.length; c++) {
+                        let child = pos[c];
+                        if (!child.id || child.id === "") {
+                            child.id = makeId(7);
+                            postDomObjInfo(child.id, child);
+                            domObjects.push(child);
+                        }
+                    }
+                } else {
+                    // html elem, not jQuery elem
+                    pos.id = makeId(7);
+                    postDomObjInfo(pos.id, pos);
+                    domObjects.push(pos);
+                }
+            }
             /* end autogen added */
 
             position[0] = Math.round(
@@ -1011,7 +1226,23 @@ function Map($container) {
 
             let isDomObj_pos = pos instanceof jQuery || pos instanceof HTMLElement;
             stateManager["Program:Map:pos"][0] = isDomObj_pos;
-            if (isDomObj_pos) domObjects.push(pos);
+            if (isDomObj_pos) {
+                if (pos instanceof jQuery) {
+                    for (let c = 0; c < pos.length; c++) {
+                        let child = pos[c];
+                        if (!child.id || child.id === "") {
+                            child.id = makeId(7);
+                            postDomObjInfo(child.id, child);
+                            domObjects.push(child);
+                        }
+                    }
+                } else {
+                    // html elem, not jQuery elem
+                    pos.id = makeId(7);
+                    postDomObjInfo(pos.id, pos);
+                    domObjects.push(pos);
+                }
+            }
             /* end autogen added */
 
             scroll_delta = [position[0] - pos.pageX, position[1] - pos.pageY];
@@ -1075,6 +1306,22 @@ $(function () {
 
     let isDomObj_map = map instanceof jQuery || map instanceof HTMLElement;
     stateManager["Program:map"][0] = isDomObj_map;
-    if (isDomObj_map) domObjects.push(map);
+    if (isDomObj_map) {
+        if (map instanceof jQuery) {
+            for (let c = 0; c < map.length; c++) {
+                let child = map[c];
+                if (!child.id || child.id === "") {
+                    child.id = makeId(7);
+                    postDomObjInfo(child.id, child);
+                    domObjects.push(child);
+                }
+            }
+        } else {
+            // html elem, not jQuery elem
+            map.id = makeId(7);
+            postDomObjInfo(map.id, map);
+            domObjects.push(map);
+        }
+    }
     /* end autogen added */
 });

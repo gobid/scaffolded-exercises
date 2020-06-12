@@ -157,6 +157,35 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         return result;
     };
 
+    const postLogInfo2 = function (name, data) {
+        fetch("/1110/log", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, data: data })
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    };
+
+    const postDomObjInfo = function (name, data) {
+        fetch("/1110/dominfo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, data: data })
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    };
+
+    const reloadScript = function (id) {
+        var $el = $("#" + id);
+        $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
+    };
+
     return `\n/* autogen added */ 
     \nlet verbosePrint = false;
     \nlet stateManager = ${stateManagerStr}
@@ -164,18 +193,15 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     \nconst updateStateManager = ${updateStateManager.toString()}
     \nlet callCounts = {};
     \nconst fxnCallCallback = ${fxnCallCallback.toString()}
-    \nconst makeId = ${makeId.toString()} 
+    \nconst makeId = ${makeId.toString()}
+    \n /* TODO - maybe take out if can use same fxn in observers.js */
+    \nconst postLogInfo2 = ${postLogInfo2.toString()}
+    \nconst postDomObjInfo = ${postDomObjInfo.toString()}
+    \nconst reloadScript = ${reloadScript.toString()}
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
-            fetch("/1110/log", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ data: "/* DOM LOADED HERE! */" })
-            })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+            postLogInfo2("DOM STATUS", "/* DOM LOADED HERE! */");
+            reloadScript("observers");
         }
     };
     document.getElementById("readytolearnbtn").addEventListener("click", () => {
@@ -356,11 +382,20 @@ function enter(node) {
             let isDomObj_${nodeName} = ${nodeName} instanceof jQuery || ${nodeName} instanceof HTMLElement;
             stateManager["${stateManagerKey}"][0] = isDomObj_${nodeName};
             if (isDomObj_${nodeName}) {
-                domObjects.push(${nodeName})
-                if (${nodeName}[0].id === "") {
-                    ${nodeName}[0].id = makeId(7);
+                if (${nodeName} instanceof jQuery) {
+                    for (let c = 0; c < ${nodeName}.length; c++) {
+                        let child = ${nodeName}[c];
+                        if (!child.id || child.id === "") {
+                            child.id = makeId(7);
+                            postDomObjInfo(child.id, child);
+                            domObjects.push(child);
+                        }
+                    }
+                } else { // html elem, not jQuery elem
+                    ${nodeName}.id = makeId(7);
+                    postDomObjInfo(${nodeName}.id, ${nodeName});
+                    domObjects.push(${nodeName});
                 }
-                postDomObjInfo("${nodeName}", ${nodeName})
             }
             /* end autogen added */\n`;
         scriptUpdates.push({
