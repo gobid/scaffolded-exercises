@@ -91,23 +91,48 @@ const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) 
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ data: nodeCodeStr, name: fnName })
+    }).then((response) => response.json());
+    // .then((data) => console.log(data));
+};
+
+function postLogInfo(name, data) {
+    fetch("/1110/log", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name, data: data })
     })
         .then((response) => response.json())
         .then((data) => console.log(data));
-};
+}
+
+function postDomObjInfo(name, data) {
+    fetch("/1110/dominfo", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name, data: data })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+}
 
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
-        fetch("/1110/log", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ data: "/* DOM LOADED HERE! */" })
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+        postLogInfo("DOM STATUS", "/* DOM LOADED HERE! */");
     }
+};
+
+const makeId = function (len) {
+    var result = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    var charactersLen = characters.length;
+    for (var i = 0; i < len; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLen));
+    }
+    return result;
 };
 
 document.getElementById("readytolearnbtn").addEventListener("click", () => {
@@ -121,6 +146,23 @@ document.getElementById("readytolearnbtn").addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => console.log(data));
 });
+
+// const targetNode = document.getElementById("comic").children[1];
+// const config = { attributes: true, childList: true, subtree: true };
+// const callback = function (mutationsList, observer) {
+//     for (let mutation of mutationsList) {
+//         fetch("/1110/log", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({ name: "FIND MUTATION", data: mutation.type })
+//         });
+//     }
+// };
+
+// const observer = new MutationObserver(callback);
+// observer.observe(targetNode, config);
 
 const sourceCode = `function eventPos(e) {
     if (e.type.match(/^touch/)) {
@@ -433,7 +475,21 @@ function Map($container) {
 
     let isDomObj_$overlay = $overlay instanceof jQuery || $overlay instanceof HTMLElement;
     stateManager["Program:Map:$overlay"][0] = isDomObj_$overlay;
-    if (isDomObj_$overlay) domObjects.push($overlay);
+    if (isDomObj_$overlay) {
+        domObjects.push($overlay);
+        console.log(
+            "is jquery OBJ? ",
+            $overlay instanceof jQuery,
+            " is HTML obj? ",
+            $overlay instanceof HTMLElement,
+            " item is named $overlay: ",
+            $overlay
+        );
+        if ($overlay[0].id === "") {
+            $overlay[0].id = makeId(7);
+        }
+        postDomObjInfo("$overlay", $overlay);
+    }
     /* end autogen added */
 
     /* autogen added */
@@ -483,7 +539,17 @@ function Map($container) {
 
     let isDomObj_offset = offset instanceof jQuery || offset instanceof HTMLElement;
     stateManager["Program:Map:offset"][0] = isDomObj_offset;
-    if (isDomObj_offset) domObjects.push(offset);
+    if (isDomObj_offset) {
+        console.log(
+            "is jquery OBJ? ",
+            offset instanceof jQuery,
+            " is HTML obj? ",
+            offset instanceof HTMLElement,
+            `Item is named offset, `,
+            offset
+        );
+        domObjects.push(offset);
+    }
     /* end autogen added */
 
     var padding_top = 200;
@@ -493,7 +559,17 @@ function Map($container) {
 
     let isDomObj_padding_top = padding_top instanceof jQuery || padding_top instanceof HTMLElement;
     stateManager["Program:Map:padding_top"][0] = isDomObj_padding_top;
-    if (isDomObj_padding_top) domObjects.push(padding_top);
+    if (isDomObj_padding_top) {
+        domObjects.push(padding_top);
+        console.log(
+            "is jquery OBJ? ",
+            padding_top instanceof jQuery,
+            " is HTML obj? ",
+            padding_top instanceof HTMLElement,
+            " item is named padding_top: ",
+            padding_top
+        );
+    }
     /* end autogen added */
 
     var size = [14, 48, 25, 33];
@@ -563,7 +639,21 @@ function Map($container) {
 
     let isDomObj_$map = $map instanceof jQuery || $map instanceof HTMLElement;
     stateManager["Program:Map:$map"][0] = isDomObj_$map;
-    if (isDomObj_$map) domObjects.push($map);
+    if (isDomObj_$map) {
+        domObjects.push($map);
+        console.log(
+            "is jquery OBJ? ",
+            $map instanceof jQuery,
+            " is HTML obj? ",
+            $map instanceof HTMLElement,
+            " item is named $map: ",
+            $map
+        );
+        if ($map[0].id === "") {
+            $map[0].id = makeId(7);
+        }
+        postDomObjInfo("$map", $map);
+    }
     /* end autogen added */
 
     var map_size = [(size[1] + size[3]) * tilesize, (size[0] + size[2]) * tilesize];
@@ -693,7 +783,21 @@ function Map($container) {
 
             let isDomObj_$remove = $remove instanceof jQuery || $remove instanceof HTMLElement;
             stateManager["Program:Map:update:$remove"][0] = isDomObj_$remove;
-            if (isDomObj_$remove) domObjects.push($remove);
+            if (isDomObj_$remove) {
+                domObjects.push($remove);
+                console.log(
+                    "is jquery OBJ? ",
+                    $remove instanceof jQuery,
+                    " is HTML obj? ",
+                    $remove instanceof HTMLElement,
+                    " item is named $remove: ",
+                    $remove
+                );
+                if ($remove[0].id === "") {
+                    $remove[0].id = makeId(7);
+                }
+                postDomObjInfo("$remove", $remove);
+            }
             /* end autogen added */
 
             for (var y = -1; y <= +1; y++) {
@@ -746,7 +850,21 @@ function Map($container) {
 
                     let isDomObj_tile = tile instanceof jQuery || tile instanceof HTMLElement;
                     stateManager["Program:Map:update:tile"][0] = isDomObj_tile;
-                    if (isDomObj_tile) domObjects.push(tile);
+                    if (isDomObj_tile) {
+                        domObjects.push(tile);
+                        console.log(
+                            "is jquery OBJ? ",
+                            tile instanceof jQuery,
+                            " is HTML obj? ",
+                            tile instanceof HTMLElement,
+                            " item is named tile: ",
+                            tile
+                        );
+                        if (tile[0].id === "") {
+                            tile[0].id = makeId(7);
+                        }
+                        postDomObjInfo("tile", tile);
+                    }
                     /* end autogen added */
 
                     if (tile.length) {
@@ -776,7 +894,21 @@ function Map($container) {
 
                         let isDomObj_$image = $image instanceof jQuery || $image instanceof HTMLElement;
                         stateManager["Program:Map:update:$image"][0] = isDomObj_$image;
-                        if (isDomObj_$image) domObjects.push($image);
+                        if (isDomObj_$image) {
+                            domObjects.push($image);
+                            console.log(
+                                "is jquery OBJ? ",
+                                $image instanceof jQuery,
+                                " is HTML obj? ",
+                                $image instanceof HTMLElement,
+                                " item is named $image: ",
+                                $image
+                            );
+                            if ($image[0].id === "") {
+                                $image[0].id = makeId(7);
+                            }
+                            postDomObjInfo("$image", $image);
+                        }
                         /* end autogen added */
 
                         /* autogen added */

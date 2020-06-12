@@ -37,10 +37,38 @@ function writeToFile(name, codeStr) {
     });
 }
 
+let idKeyCounter = 1;
+function addObserver(name, data) {
+    let selector = null;
+    let objId = data[0].id;
+    if (data.selector !== "") {
+        selector = data.selector;
+    } else if (objId !== "") {
+        selector = `document.getElementById(${objId})`;
+    } else {
+        console.log("ERROR: no ID on DOM element");
+        return;
+    }
+    let observer = `
+        const ${objId}_targetNode = document.getElementById("${objId}")
+        const ${objId}_observer = new MutationObserver(callback);
+        ${objId}_observer.observe(${objId}_targetNode, config);
+    `;
+    fs.appendFileSync("./sites/xkcd/xkcd.com/1110/s/observers.js", observer, (err) => {
+        if (err) {
+            console.log("Error: ", err);
+        } else {
+            console.log("wahoo!");
+        }
+    });
+}
+
 app.post("/1110/log", function (req, res) {
     writeToFile(req.body.name, req.body.data);
     res.send({ message: "wrote to file" });
 });
+
+app.post("/1110/dominfo", function (req, res) {});
 
 app.post("/1110/exercisedata", function (req, res) {
     const timestamp = Date.now();

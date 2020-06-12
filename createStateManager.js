@@ -147,13 +147,24 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             .then((data) => console.log(data));
     };
 
+    const makeId = function (len) {
+        var result = "";
+        var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        var charactersLen = characters.length;
+        for (var i = 0; i < len; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLen));
+        }
+        return result;
+    };
+
     return `\n/* autogen added */ 
     \nlet verbosePrint = false;
     \nlet stateManager = ${stateManagerStr}
     \nlet domObjects = [];
     \nconst updateStateManager = ${updateStateManager.toString()}
     \nlet callCounts = {};
-    \nconst fxnCallCallback = ${fxnCallCallback.toString()} 
+    \nconst fxnCallCallback = ${fxnCallCallback.toString()}
+    \nconst makeId = ${makeId.toString()} 
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
             fetch("/1110/log", {
@@ -344,7 +355,13 @@ function enter(node) {
             \n/* autogen added */ 
             let isDomObj_${nodeName} = ${nodeName} instanceof jQuery || ${nodeName} instanceof HTMLElement;
             stateManager["${stateManagerKey}"][0] = isDomObj_${nodeName};
-            if (isDomObj_${nodeName}) domObjects.push(${nodeName})
+            if (isDomObj_${nodeName}) {
+                domObjects.push(${nodeName})
+                if (${nodeName}[0].id === "") {
+                    ${nodeName}[0].id = makeId(7);
+                }
+                postDomObjInfo("${nodeName}", ${nodeName})
+            }
             /* end autogen added */\n`;
         scriptUpdates.push({
             loc: locKey,
