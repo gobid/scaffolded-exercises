@@ -40,13 +40,11 @@ function writeToFile(name, codeStr) {
 let idKeyCounter = 1;
 function addObserver(name, data) {
     let selector = null;
-    let objId = data[0].id;
-    if (data.selector !== "") {
-        selector = data.selector;
-    } else if (objId !== "") {
+    let objId = name; // data[0].id;
+    if (objId !== undefined && objId !== "") {
         selector = `document.getElementById(${objId})`;
     } else {
-        console.log("ERROR: no ID on DOM element");
+        console.log("ERROR: no ID on DOM element: ", data);
         return;
     }
     let observer = `
@@ -68,7 +66,10 @@ app.post("/1110/log", function (req, res) {
     res.send({ message: "wrote to file" });
 });
 
-app.post("/1110/dominfo", function (req, res) {});
+app.post("/1110/dominfo", function (req, res) {
+    addObserver(req.body.name, req.body.data);
+    res.send({ message: "added observer" });
+});
 
 app.post("/1110/exercisedata", function (req, res) {
     const timestamp = Date.now();
@@ -79,6 +80,9 @@ app.post("/1110/exercisedata", function (req, res) {
     // let runLog = fs.readFileSync("./logs/runLog.js", "utf8").split("~~~~\n\n~~~~");
     // const codeRun = runLog.map((r) => r.replace(/^\s+|\s+$/g, ""));
     fs.copyFileSync("./logs/runLog.js", `${dir}/runLog.js`);
+    /** Copy HTML file with IDs added to all DOM attributes */
+    fs.copyFileSync("./sites/xkcd/xkcd.com/1110/index.html", `${dir}/index.html`);
+    fs.copyFileSync("./sites/xkcd/xkcd.com/1110/s/observers.js", `${dir}/observers.js`);
     fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
     fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));
 
@@ -88,5 +92,25 @@ app.post("/1110/exercisedata", function (req, res) {
 app.listen(PORT, function () {
     // clear out log file before new run
     fs.writeFileSync(`./logs/runLog.js`, "/*~~~~*/");
+    fs.writeFileSync(
+        `./sites/xkcd/xkcd.com/1110/s/observers.js`,
+        `function postLogInfo(name, data) {
+            fetch("/1110/log", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name: name, data: data })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+            }
+            const callback = function (mutationsList, observer) {
+                for (let mutation of mutationsList) {
+                    postLogInfo("FOUND MUTATION", mutation.type);
+                }
+            };
+            const config = { attributes: true, childList: true, subtree: true };`
+    );
     console.log("Example app listening at http://localhost:" + "3000");
 });

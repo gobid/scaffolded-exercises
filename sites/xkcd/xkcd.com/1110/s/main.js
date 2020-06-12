@@ -118,10 +118,15 @@ function postDomObjInfo(name, data) {
         .then((response) => response.json())
         .then((data) => console.log(data));
 }
+function reloadScript(id) {
+    var $el = $("#" + id);
+    $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
+}
 
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
         postLogInfo("DOM STATUS", "/* DOM LOADED HERE! */");
+        reloadScript("observers");
     }
 };
 
@@ -488,7 +493,7 @@ function Map($container) {
         if ($overlay[0].id === "") {
             $overlay[0].id = makeId(7);
         }
-        postDomObjInfo("$overlay", $overlay);
+        postDomObjInfo($overlay[0].id, $overlay);
     }
     /* end autogen added */
 
@@ -652,7 +657,7 @@ function Map($container) {
         if ($map[0].id === "") {
             $map[0].id = makeId(7);
         }
-        postDomObjInfo("$map", $map);
+        postDomObjInfo($map[0].id, $map);
     }
     /* end autogen added */
 
@@ -793,10 +798,10 @@ function Map($container) {
                     " item is named $remove: ",
                     $remove
                 );
-                if ($remove[0].id === "") {
-                    $remove[0].id = makeId(7);
+                if ($remove.id === "") {
+                    $remove.id = makeId(7);
                 }
-                postDomObjInfo("$remove", $remove);
+                postDomObjInfo($remove.id, $remove);
             }
             /* end autogen added */
 
@@ -860,10 +865,10 @@ function Map($container) {
                             " item is named tile: ",
                             tile
                         );
-                        if (tile[0].id === "") {
-                            tile[0].id = makeId(7);
+                        if (tile.id === "") {
+                            tile.id = makeId(7);
                         }
-                        postDomObjInfo("tile", tile);
+                        postDomObjInfo(tile.id, tile);
                     }
                     /* end autogen added */
 
@@ -907,7 +912,7 @@ function Map($container) {
                             if ($image[0].id === "") {
                                 $image[0].id = makeId(7);
                             }
-                            postDomObjInfo("$image", $image);
+                            postDomObjInfo($image[0].id, $image);
                         }
                         /* end autogen added */
 
