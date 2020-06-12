@@ -28,6 +28,8 @@ for (let key in stateManager) {
     }
 }
 
+console.log(domObjects);
+
 let firstExerciseInfo = getFirstExercise(allSnippets, domObjects);
 console.log(firstExerciseInfo);
 let firstExerciseInitCode = getInitializerCode(firstExerciseInfo.domObj, initCode, callCounts);

@@ -37,39 +37,9 @@ function writeToFile(name, codeStr) {
     });
 }
 
-function addObserver(name, data) {
-    let selector = null;
-    let objId = name; // data[0].id;
-    if (objId !== undefined && objId !== "") {
-        selector = `document.getElementById(${objId})`;
-    } else {
-        console.log("ERROR: no ID on DOM element: ", name, " data: ", data);
-        return;
-    }
-    let observer = `
-        const ${objId}_targetNode = document.getElementById("${objId}")
-        const ${objId}_observer = new MutationObserver(callback);
-        ${objId}_observer.observe(${objId}_targetNode, config);
-    `;
-    fs.appendFileSync("./sites/xkcd/xkcd.com/1110/s/observers.js", observer, (err) => {
-        if (err) {
-            console.log("Error: ", err);
-        } else {
-            console.log("wahoo!");
-        }
-    });
-}
-
-function saveDomInfo(name, data) {}
-
 app.post("/1110/log", function (req, res) {
     writeToFile(req.body.name, req.body.data);
     res.send({ message: "wrote to file" });
-});
-
-app.post("/1110/dominfo", function (req, res) {
-    // addObserver(req.body.name, req.body.data);
-    res.send({ message: "added observer" });
 });
 
 app.post("/1110/exercisedata", function (req, res) {
@@ -83,6 +53,7 @@ app.post("/1110/exercisedata", function (req, res) {
     fs.copyFileSync("./logs/runLog.js", `${dir}/runLog.js`);
     /** Copy HTML file with IDs added to all DOM attributes */
     fs.copyFileSync("./sites/xkcd/xkcd.com/1110/index.html", `${dir}/index.html`);
+    fs.writeFileSync(`${dir}/domObjInfo.json`, JSON.stringify(req.body.domObjInfo));
     fs.copyFileSync("./sites/xkcd/xkcd.com/1110/s/observers.js", `${dir}/observers.js`);
     fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
     fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));

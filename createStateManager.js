@@ -169,21 +169,8 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             .then((data) => console.log(data));
     };
 
-    const postDomObjInfo = function (name, data) {
-        fetch("/1110/dominfo", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name: name, data: data })
-        })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
-    };
-
-    const reloadScript = function (id) {
-        var $el = $("#" + id);
-        $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
+    const postDomObjInfo = function (id, name, data) {
+        domObjInfo[id] = { name: name, data: data };
     };
 
     return `\n/* autogen added */ 
@@ -196,12 +183,11 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     \nconst makeId = ${makeId.toString()}
     \n /* TODO - maybe take out if can use same fxn in observers.js */
     \nconst postLogInfo2 = ${postLogInfo2.toString()}
+    let domObjInfo = {};
     \nconst postDomObjInfo = ${postDomObjInfo.toString()}
-    \nconst reloadScript = ${reloadScript.toString()}
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
             postLogInfo2("DOM STATUS", "/* DOM LOADED HERE! */");
-            reloadScript("observers");
         }
     };
     document.getElementById("readytolearnbtn").addEventListener("click", () => {
@@ -210,7 +196,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager })
+            body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager, domObjInfo: domObjInfo })
         })
         .then((response) => response.json())
         .then((data) => console.log(data));
@@ -387,13 +373,13 @@ function enter(node) {
                         let child = ${nodeName}[c];
                         if (!child.id || child.id === "") {
                             child.id = makeId(7);
-                            postDomObjInfo(child.id, child);
+                            postDomObjInfo(child.id, "${nodeName}", child);
                             domObjects.push(child);
                         }
                     }
                 } else { // html elem, not jQuery elem
                     ${nodeName}.id = makeId(7);
-                    postDomObjInfo(${nodeName}.id, ${nodeName});
+                    postDomObjInfo(${nodeName}.id, "${nodeName}", ${nodeName});
                     domObjects.push(${nodeName});
                 }
             }

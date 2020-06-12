@@ -119,27 +119,14 @@ const postLogInfo2 = function (name, data) {
         .then((response) => response.json())
         .then((data) => console.log(data));
 };
+let domObjInfo = {};
 
-const postDomObjInfo = function (name, data) {
-    fetch("/1110/dominfo", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name: name, data: data })
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-};
-
-const reloadScript = function (id) {
-    var $el = $("#" + id);
-    $("#" + id).replaceWith('<script id="' + id + '" src="' + $el.prop("src") + '"></script>');
+const postDomObjInfo = function (id, name, data) {
+    domObjInfo[id] = { name: name, data: data };
 };
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
         postLogInfo2("DOM STATUS", "/* DOM LOADED HERE! */");
-        reloadScript("observers");
     }
 };
 document.getElementById("readytolearnbtn").addEventListener("click", () => {
@@ -148,7 +135,7 @@ document.getElementById("readytolearnbtn").addEventListener("click", () => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager })
+        body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager, domObjInfo: domObjInfo })
     })
         .then((response) => response.json())
         .then((data) => console.log(data));
@@ -471,14 +458,14 @@ function Map($container) {
                 let child = $overlay[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "$overlay", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             $overlay.id = makeId(7);
-            postDomObjInfo($overlay.id, $overlay);
+            postDomObjInfo($overlay.id, "$overlay", $overlay);
             domObjects.push($overlay);
         }
     }
@@ -537,14 +524,14 @@ function Map($container) {
                 let child = offset[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "offset", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             offset.id = makeId(7);
-            postDomObjInfo(offset.id, offset);
+            postDomObjInfo(offset.id, "offset", offset);
             domObjects.push(offset);
         }
     }
@@ -563,14 +550,14 @@ function Map($container) {
                 let child = padding_top[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "padding_top", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             padding_top.id = makeId(7);
-            postDomObjInfo(padding_top.id, padding_top);
+            postDomObjInfo(padding_top.id, "padding_top", padding_top);
             domObjects.push(padding_top);
         }
     }
@@ -589,14 +576,14 @@ function Map($container) {
                 let child = size[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "size", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             size.id = makeId(7);
-            postDomObjInfo(size.id, size);
+            postDomObjInfo(size.id, "size", size);
             domObjects.push(size);
         }
     }
@@ -615,14 +602,14 @@ function Map($container) {
                 let child = tilesize[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "tilesize", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             tilesize.id = makeId(7);
-            postDomObjInfo(tilesize.id, tilesize);
+            postDomObjInfo(tilesize.id, "tilesize", tilesize);
             domObjects.push(tilesize);
         }
     }
@@ -641,14 +628,14 @@ function Map($container) {
                 let child = visible[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "visible", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             visible.id = makeId(7);
-            postDomObjInfo(visible.id, visible);
+            postDomObjInfo(visible.id, "visible", visible);
             domObjects.push(visible);
         }
     }
@@ -670,14 +657,14 @@ function Map($container) {
                 let child = container_size[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "container_size", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             container_size.id = makeId(7);
-            postDomObjInfo(container_size.id, container_size);
+            postDomObjInfo(container_size.id, "container_size", container_size);
             domObjects.push(container_size);
         }
     }
@@ -703,14 +690,14 @@ function Map($container) {
                 let child = scroll_delta[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "scroll_delta", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             scroll_delta.id = makeId(7);
-            postDomObjInfo(scroll_delta.id, scroll_delta);
+            postDomObjInfo(scroll_delta.id, "scroll_delta", scroll_delta);
             domObjects.push(scroll_delta);
         }
     }
@@ -729,14 +716,14 @@ function Map($container) {
                 let child = $map[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "$map", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             $map.id = makeId(7);
-            postDomObjInfo($map.id, $map);
+            postDomObjInfo($map.id, "$map", $map);
             domObjects.push($map);
         }
     }
@@ -755,14 +742,14 @@ function Map($container) {
                 let child = map_size[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "map_size", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             map_size.id = makeId(7);
-            postDomObjInfo(map_size.id, map_size);
+            postDomObjInfo(map_size.id, "map_size", map_size);
             domObjects.push(map_size);
         }
     }
@@ -793,14 +780,14 @@ function Map($container) {
                 let child = position[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "position", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             position.id = makeId(7);
-            postDomObjInfo(position.id, position);
+            postDomObjInfo(position.id, "position", position);
             domObjects.push(position);
         }
     }
@@ -833,14 +820,14 @@ function Map($container) {
                 let child = centre[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "centre", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             centre.id = makeId(7);
-            postDomObjInfo(centre.id, centre);
+            postDomObjInfo(centre.id, "centre", centre);
             domObjects.push(centre);
         }
     }
@@ -877,14 +864,14 @@ function Map($container) {
                     let child = centre_last[c];
                     if (!child.id || child.id === "") {
                         child.id = makeId(7);
-                        postDomObjInfo(child.id, child);
+                        postDomObjInfo(child.id, "centre_last", child);
                         domObjects.push(child);
                     }
                 }
             } else {
                 // html elem, not jQuery elem
                 centre_last.id = makeId(7);
-                postDomObjInfo(centre_last.id, centre_last);
+                postDomObjInfo(centre_last.id, "centre_last", centre_last);
                 domObjects.push(centre_last);
             }
         }
@@ -939,14 +926,14 @@ function Map($container) {
                         let child = $remove[c];
                         if (!child.id || child.id === "") {
                             child.id = makeId(7);
-                            postDomObjInfo(child.id, child);
+                            postDomObjInfo(child.id, "$remove", child);
                             domObjects.push(child);
                         }
                     }
                 } else {
                     // html elem, not jQuery elem
                     $remove.id = makeId(7);
-                    postDomObjInfo($remove.id, $remove);
+                    postDomObjInfo($remove.id, "$remove", $remove);
                     domObjects.push($remove);
                 }
             }
@@ -965,14 +952,14 @@ function Map($container) {
                             let child = y[c];
                             if (!child.id || child.id === "") {
                                 child.id = makeId(7);
-                                postDomObjInfo(child.id, child);
+                                postDomObjInfo(child.id, "y", child);
                                 domObjects.push(child);
                             }
                         }
                     } else {
                         // html elem, not jQuery elem
                         y.id = makeId(7);
-                        postDomObjInfo(y.id, y);
+                        postDomObjInfo(y.id, "y", y);
                         domObjects.push(y);
                     }
                 }
@@ -991,14 +978,14 @@ function Map($container) {
                                 let child = x[c];
                                 if (!child.id || child.id === "") {
                                     child.id = makeId(7);
-                                    postDomObjInfo(child.id, child);
+                                    postDomObjInfo(child.id, "x", child);
                                     domObjects.push(child);
                                 }
                             }
                         } else {
                             // html elem, not jQuery elem
                             x.id = makeId(7);
-                            postDomObjInfo(x.id, x);
+                            postDomObjInfo(x.id, "x", x);
                             domObjects.push(x);
                         }
                     }
@@ -1027,14 +1014,14 @@ function Map($container) {
                                 let child = name[c];
                                 if (!child.id || child.id === "") {
                                     child.id = makeId(7);
-                                    postDomObjInfo(child.id, child);
+                                    postDomObjInfo(child.id, "name", child);
                                     domObjects.push(child);
                                 }
                             }
                         } else {
                             // html elem, not jQuery elem
                             name.id = makeId(7);
-                            postDomObjInfo(name.id, name);
+                            postDomObjInfo(name.id, "name", name);
                             domObjects.push(name);
                         }
                     }
@@ -1056,14 +1043,14 @@ function Map($container) {
                                 let child = tile[c];
                                 if (!child.id || child.id === "") {
                                     child.id = makeId(7);
-                                    postDomObjInfo(child.id, child);
+                                    postDomObjInfo(child.id, "tile", child);
                                     domObjects.push(child);
                                 }
                             }
                         } else {
                             // html elem, not jQuery elem
                             tile.id = makeId(7);
-                            postDomObjInfo(tile.id, tile);
+                            postDomObjInfo(tile.id, "tile", tile);
                             domObjects.push(tile);
                         }
                     }
@@ -1102,14 +1089,14 @@ function Map($container) {
                                     let child = $image[c];
                                     if (!child.id || child.id === "") {
                                         child.id = makeId(7);
-                                        postDomObjInfo(child.id, child);
+                                        postDomObjInfo(child.id, "$image", child);
                                         domObjects.push(child);
                                     }
                                 }
                             } else {
                                 // html elem, not jQuery elem
                                 $image.id = makeId(7);
-                                postDomObjInfo($image.id, $image);
+                                postDomObjInfo($image.id, "$image", $image);
                                 domObjects.push($image);
                             }
                         }
@@ -1178,14 +1165,14 @@ function Map($container) {
                         let child = pos[c];
                         if (!child.id || child.id === "") {
                             child.id = makeId(7);
-                            postDomObjInfo(child.id, child);
+                            postDomObjInfo(child.id, "pos", child);
                             domObjects.push(child);
                         }
                     }
                 } else {
                     // html elem, not jQuery elem
                     pos.id = makeId(7);
-                    postDomObjInfo(pos.id, pos);
+                    postDomObjInfo(pos.id, "pos", pos);
                     domObjects.push(pos);
                 }
             }
@@ -1232,14 +1219,14 @@ function Map($container) {
                         let child = pos[c];
                         if (!child.id || child.id === "") {
                             child.id = makeId(7);
-                            postDomObjInfo(child.id, child);
+                            postDomObjInfo(child.id, "pos", child);
                             domObjects.push(child);
                         }
                     }
                 } else {
                     // html elem, not jQuery elem
                     pos.id = makeId(7);
-                    postDomObjInfo(pos.id, pos);
+                    postDomObjInfo(pos.id, "pos", pos);
                     domObjects.push(pos);
                 }
             }
@@ -1312,14 +1299,14 @@ $(function () {
                 let child = map[c];
                 if (!child.id || child.id === "") {
                     child.id = makeId(7);
-                    postDomObjInfo(child.id, child);
+                    postDomObjInfo(child.id, "map", child);
                     domObjects.push(child);
                 }
             }
         } else {
             // html elem, not jQuery elem
             map.id = makeId(7);
-            postDomObjInfo(map.id, map);
+            postDomObjInfo(map.id, "map", map);
             domObjects.push(map);
         }
     }
