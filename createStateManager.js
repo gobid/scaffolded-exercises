@@ -147,24 +147,46 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             .then((data) => console.log(data));
     };
 
+    const makeId = function (len) {
+        var result = "";
+        var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        var charactersLen = characters.length;
+        for (var i = 0; i < len; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLen));
+        }
+        return result;
+    };
+
+    const postLogInfo = function (name, data) {
+        fetch("/1110/log", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, data: data })
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    };
+
+    const postDomObjInfo = function (id, name, data) {
+        domObjInfo[id] = { name: name, data: data };
+    };
+
     return `\n/* autogen added */ 
     \nlet verbosePrint = false;
     \nlet stateManager = ${stateManagerStr}
     \nlet domObjects = [];
     \nconst updateStateManager = ${updateStateManager.toString()}
     \nlet callCounts = {};
-    \nconst fxnCallCallback = ${fxnCallCallback.toString()} 
+    \nconst fxnCallCallback = ${fxnCallCallback.toString()}
+    \nconst makeId = ${makeId.toString()}
+    \nconst postLogInfo = ${postLogInfo.toString()}
+    let domObjInfo = {};
+    \nconst postDomObjInfo = ${postDomObjInfo.toString()}
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
-            fetch("/1110/log", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ data: "/* DOM LOADED HERE! */" })
-            })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+            postLogInfo("DOM STATUS", "/* DOM LOADED HERE! */");
         }
     };
     document.getElementById("readytolearnbtn").addEventListener("click", () => {
@@ -173,7 +195,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager })
+            body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager, domObjInfo: domObjInfo })
         })
         .then((response) => response.json())
         .then((data) => console.log(data));
@@ -344,7 +366,22 @@ function enter(node) {
             \n/* autogen added */ 
             let isDomObj_${nodeName} = ${nodeName} instanceof jQuery || ${nodeName} instanceof HTMLElement;
             stateManager["${stateManagerKey}"][0] = isDomObj_${nodeName};
-            if (isDomObj_${nodeName}) domObjects.push(${nodeName})
+            if (isDomObj_${nodeName}) {
+                if (${nodeName} instanceof jQuery) {
+                    for (let c = 0; c < ${nodeName}.length; c++) {
+                        let child = ${nodeName}[c];
+                        if (!child.id || child.id === "") {
+                            child.id = makeId(7);
+                            postDomObjInfo(child.id, "${nodeName}", child);
+                            domObjects.push(child);
+                        }
+                    }
+                } else { // html elem, not jQuery elem
+                    ${nodeName}.id = makeId(7);
+                    postDomObjInfo(${nodeName}.id, "${nodeName}", ${nodeName});
+                    domObjects.push(${nodeName});
+                }
+            }
             /* end autogen added */\n`;
         scriptUpdates.push({
             loc: locKey,
