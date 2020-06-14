@@ -34,7 +34,26 @@ function addScriptUpdates(source, scriptUpdates) {
         /* insert the update into the correct position */
         sourceArr.splice(line, 0, update["autoStr"]);
     }
-    return sourceArr.join("\n");
+
+    const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
+        if (prevNodeName instanceof jQuery) {
+            console.log(
+                `${currNodeNameStr} same node as "${prevNodeNameStr}"?: `,
+                prevNodeName.length == currNodeName.length &&
+                    currNodeName.length == currNodeName.filter(prevNodeName).length
+            );
+            /** prevNodeName instanceof HTMLElement */
+        } else {
+            console.log(
+                `"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: `,
+                prevNodeName === currNodeName
+            );
+        }
+    };
+
+    return `
+        const areSameDomElems = ${areSameDomElems.toString()}
+        \n${sourceArr.join("\n")}`;
 }
 
 estraverse.traverse(ast.program, {
@@ -50,6 +69,9 @@ function enter(node) {
         const startLoc = node.loc.start;
         const endLoc = node.loc.end;
 
+        /** Adding this to avoid adding an empty comment if no
+         * DOM object is in the current code snippet
+         */
         let foundElem = false;
         for (let elem of domElems) {
             if (nodeStr.includes(elem)) {
@@ -63,16 +85,16 @@ function enter(node) {
                     }
                 }
                 foundElem = true;
-                updateStartStr += `\nlet prevStatus_${elem}_${startLoc.line}_${endLoc.line} = ${elem};`;
-
-                updateEndStr += `
-                    let currStatus_${elem}_${startLoc.line}_${endLoc.line} = ${elem};
-                    console.log("same node?", prevStatus_${elem}_${startLoc.line}_${endLoc.line}.isSameNode(currStatus_${elem}_${startLoc.line}_${endLoc.line}))`;
+                let prevName = `prevStatus_${elem}_${startLoc.line}_${endLoc.line}`;
+                let currName = `currStatus_${elem}_${startLoc.line}_${endLoc.line}`;
+                updateStartStr += `\nlet ${prevName} = ${elem};`;
+                updateEndStr += `\nlet ${currName} = ${elem};`;
+                updateEndStr += `\nareSameDomElems("${prevName}", ${prevName}, "${currName}", ${currName})\n`;
             }
         }
         if (foundElem) {
-            updateStartStr += "/* end autogen added */";
-            updateEndStr += "/* end autogen added */";
+            updateStartStr += "\n/* end autogen added */\n";
+            updateEndStr += "\n/* end autogen added */\n";
 
             const startLocKey = `${startLoc["line"] - 1}.${startLoc["column"]}`;
             scriptUpdates.push({
@@ -159,4 +181,4 @@ function isAnonymizedFunction(node) {
 }
 
 let updates = addScriptUpdates(scriptString, scriptUpdates);
-fs.writeFileSync(`./temp/doubletime_${fileKey}.js`, updates);
+fs.writeFileSync(`./temp/second_instrumentation_${fileKey}.js`, updates);
