@@ -48,13 +48,12 @@ app.post("/1110/exercisedata", function (req, res) {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
-    // let runLog = fs.readFileSync("./logs/runLog.js", "utf8").split("~~~~\n\n~~~~");
-    // const codeRun = runLog.map((r) => r.replace(/^\s+|\s+$/g, ""));
     fs.copyFileSync("./logs/runLog.js", `${dir}/runLog.js`);
-    /** Copy HTML file with IDs added to all DOM attributes */
+    /** Copy HTML file with IDs added to all DOM attributes. Will run
+     * second instrumentation with this HTML.
+     */
     fs.copyFileSync("./sites/xkcd/xkcd.com/1110/index.html", `${dir}/index.html`);
     fs.writeFileSync(`${dir}/domObjInfo.json`, JSON.stringify(req.body.domObjInfo));
-    fs.copyFileSync("./sites/xkcd/xkcd.com/1110/s/observers.js", `${dir}/observers.js`);
     fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
     fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));
 
@@ -64,9 +63,5 @@ app.post("/1110/exercisedata", function (req, res) {
 app.listen(PORT, function () {
     // clear out log file before new run
     fs.writeFileSync(`./logs/runLog.js`, "/*~~~~*/");
-    fs.copyFileSync(
-        "./sites/xkcd/xkcd.com/1110/s/observersTemplate.js",
-        "./sites/xkcd/xkcd.com/1110/s/observers.js"
-    );
     console.log("Example app listening at http://localhost:" + "3000");
 });

@@ -157,7 +157,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
         return result;
     };
 
-    const postLogInfo2 = function (name, data) {
+    const postLogInfo = function (name, data) {
         fetch("/1110/log", {
             method: "POST",
             headers: {
@@ -181,13 +181,12 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     \nlet callCounts = {};
     \nconst fxnCallCallback = ${fxnCallCallback.toString()}
     \nconst makeId = ${makeId.toString()}
-    \n /* TODO - maybe take out if can use same fxn in observers.js */
-    \nconst postLogInfo2 = ${postLogInfo2.toString()}
+    \nconst postLogInfo = ${postLogInfo.toString()}
     let domObjInfo = {};
     \nconst postDomObjInfo = ${postDomObjInfo.toString()}
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
-            postLogInfo2("DOM STATUS", "/* DOM LOADED HERE! */");
+            postLogInfo("DOM STATUS", "/* DOM LOADED HERE! */");
         }
     };
     document.getElementById("readytolearnbtn").addEventListener("click", () => {
