@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
+const { secondInstrumentation } = require("./../identifyCodeClassification.js");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,6 +57,9 @@ app.post("/1110/exercisedata", function (req, res) {
     fs.writeFileSync(`${dir}/domObjInfo.json`, JSON.stringify(req.body.domObjInfo));
     fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
     fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));
+
+    /** Run the new script and load in the new HTML */
+    secondInstrumentation();
 
     res.send({ message: `data in directory: ${dir}` });
 });

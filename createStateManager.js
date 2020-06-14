@@ -198,7 +198,11 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
             body: JSON.stringify({ callCounts: callCounts, stateManager: stateManager, domObjInfo: domObjInfo })
         })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            console.log(data)
+            document.getElementById("readytolearnbtn").innerText = "Scaffolded Exercises: Play with the page one more time then click here"
+            $('#mainjs').replaceWith('<script id="mainjs" src="./s/main2.js"><\/script>');
+        });
     });
     \nconst sourceCode = \`${scriptString}\`;
     \nconst sourceCodeArr = sourceCode.split("\\n");

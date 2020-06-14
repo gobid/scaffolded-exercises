@@ -19,15 +19,16 @@ let domElems = ["$overlay", "$map", "$remove", "tile", "$image"];
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(path.resolve(__dirname, `./temp/updated_${fileKey}.js`)).toString();
 const ast = recast.parse(scriptString, { range: true });
-
 let scriptUpdates = [];
 
-function addScriptUpdates(source, scriptUpdates) {
-    /* sort in descending order so we are modifying the file from the end to the beginning so we don't mess up the recorded locations for updates downstream */
+function secondInstrumentation() {
+    traverseTree();
     let uniqueScriptUpdates = new Set(scriptUpdates);
     let finScriptUpdates = Array.from(uniqueScriptUpdates);
+    /** sort in descending order so we are modifying the file from the end to the beginning so
+     * we don't mess up the recorded locations for updates downstream */
     finScriptUpdates = finScriptUpdates.sort((a, b) => b["loc"] - a["loc"]);
-    let sourceArr = source.split("\n");
+    let sourceArr = scriptString.split("\n");
     for (let update of finScriptUpdates) {
         const locs = update["loc"].split(".");
         const line = locs[0];
@@ -39,26 +40,30 @@ function addScriptUpdates(source, scriptUpdates) {
         if (prevNodeName instanceof jQuery) {
             console.log(
                 `${currNodeNameStr} same node as "${prevNodeNameStr}"?: `,
-                prevNodeName.length == currNodeName.length &&
-                    currNodeName.length == currNodeName.filter(prevNodeName).length
+                (prevNodeName.length == currNodeName.length &&
+                    currNodeName.length == currNodeName.filter(prevNodeName).length) ||
+                    prevNodeName === undefined
             );
-            /** prevNodeName instanceof HTMLElement */
+            /** else prevNodeName instanceof HTMLElement, not jQuery element */
         } else {
             console.log(
                 `"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: `,
-                prevNodeName === currNodeName
+                prevNodeName === currNodeName || prevNodeName === undefined
             );
         }
     };
-
-    return `
-        const areSameDomElems = ${areSameDomElems.toString()}
+    let finalScript = `const areSameDomElems = ${areSameDomElems.toString()}
         \n${sourceArr.join("\n")}`;
+
+    fs.writeFileSync(`./temp/second_instrumentation_${fileKey}.js`, finalScript);
+    fs.writeFileSync("./sites/xkcd/xkcd.com/1110/s/main2.js", finalScript);
 }
 
-estraverse.traverse(ast.program, {
-    enter: enter
-});
+function traverseTree() {
+    estraverse.traverse(ast.program, {
+        enter: enter
+    });
+}
 
 function enter(node) {
     if (isCorrectNodeType(node)) {
@@ -136,16 +141,6 @@ function isVariableUpdate(node) {
     );
 }
 
-/** Check if a node is a function declaration, not an es5 class definition */
-function isFunctionDeclaration(node) {
-    return node.type === "FunctionDeclaration" && !/[A-Z]/.test(node.id.name[0]);
-}
-
-/** check if a node is a class method declaration */
-function isClassMethodDeclaration(node) {
-    return node.type === "Property" && node.value.type === "FunctionExpression";
-}
-
 /** Check for instrumenting Stacktrace.js */
 // @TODO: does this hold for user-defined class methods? do MemberExpressions only capture
 // library expressions?
@@ -161,24 +156,7 @@ function isLibraryMethodCall(node) {
     );
 }
 
-/** Check if the node creates a new scope */
-function createsNewScope(node) {
-    return (
-        node.type === "FunctionDeclaration" ||
-        isAnonymizedFunction(node) ||
-        node.type === "Program" ||
-        (node.type === "Property" && node.value.type === "FunctionExpression") /** class method */
-    );
-}
+module.exports = { secondInstrumentation };
 
-function isAnonymizedFunction(node) {
-    return (
-        (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
-        (node.type === "ExpressionStatement" &&
-            node.expression === "AssignmentExpression" &&
-            node.expression.right === "FunctionExpression")
-    );
-}
-
-let updates = addScriptUpdates(scriptString, scriptUpdates);
-fs.writeFileSync(`./temp/second_instrumentation_${fileKey}.js`, updates);
+// let updates = addScriptUpdates();
+// fs.writeFileSync(`./temp/second_instrumentation_${fileKey}.js`, updates);

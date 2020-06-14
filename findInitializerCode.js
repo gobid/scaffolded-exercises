@@ -12,7 +12,7 @@ const runLogString = fs
 /** Split the runLog into an array since each code snippet is separated by the squiggly comments */
 const allSnippets = runLogString.split("/*~~~~*/\n/*~~~~*/");
 /** Find the DOM Content Loaded message. Anything before this could be initializer code */
-let domContentLoadedAt = allSnippets.indexOf("\n/* undefined */\n/* DOM LOADED HERE! */\n");
+let domContentLoadedAt = allSnippets.indexOf("\n/* DOM STATUS */\n/* DOM LOADED HERE! */\n");
 let initCode = allSnippets.slice(0, domContentLoadedAt);
 let runCode = allSnippets.slice(domContentLoadedAt + 1);
 
