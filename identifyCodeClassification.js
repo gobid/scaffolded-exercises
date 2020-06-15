@@ -13,8 +13,20 @@ const stringify = require("json-stringify-safe");
 const fs = require("fs");
 const path = require("path");
 
-/** @TODO : get this from the exercise data */
-let domElems = ["$overlay", "$map", "$remove", "tile", "$image"];
+/** which exercise-data download to get information from */
+const timestampKey = "1591811153191";
+const stateManager = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/stateManager.json`));
+/** Get all the DOM objects from the downloaded exercise data */
+let domElems = [];
+for (let key in stateManager) {
+    if (stateManager[key][0] === true) {
+        /* key looks like 'Program:Map:$overlay'. Need to get the last item, which is the
+         * DOM object name */
+        const domObjNameArr = key.split(":");
+        const domObjName = domObjNameArr[domObjNameArr.length - 1];
+        domElems.push(domObjName);
+    }
+}
 
 const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(path.resolve(__dirname, `./temp/updated_${fileKey}.js`)).toString();
@@ -36,23 +48,47 @@ function addScriptUpdates(source, scriptUpdates) {
     }
 
     const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
+        let areSame = false;
         if (prevNodeName instanceof jQuery) {
-            console.log(
-                `${currNodeNameStr} same node as "${prevNodeNameStr}"?: `,
+            areSame =
                 prevNodeName.length == currNodeName.length &&
-                    currNodeName.length == currNodeName.filter(prevNodeName).length
-            );
+                currNodeName.length == currNodeName.filter(prevNodeName).length;
+            console.log(`${currNodeNameStr} same node as "${prevNodeNameStr}"?: ${areSame}`);
             /** prevNodeName instanceof HTMLElement */
         } else {
-            console.log(
-                `"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: `,
-                prevNodeName === currNodeName
-            );
+            areSame = prevNodeName === currNodeName;
+            console.log(`"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: ${areSame}`);
+        }
+        /** If you want to write out log info to a file instead of an object
+    fetch("/1110/codetypes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ data: areSame, name: currNodeNameStr })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    */
+        if (codeTypes[currNodeNameStr] === undefined || codeTypes[currNodeNameStr] !== areSame) {
+            codeTypes[currNodeNameStr] = areSame;
         }
     };
 
     return `
-        const areSameDomElems = ${areSameDomElems.toString()}
+        let codeTypes = {};
+        \nconst areSameDomElems = ${areSameDomElems.toString()}
+        document.getElementById("readytolearnbtn").addEventListener("click", () => {
+            fetch("/1110/codetypes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ codeTypeInfo: codeTypes })
+            })
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+        });
         \n${sourceArr.join("\n")}`;
 }
 

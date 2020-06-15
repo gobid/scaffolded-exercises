@@ -1,18 +1,43 @@
+let codeTypes = {};
 const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
+    let areSame = false;
     if (prevNodeName instanceof jQuery) {
-        console.log(
-            `${currNodeNameStr} same node as "${prevNodeNameStr}"?: `,
+        areSame =
             prevNodeName.length == currNodeName.length &&
-                currNodeName.length == currNodeName.filter(prevNodeName).length
-        );
+            currNodeName.length == currNodeName.filter(prevNodeName).length;
+        console.log(`${currNodeNameStr} same node as "${prevNodeNameStr}"?: ${areSame}`);
         /** prevNodeName instanceof HTMLElement */
     } else {
-        console.log(
-            `"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: `,
-            prevNodeName === currNodeName
-        );
+        areSame = prevNodeName === currNodeName;
+        console.log(`"${currNodeNameStr}" same node as "${prevNodeNameStr}"?: ${areSame}`);
+    }
+    /** If you want to write out log info to a file instead of an object
+    fetch("/1110/codetypes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ data: areSame, name: currNodeNameStr })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    */
+    if (codeTypes[currNodeNameStr] === undefined || codeTypes[currNodeNameStr] !== areSame) {
+        codeTypes[currNodeNameStr] = areSame;
     }
 };
+
+document.getElementById("readytolearnbtn").addEventListener("click", () => {
+    fetch("/1110/codetypes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ codeTypeInfo: codeTypes })
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+});
 
 function eventPos(e) {
     if (e.type.match(/^touch/)) {
