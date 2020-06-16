@@ -208,7 +208,7 @@ function getNextExercise(prevEx) {
             let currSnippetKey = parseSnippetKey(allSnippets[c]);
             let currCodeTypeKey = parseCodeTypeKey(prevEx.domObj, currSnippetKey, true);
             if (!visited[currSnippetKey]) {
-                if (modifiers.includes(currCodeTypeKey)) {
+                if (users.includes(currCodeTypeKey)) {
                     visited[currSnippetKey] = true;
                     let exInfo = new ExerciseInfo(prevEx);
                     exInfo.code = snippets[c];
@@ -222,7 +222,48 @@ function getNextExercise(prevEx) {
         }
     }
 
-    /** @TODO user nodes of other introduced dom objects */
+    /** If we find no modifer nodes for any involved DOM objects, and no user node for the
+     * current DOM object, look for user nodes for other involved DOM objects.
+     */
+    let otherUserOptions = [];
+    if (prevEx.otherElemsIncluded.length) {
+        for (let elem of prevEx.otherElemsIncluded) {
+            /** Don't go looping through looking for user code again if there are none
+             * left for the current DOM object
+             */
+            if (elem === prevEx.domObj) continue;
+
+            for (let d = allSnippets.length - 1; d > domContentLoadedAt; d--) {
+                if (allSnippets[d].includes(elem)) {
+                    let currSnippetKey = parseSnippetKey(allSnippets[d]);
+                    let currCodeTypeKey = parseCodeTypeKey(elem, currSnippetKey, true);
+                    if (!visited[currSnippetKey]) {
+                        if (users.includes(currCodeTypeKey)) {
+                            visited[currSnippetKey] = true;
+                            let exInfo = new ExerciseInfo(prevEx);
+                            exInfo.code = allSnippets[d];
+                            exInfo.arrayLoc = d;
+                            exInfo.domObj = elem;
+                            exInfo.reason = "most recent time current DOM obj was used in run log";
+                            exInfo.codeType = "user";
+                            exInfo.otherElemsIncluded = findIncludedDomElems(
+                                allSnippets[d],
+                                prevEx.otherElemsIncluded
+                            );
+                            otherUserOptions.push(exInfo);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /** if there are DOM objects introduced in previous exercises that have been used,
+     * the next exercise is the  user code that ran most recently
+     */
+    if (otherUserOptions.length) {
+        otherUserOptions.sort((a, b) => a.arrayLoc > b.arrayLoc);
+        return otherUserOptions[0];
+    }
 
     console.log("cant find next exercise.. look for next dom object");
     return null;
