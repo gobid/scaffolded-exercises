@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 /** Load in data collected from instrumented code */
-const timestampKey = "1591811153191";
+const timestampKey = "1592316243638";
 /** load in data collected from second instrumentation */
 const secondaryTimestampKey = "1592253184657";
 const stateManager = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/stateManager.json`));
@@ -49,8 +49,6 @@ for (let c in codeTypes) {
 const allSnippets = runLogString.split("/*~~~~*/\n/*~~~~*/");
 /** Find the DOM Content Loaded message. Anything before this could be initializer code */
 let domContentLoadedAt = allSnippets.indexOf("\n/* DOM STATUS */\n/* DOM LOADED HERE! */\n");
-let initCode = allSnippets.slice(0, domContentLoadedAt);
-let runCode = allSnippets.slice(domContentLoadedAt + 1);
 
 /** Get all the DOM objects from the stateManager */
 let domObjects = [];
