@@ -63,7 +63,7 @@ for (let key in stateManager) {
 }
 
 /** Generate exercise order */
-let currExercise = getFirstExercise(allSnippets, domObjects);
+let currExercise = getDomObjExercise();
 while (currExercise !== null) {
     exerciseOrder.push(currExercise);
     currExercise = getNextExercise(currExercise);
@@ -71,14 +71,22 @@ while (currExercise !== null) {
 console.log("exercise order: ", exerciseOrder);
 
 /** Find out the most recently run snippet (the latest in the array) to have been run that modifies a DOM object. */
-function getFirstExercise(snippets, domObjects) {
+function getDomObjExercise(prevEx = null, exType = "modifier") {
     let exInfo = new ExerciseInfo();
-    exInfo.reason = "most recent DOM object modified in run log";
-    exInfo.codeType = "modifier";
+    let arrToCheck = null;
+    if (exType === "modifier") {
+        exInfo.reason = "most recent DOM object modified in run log";
+        exInfo.codeType = "modifier";
+        arrToCheck = modifiers;
+    } else { /** exercise type === user */
+        exInfo.reason = "most recent DOM object used in run log";
+        exInfo.codeType = "user";
+        arrToCheck = users;
+    }
 
-    for (let s = snippets.length - 1; s >= 0; s--) {
+    for (let s = allSnippets.length - 1; s >= 0; s--) {
         for (let o = 0; o < domObjects.length; o++) {
-            if (snippets[s].includes(domObjects[o])) {
+            if (allSnippets[s].includes(domObjects[o])) {
                 /** snippets look like: 
                  * '\n' +
                     '/ * $map.css({:71:74 * /\n' +
@@ -101,19 +109,22 @@ function getFirstExercise(snippets, domObjects) {
                 key from the codeType modifer array was "$map_71_74", this is still the
                 correct element to be in the exercise. 
                 */
-                let currSnippetKey = parseSnippetKey(snippets[s]);
+                let currSnippetKey = parseSnippetKey(allSnippets[s]);
                 let currCodeTypeKey = parseCodeTypeKey(domObjects[o], currSnippetKey, true);
-                if (modifiers.includes(currCodeTypeKey)) {
-                    exInfo.code = snippets[s];
+                if (arrToCheck.includes(currCodeTypeKey) && !visited[currSnippetKey]) {
+                    exInfo.code = allSnippets[s];
                     exInfo.arrayLoc = s;
                     exInfo.domObj = domObjects[o];
-                    exInfo.otherElemsIncluded = findIncludedDomElems(snippets[s], []);
+                    let currElems = prevEx ? prevEx.otherElemsIncluded : [];
+                    exInfo.otherElemsIncluded = findIncludedDomElems(allSnippets[s], currElems);
                     visited[currSnippetKey] = true;
                     return exInfo;
                 }
             }
         }
     }
+    /** if we never find another dom object exercise */
+    return null;
 }
 
 function getNextExercise(prevEx) {
@@ -264,8 +275,19 @@ function getNextExercise(prevEx) {
         otherUserOptions.sort((a, b) => a.arrayLoc > b.arrayLoc);
         return otherUserOptions[0];
     }
+    
+    let newDomObjEx = getDomObjExercise(prevEx, "modifier");
+    if (newDomObjEx) {
+        return newDomObjEx;
+    } else {
+        newDomObjEx = getDomObjExercise(prevEx, "user");
+        if (newDomObjEx) {
+            return newDomObjEx;
+        }
+    }
 
-    console.log("cant find next exercise.. look for next dom object");
+    /** Fallthrough if all exercises have been found / visisted */
+    console.log("cant find next exercise.");
     return null;
 }
 
