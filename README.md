@@ -72,8 +72,7 @@ Directly below the HTML `<body>` tag:
 11. Run `node identifyCodeClassification.js`, changing `timestampKey` to the number you copied from your console above. This will generate a new file in `temp` called `second_instrumentation.js`, which is the second instrumentation of the source code.
 12. Copy the contents of `second_instrumentation.js` to the main JavaScript file. Run `npm start` again.
 13. Interact with the site for long enough that you see the full functionality of the site. Press the purple button in the top left corner of your screen (you added this button in step 4). In the browser console where you're running the site, you'll see a message that says "data in file: ./exercise-data/codetypeinfo-######.json". Copy the sequence of numbers for the following steps.
-14. Run `node findInitializerCode.js`. This will print out the first exercise.
-15. @TODO add thing to run to break down the rest of the code
+14. Run `node findExerciseOrder.js`. This will print out the exercise order.
 
 ## Future considerations / questions
 
