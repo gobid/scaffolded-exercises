@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-navigate to `[http://localhost:3000/1110/index.html](http://localhost:3000/1110/index.html)` to see an exact copy of an XKCD comic. Open developer tools to see more information about what's happening on the page.
+navigate to `[http://localhost:3000/xkcd.com/1110/index.html](http://localhost:3000/xkcd.com/1110/index.html)` to see an exact copy of an XKCD comic. Open developer tools to see more information about what's happening on the page.
 
 ## System Explanation
 
@@ -30,10 +30,25 @@ Deanonymizes named functions (ex: `var foo = function(x, y) { ... }` turns into 
 
 After the source code is modified by `rewriteCode.js` (see above^ for information on function deanonymization for scoping purposes), `createStateManager.js` creates the _state manager_ (`stateManager`) object and instruments over the modified source code in order to add in code that updates the `stateManager` object in real-time. This `stateManager` object is inputted at the top of the client-side JS file it modifies.
 
-### WiP: Exercise Breakdown
+This instrumentation also:
 
--   using [Stacktrace](https://www.stacktracejs.com/#!/docs/stacktrace-js) to trace function calls
--   using abstract syntax trees for static code analysis to decide the amount of code to be included in a given exercise + which exercises to present earlier in the sequence (see [breakdown methodology explanation video](https://www.youtube.com/watch?v=frKHF048qSg) for more info)
+-   adds information into `logs/runLog.js`. The information in the runLog describes the order that things ran in and everytime a code snippet is run, it is added in the run log.
+-   identifies which code/variables refer to DOM objects
+-   counts the number of time each instrumented code snippet is run
+
+In the instructions for "Using SE on a new site" below, step 4 instructs developers to add a button to the source code's HTML. When you click that button, the stateManager, runLog, dom object information, and the number of time each code snippet is run is all downloaded in preparation to be analyzed for exercise breakdown (below).
+
+### Exercise Breakdown
+
+SE recency information (created by instrumentation steps in `createStateManager.js`) and code classification (`user`, `modifier`, and `initializer` code types) to create an order of exercises.
+
+### `identifyCodeClassification.js`
+
+Re-instruments the code created by `rewriteCode.js` to include copies of DOM objects before and after code is run that includes the object. If the two copies are the same before and after a certain code snippet run, that snippet gets a `user` code classification. Otherwise, it gets a `modifier` classification.
+
+### `findExerciseorder.js`
+
+The final step to actually output the exercise order. Runs the algorithm described in [this video](https://www.youtube.com/watch?v=frKHF048qSg) to ouput a series of exercises based on a site's source code.
 
 ## Using SE on a new site
 

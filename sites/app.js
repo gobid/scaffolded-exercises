@@ -16,7 +16,7 @@ app.get("/", function (req, res) {
     res.set("Content-Type", "text/html");
     res.send(
         Buffer.from(
-            "<p>XCKD home page at <a href='/1110/index.html'>localhost:3000/xkcd.com/1110/index.html</a></p><p>MapsTD home page at <a href='/MapsTD.htm'>localhost:3000/MapsTD.htm</a></p>"
+            "<p>XCKD home page at <a href='/xkcd.com/1110/index.html'>localhost:3000/xkcd.com/1110/index.html</a></p><p>MapsTD home page at <a href='/MapsTD.htm'>localhost:3000/MapsTD.htm</a></p>"
         )
     );
 });
@@ -51,10 +51,6 @@ app.post("/1110/exercisedata", function (req, res) {
         fs.mkdirSync(dir);
     }
     fs.copyFileSync("./logs/runLog.js", `${dir}/runLog.js`);
-    /** Copy HTML file with IDs added to all DOM attributes. Will run
-     * second instrumentation with this HTML.
-     */
-    fs.copyFileSync("./sites/xkcd/xkcd.com/1110/index.html", `${dir}/index.html`);
     fs.writeFileSync(`${dir}/domObjInfo.json`, JSON.stringify(req.body.domObjInfo));
     fs.writeFileSync(`${dir}/stateManager.json`, JSON.stringify(req.body.stateManager));
     fs.writeFileSync(`${dir}/callCounts.json`, JSON.stringify(req.body.callCounts));
