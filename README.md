@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-navigate to `[http://localhost:3000/xkcd.com/1110/index.html](http://localhost:3000/xkcd.com/1110/index.html)` to see an exact copy of an XKCD comic. Open developer tools to see more information about what's happening on the page.
+navigate to `http://localhost:3000/xkcd.com/1110/index.html` to see an exact copy of an XKCD comic. Open developer tools to see more information about what's happening on the page.
 
 ## System Explanation
 
