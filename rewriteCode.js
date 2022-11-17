@@ -12,6 +12,7 @@ const fileKey = "xkcd_src";
 const scriptString = fs.readFileSync(`./temp/${fileKey}.js`).toString();
 
 function deanonymizeFunctionExpressions(source) {
+    console.log("doing deanonymizeFunctionExpressions");
     let prevUpdated,
         updatedSrc = source;
     let isTraveralComplete = false;
@@ -28,6 +29,7 @@ function deanonymizeFunctionExpressions(source) {
 }
 
 function parseTreeAndUpdate(source) {
+    console.log("doing parseTreeAndUpdate");
     /* make one update then stop so that the next update is done on the newly updated tree. Inefficicent but consistent. */
     let updates = false;
     esprima.parseScript(source, {}, function (node, meta) {
@@ -70,6 +72,7 @@ function parseTreeAndUpdate(source) {
 }
 
 function isAnonymizedFunction(node) {
+    //console.log("isAnonymizedFunction");
     return (
         (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
         (node.init && node.init.type === "ArrowFunctionExpression") ||
@@ -94,6 +97,7 @@ function isAnonymizedFunction(node) {
  * })
  */
 function deanonymizeFunctionExpr(node) {
+    console.log("deanonymizeFunctionExpr");
     const functionName = node.id.name ? node.id.name : "REAL_ANON_SOS";
     const newId = b.identifier(functionName);
     const newNode = b.functionDeclaration(newId, node.init.params, node.init.body);

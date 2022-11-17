@@ -72,6 +72,7 @@ console.log("exercise order: ", exerciseOrder);
 
 /** Find out the most recently run snippet (the latest in the array) to have been run that modifies a DOM object. */
 function getDomObjExercise(prevEx = null, exType = "modifier") {
+    console.log("in getDomObjExercise");
     let exInfo = new ExerciseInfo();
     let arrToCheck = null;
     if (exType === "modifier") {
@@ -128,6 +129,7 @@ function getDomObjExercise(prevEx = null, exType = "modifier") {
 }
 
 function getNextExercise(prevEx) {
+    console.log("in getNextExercise");
     /** If a new dom object is introduced in the current exercise,
      * get that new object's init code. If there is more than one new
      * object introduced, add all the initializers to the exercises
@@ -301,6 +303,7 @@ function getNextExercise(prevEx) {
  * problem.
  */
 function getInitializerCode(prevEx, domObj) {
+    console.log("in getInitializerCode");
     let exInfo = new ExerciseInfo(prevEx);
     exInfo.code = []; /** show all initializer code for an elem in the same exercise */
     exInfo.arrayLoc = [];
@@ -326,6 +329,7 @@ function getInitializerCode(prevEx, domObj) {
  * the two lists
  */
 function findIncludedDomElems(snippet, currElemsIncluded) {
+    console.log("in findIncludedDomElems");
     let newElemsIncluded = [];
     for (let obj of domObjects) {
         if (snippet.includes(obj)) {

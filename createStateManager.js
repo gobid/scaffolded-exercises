@@ -77,6 +77,7 @@ fs.writeFileSync(`./temp/final_${fileKey}.js`, finalSource); // @TODO: should th
 
 /* after traversing through the source code's AST representation and collecting information about the places where variable updates are made, modify the source code so that it updates the stateManager every time a variable gets updated. */
 function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
+    console.log("doing addStateManagerUpdates");
     /* sort in descending order so we are modifying the file from the end to the beginning so we don't mess up the recorded locations for updates downstream */
     scriptUpdates = scriptUpdates.sort((a, b) => b["loc"] - a["loc"]);
     let sourceArr = source.split("\n");
@@ -96,6 +97,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
      * name, which is the last item in the array
      */
     const updateStateManager = function (key, node) {
+        console.log("doing updateStateManager");
         if (stateManager[key]) {
             stateManager[key][1] = node;
         } else {
@@ -121,6 +123,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     };
     /* compile the updated source code and add the state manager object to it */
     const fxnCallCallback = (fnName, sourceCodeArr, sourceCodeMap) => (stackframes) => {
+        console.log("doing fxnCallCallback");
         if (callCounts[fnName] === undefined) {
             callCounts[fnName] = 1;
         } else {
@@ -148,6 +151,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     };
 
     const makeId = function (len) {
+        console.log("doing makeId");
         var result = "";
         var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         var charactersLen = characters.length;
@@ -158,6 +162,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     };
 
     const postLogInfo = function (name, data) {
+        console.log("doing postLogInfo");
         fetch("/1110/log", {
             method: "POST",
             headers: {
@@ -208,6 +213,7 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
 }
 
 function enter(node) {
+    console.log("in enter")
     let scopedFxnName = null;
     let currentScope = scopeChain[scopeChain.length - 1];
 
@@ -219,6 +225,7 @@ function enter(node) {
     }
     /** adding stacktrace instrumentation to functions */
     if (isFunctionDeclaration(node)) {
+        console.log("check isFunctionDeclaration");
         const fxnName = node.id.name;
         const fxnKey = `${fxnName}:${node.loc.start.line}:${node.loc.end.line}`;
         sourceCodeMap[fxnKey] = { start: node.loc.start, end: node.loc.end };
@@ -257,6 +264,7 @@ function enter(node) {
          * });
          **/
         if (node.type === "ExpressionStatement") {
+            console.log("in ExpressionStatement checking")
             /** Grabs the stringified node by its position in the source code */
             const stringifiedNode = scriptString.slice(node.range[0], node.range[1]);
             let methodName = `${stringifiedNode.split("\n")[0]}:${node.loc.start.line}:${node.loc.end.line}`;
@@ -304,6 +312,7 @@ function enter(node) {
      * }, , fxnCallCallback("$container.children"))();`
      */
     if (isRHSMethod(node)) {
+        console.log("in isRHSMethod section");
         const varName = node.id.name;
         const varKey = `rhs-method-${varName}:${node.loc.start.line}:${node.loc.end.line}`;
         sourceCodeMap[varKey] = { start: node.loc.start, end: node.loc.end };
@@ -329,6 +338,7 @@ function enter(node) {
      * maintains information about the current program scope we are in as we are traversing through the AST.
      */
     if (createsNewScope(node)) {
+        console.log("in createsNewScope section");
         /* initialized the scopeChain to include the global "Program" state, so don't add it twice */
         if (node.type !== "Program") {
             /* create the stateManager key for the current function scope if not yet created */
@@ -350,6 +360,7 @@ function enter(node) {
     /** If the node is a variable declaration, chceck if the item is a DOM object, add the variable to
      * the current scope and update the state manager */
     if (node.type === "VariableDeclarator") {
+        console.log("in VariableDeclarator");
         const nodeName = node.id.name;
         currentScope.push(nodeName);
         addVarsToStateManager(node, currentScope);
@@ -392,9 +403,11 @@ function enter(node) {
      * @TODO: how is this different than `isVariableUpdate`?
      */
     if (node.type === "AssignmentExpression") {
+        console.log("in AssignmentExpression");
         addVarsToStateManager(node, currentScope);
     }
     if (isVariableUpdate(node)) {
+        console.log("in isVariableUpdate");
         /* nodes from an AST parsed by recast have location objects that specify their location in the source code by line and column. This creates unique location keys from the given information so that when it comes time to rewrite the code with the stateManager update lines, we know where those lines should go. */
         const endLoc = node.loc.end;
         const locKey = `${endLoc["line"]}.${endLoc["column"]}`;
@@ -418,6 +431,7 @@ function enter(node) {
 /** if we're leaving a node that created a new scope, update the scopeChain so that
  * the current scope is always represented by the last item in the scopeChain array. */
 function leave(node) {
+    console.log("in leave");
     if (createsNewScope(node)) {
         let currentScope = scopeChain.pop();
         printScope(currentScope, node);
@@ -427,6 +441,7 @@ function leave(node) {
 
 /** pretty printing for scope information */
 function printScope(scope, node) {
+    console.log("in printScope");
     const declaredVars = scope.slice(1);
     const varsDisplay = declaredVars.length === 0 ? "NONE" : declaredVars.join(", ");
     if (node.type === "Program") {
@@ -562,6 +577,7 @@ function addVarsToStateManager(node, scope) {
  * LHS declarators
  */
 function isAnonymizedFunction(node) {
+    console.log("in isAnonymizedFunction");
     return (
         (node.type === "VariableDeclarator" && node.init && node.init.type === "FunctionExpression") ||
         (node.type === "ExpressionStatement" &&

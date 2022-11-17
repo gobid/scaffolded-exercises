@@ -6,7 +6,8 @@ function eventPos(e) {
         pageX: e.pageX,
         pageY: e.pageY
     };
-}
+} // here is a comment
+
 function Map($container) {
     $container.css({
         "z-index": 1,
@@ -94,24 +95,14 @@ function Map($container) {
                         $remove = $remove.not(tile);
                     } else {
                         var $image = $(
-                            '<img class="tile' +
-                                name +
-                                '" src="http://imgs.xkcd.com/clickdrag/' +
-                                name +
-                                '.png" style="top:' +
-                                (centre[1] + y) * tilesize +
-                                "px;left:" +
-                                (centre[0] + x) * tilesize +
-                                'px; z-index: -1; position: absolute;;" style="display:none" />'
+                            "<img class=\"tile" + name + "\" src=\"http://imgs.xkcd.com/clickdrag/" + name + ".png\" style=\"top:" + (centre[1] + y) * tilesize + "px;left:" + (centre[0] + x) * tilesize + "px; z-index: -1; position: absolute;;\" style=\"display:none\" />"
                         );
 
-                        $image
-                            .load(function () {
-                                $(this).show();
-                            })
-                            .error(function () {
-                                $(this).remove();
-                            });
+                        $image.load(function() {
+                            $(this).show();
+                        }).error(function() {
+                            $(this).remove();
+                        });
 
                         $map.append($image);
                     }
@@ -128,19 +119,23 @@ function Map($container) {
         if (scroll_delta) {
             var pos = eventPos(e);
 
-            position[0] = Math.round(
-                clamp(pos.pageX + scroll_delta[0], -(size[1] + size[3]) * tilesize + container_size[0], 0)
-            );
+            position[0] = Math.round(clamp(
+                pos.pageX + scroll_delta[0],
+                -(size[1] + size[3]) * tilesize + container_size[0],
+                0
+            ));
 
-            position[1] = Math.round(
-                clamp(pos.pageY + scroll_delta[1], -(size[0] + size[2]) * tilesize + container_size[1], 0)
-            );
+            position[1] = Math.round(clamp(
+                pos.pageY + scroll_delta[1],
+                -(size[0] + size[2]) * tilesize + container_size[1],
+                0
+            ));
 
             update();
         }
     }
 
-    $container.on("mousedown touchstart", function (e) {
+    $container.on("mousedown touchstart", function(e) {
         if (e.button && e.button >= 2) {
             return;
         }
@@ -151,11 +146,11 @@ function Map($container) {
         e.preventDefault();
     });
 
-    $(document).on("mouseup touchend", function (e) {
+    $(document).on("mouseup touchend", function(e) {
         $(document).off("mousemove touchmove", drag);
         scroll_delta = null;
     });
-}
+};
 
 /* 50:72:6f:50:75:6b:65:20:69:73:20:61:77:65:73:6f:6d:65 */
 
