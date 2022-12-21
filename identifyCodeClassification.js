@@ -14,7 +14,7 @@ const fs = require("fs");
 const path = require("path");
 
 /** which exercise-data download to get information from */
-const timestampKey = "1591811153191";
+const timestampKey = "1671582723497";
 const stateManager = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/stateManager.json`));
 /** Get all the DOM objects from the downloaded exercise data */
 let domElems = [];
@@ -35,6 +35,7 @@ const ast = recast.parse(scriptString, { range: true });
 let scriptUpdates = [];
 
 function addScriptUpdates(source, scriptUpdates) {
+    console.log("in addScriptUpdates");
     /* sort in descending order so we are modifying the file from the end to the beginning so we don't mess up the recorded locations for updates downstream */
     let uniqueScriptUpdates = new Set(scriptUpdates);
     let finScriptUpdates = Array.from(uniqueScriptUpdates);
@@ -48,6 +49,7 @@ function addScriptUpdates(source, scriptUpdates) {
     }
 
     const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
+        console.log("in areSameDomElems");
         let areSame = false;
         if (prevNodeName instanceof jQuery) {
             areSame =
@@ -97,6 +99,7 @@ estraverse.traverse(ast.program, {
 });
 
 function enter(node) {
+    // console.log("in enter");
     if (isCorrectNodeType(node)) {
         let updateStartStr = "/* autogen added */";
         let updateEndStr = "/* autogen added */";
@@ -199,6 +202,7 @@ function isLibraryMethodCall(node) {
 
 /** Check if the node creates a new scope */
 function createsNewScope(node) {
+    console.log("in createsNewScope");
     return (
         node.type === "FunctionDeclaration" ||
         isAnonymizedFunction(node) ||

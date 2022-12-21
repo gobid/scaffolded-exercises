@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 
 /** Load in data collected from instrumented code */
-const timestampKey = "1592316243638";
+const timestampKey = "1671582723497";
 /** load in data collected from second instrumentation */
-const secondaryTimestampKey = "1592253184657";
+const secondaryTimestampKey = "1671584153301";
 const stateManager = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/stateManager.json`));
 const callCounts = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/callCounts.json`));
 const runLogString = fs
