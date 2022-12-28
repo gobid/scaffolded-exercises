@@ -224,7 +224,7 @@ function getNextExercise(prevEx) {
                 if (users.includes(currCodeTypeKey)) {
                     visited[currSnippetKey] = true;
                     let exInfo = new ExerciseInfo(prevEx);
-                    exInfo.code = snippets[c];
+                    exInfo.code = allSnippets[c];
                     exInfo.arrayLoc = c;
                     exInfo.domObj = prevEx.domObj;
                     exInfo.reason = "most recent time current DOM obj was used in run log";
