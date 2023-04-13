@@ -415,15 +415,75 @@ for (var ex of exerciseOrder) {
     console.log("ex:", ex);
     // console.log("ex.code: ", ex.code);
     let vars_in_ex = [];
+    var ex_asts = getASTs(ex.code);
+
+    /* parse out variables */
+    for (var ex_ast of ex_asts) {
+        // console.log("ex_ast:", ex_ast);
+        vars_to_add = varsInAST(ex_ast);
+        for (let var_to_add of vars_to_add) {
+            if (!vars_in_ex.includes(var_to_add)) {
+                vars_in_ex.push(var_to_add);
+            }
+        }
+    }
+    console.log("vars_in_ex", vars_in_ex);
+
+    /* iterate through runlog and splice in exercises for code dealing with relevant vars */
+    for (var var_in_ex of vars_in_ex) {
+        console.log("var_in_ex", var_in_ex);
+        for (let e = allSnippets.length - 1; e > domContentLoadedAt; e--) {
+            allSnippets_asts = getASTs(allSnippets[e]);
+            for (var aS_asts of allSnippets_asts) {
+                aS_ast_vars = varsInAST(aS_asts);
+                // console.log("aS_ast_vars:", aS_ast_vars);
+                if (aS_ast_vars.includes(var_in_ex)) {
+                    let currSnippetKey = parseSnippetKey(allSnippets[e]);
+                    let currCodeTypeKey = parseCodeTypeKey(var_in_ex, currSnippetKey, true);
+                    // console.log("currSnippetKey:", currSnippetKey);
+                    if (!visited[currSnippetKey]) {
+                        let exInfo = new ExerciseInfo(ex);
+                        exInfo.code = [allSnippets[e]]; 
+                        exInfo.arrayLoc = [];
+                        exInfo.domObj = null;
+                        exInfo.reason = `variable ${var_in_ex} is defined, modified or used in this exercise, and it was introduced in previous exercise`;
+                        exInfo.codeType = "precursor-variable-exercise";
+                        console.log("exercise to add:", exInfo);
+                        visited[currSnippetKey] = true;                    
+                    }
+                }
+            }
+        }
+    }
+}
+
+function varsInAST(ex_ast) {
+    vars_in_ast = [];
+    if ("tokens" in ex_ast) {
+        // console.log("ex_ast.tokens", ex_ast.tokens)
+        for (var token of ex_ast.tokens) {
+            // console.log("token", token);
+            // console.log("variables", variables);
+            if (token.type == "Identifier" && variables.includes(token.value)) {
+                // console.log("token.value: ", token.value);
+                vars_in_ast.push(token.value);
+            }
+        }
+    }
+    // console.log("vars_in_ast", vars_in_ast);
+    return vars_in_ast;
+}
+
+function getASTs(code) {
     let codes_to_parse = [];
 
     /* sometimes the exercises' code can be an array of "codes" */
-    // console.log("type of ex.code", typeof ex.code);
-    if (typeof ex.code == "string") {
-        codes_to_parse.push(ex.code);
+    // console.log("type of code", typeof code);
+    if (typeof code == "string") {
+        codes_to_parse.push(code);
     }
-    else { // 
-        for (var code_to_parse of ex.code){
+    else { 
+        for (var code_to_parse of code){
             codes_to_parse.push(code_to_parse);
         }
     }
@@ -443,43 +503,10 @@ for (var ex of exerciseOrder) {
             // console.log("code_arr:", code_arr);
             let fixed_code = code_arr.join("\n");
             // console.log("fixed_code:", fixed_code);
-            ex_ast = recast.parse(fixed_code, { range: true });
+            // console.log("fixed_code.toString()", fixed_code.toString());
+            ex_ast = recast.parse(fixed_code.toString(), { range: true });
             ex_asts.push(ex_ast);
         }
     }
-
-    /* parse out variables */
-    for (var ex_ast of ex_asts) {
-        // console.log("ex_ast:", ex_ast);
-        vars_in_ex.push(varInAST(ex_ast));
-    }
-    console.log("vars_in_ex", vars_in_ex);
-
-    /* iterate through runlog and splice in exercises for code dealing with relevant vars */
-    for (var var_in_ex in vars_in_ex) {
-        for (let e = allSnippets.length - 1; e > domContentLoadedAt; e--) {
-            if (allSnippets[e].includes(var_in_ex)) {
-                let currSnippetKey = parseSnippetKey(allSnippets[e]);
-                let currCodeTypeKey = parseCodeTypeKey(var_in_ex, currSnippetKey, true);
-                if (!visited[currSnippetKey]) {
-
-                    visited[currSnippetKey] = true;                    
-                }
-            }
-        }
-    }
-}
-
-function varInAST(ex_ast) {
-    if ("tokens" in ex_ast) {
-        // console.log("ex_ast.tokens", ex_ast.tokens)
-        for (var token of ex_ast.tokens) {
-            // console.log("token", token);
-            // console.log("variables", variables);
-            if (token.type == "Identifier" && variables.includes(token.value)) {
-                // console.log("token.value: ", token.value);
-                return token.value;
-            }
-        }
-    }
+    return ex_asts;
 }
