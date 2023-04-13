@@ -3,11 +3,11 @@
 */
 
 // to handle typescript error :https://stackoverflow.com/questions/41292559/could-not-find-a-declaration-file-for-module-module-name-path-to-module-nam
-const estraverse = require("estraverse");
-const recast = require("recast");
+const estraverse = require("estraverse"); // ast traversal library
+const recast = require("recast"); // js syntax tree transformer
 const stringify = require("json-stringify-safe");
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs"); // js files module
+const path = require("path"); // working with directories and paths
 
 /* Initialize state manager. This will be inserted into the source code at the very end of its creation/the source code's modification (see scriptUpdates array comment) and will be the definitive source for every variable's value in the program. */
 let stateManager = {};
@@ -80,6 +80,8 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
     console.log("doing addStateManagerUpdates");
     /* sort in descending order so we are modifying the file from the end to the beginning so we don't mess up the recorded locations for updates downstream */
     scriptUpdates = scriptUpdates.sort((a, b) => b["loc"] - a["loc"]);
+    console.log("scriptUpdates: ", scriptUpdates);
+    console.log("source: ", source);
     let sourceArr = source.split("\n");
     for (let update of scriptUpdates) {
         const locs = update["loc"].split(".");
@@ -97,7 +99,6 @@ function addStateManagerUpdates(source, scriptUpdates, stateManagerStr) {
      * name, which is the last item in the array
      */
     const updateStateManager = function (key, node) {
-        console.log("doing updateStateManager");
         if (stateManager[key]) {
             stateManager[key][1] = node;
         } else {

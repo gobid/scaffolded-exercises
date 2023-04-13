@@ -4,7 +4,10 @@
 const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
         console.log("in areSameDomElems");
         let areSame = false;
+        console.log("prevNodeName:", prevNodeName);
+        console.log("currNodeName:", currNodeName);
         if (prevNodeName instanceof jQuery) {
+            console.log("currNodeName.filter(prevNodeName):", currNodeName.filter(prevNodeName));
             areSame =
                 prevNodeName.length == currNodeName.length &&
                 currNodeName.length == currNodeName.filter(prevNodeName).length;

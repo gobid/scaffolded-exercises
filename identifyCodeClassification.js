@@ -14,7 +14,7 @@ const fs = require("fs");
 const path = require("path");
 
 /** which exercise-data download to get information from */
-const timestampKey = "1671582723497";
+const timestampKey = "1681214183347";
 const stateManager = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/stateManager.json`));
 /** Get all the DOM objects from the downloaded exercise data */
 let domElems = [];
@@ -51,7 +51,10 @@ function addScriptUpdates(source, scriptUpdates) {
     const areSameDomElems = function (prevNodeNameStr, prevNodeName, currNodeNameStr, currNodeName) {
         console.log("in areSameDomElems");
         let areSame = false;
+        console.log("prevNodeName:", prevNodeName);
+        console.log("currNodeName:", currNodeName);
         if (prevNodeName instanceof jQuery) {
+            console.log("currNodeName.filter(prevNodeName):", currNodeName.filter(prevNodeName));
             areSame =
                 prevNodeName.length == currNodeName.length &&
                 currNodeName.length == currNodeName.filter(prevNodeName).length;

@@ -8,7 +8,6 @@ let stateManager = {"Program:eventPos:e":[null,null],"Program:Map:$container":[n
 let domObjects = [];
     
 const updateStateManager = function (key, node) {
-        console.log("doing updateStateManager");
         if (stateManager[key]) {
             stateManager[key][1] = node;
         } else {

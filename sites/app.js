@@ -46,6 +46,7 @@ app.post("/1110/codetypes", function (req, res) {
 
 app.post("/1110/exercisedata", function (req, res) {
     const timestamp = Date.now();
+    console.log("in exercisedata post");
     const dir = `./exercise-data/${timestamp}`;
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
