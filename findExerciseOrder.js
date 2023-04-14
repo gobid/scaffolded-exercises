@@ -15,7 +15,7 @@ for (let sm_key in stateManager) {
     let scope_parts = sm_key.split(":"); 
     variables.push(scope_parts[scope_parts.length-1]);
 }
-console.log("variables:", variables);
+// console.log("variables:", variables);
 
 const callCounts = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/callCounts.json`));
 const runLogString = fs
@@ -35,6 +35,7 @@ class ExerciseInfo {
         this.reason = "";
         this.codeType = "";
         this.otherElemsIncluded = [];
+        this.variables = [];
     }
 }
 
@@ -411,8 +412,10 @@ function parseCodeTypeKey(domObj, snippet, isParsed) {
  */
 
 /* Handle context and scope - variable dependencies */
-for (var ex of exerciseOrder) {
-    console.log("ex:", ex);
+var eio = exerciseOrder.length;
+for (var ei = 0; ei < eio; ei++) {
+    var ex = exerciseOrder[ei];
+    // console.log("ex:", ex);
     // console.log("ex.code: ", ex.code);
     let vars_in_ex = [];
     var ex_asts = getASTs(ex.code);
@@ -427,15 +430,15 @@ for (var ex of exerciseOrder) {
             }
         }
     }
-    console.log("vars_in_ex", vars_in_ex);
+    // console.log("vars_in_ex", vars_in_ex);
 
     /* iterate through runlog and splice in exercises for code dealing with relevant vars */
     for (var var_in_ex of vars_in_ex) {
-        console.log("var_in_ex", var_in_ex);
+        // console.log("var_in_ex", var_in_ex);
         for (let e = allSnippets.length - 1; e > domContentLoadedAt; e--) {
             allSnippets_asts = getASTs(allSnippets[e]);
             for (var aS_asts of allSnippets_asts) {
-                aS_ast_vars = varsInAST(aS_asts);
+                var aS_ast_vars = varsInAST(aS_asts);
                 // console.log("aS_ast_vars:", aS_ast_vars);
                 if (aS_ast_vars.includes(var_in_ex)) {
                     let currSnippetKey = parseSnippetKey(allSnippets[e]);
@@ -448,7 +451,9 @@ for (var ex of exerciseOrder) {
                         exInfo.domObj = null;
                         exInfo.reason = `variable ${var_in_ex} is defined, modified or used in this exercise, and it was introduced in previous exercise`;
                         exInfo.codeType = "precursor-variable-exercise";
-                        console.log("exercise to add:", exInfo);
+                        exInfo.variables = Array.from(new Set(aS_ast_vars));
+                        // console.log("exercise to add:", exInfo);
+                        exerciseOrder.push(exInfo);
                         visited[currSnippetKey] = true;                    
                     }
                 }
@@ -510,3 +515,5 @@ function getASTs(code) {
     }
     return ex_asts;
 }
+
+console.log("exerciseOrder:", exerciseOrder);
