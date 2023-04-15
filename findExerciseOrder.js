@@ -445,11 +445,11 @@ for (var ei = 0; ei < eio; ei++) {
                     let currCodeTypeKey = parseCodeTypeKey(var_in_ex, currSnippetKey, true);
                     // console.log("currSnippetKey:", currSnippetKey);
                     if (!visited[currSnippetKey]) {
-                        let exInfo = new ExerciseInfo(ex);
+                        let exInfo = new ExerciseInfo(ex=null);
                         exInfo.code = [allSnippets[e]]; 
-                        exInfo.arrayLoc = [];
+                        exInfo.arrayLoc = e;
                         exInfo.domObj = null;
-                        exInfo.reason = `variable ${var_in_ex} is defined, modified or used in this exercise, and it was introduced in previous exercise`;
+                        exInfo.reason = `variable ${var_in_ex} and possibly others were defined, modified or used in this exercise, and it was introduced in previous exercise`;
                         exInfo.codeType = "precursor-variable-exercise";
                         exInfo.variables = Array.from(new Set(aS_ast_vars));
                         // console.log("exercise to add:", exInfo);
