@@ -432,7 +432,7 @@ for (var ei = 0; ei < eio; ei++) {
     }
     // console.log("vars_in_ex", vars_in_ex);
 
-    /* iterate through runlog and splice in exercises for code dealing with relevant vars */
+    /* iterate through runlog and add exercises for code dealing with relevant vars */
     for (var var_in_ex of vars_in_ex) {
         // console.log("var_in_ex", var_in_ex);
         for (let e = allSnippets.length - 1; e > domContentLoadedAt; e--) {
