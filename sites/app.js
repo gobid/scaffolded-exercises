@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, "xkcd")));
 app.use(express.static(path.join(__dirname, "xkcd/imgs.xkcd.com")));
 app.use(express.static(path.join(__dirname, "mapstd")));
 app.use(express.static(path.join(__dirname, "mapstd/MapsTD_files")));
+app.use(express.static(path.join(__dirname, "xkcd-exercises")));
 const PORT = 3000;
 
 app.get("/", function (req, res) {
@@ -19,6 +20,11 @@ app.get("/", function (req, res) {
             "<p>XCKD home page at <a href='/xkcd.com/1110/index.html'>localhost:3000/xkcd.com/1110/index.html</a></p><p>MapsTD home page at <a href='/MapsTD.htm'>localhost:3000/MapsTD.htm</a></p>"
         )
     );
+});
+
+app.get("/xkcd-exercise", function(req, res) {
+    res.set("Content-Type", "text/html");
+    res.sendFile("xkcd-exercises/index.html", {root: __dirname });
 });
 
 function writeToFile(name, codeStr, filePath) {
