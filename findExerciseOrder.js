@@ -516,4 +516,4 @@ function getASTs(code) {
     return ex_asts;
 }
 
-console.log("exerciseOrder:", exerciseOrder);
+console.log(JSON.stringify(exerciseOrder));

@@ -22,11 +22,6 @@ app.get("/", function (req, res) {
     );
 });
 
-app.get("/xkcd-exercise", function(req, res) {
-    res.set("Content-Type", "text/html");
-    res.sendFile("xkcd-exercises/index.html", {root: __dirname });
-});
-
 function writeToFile(name, codeStr, filePath) {
     fs.appendFileSync(filePath, `/*~~~~*/\n/* ${name} */\n${codeStr}\n/*~~~~*/\n`, (err) => {
         if (err) {
