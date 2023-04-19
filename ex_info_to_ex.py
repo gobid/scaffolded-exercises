@@ -12,7 +12,10 @@ ordering = json.loads(fi.read())
 lines_to_splice_in = [] # global variable
 
 def instrument(t, vars_to_track):
-    
+    if "body" in t:
+        print("type: ", t.type, "going into body")
+        instrument(t)
+        
 
 def modify_js_to_track_vars(src_code, vars_to_track):
     t = esprima.parseScript(src_code, options={'loc': True})
