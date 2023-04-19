@@ -27,6 +27,7 @@ def instrument(t, vars_to_track):
         if t.expression and t.expression.left:
             if t.expression.left.name in vars_to_track:
                 print("need to track", t.expression.left.name, "at", t.expression.left.loc)
+        instrument(t.expression, vars_to_track)
     if hasattr(t, "declarations"): # variable declaration
         if t.declarations:
             for decl in t.declarations:
