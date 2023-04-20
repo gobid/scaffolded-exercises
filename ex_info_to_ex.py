@@ -68,6 +68,8 @@ def instrument(t, vars_to_track):
         if t.init:
             instrument(t.init, vars_to_track)
     if hasattr(t, "arguments"): # cover async functions
+        if len(lines_to_splice_in) > 0 and lines_to_splice_in[-1]["line"] == t.loc.start.line and t.loc.end.line > t.loc.start.line: # expression includes arguments that expand over one line so we can't splice in till the very end
+            lines_to_splice_in[-1]["line"] = t.loc.end.line
         instrument(t.arguments, vars_to_track)
     global_depth -= 1
 
