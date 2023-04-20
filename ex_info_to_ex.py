@@ -84,7 +84,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     modified_lines = src_code_lines.copy()
     num_lines_spliced_in = 0
     for line_to_splice_in in lines_to_splice_in:
-        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$(#'""" + line_to_splice_in["variable"] + """')[0].innerHTML = `""" + line_to_splice_in["variable"] + """ = ${""" + line_to_splice_in["variable"] + """}`""")
+        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + line_to_splice_in["variable"] + """')[0].innerHTML = `""" + line_to_splice_in["variable"] + """ = ${""" + line_to_splice_in["variable"] + """}`""")
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
     print("modified_src_code:", modified_src_code)
