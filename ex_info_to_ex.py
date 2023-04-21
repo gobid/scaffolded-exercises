@@ -6,7 +6,7 @@ import escodegen # escodegen==1.0.11, esutils==1.0.1
 
 # import examples' source
 xkcd_js_src = open("temp/xkcd_src.js").read()
-xkcd_html = """<div id="comic"><div class="map"><div class="ground"></div></div></div>"""
+xkcd_html = """<div id="comic"><div className="map"><div className="ground"></div></div></div>"""
 
 src_to_use = xkcd_js_src
 html_to_use = xkcd_html
@@ -89,7 +89,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     num_lines_spliced_in = 0
     for line_to_splice_in in lines_to_splice_in:
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
-        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + var_name_to_use + """')[0].innerHTML = `""" + line_to_splice_in["variable"] + """ = ${""" + line_to_splice_in["variable"] + """}`""")
+        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + var_name_to_use + """')[0].innerHTML = JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`)""")
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
     print("modified_src_code:", modified_src_code)
@@ -118,9 +118,6 @@ for i, ex in enumerate(ordering):
     eg.write("""import React from 'react';
 import './../App.css';
 import $ from 'jquery';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 window.$ = $;
 
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
@@ -132,18 +129,15 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
         return (
             <div className="App">
                 <div id="app-title">Scaffolded Exercises</div>
-                <Container>
-                    <Row>
-                        <Col>
-                            DOM
-                            """ + html_to_use + """
-                        </Col>
-                        <Col>
-                            Variables:
-                            """ + get_var_html(vars_to_track) + """
-                        </Col>
-                    </Row>
-                </Container>
+                <br/><br/><br/>
+                DOM
+                """ + html_to_use + """
+                <br/>
+                <div className="exercises">
+                    Variables:
+                    <br/><br/>
+                    """ + get_var_html(vars_to_track) + """
+                </div>
             </div>
         )
     }
