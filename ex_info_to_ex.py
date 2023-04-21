@@ -6,6 +6,10 @@ import escodegen # escodegen==1.0.11, esutils==1.0.1
 
 # import examples' source
 xkcd_js_src = open("temp/xkcd_src.js").read()
+xkcd_html = """<div id="comic"><div class="map"><div class="ground"></div></div></div>"""
+
+src_to_use = xkcd_js_src
+html_to_use = xkcd_html
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -84,11 +88,19 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     modified_lines = src_code_lines.copy()
     num_lines_spliced_in = 0
     for line_to_splice_in in lines_to_splice_in:
-        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + line_to_splice_in["variable"] + """')[0].innerHTML = `""" + line_to_splice_in["variable"] + """ = ${""" + line_to_splice_in["variable"] + """}`""")
+        var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
+        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + var_name_to_use + """')[0].innerHTML = `""" + line_to_splice_in["variable"] + """ = ${""" + line_to_splice_in["variable"] + """}`""")
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
     print("modified_src_code:", modified_src_code)
     return modified_src_code
+
+def get_var_html(vars_to_track):
+    html_of_vars = ""
+    for var_to_display in vars_to_track:
+        var_to_display_fixed = var_to_display.replace("$", "d")
+        html_of_vars += "<p>" + var_to_display + " = " + "<span id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
+    return html_of_vars
 
 for i, ex in enumerate(ordering):
     print("===Writing ex:", str(i), "===")
@@ -106,11 +118,34 @@ for i, ex in enumerate(ordering):
     eg.write("""import React from 'react';
 import './../App.css';
 import $ from 'jquery';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 window.$ = $;
 
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
     componentDidMount() {
-        """ + modify_js_to_track_vars(xkcd_js_src, vars_to_track) + """
+        """ + modify_js_to_track_vars(src_to_use, vars_to_track) + """
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <div id="app-title">Scaffolded Exercises</div>
+                <Container>
+                    <Row>
+                        <Col>
+                            DOM
+                            """ + html_to_use + """
+                        </Col>
+                        <Col>
+                            Variables:
+                            """ + get_var_html(vars_to_track) + """
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        )
     }
 }
     """)
