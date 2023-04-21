@@ -137,7 +137,16 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                     Variables:
                     <br/><br/>
                     """ + get_var_html(vars_to_track) + """
+                    <div className="reflection-area">
+                        <p>As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</p>
+                        <textarea className="reflection-textarea" rows="6"></textarea>
+                        <p>What is happening in the code?</p>
+                        <textarea className="reflection-textarea" rows="6"></textarea>
+                        <p>What is the relationship between the following variables: """ + vars_to_track[0] + """?</p>
+                        <textarea className="reflection-textarea" rows="6"></textarea>
+                    </div>
                 </div>
+                <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
             </div>
         )
     }
