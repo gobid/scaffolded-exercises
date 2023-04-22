@@ -91,24 +91,17 @@ def modify_js_to_track_vars(src_code, vars_to_track):
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
             console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
-            if (typeof(""" + line_to_splice_in["variable"] + """.length) == 'number' && """ + line_to_splice_in["variable"] + """.length < 1) {
-                console.log('skipping because """ + line_to_splice_in["variable"] + """ has length and its 0');
-                document.getElementById('""" + line_to_splice_in["variable"].replace("$", "d") + """_p').style.display = "none";
+            if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
+                $('#""" + var_name_to_use + """')[0].innerHTML = `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
             }
             else {
-                if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML = `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
+                if (""" + line_to_splice_in["variable"] + """.selector) {
+                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.selector}`
                 }
                 else {
-                    if (""" + line_to_splice_in["variable"] + """.selector) {
-                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.selector}`
-                    }
-                    else {
-                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
-                    }
+                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
                 }
             }
-            //}
         """)
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
