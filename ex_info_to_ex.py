@@ -4,12 +4,17 @@ import pprint
 import esprima # esprima==4.0.1
 import escodegen # escodegen==1.0.11, esutils==1.0.1
 
+EXAMPLE = "XKCD" # MAPSTD
+
 # import examples' source
 xkcd_js_src = open("temp/xkcd_src.js").read()
 xkcd_html = """<div id="comic"><div className="map"><div className="ground"></div></div></div>"""
+xkcd_vars_to_skip = ["$overlay"]
 
-src_to_use = xkcd_js_src
-html_to_use = xkcd_html
+if EXAMPLE == "XKCD":
+    src_to_use = xkcd_js_src
+    html_to_use = xkcd_html
+    vars_to_skip = xkcd_vars_to_skip
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -118,11 +123,11 @@ def get_var_html(vars_to_track):
 i = 0
 for ex in ordering:
     print("===Writing ex:", str(i), "===")
-    vars_to_track = [ex['domObj']] if (ex['domObj']) else []
-    for oe in ex['otherElemsIncluded']:
+    vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
+    for oe in ex['otherElemsIncluded'] and oe not in vars_to_skip:
         if oe not in vars_to_track:
             vars_to_track.append(oe)
-    for v in ex['variables']:
+    for v in ex['variables'] and v not in vars_to_skip:
         if v not in vars_to_track:
             vars_to_track.append(v)
     if len(vars_to_track) < 1: continue
