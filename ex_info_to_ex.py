@@ -89,7 +89,27 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     num_lines_spliced_in = 0
     for line_to_splice_in in lines_to_splice_in:
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
-        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """$('#""" + var_name_to_use + """')[0].innerHTML = JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`)""")
+        modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
+            console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
+            if (typeof(""" + line_to_splice_in["variable"] + """.length) == 'number' && """ + line_to_splice_in["variable"] + """.length < 1) {
+                console.log('skipping because """ + line_to_splice_in["variable"] + """ has length and its 0');
+                document.getElementById('""" + line_to_splice_in["variable"].replace("$", "d") + """_p').style.display = "none";
+            }
+            else {
+                if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
+                    $('#""" + var_name_to_use + """')[0].innerHTML = `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
+                }
+                else {
+                    if (""" + line_to_splice_in["variable"] + """.selector) {
+                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.selector}`
+                    }
+                    else {
+                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
+                    }
+                }
+            }
+            //}
+        """)
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
     print("modified_src_code:", modified_src_code)
@@ -99,18 +119,20 @@ def get_var_html(vars_to_track):
     html_of_vars = ""
     for var_to_display in vars_to_track:
         var_to_display_fixed = var_to_display.replace("$", "d")
-        html_of_vars += "<p>" + var_to_display + " = " + "<span id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
+        html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
     return html_of_vars
 
-for i, ex in enumerate(ordering):
+i = 0
+for ex in ordering:
     print("===Writing ex:", str(i), "===")
-    vars_to_track = [ex['domObj']] if ex['domObj'] else []
+    vars_to_track = [ex['domObj']] if (ex['domObj']) else []
     for oe in ex['otherElemsIncluded']:
         if oe not in vars_to_track:
             vars_to_track.append(oe)
     for v in ex['variables']:
         if v not in vars_to_track:
             vars_to_track.append(v)
+    if len(vars_to_track) < 1: continue
 
     lines_to_splice_in = [] # reset lines to splice in
     # pprint.pprint(ex)
@@ -120,7 +142,17 @@ import './../App.css';
 import $ from 'jquery';
 window.$ = $;
 
+function addNewlines(str) {
+    var result = '';
+    while (str.length > 0) {
+        result += str.substring(0, 40) + '\\n';
+        str = str.substring(40);
+    }
+    return result;
+}
+
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
+
     componentDidMount() {
         """ + modify_js_to_track_vars(src_to_use, vars_to_track) + """
     }
@@ -153,5 +185,6 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
 }
     """)
     eg.close()
+    i += 1
 
 # print(esprima.parseScript(xkcd_js_src, options={'loc': True}))
