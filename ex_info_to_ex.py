@@ -4,6 +4,9 @@ import pprint
 import esprima # esprima==4.0.1
 import escodegen # escodegen==1.0.11, esutils==1.0.1
 
+# CAREFUL but here's the command to remove autogen exercises, in SEI repo, rm -rf src/pages/auto-ex*.js
+# THEN, remove unneeded exercises in SEI App.js and home.js
+
 EXAMPLE = "XKCD" # MAPSTD
 
 # import examples' source
@@ -100,8 +103,19 @@ def modify_js_to_track_vars(src_code, vars_to_track):
                 $('#""" + var_name_to_use + """')[0].innerHTML = `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
             }
             else {
-                if (""" + line_to_splice_in["variable"] + """.selector) {
+                if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
                     $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.selector}`
+                }
+                else if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.originalEvent) {
+                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.type}`
+                }
+                else if (typeof(""" + line_to_splice_in["variable"] + """) == 'object') {
+                    try {
+                        $('#""" + var_name_to_use + """')[0].innerHTML = JSON.stringify(""" + line_to_splice_in["variable"] + """)
+                    }
+                    catch {
+                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
+                    }
                 }
                 else {
                     $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
@@ -124,13 +138,14 @@ i = 0
 for ex in ordering:
     print("===Writing ex:", str(i), "===")
     vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
-    for oe in ex['otherElemsIncluded'] and oe not in vars_to_skip:
-        if oe not in vars_to_track:
+    for oe in ex['otherElemsIncluded']:
+        if oe not in vars_to_track and oe not in vars_to_skip:
             vars_to_track.append(oe)
-    for v in ex['variables'] and v not in vars_to_skip:
-        if v not in vars_to_track:
+    for v in ex['variables']:
+        if v not in vars_to_track and v not in vars_to_skip:
             vars_to_track.append(v)
-    if len(vars_to_track) < 1: continue
+    print("ex ", i, vars_to_track)
+    if len(vars_to_track) < 1:continue
 
     lines_to_splice_in = [] # reset lines to splice in
     # pprint.pprint(ex)
