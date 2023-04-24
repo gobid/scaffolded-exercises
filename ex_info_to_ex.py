@@ -12,22 +12,28 @@ EXAMPLE = "XKCD" # MAPSTD
 # import examples' source
 xkcd_js_src = open("temp/xkcd_src.js").read()
 xkcd_html = """<div id="comic"><div className="map"><div className="ground"></div></div></div>"""
-xkcd_vars_to_skip = ["$overlay"]
+xkcd_vars_to_skip = ["$overlay", "x", "y", "size"]
+xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that appear in loops that should be unfurled
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
     html_to_use = xkcd_html
     vars_to_skip = xkcd_vars_to_skip
+    vars_to_unfurl = xkcd_vars_to_unfurl
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
 # pprint.pprint(ordering)
 lines_to_splice_in = [] # global variable
 global_depth = 0 # for debugging
+in_for_loop = 0
+outer_loop_location = 0
 
 def instrument(t, vars_to_track):
-    global global_depth # for debugging
+    global global_depth, in_for_loop, outer_loop_location # for debugging
     global_depth += 1
+    if hasattr(t, "type") and t.type == "ForStatement": # consider as in for loop for all recursive calls beneath this
+        in_for_loop = 1
     # print("global_depth", global_depth)
     if hasattr(t, "type"):
         print("t type: ", t.type)
@@ -47,14 +53,14 @@ def instrument(t, vars_to_track):
         if t.expression and t.expression.left:
             if t.expression.left.name in vars_to_track:
                 print("need to track", t.expression.left.name, "at", t.expression.left.loc)
-                lines_to_splice_in.append({"variable": t.expression.left.name, "line": t.expression.left.loc.end.line})
+                lines_to_splice_in.append({"variable": t.expression.left.name, "line": t.expression.left.loc.end.line, "in_for_loop": in_for_loop})
         instrument(t.expression, vars_to_track)
     if hasattr(t, "declarations"): # variable declaration
         if t.declarations:
             for decl in t.declarations:
                 if decl.id.name in vars_to_track:
                     print("need to track", decl.id.name, decl.id.loc)
-                    lines_to_splice_in.append({"variable": decl.id.name, "line": decl.id.loc.end.line})
+                    lines_to_splice_in.append({"variable": decl.id.name, "line": decl.id.loc.end.line, "in_for_loop": in_for_loop})
                 if decl.init.type == "FunctionExpression":
                     instrument(decl.init, vars_to_track)
     if hasattr(t, "alternate"): # else statement
@@ -65,17 +71,17 @@ def instrument(t, vars_to_track):
             if hasattr(t.callee.object, "callee"):
                 if t.callee.object.callee and t.callee.object.callee.name in vars_to_track:
                     print("need to track", t.callee.object.callee.name, t.callee.object.callee.loc)
-                    lines_to_splice_in.append({"variable": t.callee.object.callee.name, "line": t.callee.object.callee.loc.end.line})
+                    lines_to_splice_in.append({"variable": t.callee.object.callee.name, "line": t.callee.object.callee.loc.end.line, "in_for_loop": in_for_loop})
                 else:
                     if t.callee.object and t.callee.object.name in vars_to_track:
                         print("need to track", t.callee.object.name, t.callee.object.loc)
-                        lines_to_splice_in.append({"variable": t.callee.object.name, "line": t.callee.object.loc.end.line})
+                        lines_to_splice_in.append({"variable": t.callee.object.name, "line": t.callee.object.loc.end.line, "in_for_loop": in_for_loop})
     if hasattr(t, "left"):
         if t.left:
             if hasattr(t.left, "object"):
                 if t.left.object and t.left.object.name in vars_to_track:
                     print("need to track", t.left.object.name, t.left.object.loc)
-                    lines_to_splice_in.append({"variable": t.left.object.name, "line": t.left.object.loc.end.line})
+                    lines_to_splice_in.append({"variable": t.left.object.name, "line": t.left.object.loc.end.line, "in_for_loop": in_for_loop})
     if hasattr(t, "init"):
         if t.init:
             instrument(t.init, vars_to_track)
@@ -84,8 +90,15 @@ def instrument(t, vars_to_track):
             lines_to_splice_in[-1]["line"] = t.loc.end.line
         instrument(t.arguments, vars_to_track)
     global_depth -= 1
+    if hasattr(t, "type") and t.type == "ForStatement":
+        in_for_loop = 0
+        if not outer_loop_location:
+            outer_loop_location = t.loc.start.line
 
 def modify_js_to_track_vars(src_code, vars_to_track):
+    global in_for_loop, outer_loop_location
+    print("outer_loop_location", outer_loop_location)
+    added_reset_unfurlables = False
     t = esprima.parseScript(src_code, options={'loc': True})
     # print(t)
     print("vars_to_track:", vars_to_track)
@@ -95,30 +108,40 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     src_code_lines = src_code.split("\n")
     modified_lines = src_code_lines.copy()
     num_lines_spliced_in = 0
-    for line_to_splice_in in lines_to_splice_in:
+    for li, line_to_splice_in in enumerate(lines_to_splice_in):
+        if li + 1 < len(lines_to_splice_in) and lines_to_splice_in[li + 1]["line"] >= outer_loop_location and not added_reset_unfurlables: # the next line to splice in is going to be after the loop, so better reset unfurlables first
+            print("in unfurlables if")
+            reset_unfurlables_js = ""
+            for unfurlable in vars_to_unfurl:
+                reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); } "
+            modified_lines.insert(outer_loop_location - 1 - 1 + num_lines_spliced_in, reset_unfurlables_js) # -1 for index, -1 for going before first for loop
+            added_reset_unfurlables = True
+            num_lines_spliced_in += 1
+
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
+        operator_to_use = "+= ' | ' +" if (line_to_splice_in["in_for_loop"] and line_to_splice_in["variable"] in vars_to_unfurl) else "="
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
             console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
             if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                $('#""" + var_name_to_use + """')[0].innerHTML = `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
+                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
             }
             else {
                 if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.selector}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.selector}`
                 }
                 else if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.originalEvent) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """.type}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.type}`
                 }
                 else if (typeof(""" + line_to_splice_in["variable"] + """) == 'object') {
                     try {
-                        $('#""" + var_name_to_use + """')[0].innerHTML = JSON.stringify(""" + line_to_splice_in["variable"] + """)
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ JSON.stringify(""" + line_to_splice_in["variable"] + """)
                     }
                     catch {
-                        $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`
                     }
                 }
                 else {
-                    $('#""" + var_name_to_use + """')[0].innerHTML = `${""" + line_to_splice_in["variable"] + """}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`
                 }
             }
         """)
