@@ -135,9 +135,11 @@ def get_var_html(vars_to_track):
     return html_of_vars
 
 i = 0
+vars_to_track_of_all_ex = []
 for ex in ordering:
     print("===Writing ex:", str(i), "===")
     vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
+    vars_to_track_of_all_ex.append([1] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else [0]) # store whether first var is a DOM obj
     for oe in ex['otherElemsIncluded']:
         if oe not in vars_to_track and oe not in vars_to_skip:
             vars_to_track.append(oe)
@@ -145,7 +147,17 @@ for ex in ordering:
         if v not in vars_to_track and v not in vars_to_skip:
             vars_to_track.append(v)
     print("ex ", i, vars_to_track)
-    if len(vars_to_track) < 1:continue
+    if len(vars_to_track) < 1: continue
+    
+    vars_to_track_of_all_ex[-1] += vars_to_track
+    relationship_vars = []
+    if len(vars_to_track_of_all_ex) > 1:
+        if vars_to_track_of_all_ex[-2][0]: # last exercise is about a DOM element, so compare it with this exercises' variables
+            relationship_vars.append(vars_to_track_of_all_ex[-2][1])
+        # last exercise is not about a DOM element, so let's just compare all the variables of this and the last exercise
+        relationship_vars = vars_to_track_of_all_ex[-2][1:] + vars_to_track_of_all_ex[-1][1:]
+    else:
+        relationship_vars = vars_to_track_of_all_ex[-1][1:] # it is the first exercise, so just compare this exercise's variables
 
     lines_to_splice_in = [] # reset lines to splice in
     # pprint.pprint(ex)
@@ -187,7 +199,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                         <textarea className="reflection-textarea" rows="6"></textarea>
                         <p>What is happening in the code?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
-                        <p>What is the relationship between the following variables: """ + vars_to_track[0] + """?</p>
+                        <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                     </div>
                 </div>
