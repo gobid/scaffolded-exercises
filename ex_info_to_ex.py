@@ -238,7 +238,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                         <pre>{codeToShow}</pre>
                         <p>What is happening in the code?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
-                        <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """?</p>
+                        <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """? """ + ("(Give the meaning of the variable if there is only one.)" if len(relationship_vars) < 2 else "") + """</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                     </div>
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
