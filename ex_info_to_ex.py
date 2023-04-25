@@ -119,29 +119,29 @@ def modify_js_to_track_vars(src_code, vars_to_track):
             num_lines_spliced_in += 1
 
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
-        operator_to_use = "+= ' | ' +" if (line_to_splice_in["in_for_loop"] and line_to_splice_in["variable"] in vars_to_unfurl) else "="
+        operator_to_use = "+= ' <br> ' +" if (line_to_splice_in["in_for_loop"] and line_to_splice_in["variable"] in vars_to_unfurl) else "="
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
-            console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
+            // console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
             if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `<plaintext class="pt">${addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML)}`
+                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML))}`;
             }
             else {
                 if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.selector}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.selector} (we output the selector when length is 0)`;
                 }
                 else if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.originalEvent) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.type}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.type}`;
                 }
                 else if (typeof(""" + line_to_splice_in["variable"] + """) == 'object') {
                     try {
-                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ JSON.stringify(""" + line_to_splice_in["variable"] + """)
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ JSON.stringify(""" + line_to_splice_in["variable"] + """);
                     }
                     catch {
-                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
                     }
                 }
                 else {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
                 }
             }
         """)
@@ -154,7 +154,7 @@ def get_var_html(vars_to_track):
     html_of_vars = ""
     for var_to_display in vars_to_track:
         var_to_display_fixed = var_to_display.replace("$", "d")
-        html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
+        html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
     return html_of_vars
 
 i = 0
@@ -184,6 +184,12 @@ for ex in ordering:
 
     lines_to_splice_in = [] # reset lines to splice in
     # pprint.pprint(ex)
+
+    # determine code to show
+    code_to_show = ex["code"] if isinstance(ex["code"], str) else '\n'.join(ex["code"])
+    # remove 1st and last 2 lines
+    code_to_show = "\n".join(code_to_show.split("\n")[1:-2])
+
     eg = open("../scaffolded-exercises-interface/src/pages/auto-exercise" + str(i) + ".js", "w+") # path to SEI
     eg.write("""import React from 'react';
 import './../App.css';
@@ -193,10 +199,17 @@ window.$ = $;
 function addNewlines(str) {
     var result = '';
     while (str.length > 0) {
-        result += str.substring(0, 40) + '\\n';
-        str = str.substring(40);
+        result += str.substring(0, 80) + '\\n';
+        str = str.substring(80);
     }
-    return result;
+    let dotdotdot = "...";
+    if (result.length < 150) 
+        dotdotdot = " ";
+    return result.substring(0,150) + dotdotdot;
+}
+
+function h2t(src) { // html to text
+    return src.replaceAll("<", "&lt;").replaceAll(">", "&gt;"); //.replace("&", " &amp; "); 
 }
 
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
@@ -206,6 +219,8 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
     }
 
     render() {
+        let codeToShow = '""" + json.dumps(code_to_show) + """'
+        codeToShow = codeToShow.substring(1, codeToShow.length - 2)
         return (
             <div className="App">
                 <div id="app-title">Scaffolded Exercises</div>
@@ -220,13 +235,14 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                     <div className="reflection-area">
                         <p>As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
+                        <pre>{codeToShow}</pre>
                         <p>What is happening in the code?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                         <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                     </div>
+                    <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
                 </div>
-                <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
             </div>
         )
     }
