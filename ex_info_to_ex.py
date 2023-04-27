@@ -14,12 +14,14 @@ xkcd_js_src = open("temp/xkcd_src.js").read()
 xkcd_html = """<div id="comic"><div className="map"><div className="ground"></div></div></div>"""
 xkcd_vars_to_skip = ["$overlay", "x", "y", "size"]
 xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that appear in loops that should be unfurled
+xkcd_dom_vars = ["$remove", "tile", "$image", "$map"]
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
     html_to_use = xkcd_html
     vars_to_skip = xkcd_vars_to_skip
     vars_to_unfurl = xkcd_vars_to_unfurl
+    dom_vars = xkcd_dom_vars
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -153,8 +155,10 @@ def modify_js_to_track_vars(src_code, vars_to_track):
 def get_var_html(vars_to_track):
     html_of_vars = ""
     for var_to_display in vars_to_track:
+        print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        ha_button = "<HAButton id=\"dimage_button\"/>" if "d" == var_to_display[0] else "" # if a DOM element
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" if var_to_display in dom_vars else "" # if a DOM element
+        print("ha_button:", ha_button)
         html_of_vars += ha_button + "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
     return html_of_vars
 
