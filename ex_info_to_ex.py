@@ -115,8 +115,11 @@ def modify_js_to_track_vars(src_code, vars_to_track):
             print("in unfurlables if")
             reset_unfurlables_js = ""
             for unfurlable in vars_to_unfurl:
-                reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); } selectors['" + unfurlable.replace("$", "d") + "'] = [];"
-            modified_lines.insert(outer_loop_location - 1 - 1 + num_lines_spliced_in, reset_unfurlables_js) # -1 for index, -1 for going before first for loop
+                reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); }"
+            reset_selectors = ""
+            for dom_var in dom_vars:
+                reset_selectors += "selectors['" + dom_var.replace("$", "d") + "'] = [];"
+            modified_lines.insert(outer_loop_location - 1 - 1 + num_lines_spliced_in, reset_unfurlables_js + reset_selectors) # -1 for index, -1 for going before first for loop
             added_reset_unfurlables = True
             num_lines_spliced_in += 1
 
@@ -125,7 +128,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
             // console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
             if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML))}`;
+                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML, '""" + var_name_to_use + """'))}`;
             }
             else {
                 if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
@@ -159,7 +162,7 @@ def get_var_html(vars_to_track):
         var_to_display_fixed = var_to_display.replace("$", "d")
         ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" if var_to_display in dom_vars else "" # if a DOM element
         print("ha_button:", ha_button)
-        html_of_vars += ha_button + "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
+        html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
 
 i = 0
@@ -239,7 +242,8 @@ function HAButton(props) {
     function handleClick() {
         console.log("in handleClick", toggle, props.id);
         let element_to_a_h = props.id.split("_")[0];
-        console.log(element_to_a_h);
+        console.log("element_to_a_h", element_to_a_h);
+        console.log("selectors[element_to_a_h]", selectors[element_to_a_h]);
         setToggle(!toggle);
     }
 
