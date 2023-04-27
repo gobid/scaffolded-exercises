@@ -113,7 +113,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
             print("in unfurlables if")
             reset_unfurlables_js = ""
             for unfurlable in vars_to_unfurl:
-                reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); } "
+                reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); } selectors['" + unfurlable.replace("$", "d") + "'] = [];"
             modified_lines.insert(outer_loop_location - 1 - 1 + num_lines_spliced_in, reset_unfurlables_js) # -1 for index, -1 for going before first for loop
             added_reset_unfurlables = True
             num_lines_spliced_in += 1
@@ -154,7 +154,8 @@ def get_var_html(vars_to_track):
     html_of_vars = ""
     for var_to_display in vars_to_track:
         var_to_display_fixed = var_to_display.replace("$", "d")
-        html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
+        ha_button = "<HAButton id=\"dimage_button\"/>" if "d" == var_to_display[0] else "" # if a DOM element
+        html_of_vars += ha_button + "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>\n"
     return html_of_vars
 
 i = 0
@@ -192,11 +193,27 @@ for ex in ordering:
 
     eg = open("../scaffolded-exercises-interface/src/pages/auto-exercise" + str(i) + ".js", "w+") # path to SEI
     eg.write("""import React from 'react';
+import { useState } from 'react';
 import './../App.css';
 import $ from 'jquery';
 window.$ = $;
 
-function addNewlines(str) {
+const selectors = {};
+
+function addNewlines(str, variable_name) {
+    // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
+    // we do it by classes for now
+    let class_loc = str.indexOf('class="') + 'class="'.length;
+    let end_class_loc = str.substring(class_loc).indexOf('"');
+    let class_name = str.substring(class_loc, class_loc + end_class_loc);
+    console.log("in addNewLines class_name:", class_name);
+    if (selectors[variable_name]) {
+        selectors[variable_name].push(class_name);
+    }
+    else {
+        selectors[variable_name] = [];
+    }
+
     var result = '';
     while (str.length > 0) {
         result += str.substring(0, 80) + '\\n';
@@ -210,6 +227,28 @@ function addNewlines(str) {
 
 function h2t(src) { // html to text
     return src.replaceAll("<", "&lt;").replaceAll(">", "&gt;"); //.replace("&", " &amp; "); 
+}
+
+function HAButton(props) {
+    const [toggle, setToggle] = useState(true);
+  
+    function handleClick() {
+        console.log("in handleClick", toggle, props.id);
+        let element_to_a_h = props.id.split("_")[0];
+        console.log(element_to_a_h);
+        setToggle(!toggle);
+    }
+
+    function buttonText(t) {
+        if (t) return "Annotate / Highlight";
+        else return "Unannotate / Unhighlight";
+    }
+    
+    return (
+      <button onClick={handleClick}>
+          {buttonText(toggle)}
+      </button>
+    );
 }
 
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
