@@ -243,7 +243,7 @@ function HAButton(props) {
         console.log("in handleClick", toggle, props.id);
         let element_to_a_h = props.id.split("_")[0];
         console.log("element_to_a_h", element_to_a_h);
-        console.log("selectors[element_to_a_h]", selectors[element_to_a_h]);
+        console.log("selectors[", element_to_a_h "]", selectors[element_to_a_h]);
         setToggle(!toggle);
     }
 
