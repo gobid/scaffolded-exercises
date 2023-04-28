@@ -15,6 +15,8 @@ xkcd_html = """<div id="comic"><div className="map"><div className="ground"></di
 xkcd_vars_to_skip = ["$overlay", "x", "y", "size"]
 xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that appear in loops that should be unfurled
 xkcd_dom_vars = ["$remove", "tile", "$image", "$map"]
+xkcd_annotations_to_skip =[el.replace("$", "d") for el in ["$remove", "$map"]]
+xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile"]]
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -22,6 +24,8 @@ if EXAMPLE == "XKCD":
     vars_to_skip = xkcd_vars_to_skip
     vars_to_unfurl = xkcd_vars_to_unfurl
     dom_vars = xkcd_dom_vars
+    annotations_to_skip = xkcd_annotations_to_skip
+    annotations_to_show_by_tag = xkcd_annotations_to_show_by_tag
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -160,7 +164,7 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" if var_to_display in dom_vars else "" # if a DOM element
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
@@ -215,7 +219,9 @@ function addNewlines(str, variable_name) {
     let class_name = str.substring(class_loc, class_loc + end_class_loc);
     console.log("in addNewLines class_name:", class_name);
     if (selectors[variable_name]) {
-        selectors[variable_name].push(class_name);
+        if (!selectors[variable_name].includes(class_name)) {
+            selectors[variable_name].push(class_name);
+        }
     }
     else {
         selectors[variable_name] = [];
@@ -238,12 +244,55 @@ function h2t(src) { // html to text
 
 function HAButton(props) {
     const [toggle, setToggle] = useState(true);
-  
+    const annotations_to_show_by_tag = [ '""" + "', '".join(annotations_to_show_by_tag) + """' ];
+    
+    function markBorder(element) {
+        console.log("markBorder", element);
+        if (element) {  
+            if (toggle) {
+                element.style.border = "5px solid black";
+            }
+            else {
+                element.style.border = "0px solid black";
+            }
+        }
+    }
+
+    function annotate(variable, element) {
+        console.log("in annotate", variable, element, toggle);
+        element = element[0];
+        if (!element) return;
+        if (annotations_to_show_by_tag.includes(variable)) {
+            console.log(variable, "in annotations_to_show_by_tag");
+            let tag = element.tagName;
+            console.log("tag", tag);
+            let tag_elems = document.getElementsByTagName(tag);
+            console.log("tag_elems", tag_elems);
+            for (var tag_elem of tag_elems) {
+                markBorder(tag_elem);
+            }
+        }
+        else {   
+            markBorder(element);
+        }
+    }
+    
+    function highlightInCode(element) {
+    
+    }
+
     function handleClick() {
+        if (toggle)
+            alert("Annotated! Play around and check.");
         console.log("in handleClick", toggle, props.id);
         let element_to_a_h = props.id.split("_")[0];
         console.log("element_to_a_h", element_to_a_h);
-        console.log("selectors[", element_to_a_h "]", selectors[element_to_a_h]);
+        console.log("selectors[", element_to_a_h, "]", selectors[element_to_a_h]);
+        for (var selector of selectors[element_to_a_h]) {
+            let element_to_a_h_html = document.getElementsByClassName(selector);
+            console.log("selector", selector, "element_to_a_h_html", element_to_a_h_html);
+            annotate(element_to_a_h, element_to_a_h_html, toggle);
+        }
         setToggle(!toggle);
     }
 
