@@ -15,8 +15,8 @@ xkcd_html = """<div id="comic"><div className="map"><div className="ground"></di
 xkcd_vars_to_skip = ["$overlay", "x", "y", "size"]
 xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that appear in loops that should be unfurled
 xkcd_dom_vars = ["$remove", "tile", "$image", "$map"]
-xkcd_annotations_to_skip =[el.replace("$", "d") for el in ["$remove", "$map"]]
-xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile"]]
+xkcd_annotations_to_skip =[el.replace("$", "d") for el in []]
+xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile", "$remove"]]
 xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
 
 if EXAMPLE == "XKCD":
@@ -408,7 +408,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                     <div className="reflection-area">
                         <p>As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
-                        <pre>{codeToShow}</pre>
+                        <pre id="codetoshow">{codeToShow}</pre>
                         <p>What is happening in the code?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                         <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """? """ + ("(Give the meaning of the variable if there is only one.)" if len(relationship_vars) < 2 else "") + """</p>
