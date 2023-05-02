@@ -172,8 +172,10 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
+        var_notes_reflection = "<textarea rows='2' id='" + var_to_display_fixed + "_notes'></textarea>"
         ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note undoing and then redoing can annotate/highlight new elements on the page." if len(var_to_display) > 1 else "" # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
+        
         print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
