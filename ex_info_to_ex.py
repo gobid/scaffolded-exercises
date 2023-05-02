@@ -17,6 +17,7 @@ xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that app
 xkcd_dom_vars = ["$remove", "tile", "$image", "$map"]
 xkcd_annotations_to_skip =[el.replace("$", "d") for el in ["$remove", "$map"]]
 xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile"]]
+xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -26,6 +27,7 @@ if EXAMPLE == "XKCD":
     dom_vars = xkcd_dom_vars
     annotations_to_skip = xkcd_annotations_to_skip
     annotations_to_show_by_tag = xkcd_annotations_to_show_by_tag
+    noannotations = xkcd_noannotations
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -164,7 +166,8 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" 
+        # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
@@ -210,6 +213,7 @@ import $ from 'jquery';
 window.$ = $;
 
 const selectors = {};
+const annotables = []; // keys are the specific annotations
 
 function addNewlines(str, variable_name) {
     // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
@@ -245,9 +249,55 @@ function h2t(src) { // html to text
 function HAButton(props) {
     const [toggle, setToggle] = useState(true);
     const annotations_to_show_by_tag = [ '""" + "', '".join(annotations_to_show_by_tag) + """' ];
+    const noannotations = [ '""" + "', '".join(noannotations) + """' ];
     
+    function reAnnotate(){ // for reannotating when user behavior erases annotations
+        let existing_annotations = document.getElementsByClassName("annotation");
+        if (existing_annotations.length < 1) { // only reannotate if the annotations aren't already there
+            for (var elem_to_annotate of annotables) {
+                addAnnotation(elem_to_annotate);
+            }
+        }
+    }
+
+    function dollarifyVar(variable_from_exercise) {
+        if (variable_from_exercise.substring(0,1) == 'd') // assumes variable can't start with a d
+            return "$" + variable_from_exercise.substring(1);
+    }
+
+    function addAnnotation(element) {
+        // console.log("element", element);
+        let text_to_display = element.outerHTML; // .replaceAll("<", "&lt;").replaceAll(">", "&gt;") - not needed apparently
+        var para = document.createElement("p");
+        var variable_from_exercise = props.id.split("_")[0];
+        variable_from_exercise = dollarifyVar(variable_from_exercise);
+        var node = document.createTextNode(variable_from_exercise + " " + text_to_display);
+        para.appendChild(node);
+        para.style.top = element.style.top;
+        para.style.left = element.style.left;
+        para.style.margin = "20px";
+        para.style.position = "absolute";
+        para.classList.add("annotation");
+        para.style.color = "gray";
+        document.getElementsByClassName('map')[0].appendChild(para);
+    }
+
+    function addOrRemoveAnnotations(element) {
+        if (toggle) {
+            addAnnotation(element);
+            // the annotation should also be retained upon user actions (mousemove / mousedown / mouseup / keyboard)
+            annotables.push(element);
+            $(document).on("mouseup keydown keyup", reAnnotate);
+        }
+        else {
+            $(".annotation").remove();
+            $(document).off("mouseup keydown keyup", reAnnotate);
+        }
+        // add element html at the corners of the html element
+    }
+
     function markBorder(element) {
-        console.log("markBorder", element);
+        // console.log("markBorder", element);
         if (element) {  
             if (toggle) {
                 element.style.border = "5px solid black";
@@ -258,41 +308,68 @@ function HAButton(props) {
         }
     }
 
+    function annotateTag(tag) {
+        console.log("tag", tag);
+        let tag_elems = document.getElementsByTagName(tag);
+        // console.log("tag_elems", tag_elems);
+        for (var tag_elem of tag_elems) {
+            markBorder(tag_elem);
+            addOrRemoveAnnotations(tag_elem);
+        }
+    }
+
     function annotate(variable, element) {
         console.log("in annotate", variable, element, toggle);
         element = element[0];
         if (!element) return;
         if (annotations_to_show_by_tag.includes(variable)) {
-            console.log(variable, "in annotations_to_show_by_tag");
+            // console.log(variable, "in annotations_to_show_by_tag");
             let tag = element.tagName;
-            console.log("tag", tag);
-            let tag_elems = document.getElementsByTagName(tag);
-            console.log("tag_elems", tag_elems);
-            for (var tag_elem of tag_elems) {
-                markBorder(tag_elem);
-            }
+            annotateTag(tag);
+            $("body").on("mouseup keydown keyup", function() {
+                annotateTag(tag); // redo the annotation if in new territory
+                if (!toggle) {
+                    $("body").off();
+                }
+            });
         }
         else {   
             markBorder(element);
+            addOrRemoveAnnotations(element);
         }
     }
     
-    function highlightInCode(element) {
-    
+    function highlightInCode(variable) {
+        let codetoshow = document.getElementById("codetoshow");
+        if (toggle) {
+            let vartohighlight = dollarifyVar(variable);
+            console.log("vartohighlight: ", vartohighlight, "codetoshow", codetoshow);
+            codetoshow.outerHTML = codetoshow.outerHTML.replaceAll(vartohighlight, "<mark>" + vartohighlight + "</mark>");
+        }
+        else {
+            codetoshow.outerHTML = codetoshow.outerHTML.replaceAll("<mark>", "").replaceAll("</mark>", "");
+        }
     }
 
     function handleClick() {
-        if (toggle)
-            alert("Annotated! Play around and check.");
         console.log("in handleClick", toggle, props.id);
         let element_to_a_h = props.id.split("_")[0];
-        console.log("element_to_a_h", element_to_a_h);
-        console.log("selectors[", element_to_a_h, "]", selectors[element_to_a_h]);
-        for (var selector of selectors[element_to_a_h]) {
-            let element_to_a_h_html = document.getElementsByClassName(selector);
-            console.log("selector", selector, "element_to_a_h_html", element_to_a_h_html);
-            annotate(element_to_a_h, element_to_a_h_html, toggle);
+        if (!noannotations.includes(element_to_a_h)) {
+            if (toggle)
+                alert("Annotated and highlighted! Play around and check.");
+            // console.log("element_to_a_h", element_to_a_h);
+            // console.log("selectors[", element_to_a_h, "]", selectors[element_to_a_h]);
+            for (var selector of selectors[element_to_a_h]) {
+                let element_to_a_h_html = document.getElementsByClassName(selector);
+                // console.log("selector", selector, "element_to_a_h_html", element_to_a_h_html);
+                annotate(element_to_a_h, element_to_a_h_html);
+            }
         }
+        else {
+            if (toggle)
+                alert("Highlighted! Play around and check.");
+        }
+        highlightInCode(element_to_a_h);
         setToggle(!toggle);
     }
 
