@@ -221,7 +221,7 @@ function addNewlines(str, variable_name) {
     let class_loc = str.indexOf('class="') + 'class="'.length;
     let end_class_loc = str.substring(class_loc).indexOf('"');
     let class_name = str.substring(class_loc, class_loc + end_class_loc);
-    console.log("in addNewLines class_name:", class_name);
+    // console.log("in addNewLines class_name:", class_name);
     if (selectors[variable_name]) {
         if (!selectors[variable_name].includes(class_name)) {
             selectors[variable_name].push(class_name);
@@ -273,7 +273,7 @@ function HAButton(props) {
     }
 
     function addAnnotation(element) {
-        console.log("element", element, "props.id", props.id);
+        // console.log("element", element, "props.id", props.id);
         let text_to_display = element.outerHTML; // .replaceAll("<", "&lt;").replaceAll(">", "&gt;") - not needed apparently
         var para = document.createElement("p");
         var variable_from_exercise = splitByLastUnderscore(props.id);
@@ -316,7 +316,7 @@ function HAButton(props) {
     }
 
     function annotateTag(tag) {
-        console.log("tag", tag);
+        // console.log("tag", tag);
         let tag_elems = document.getElementsByTagName(tag);
         // console.log("tag_elems", tag_elems);
         for (var tag_elem of tag_elems) {
@@ -326,7 +326,7 @@ function HAButton(props) {
     }
 
     function annotate(variable, element) {
-        console.log("in annotate", variable, element, toggle);
+        // console.log("in annotate", variable, element, toggle);
         element = element[0];
         if (!element) return;
         if (annotations_to_show_by_tag.includes(variable)) {
@@ -350,7 +350,7 @@ function HAButton(props) {
         let codetoshow = document.getElementById("codetoshow");
         if (toggle) {
             let vartohighlight = dollarifyVar(variable);
-            console.log("vartohighlight: ", vartohighlight, "codetoshow", codetoshow);
+            // console.log("vartohighlight: ", vartohighlight, "codetoshow", codetoshow);
             codetoshow.outerHTML = codetoshow.outerHTML.replaceAll(vartohighlight, "<mark>" + vartohighlight + "</mark>");
         }
         else {
@@ -359,7 +359,7 @@ function HAButton(props) {
     }
 
     function handleClick() {
-        console.log("in handleClick", toggle, props.id);
+        // console.log("in handleClick", toggle, props.id);
 
         // remove all existing annotations to avoid confusion
         if (!toggle) {
