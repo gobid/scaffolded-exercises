@@ -166,7 +166,7 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" 
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note undoing and then redoing can annotate/highlight new elements on the page." 
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
@@ -268,10 +268,12 @@ function HAButton(props) {
     function dollarifyVar(variable_from_exercise) {
         if (variable_from_exercise.substring(0,1) == 'd') // assumes variable can't start with a d
             return "$" + variable_from_exercise.substring(1);
+        else
+            return variable_from_exercise;
     }
 
     function addAnnotation(element) {
-        // console.log("element", element);
+        console.log("element", element, "props.id", props.id);
         let text_to_display = element.outerHTML; // .replaceAll("<", "&lt;").replaceAll(">", "&gt;") - not needed apparently
         var para = document.createElement("p");
         var variable_from_exercise = splitByLastUnderscore(props.id);
@@ -358,6 +360,12 @@ function HAButton(props) {
 
     function handleClick() {
         console.log("in handleClick", toggle, props.id);
+
+        // remove all existing annotations to avoid confusion
+        if (!toggle) {
+            $(".annotation").remove(); 
+        }
+        
         let element_to_a_h = splitByLastUnderscore(props.id);
         if (!noannotations.includes(element_to_a_h)) {
             if (toggle)
