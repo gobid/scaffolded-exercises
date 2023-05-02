@@ -172,8 +172,8 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        var_notes_reflection = "<textarea rows='2' id='" + var_to_display_fixed + "_notes'></textarea>"
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note undoing and then redoing can annotate/highlight new elements on the page." if len(var_to_display) > 1 else "" # we can't do variable displays for one-letter variables
+        var_notes_reflection = "<textarea className='reflection-textarea var-notes' rows='2' placeholder='(Optional) Your notes on this variable.' id='" + var_to_display_fixed + "_notes'></textarea>"
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note un/redoing can annotate new elements on the page." + var_notes_reflection if len(var_to_display) > 1 else var_notes_reflection # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         
         print("ha_button:", ha_button)
@@ -220,8 +220,23 @@ import './../App.css';
 import $ from 'jquery';
 window.$ = $;
 
+// store variable notes in exercises
+$('textarea').on("change keyup paste", function(){
+    console.log("text area has changed 2", $(this).val(), $(this).prop("id"), window.location.href.at(-1));
+    localStorage.setItem($(this).prop("id") + "_ex" + window.location.href.at(-1), $(this).val());
+})
+
 const selectors = {};
 const annotables = []; // keys are the specific annotations
+
+$(document).on("ready", function(){
+    // store variable notes in exercises
+    $('textarea').on("change keyup paste", function(){
+        // console.log("text area has changed 2", $(this).val(), $(this).prop("id"), window.location.href.at(-1));
+        // console.log("going to set", $(this).prop("id") + "_ex" + window.location.href.at(-1), "to", $(this).val());
+        localStorage.setItem($(this).prop("id") + "_ex" + window.location.href.at(-1), $(this).val());
+    });
+});
 
 function addNewlines(str, variable_name) {
     // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
