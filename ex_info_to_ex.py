@@ -246,6 +246,11 @@ function h2t(src) { // html to text
     return src.replaceAll("<", "&lt;").replaceAll(">", "&gt;"); //.replace("&", " &amp; "); 
 }
 
+function splitByLastUnderscore(splittable) {
+    var split_index = splittable.lastIndexOf("_");
+    return splittable.substr(0, split_index);
+}
+
 function HAButton(props) {
     const [toggle, setToggle] = useState(true);
     const annotations_to_show_by_tag = [ '""" + "', '".join(annotations_to_show_by_tag) + """' ];
@@ -269,7 +274,7 @@ function HAButton(props) {
         // console.log("element", element);
         let text_to_display = element.outerHTML; // .replaceAll("<", "&lt;").replaceAll(">", "&gt;") - not needed apparently
         var para = document.createElement("p");
-        var variable_from_exercise = props.id.split("_")[0];
+        var variable_from_exercise = splitByLastUnderscore(props.id);
         variable_from_exercise = dollarifyVar(variable_from_exercise);
         var node = document.createTextNode(variable_from_exercise + " " + text_to_display);
         para.appendChild(node);
@@ -353,7 +358,7 @@ function HAButton(props) {
 
     function handleClick() {
         console.log("in handleClick", toggle, props.id);
-        let element_to_a_h = props.id.split("_")[0];
+        let element_to_a_h = splitByLastUnderscore(props.id);
         if (!noannotations.includes(element_to_a_h)) {
             if (toggle)
                 alert("Annotated and highlighted! Play around and check.");
