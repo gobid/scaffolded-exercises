@@ -133,26 +133,32 @@ def modify_js_to_track_vars(src_code, vars_to_track):
         operator_to_use = "+= ' <br> ' +" if (line_to_splice_in["in_for_loop"] and line_to_splice_in["variable"] in vars_to_unfurl) else "="
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
             // console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
-            if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML, '""" + var_name_to_use + """'))}`;
+            // exclude annotations
+            if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """[0] && """ + line_to_splice_in["variable"] + """[0].outerHTML && """ + line_to_splice_in["variable"] + """[0].outerHTML.includes("annotation")) {
+                console.log("it's annotation so skipping showing");
             }
             else {
-                if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.selector} (we output the selector when length is 0)`;
-                }
-                else if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.originalEvent) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.type}`;
-                }
-                else if (typeof(""" + line_to_splice_in["variable"] + """) == 'object') {
-                    try {
-                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ JSON.stringify(""" + line_to_splice_in["variable"] + """);
-                    }
-                    catch {
-                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
-                    }
+                if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML, '""" + var_name_to_use + """'))}`;
                 }
                 else {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
+                    if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.selector} (we output the selector when length is 0)`;
+                    }
+                    else if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.originalEvent) {
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """.type}`;
+                    }
+                    else if (typeof(""" + line_to_splice_in["variable"] + """) == 'object') {
+                        try {
+                            $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ JSON.stringify(""" + line_to_splice_in["variable"] + """);
+                        }
+                        catch {
+                            $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
+                        }
+                    }
+                    else {
+                        $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${""" + line_to_splice_in["variable"] + """}`;
+                    }
                 }
             }
         """)
@@ -166,7 +172,7 @@ def get_var_html(vars_to_track):
     for var_to_display in vars_to_track:
         print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note undoing and then redoing can annotate/highlight new elements on the page." 
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note undoing and then redoing can annotate/highlight new elements on the page." if len(var_to_display) > 1 else "" # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"

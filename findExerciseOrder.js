@@ -15,7 +15,7 @@ for (let sm_key in stateManager) {
     let scope_parts = sm_key.split(":"); 
     variables.push(scope_parts[scope_parts.length-1]);
 }
-// console.log("variables:", variables);
+console.log("variables:", variables);
 
 const callCounts = require(path.resolve(__dirname, `./exercise-data/${timestampKey}/callCounts.json`));
 const runLogString = fs
