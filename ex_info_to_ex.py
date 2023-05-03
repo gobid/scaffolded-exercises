@@ -233,13 +233,17 @@ const tutorons = {
     "top": "The top CSS property participates in specifying the vertical position of a positioned element. It has no effect on non-positioned elements.",
     "load": "Load data from the server and place the returned HTML into the matched elements.",
     "show()": "Display the matched elements.",
-    "error": "Bind an event handler to the \"error\" JavaScript event.",
+    "error": "Bind an event handler to the 'error' JavaScript event.",
     "remove()": "Remove the set of matched elements from the DOM.",
     "append": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
     "Math.floor()": "The static method always rounds down and returns the largest integer less than or equal to a given number.", // JS MDN site
-    ".children()": "Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called",
-    ".not": "A.not(B) returns all A elements that do not have the class name B",
+    "children": "Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called",
+    "not": "A.not(B) returns all A elements that do not have the class name B",
     "find": "Returns the first element in the provided array that satisfies the provided testing function.",
+    "height": "Specifies the height of an element.",
+    "position": "Specifies the type of positioning method used for an element.", // W3
+    "width": "Specifies an element's width",
+    "zIndex": "sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one."
 };
 
 $(document).on("ready", function(){
@@ -472,7 +476,6 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
 
     render() {
         
-        codeToShow = codeToShow.substring(1, codeToShow.length - 2)
         return (
             <div className="App">
                 <div id="app-title">Scaffolded Exercises</div>
@@ -487,12 +490,12 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                     """ + get_var_html(vars_to_track) + """
                     <div className="reflection-area">
                         <p>As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</p>
-                        <textarea className="reflection-textarea" rows="6"></textarea>
+                        <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
                         <pre id="codetoshow"></pre>
                         <p>What is happening in the code?</p>
-                        <textarea className="reflection-textarea" rows="6"></textarea>
+                        <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
                         <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """? """ + ("(Give the meaning of the variable if there is only one.)" if len(relationship_vars) < 2 else "") + """</p>
-                        <textarea className="reflection-textarea" rows="6"></textarea>
+                        <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>
                     </div>
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
                 </div>
