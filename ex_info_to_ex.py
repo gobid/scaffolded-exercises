@@ -236,14 +236,15 @@ const tutorons = {
     "error": "Bind an event handler to the 'error' JavaScript event.",
     "remove()": "Remove the set of matched elements from the DOM.",
     "append": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
-    "Math.floor()": "The static method always rounds down and returns the largest integer less than or equal to a given number.", // JS MDN site
+    "Math.floor": "The static method always rounds down and returns the largest integer less than or equal to a given number.", // JS MDN site
     "children": "Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called",
     "not": "A.not(B) returns all A elements that do not have the class name B",
     "find": "Returns the first element in the provided array that satisfies the provided testing function.",
     "height": "Specifies the height of an element.",
     "position": "Specifies the type of positioning method used for an element.", // W3
     "width": "Specifies an element's width",
-    "zIndex": "sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one."
+    "zIndex": "Sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one.",
+    "Math.round": "Returns the value of a number rounded to the nearest integer"
 };
 
 $(document).on("ready", function(){
