@@ -228,6 +228,19 @@ $('textarea').on("change keyup paste", function(){
 
 const selectors = {};
 const annotables = []; // keys are the specific annotations
+const tutorons = {
+    "left": "The left CSS property participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements.",
+    "top": "The top CSS property participates in specifying the vertical position of a positioned element. It has no effect on non-positioned elements.",
+    "load": "Load data from the server and place the returned HTML into the matched elements.",
+    "show()": "Display the matched elements.",
+    "error": "Bind an event handler to the \"error\" JavaScript event.",
+    "remove()": "Remove the set of matched elements from the DOM.",
+    "append": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
+    "Math.floor()": "The static method always rounds down and returns the largest integer less than or equal to a given number.", // JS MDN site
+    ".children()": "Returns a live HTMLCollection which contains all of the child elements of the element upon which it was called",
+    ".not": "A.not(B) returns all A elements that do not have the class name B",
+    "find": "Returns the first element in the provided array that satisfies the provided testing function.",
+};
 
 $(document).on("ready", function(){
     // store variable notes in exercises
@@ -237,6 +250,31 @@ $(document).on("ready", function(){
         localStorage.setItem($(this).prop("id") + "_ex" + window.location.href.at(-1), $(this).val());
     });
 });
+
+function getPrevNotes() {
+    var prev_notes = "<ul style='position: fixed; left: 100px;'>";
+    var prev_ex = parseInt(window.location.href.at(-1)) - 1;
+    if (prev_ex > -1) {
+        for (var i = 0; i < localStorage.length; i++){
+            var k = localStorage.key(i);
+            if (k.includes("_ex" + prev_ex)) {
+                console.log("prev ex notes: ", localStorage.getItem(k));
+                prev_notes += "<li style='text-align:left; margin:20px;'>" + k + ": " + localStorage.getItem(k) + " <br></li>";
+            }
+        }
+    }
+    prev_notes += "</ul>";
+    return prev_notes;
+}
+
+function getTutoronifiedHTML(code) {
+    code = code.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    for (const [key, value] of Object.entries(tutorons)) {
+        var tutorons_html = "<span class='border-underline' title='" + value + "'>" + key + "</span>";
+        code = code.replaceAll(key, tutorons_html);
+    }
+    return code;
+}
 
 function addNewlines(str, variable_name) {
     // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
@@ -425,10 +463,15 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
 
     componentDidMount() {
         """ + modify_js_to_track_vars(src_to_use, vars_to_track) + """
+        let codeToShow = '""" + json.dumps(code_to_show) + """'
+        codeToShow = codeToShow.substring(1, codeToShow.length - 2);
+        document.getElementById("codetoshow").innerHTML = getTutoronifiedHTML(codeToShow);
+        var prevNotes = getPrevNotes();
+        document.getElementById("prev_notes").innerHTML = getPrevNotes();
     }
 
     render() {
-        let codeToShow = '""" + json.dumps(code_to_show) + """'
+        
         codeToShow = codeToShow.substring(1, codeToShow.length - 2)
         return (
             <div className="App">
@@ -437,6 +480,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                 DOM
                 """ + html_to_use + """
                 <br/>
+                <p id="prev_notes"></p>
                 <div className="exercises">
                     Variables:
                     <br/><br/>
@@ -444,7 +488,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                     <div className="reflection-area">
                         <p>As you interact with the screen, what is happening visually? What is happening to the variable values shown above?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
-                        <pre id="codetoshow">{codeToShow}</pre>
+                        <pre id="codetoshow"></pre>
                         <p>What is happening in the code?</p>
                         <textarea className="reflection-textarea" rows="6"></textarea>
                         <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """? """ + ("(Give the meaning of the variable if there is only one.)" if len(relationship_vars) < 2 else "") + """</p>
