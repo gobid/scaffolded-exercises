@@ -180,8 +180,16 @@ def get_var_html(vars_to_track):
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
 
+def get_relationship_question(relationship_vars):
+    relationship_vars = list(set(relationship_vars))
+    if len(relationship_vars) < 2:
+        return "What is the meaning / purpose of the variable " + ''.join(relationship_vars) + "?"
+    else:
+        return "What is the relationship between the following variables: " + ', '.join(relationship_vars) + "? "
+
 i = 0
 vars_to_track_of_all_ex = []
+pairs_compared = []
 for ex in ordering:
     print("===Writing ex:", str(i), "===")
     vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
@@ -204,6 +212,27 @@ for ex in ordering:
         relationship_vars = vars_to_track_of_all_ex[-2][1:] + vars_to_track_of_all_ex[-1][1:]
     else:
         relationship_vars = vars_to_track_of_all_ex[-1][1:] # it is the first exercise, so just compare this exercise's variables
+    print("A) ex", i, "relationship_vars", relationship_vars)
+    # include only variables that are in the code
+    relationship_vars_copy = relationship_vars.copy()
+    for rv in relationship_vars_copy:
+        print("rv not in ex[code]", rv, ex["code"], rv not in ex["code"])
+        if rv not in ex["code"] and i > 0 and rv not in ordering[i-1]["code"]:
+            if rv in relationship_vars:
+                relationship_vars.remove(rv)
+    print("B) ex", i, "relationship_vars", relationship_vars)
+    # exclude variables already compared
+    relationship_vars_copy = relationship_vars.copy()
+    for rv in relationship_vars_copy:
+        for rv2 in relationship_vars_copy:
+            if (rv, rv2) in pairs_compared or (rv2, rv) in pairs_compared:
+                if rv in relationship_vars:
+                    relationship_vars.remove(rv)
+                if rv2 in relationship_vars:
+                    relationship_vars.remove(rv2)
+            else:
+                pairs_compared.append((rv, rv2))
+    print("ex", i, "relationship_vars", relationship_vars)
 
     lines_to_splice_in = [] # reset lines to splice in
     # pprint.pprint(ex)
@@ -495,7 +524,7 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                         <pre id="codetoshow"></pre>
                         <p>What is happening in the code?</p>
                         <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
-                        <p>What is the relationship between the following variables: """ + ', '.join(list(set(relationship_vars))) + """? """ + ("(Give the meaning of the variable if there is only one.)" if len(relationship_vars) < 2 else "") + """</p>
+                        <p>""" + get_relationship_question(relationship_vars) + """</p>
                         <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>
                     </div>
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
