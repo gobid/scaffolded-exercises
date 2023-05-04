@@ -212,6 +212,7 @@ for ex in ordering:
         relationship_vars = vars_to_track_of_all_ex[-2][1:] + vars_to_track_of_all_ex[-1][1:]
     else:
         relationship_vars = vars_to_track_of_all_ex[-1][1:] # it is the first exercise, so just compare this exercise's variables
+    relationship_vars = list(set(relationship_vars)) # make sure relationship_vars has no duplicates
     print("A) ex", i, "relationship_vars", relationship_vars)
     # include only variables that are in the code
     relationship_vars_copy = relationship_vars.copy()
@@ -222,7 +223,9 @@ for ex in ordering:
                 relationship_vars.remove(rv)
     print("B) ex", i, "relationship_vars", relationship_vars)
     # exclude variables already compared
+    print("pairs_compared before:", pairs_compared)
     relationship_vars_copy = relationship_vars.copy()
+    new_pairs_compared = pairs_compared.copy()
     for rv in relationship_vars_copy:
         for rv2 in relationship_vars_copy:
             if (rv, rv2) in pairs_compared or (rv2, rv) in pairs_compared:
@@ -231,7 +234,10 @@ for ex in ordering:
                 if rv2 in relationship_vars:
                     relationship_vars.remove(rv2)
             else:
-                pairs_compared.append((rv, rv2))
+                if rv != rv2 and (rv, rv2) not in new_pairs_compared: # no adding identical twins or repeat pairs
+                    new_pairs_compared.append((rv, rv2))
+    pairs_compared = new_pairs_compared
+    print("pairs_compared:", pairs_compared)
     print("ex", i, "relationship_vars", relationship_vars)
 
     lines_to_splice_in = [] # reset lines to splice in
