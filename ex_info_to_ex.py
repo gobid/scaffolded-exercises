@@ -13,11 +13,13 @@ EXAMPLE = "XKCD" # MAPSTD
 xkcd_js_src = open("temp/xkcd_src.js").read()
 xkcd_html = """<div id="comic"><div className="map"><div className="ground"></div></div></div>"""
 xkcd_vars_to_skip = ["$overlay", "x", "y", "size"]
-xkcd_vars_to_unfurl = ["name", "tile", "$remove", "$image"] # variables that appear in loops that should be unfurled
+xkcd_vars_to_unfurl = ["name", "tile", "$image"] # variables that appear in loops that should be unfurled
+xkcd_html_arrays = ["$remove"] # DOM variables that are actual arrays of DOM elements
 xkcd_dom_vars = ["$remove", "tile", "$image", "$map"]
 xkcd_annotations_to_skip =[el.replace("$", "d") for el in []]
 xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile", "$remove"]]
 xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
+xkcd_ex_to_skip = ["$overlay.css(", ]
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -132,6 +134,14 @@ def modify_js_to_track_vars(src_code, vars_to_track):
 
         var_name_to_use = line_to_splice_in["variable"].replace("$", "d")
         operator_to_use = "+= ' <br> ' +" if (line_to_splice_in["in_for_loop"] and line_to_splice_in["variable"] in vars_to_unfurl) else "="
+
+        def check_if_html_array(html_var):
+            if html_var in xkcd_html_arrays:
+                html_var = ('createHTMLArray(' + html_var + ')', '0')
+            else:
+                html_var = (html_var + "[0].outerHTML", '1')
+            return html_var
+
         modified_lines.insert(line_to_splice_in["line"] + num_lines_spliced_in, """
             // console.log('""" + line_to_splice_in["variable"] + """', """ + line_to_splice_in["variable"] + """);
             // exclude annotations
@@ -140,7 +150,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
             }
             else {
                 if (JSON.stringify(`${""" + line_to_splice_in["variable"] + """}`).includes("object") && """ + line_to_splice_in["variable"] + """[0]) {
-                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + line_to_splice_in["variable"] + """[0].outerHTML, '""" + var_name_to_use + """'))}`;
+                    $('#""" + var_name_to_use + """')[0].innerHTML """ + operator_to_use + """ `${h2t(addNewlines(""" + check_if_html_array(line_to_splice_in["variable"])[0] + """, '""" + var_name_to_use + """', """ + check_if_html_array(line_to_splice_in["variable"])[1] + """))}`;
                 }
                 else {
                     if (""" + line_to_splice_in["variable"] + """ && """ + line_to_splice_in["variable"] + """.selector) {
@@ -222,16 +232,25 @@ for ex in ordering:
     relationship_vars = list(set(relationship_vars)) # make sure relationship_vars has no duplicates
     print("A) ex", i, "relationship_vars", relationship_vars)
     
+    # get the current and previous exercise's code
+    ex_code = "".join(ex["code"]) if type(ex["code"]) == list else ex["code"]
+    skippable = False
+    for skip_indicator in xkcd_ex_to_skip:
+        if skip_indicator in ex_code:
+            print("Found", skip_indicator, "in ex", i, "so cancelling this exercise")
+            skippable = True
+            break # we skip this exercise
+    if skippable: 
+        continue
+    ex_prev_code = (
+        "".join(ordering[i-1]["code"]) 
+        if type(ordering[i-1]["code"]) == list 
+        else ordering[i-1]["code"]
+    ) if i > 0 else ""
+
     # include only variables that are in the code
     relationship_vars_copy = relationship_vars.copy()
     for rv in relationship_vars_copy:
-        ex_code = "".join(ex["code"]) if type(ex["code"]) == list else ex["code"]
-        ex_prev_code = (
-            "".join(ordering[i-1]["code"]) 
-            if type(ordering[i-1]["code"]) == list 
-            else ordering[i-1]["code"]
-        ) if i > 0 else ""
-        
         # print("rv not in ex[code]", rv, ex_code, rv not in ex_code)
         if rv not in ex_code and i > 0 and rv not in ex_prev_code:
             if rv in relationship_vars:
@@ -324,6 +343,14 @@ $(document).on("ready", function(){
     });
 });
 
+function createHTMLArray(html_array) {
+    var html_array_str = '';
+    for (var html_var of html_array) {
+        html_array_str += html_var.outerHTML + ' and ';
+    }
+    return html_array_str;
+}
+
 function getPrevNotes() {
     var prev_notes = "<ul style='position: fixed; left: 100px;'>";
     var prev_ex = parseInt(window.location.href.at(-1)) - 1;
@@ -349,31 +376,34 @@ function getTutoronifiedHTML(code) {
     return code;
 }
 
-function addNewlines(str, variable_name) {
-    // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
-    // we do it by classes for now
-    let class_loc = str.indexOf('class="') + 'class="'.length;
-    let end_class_loc = str.substring(class_loc).indexOf('"');
-    let class_name = str.substring(class_loc, class_loc + end_class_loc);
-    // console.log("in addNewLines class_name:", class_name);
-    if (selectors[variable_name]) {
-        if (!selectors[variable_name].includes(class_name)) {
-            selectors[variable_name].push(class_name);
+function addNewlines(str, variable_name, perform=1) {
+    if (perform) {
+        // this runs every time a DOM element is shown as a variable on the page, so we should update the selectors at this stage
+        // we do it by classes for now
+        let class_loc = str.indexOf('class="') + 'class="'.length;
+        let end_class_loc = str.substring(class_loc).indexOf('"');
+        let class_name = str.substring(class_loc, class_loc + end_class_loc);
+        // console.log("in addNewLines class_name:", class_name);
+        if (selectors[variable_name]) {
+            if (!selectors[variable_name].includes(class_name)) {
+                selectors[variable_name].push(class_name);
+            }
         }
-    }
-    else {
-        selectors[variable_name] = [];
-    }
+        else {
+            selectors[variable_name] = [];
+        }
 
-    var result = '';
-    while (str.length > 0) {
-        result += str.substring(0, 80) + '\\n';
-        str = str.substring(80);
+        var result = '';
+        while (str.length > 0) {
+            result += str.substring(0, 80) + '\\n';
+            str = str.substring(80);
+        }
+        let dotdotdot = "...";
+        if (result.length < 150) 
+            dotdotdot = " ";
+        return result.substring(0,150) + dotdotdot;
     }
-    let dotdotdot = "...";
-    if (result.length < 150) 
-        dotdotdot = " ";
-    return result.substring(0,150) + dotdotdot;
+    else return str;
 }
 
 function h2t(src) { // html to text
@@ -563,8 +593,9 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                         <pre id="codetoshow"></pre>
                         <p>What is happening in the code?</p>
                         <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
-                        <p>""" + get_relationship_question(relationship_vars) + """</p>
-                        <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>
+                        """ + 
+                        ("""<p>""" + get_relationship_question(relationship_vars) + """</p>
+                        <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>""" if len(relationship_vars) > 0 else "") + """
                     </div>
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
                 </div>
