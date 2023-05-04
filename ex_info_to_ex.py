@@ -114,7 +114,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     print("lines_to_splice_in:")
     pprint.pprint(lines_to_splice_in)
     src_code_lines = src_code.split("\n")
-    modified_lines = src_code_lines.copy()
+    modified_lines = src_code_lines.deepcopy()
     num_lines_spliced_in = 0
     for li, line_to_splice_in in enumerate(lines_to_splice_in):
         if li + 1 < len(lines_to_splice_in) and lines_to_splice_in[li + 1]["line"] >= outer_loop_location and not added_reset_unfurlables: # the next line to splice in is going to be after the loop, so better reset unfurlables first
@@ -215,7 +215,7 @@ for ex in ordering:
     relationship_vars = list(set(relationship_vars)) # make sure relationship_vars has no duplicates
     print("A) ex", i, "relationship_vars", relationship_vars)
     # include only variables that are in the code
-    relationship_vars_copy = relationship_vars.copy()
+    relationship_vars_copy = relationship_vars.deepcopy()
     for rv in relationship_vars_copy:
         print("rv not in ex[code]", rv, ex["code"], rv not in ex["code"])
         if rv not in ex["code"] and i > 0 and rv not in ordering[i-1]["code"]:
@@ -224,8 +224,8 @@ for ex in ordering:
     print("B) ex", i, "relationship_vars", relationship_vars)
     # exclude variables already compared
     print("pairs_compared before:", pairs_compared)
-    relationship_vars_copy = relationship_vars.copy()
-    new_pairs_compared = pairs_compared.copy()
+    relationship_vars_copy = relationship_vars.deepcopy()
+    new_pairs_compared = pairs_compared.deepcopy()
     for rv in relationship_vars_copy:
         for rv2 in relationship_vars_copy:
             if (rv, rv2) in pairs_compared or (rv2, rv) in pairs_compared:
