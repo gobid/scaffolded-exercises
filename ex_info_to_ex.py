@@ -44,7 +44,8 @@ def instrument(t, vars_to_track):
         in_for_loop = 1
     # print("global_depth", global_depth)
     if hasattr(t, "type"):
-        print("t type: ", t.type)
+        pass
+        # print("t type: ", t.type)
         # print(escodegen.generate(t)[:100])
     if hasattr(t, "body"):
         # print("t has a body, going in")
@@ -60,14 +61,14 @@ def instrument(t, vars_to_track):
     if hasattr(t, "expression"): # expression with left hand side
         if t.expression and t.expression.left:
             if t.expression.left.name in vars_to_track:
-                print("need to track", t.expression.left.name, "at", t.expression.left.loc)
+                # print("need to track", t.expression.left.name, "at", t.expression.left.loc)
                 lines_to_splice_in.append({"variable": t.expression.left.name, "line": t.expression.left.loc.end.line, "in_for_loop": in_for_loop})
         instrument(t.expression, vars_to_track)
     if hasattr(t, "declarations"): # variable declaration
         if t.declarations:
             for decl in t.declarations:
                 if decl.id.name in vars_to_track:
-                    print("need to track", decl.id.name, decl.id.loc)
+                    # print("need to track", decl.id.name, decl.id.loc)
                     lines_to_splice_in.append({"variable": decl.id.name, "line": decl.id.loc.end.line, "in_for_loop": in_for_loop})
                 if decl.init.type == "FunctionExpression":
                     instrument(decl.init, vars_to_track)
@@ -78,17 +79,17 @@ def instrument(t, vars_to_track):
         if hasattr(t.callee, "object"):
             if hasattr(t.callee.object, "callee"):
                 if t.callee.object.callee and t.callee.object.callee.name in vars_to_track:
-                    print("need to track", t.callee.object.callee.name, t.callee.object.callee.loc)
+                    # print("need to track", t.callee.object.callee.name, t.callee.object.callee.loc)
                     lines_to_splice_in.append({"variable": t.callee.object.callee.name, "line": t.callee.object.callee.loc.end.line, "in_for_loop": in_for_loop})
                 else:
                     if t.callee.object and t.callee.object.name in vars_to_track:
-                        print("need to track", t.callee.object.name, t.callee.object.loc)
+                        # print("need to track", t.callee.object.name, t.callee.object.loc)
                         lines_to_splice_in.append({"variable": t.callee.object.name, "line": t.callee.object.loc.end.line, "in_for_loop": in_for_loop})
     if hasattr(t, "left"):
         if t.left:
             if hasattr(t.left, "object"):
                 if t.left.object and t.left.object.name in vars_to_track:
-                    print("need to track", t.left.object.name, t.left.object.loc)
+                    # print("need to track", t.left.object.name, t.left.object.loc)
                     lines_to_splice_in.append({"variable": t.left.object.name, "line": t.left.object.loc.end.line, "in_for_loop": in_for_loop})
     if hasattr(t, "init"):
         if t.init:
@@ -105,20 +106,20 @@ def instrument(t, vars_to_track):
 
 def modify_js_to_track_vars(src_code, vars_to_track):
     global in_for_loop, outer_loop_location
-    print("outer_loop_location", outer_loop_location)
+    # print("outer_loop_location", outer_loop_location)
     added_reset_unfurlables = False
     t = esprima.parseScript(src_code, options={'loc': True})
     # print(t)
-    print("vars_to_track:", vars_to_track)
+    # print("vars_to_track:", vars_to_track)
     instrument(t, vars_to_track)
-    print("lines_to_splice_in:")
-    pprint.pprint(lines_to_splice_in)
+    # print("lines_to_splice_in:")
+    # pprint.pprint(lines_to_splice_in)
     src_code_lines = src_code.split("\n")
-    modified_lines = src_code_lines.deepcopy()
+    modified_lines = src_code_lines.copy()
     num_lines_spliced_in = 0
     for li, line_to_splice_in in enumerate(lines_to_splice_in):
         if li + 1 < len(lines_to_splice_in) and lines_to_splice_in[li + 1]["line"] >= outer_loop_location and not added_reset_unfurlables: # the next line to splice in is going to be after the loop, so better reset unfurlables first
-            print("in unfurlables if")
+            # print("in unfurlables if")
             reset_unfurlables_js = ""
             for unfurlable in vars_to_unfurl:
                 reset_unfurlables_js += "try { $('#" + unfurlable.replace("$", "d") + "')[0].innerHTML = ''; } catch { console.log('1 unfurlable not on this page.'); }"
@@ -164,32 +165,37 @@ def modify_js_to_track_vars(src_code, vars_to_track):
         """)
         num_lines_spliced_in += 1
     modified_src_code = "\n".join(modified_lines)
-    print("modified_src_code:", modified_src_code)
+    # print("modified_src_code:", modified_src_code)
     return modified_src_code
 
 def get_var_html(vars_to_track):
     html_of_vars = ""
     for var_to_display in vars_to_track:
-        print("var_to_display:", var_to_display)
+        # print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
         var_notes_reflection = "<textarea className='reflection-textarea var-notes' rows='2' placeholder='(Optional) Your notes on this variable.' id='" + var_to_display_fixed + "_notes'></textarea>"
         ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note un/redoing can annotate new elements on the page." + var_notes_reflection if len(var_to_display) > 1 else var_notes_reflection # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         
-        print("ha_button:", ha_button)
+        # print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
 
 def get_relationship_question(relationship_vars):
     relationship_vars = list(set(relationship_vars))
+    print("relationship_vars:", relationship_vars)
+    rq = ""
     if len(relationship_vars) < 2:
-        return "What is the meaning / purpose of the variable " + ''.join(relationship_vars) + "?"
+        rq = "What is the meaning / purpose of the variable " + ''.join(relationship_vars) + "?"
     else:
-        return "What is the relationship between the following variables: " + ', '.join(relationship_vars) + "? "
+        rq = "What is the relationship between the following variables: " + ', '.join(relationship_vars) + "? "
+    print("rq:", rq)
+    return rq
 
 i = 0
 vars_to_track_of_all_ex = []
 pairs_compared = []
+singles_analyzed = []
 for ex in ordering:
     print("===Writing ex:", str(i), "===")
     vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
@@ -203,6 +209,7 @@ for ex in ordering:
     print("ex ", i, vars_to_track)
     if len(vars_to_track) < 1: continue
     
+    # collect relationships of variables across previous and current exercise
     vars_to_track_of_all_ex[-1] += vars_to_track
     relationship_vars = []
     if len(vars_to_track_of_all_ex) > 1:
@@ -214,30 +221,56 @@ for ex in ordering:
         relationship_vars = vars_to_track_of_all_ex[-1][1:] # it is the first exercise, so just compare this exercise's variables
     relationship_vars = list(set(relationship_vars)) # make sure relationship_vars has no duplicates
     print("A) ex", i, "relationship_vars", relationship_vars)
+    
     # include only variables that are in the code
-    relationship_vars_copy = relationship_vars.deepcopy()
+    relationship_vars_copy = relationship_vars.copy()
     for rv in relationship_vars_copy:
-        print("rv not in ex[code]", rv, ex["code"], rv not in ex["code"])
-        if rv not in ex["code"] and i > 0 and rv not in ordering[i-1]["code"]:
+        ex_code = "".join(ex["code"]) if type(ex["code"]) == list else ex["code"]
+        ex_prev_code = (
+            "".join(ordering[i-1]["code"]) 
+            if type(ordering[i-1]["code"]) == list 
+            else ordering[i-1]["code"]
+        ) if i > 0 else ""
+        
+        # print("rv not in ex[code]", rv, ex_code, rv not in ex_code)
+        if rv not in ex_code and i > 0 and rv not in ex_prev_code:
             if rv in relationship_vars:
                 relationship_vars.remove(rv)
     print("B) ex", i, "relationship_vars", relationship_vars)
+    
     # exclude variables already compared
-    print("pairs_compared before:", pairs_compared)
-    relationship_vars_copy = relationship_vars.deepcopy()
-    new_pairs_compared = pairs_compared.deepcopy()
-    for rv in relationship_vars_copy:
-        for rv2 in relationship_vars_copy:
-            if (rv, rv2) in pairs_compared or (rv2, rv) in pairs_compared:
-                if rv in relationship_vars:
-                    relationship_vars.remove(rv)
-                if rv2 in relationship_vars:
-                    relationship_vars.remove(rv2)
+    if len(relationship_vars) > 1: # skip the edge case of the first exercise of only one relationship_var 
+        print("pairs_compared before:", pairs_compared)
+        pairs_to_remain = []
+        for rv in relationship_vars:
+            for rv2 in relationship_vars:
+                # no adding identical twins or repeat pairs
+                if rv != rv2 and (rv, rv2) not in pairs_compared and (rv2, rv) not in pairs_compared:
+                    pairs_to_remain.append((rv, rv2))
+        for rv in relationship_vars:
+            rv_in_p = False
+            for p in pairs_to_remain:
+                if rv in p:
+                    rv_in_p = True
+            if not rv_in_p:
+                relationship_vars.remove(rv)
+
+        pairs_compared += pairs_to_remain
+        print("pairs_compared:", pairs_compared)
+    
+    # don't repeat singles, don't make list of comparables excessively long
+    if len(relationship_vars) <= 1:
+        print("singles_analyzed", singles_analyzed)
+        if len(relationship_vars) > 0:
+            if relationship_vars[0] in singles_analyzed:
+                relationship_vars.remove(relationship_vars[0])
             else:
-                if rv != rv2 and (rv, rv2) not in new_pairs_compared: # no adding identical twins or repeat pairs
-                    new_pairs_compared.append((rv, rv2))
-    pairs_compared = new_pairs_compared
-    print("pairs_compared:", pairs_compared)
+                singles_analyzed.append(relationship_vars[0])
+    if len(relationship_vars) > 3: # remove singles
+        for s in singles_analyzed:
+            if s in relationship_vars:
+                relationship_vars.remove(s)
+
     print("ex", i, "relationship_vars", relationship_vars)
 
     lines_to_splice_in = [] # reset lines to splice in
