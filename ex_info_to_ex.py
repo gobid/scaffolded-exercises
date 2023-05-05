@@ -316,11 +316,11 @@ $('textarea').on("change keyup paste", function(){
 const selectors = {};
 const annotables = []; // keys are the specific annotations
 const tutorons = {
-    "left": "The left CSS property participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements.",
-    "top": "The top CSS property participates in specifying the vertical position of a positioned element. It has no effect on non-positioned elements.",
+    "left": "The left CSS property participates in specifying the horizontal placing of an element.",
+    "top": "The top CSS property participates in specifying the vertical placing of an element.",
     "load": "Load data from the server and place the returned HTML into the matched elements.",
     "show()": "Display the matched elements.",
-    "error": "Bind an event handler to the 'error' JavaScript event.",
+    "error": "Bind an event handler to the JavaScript event of a runtime err.",
     "remove()": "Remove the set of matched elements from the DOM.",
     "append": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
     "Math.floor": "The static method always rounds down and returns the largest integer less than or equal to a given number.", // JS MDN site
@@ -329,7 +329,7 @@ const tutorons = {
     "find": "Returns the first element in the provided array that satisfies the provided testing function.",
     "height": "Specifies the height of an element.",
     "position": "Specifies the type of positioning method used for an element.", // W3
-    "width": "Specifies an element's width",
+    "width": "Specifies the width of an element.",
     "zIndex": "Sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one.",
     "Math.round": "Returns the value of a number rounded to the nearest integer"
 };
@@ -345,10 +345,19 @@ $(document).on("ready", function(){
 
 function createHTMLArray(html_array) {
     var html_array_str = '';
+    var i = 0;
     for (var html_var of html_array) {
         html_array_str += html_var.outerHTML + ' and ';
+        if (i > 3) {
+            html_array_str += "many more.";
+            break;
+        }
+        i++;
     }
-    return html_array_str;
+    if (html_array_str.substr(-5) == ' and ')
+        return html_array_str.substring(0, html_array_str.length - 5)
+    else
+        return html_array_str.substring(0, 500)
 }
 
 function getPrevNotes() {
