@@ -20,6 +20,7 @@ xkcd_annotations_to_skip =[el.replace("$", "d") for el in []]
 xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "tile", "$remove"]]
 xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
 xkcd_ex_to_skip = ["$overlay.css(", ]
+xkcd_site = "https://xkcd.com/1110"
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -30,6 +31,7 @@ if EXAMPLE == "XKCD":
     annotations_to_skip = xkcd_annotations_to_skip
     annotations_to_show_by_tag = xkcd_annotations_to_show_by_tag
     noannotations = xkcd_noannotations
+    site = xkcd_site
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -207,7 +209,7 @@ control_ex = {
     'domObj': None,
     'otherElemsIncluded': []
 }
-# ordering.append(control_ex) # skip adding the control unless needed, need to split the codeToShow when regenerating control
+ordering.append(control_ex) # skip adding the control unless needed, need to split the codeToShow when regenerating control
 
 lines_to_splice_in = [] # global variable
 global_depth = 0 # for debugging
@@ -353,7 +355,7 @@ def modify_js_to_track_vars(src_code, vars_to_track):
     # print("modified_src_code:", modified_src_code)
     return modified_src_code
 
-def get_var_html(vars_to_track):
+def get_var_html(vars_to_track, reason):
     html_of_vars = ""
     for var_to_display in vars_to_track:
         # print("var_to_display:", var_to_display)
@@ -361,8 +363,10 @@ def get_var_html(vars_to_track):
         var_notes_reflection = "<textarea className='reflection-textarea var-notes' rows='2' placeholder='(Optional) Your notes on this variable.' id='" + var_to_display_fixed + "_notes'></textarea>"
         ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note un/redoing can annotate new elements on the page." + var_notes_reflection if len(var_to_display) > 1 else var_notes_reflection # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
-        
-        # print("ha_button:", ha_button)
+        print("reason", reason)
+        if reason == "control":
+            ha_button = ""
+        print("ha_button:", ha_button)
         html_of_vars += "<p id='" + var_to_display_fixed + "_p'>" + var_to_display + " = " + "<span className =\"pt\" id='" + var_to_display_fixed + "'> </span>" + " </p>" + ha_button + "\n"
     return html_of_vars
 
@@ -376,6 +380,23 @@ def get_relationship_question(relationship_vars):
         rq = "What is the relationship between the following variables: " + ', '.join(relationship_vars) + "? "
     print("rq:", rq)
     return rq
+
+def get_reflection_questions(relationship_vars, reason):
+    if reason == "control":
+        return """<div className="reflection-area">
+                <pre id="codetoshow"></pre>
+                <p>What is happening to the variable values shown above? What is happening in the code? How does it shape the visual output? What is the relationship between the various variables? <i>If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i></p>
+                <textarea id="codereflect" className="reflection-textarea" rows="18"></textarea>
+            </div>"""
+    return """<div className="reflection-area">
+                <p>What is happening to the variable values shown above?</p>
+                <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
+                <pre id="codetoshow"></pre>
+                <p>What is happening in the code? How does it shape the visual output?</p>
+                <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
+                """ + ("""<p>""" + get_relationship_question(relationship_vars) + """</p>
+                <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>""" if len(relationship_vars) > 0 else "") + """
+            </div>"""
 
 i = 0
 vars_to_track_of_all_ex = []
@@ -775,17 +796,8 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
                 <div className="exercises">
                     Variables:
                     <br/><br/>
-                    """ + get_var_html(vars_to_track) + """
-                    <div className="reflection-area">
-                        <p>What is happening to the variable values shown above?</p>
-                        <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
-                        <pre id="codetoshow"></pre>
-                        <p>What is happening in the code? How does it shape the visual output?</p>
-                        <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
-                        """ + 
-                        ("""<p>""" + get_relationship_question(relationship_vars) + """</p>
-                        <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>""" if len(relationship_vars) > 0 else "") + """
-                    </div>
+                    """ + get_var_html(vars_to_track, ex['reason']) + """
+                    """ + get_reflection_questions(relationship_vars, ex['reason']) + """
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
                 </div>
             </div>
