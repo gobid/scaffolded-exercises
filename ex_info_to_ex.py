@@ -758,7 +758,7 @@ function HAButton(props) {
         }
         else {
             if (toggle)
-                alert("Highlighted! Play around and check.");
+                alert("Done! Play around and check.");
         }
         highlightInCode(element_to_a_h);
         setToggle(!toggle);
