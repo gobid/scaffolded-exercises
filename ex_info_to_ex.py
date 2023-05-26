@@ -21,6 +21,7 @@ xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "ti
 xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
 xkcd_ex_to_skip = ["$overlay.css(", ]
 xkcd_site = "https://xkcd.com/1110"
+xkcd_vars_to_only_highlight = 'var v_t_o_h = ["scroll_delta", "pos", "position", "tilesize", "container_size", "dmap", "centre_last", "centre", "dremove"];'
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -32,6 +33,7 @@ if EXAMPLE == "XKCD":
     annotations_to_show_by_tag = xkcd_annotations_to_show_by_tag
     noannotations = xkcd_noannotations
     site = xkcd_site
+    vars_to_only_highlight = xkcd_vars_to_only_highlight # not annotate
 
 fi = open("ordering.js")
 ordering = json.loads(fi.read())
@@ -533,6 +535,8 @@ const tutorons = {
     "Math.round": "Returns the value of a number rounded to the nearest integer"
 };
 
+""" + vars_to_only_highlight + """
+
 $(document).on("ready", function(){
     // store variable notes in exercises
     $('textarea').on("change keyup paste", function(){
@@ -761,8 +765,14 @@ function HAButton(props) {
     }
 
     function buttonText(t) {
-        if (t) return "Annotate / Highlight";
-        else return "Unannotate / Unhighlight";
+        if (t) { 
+            if (v_t_o_h.includes(props.id.replace("_button",""))) return "Highlight";
+            else return "Highlight / Annotate"
+        }
+        else {
+            if (v_t_o_h.includes(props.id.replace("_button",""))) return "Unhighlight";
+            else return "Unhighlight / Unannotate"
+        }
     }
     
     return (
