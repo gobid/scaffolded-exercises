@@ -747,7 +747,7 @@ function HAButton(props) {
         let element_to_a_h = splitByLastUnderscore(props.id);
         if (!noannotations.includes(element_to_a_h)) {
             if (toggle)
-                alert("Annotated and highlighted! Play around and check.");
+                alert("Done! Play around and check.");
             // console.log("element_to_a_h", element_to_a_h);
             // console.log("selectors[", element_to_a_h, "]", selectors[element_to_a_h]);
             for (var selector of selectors[element_to_a_h]) {
