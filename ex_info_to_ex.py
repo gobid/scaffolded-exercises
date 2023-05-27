@@ -21,7 +21,7 @@ xkcd_annotations_to_show_by_tag = [el.replace("$", "d") for el in ["$image", "ti
 xkcd_noannotations = [el.replace("$", "d") for el in ["$map", "position", "centre_last", "centre", "tilesize", "name", "e", "scroll_delta", "pos", "container_size"]]
 xkcd_ex_to_skip = ["$overlay.css(", ]
 xkcd_site = "https://xkcd.com/1110"
-xkcd_vars_to_only_highlight = 'var v_t_o_h = ["scroll_delta", "pos", "position", "tilesize", "container_size", "dmap", "centre_last", "centre", "dremove"];'
+xkcd_vars_to_only_highlight = 'var v_t_o_h = ["scroll_delta", "pos", "position", "tilesize", "container_size", "dmap", "centre_last", "centre", "dremove", "name"];'
 
 if EXAMPLE == "XKCD":
     src_to_use = xkcd_js_src
@@ -363,7 +363,7 @@ def get_var_html(vars_to_track, reason):
         # print("var_to_display:", var_to_display)
         var_to_display_fixed = var_to_display.replace("$", "d")
         var_notes_reflection = "<textarea className='reflection-textarea var-notes' rows='2' placeholder='(Optional) Your notes on this variable.' id='" + var_to_display_fixed + "_notes'></textarea>"
-        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/> Note un/redoing can annotate new elements on the page." + var_notes_reflection if len(var_to_display) > 1 else var_notes_reflection # we can't do variable displays for one-letter variables
+        ha_button = "<HAButton id=\"" + var_to_display_fixed + "_button\"/>" + var_notes_reflection if len(var_to_display) > 1 else var_notes_reflection # we can't do variable displays for one-letter variables
         # if (var_to_display in dom_vars and var_to_display_fixed not in annotations_to_skip) else "" # if a DOM element and not skippable
         print("reason", reason)
         if reason == "control":
@@ -765,21 +765,33 @@ function HAButton(props) {
     }
 
     function buttonText(t) {
+        let codetoshow = '""" + json.dumps(code_to_show) + """';
+        var needle_text = props.id.replace("_button","");
+        var needle_text_short = needle_text.substr(1); // ignore the $ vs d case, all vars are strictly more than 1 character
         if (t) { 
-            if (v_t_o_h.includes(props.id.replace("_button",""))) return "Highlight";
-            else return "Highlight / Annotate"
+            if (codetoshow.includes(needle_text_short)) { // highlights means something
+                if (v_t_o_h.includes(needle_text)) return "Highlight";
+                else return "Highlight / Annotate";
+            }
+            else {
+                if (v_t_o_h.includes(needle_text)) return "Annotate";
+            }
         }
         else {
-            if (v_t_o_h.includes(props.id.replace("_button",""))) return "Unhighlight";
-            else return "Unhighlight / Unannotate"
+            if (v_t_o_h.includes(needle_text)) return "Unhighlight";
+            else return "Unhighlight / Unannotate";
         }
+        return null;
     }
-    
-    return (
-      <button onClick={handleClick}>
-          {buttonText(toggle)}
-      </button>
-    );
+     
+    if (buttonText(toggle)) {
+        return (
+        <button onClick={handleClick}>
+            {buttonText(toggle)}
+        </button> Note un/redoing can annotate new elements on the page.
+        );
+    }
+    else return null;
 }
 
 export default class ExerciseAG""" + str(i) + """ extends React.Component {
