@@ -774,21 +774,21 @@ function HAButton(props) {
                 else return "Highlight / Annotate";
             }
             else {
-                if (v_t_o_h.includes(needle_text)) return "Annotate";
+                if (!v_t_o_h.includes(needle_text)) return "Annotate";
             }
         }
         else {
             if (v_t_o_h.includes(needle_text)) return "Unhighlight";
-            else return "Unhighlight / Unannotate";
+            else return "Unannotate / Unhighlight";
         }
         return null;
     }
      
     if (buttonText(toggle)) {
         return (
-        <button onClick={handleClick}>
+        <p><button onClick={handleClick}>
             {buttonText(toggle)}
-        </button> Note un/redoing can annotate new elements on the page.
+        </button> Note un/redoing can annotate new elements on the page.</p>
         );
     }
     else return null;
