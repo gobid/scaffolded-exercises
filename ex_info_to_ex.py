@@ -387,11 +387,11 @@ def get_reflection_questions(relationship_vars, reason):
     if reason == "control":
         return """<div className="reflection-area">
                 <pre id="codetoshow"></pre>
-                <p>What is happening to the variable values shown above? What is happening in the code? How does it shape the visual output? What is the relationship between the various variables? <i>If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i></p>
+                <p>As you interact with the page, what's happening to the variable values shown above? What is happening in the code? How does it shape the visual output? What is the relationship between the various variables? <i>If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i></p>
                 <textarea id="codereflect" className="reflection-textarea" rows="18"></textarea>
             </div>"""
     return """<div className="reflection-area">
-                <p>What is happening to the variable values shown above?</p>
+                <p>As you interact with the page, what's happening to the variable values shown above?</p>
                 <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
                 <pre id="codetoshow"></pre>
                 <p>What is happening in the code? How does it shape the visual output?</p>
@@ -741,13 +741,20 @@ function HAButton(props) {
 
         // remove all existing annotations to avoid confusion
         if (!toggle) {
-            $(".annotation").remove(); 
+            $(".annotation").remove();
+            // enable all the highlight / annotate buttons on the page
+            $(".habutton").prop("disabled", false);
         }
         
         let element_to_a_h = splitByLastUnderscore(props.id);
         if (!noannotations.includes(element_to_a_h)) {
-            if (toggle)
+            if (toggle) {
                 alert("Done! Play around and check.");
+                // disable all the highlight / annotate buttons on the page
+                $(".habutton").prop("disabled", true);
+                // except this one
+                $("#" + props.id).prop("disabled", false);
+            }
             // console.log("element_to_a_h", element_to_a_h);
             // console.log("selectors[", element_to_a_h, "]", selectors[element_to_a_h]);
             for (var selector of selectors[element_to_a_h]) {
@@ -757,8 +764,13 @@ function HAButton(props) {
             }
         }
         else {
-            if (toggle)
+            if (toggle) {
                 alert("Done! Play around and check.");
+                // disable all the highlight / annotate buttons on the page
+                $(".habutton").prop("disabled", true);
+                // except this one
+                $("#" + props.id).prop("disabled", false);
+            }
         }
         highlightInCode(element_to_a_h);
         setToggle(!toggle);
@@ -786,7 +798,7 @@ function HAButton(props) {
      
     if (buttonText(toggle)) {
         return (
-        <p><button onClick={handleClick}>
+        <p><button className="habutton" id={props.id} onClick={handleClick}>
             {buttonText(toggle)}
         </button> Note un/redoing can annotate new elements on the page.</p>
         );
@@ -811,14 +823,16 @@ export default class ExerciseAG""" + str(i) + """ extends React.Component {
             <div className="App">
                 <div id="app-title">Scaffolded Exercises</div>
                 <br/><br/><br/>
-                DOM
+                <p id="domelemslabel">DOM Elements:</p>
                 """ + html_to_use + """
                 <br/>
                 <p id="prev_notes"></p>
                 <div className="exercises">
                     Variables:
-                    <br/><br/>
+                    <br/>
                     """ + get_var_html(vars_to_track, ex['reason']) + """
+                    <br/><br/>
+                    Reflection Questions:
                     """ + get_reflection_questions(relationship_vars, ex['reason']) + """
                     <a href='/exercise-auto""" + str(i + 1) + """'>Next Exercise</a>
                 </div>
