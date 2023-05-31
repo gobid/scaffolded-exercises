@@ -387,14 +387,14 @@ def get_reflection_questions(relationship_vars, reason):
     if reason == "control":
         return """<div className="reflection-area">
                 <pre id="codetoshow"></pre>
-                <p>As you interact with the page, what's happening to the variable values shown above? What is happening in the code? How does it shape the visual output? What is the relationship between the various variables? <i>If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i></p>
+                <p>As you interact with the page, what's happening to the variable values shown above? What is happening in the code? How does it shape the visual output? What is the relationship between the various variables? <i>Hint: hover over the tool tips in the code. If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i></p>
                 <textarea id="codereflect" className="reflection-textarea" rows="18"></textarea>
             </div>"""
     return """<div className="reflection-area">
                 <p>As you interact with the page, what's happening to the variable values shown above?</p>
                 <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
                 <pre id="codetoshow"></pre>
-                <p>What is happening in the code? How does it shape the visual output? Hint: Use the buttons (annotate, highlight if present) and hover over the tool tips in the code.</p>
+                <p>What is happening in the code? How does it shape the visual output? <i>Hint: Use the buttons (annotate, highlight if present) and hover over the tool tips in the code.</i></p>
                 <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
                 """ + ("""<p>""" + get_relationship_question(relationship_vars) + """</p>
                 <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>""" if len(relationship_vars) > 0 else "") + """
