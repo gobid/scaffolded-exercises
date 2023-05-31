@@ -394,7 +394,7 @@ def get_reflection_questions(relationship_vars, reason):
                 <p>As you interact with the page, what's happening to the variable values shown above?</p>
                 <textarea id="visualreflect" className="reflection-textarea" rows="6"></textarea>
                 <pre id="codetoshow"></pre>
-                <p>What is happening in the code? How does it shape the visual output?</p>
+                <p>What is happening in the code? How does it shape the visual output? Hint: Use the buttons (annotate, highlight if present) and hover over the tool tips in the code.</p>
                 <textarea id="codereflect" className="reflection-textarea" rows="6"></textarea>
                 """ + ("""<p>""" + get_relationship_question(relationship_vars) + """</p>
                 <textarea id="relationreflect" className="reflection-textarea" rows="6"></textarea>""" if len(relationship_vars) > 0 else "") + """
@@ -404,7 +404,8 @@ i = 0
 vars_to_track_of_all_ex = []
 pairs_compared = []
 singles_analyzed = []
-for ex in ordering:
+print("ordering len", len(ordering))
+for j, ex in enumerate(ordering):
     print("===Writing ex:", str(i), "===")
     vars_to_track = [ex['domObj']] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else []
     vars_to_track_of_all_ex.append([1] if (ex['domObj'] and ex['domObj'] not in vars_to_skip) else [0]) # store whether first var is a DOM obj
@@ -564,7 +565,9 @@ function createHTMLArray(html_array) {
 }
 
 function getPrevNotes() {
-    var prev_notes = "<ul style='position: fixed; left: 100px;'>";
+    """ + 
+    ("""var prev_notes = "<div style='position: fixed; left: 100px;'><u>Prior Notes</u><ul>";""" if j < len(ordering) - 1 else """var prev_notes = "<div style='position: fixed; left: 100px;'><ul>";""") + 
+    """
     var prev_ex = parseInt(window.location.href.at(-1)) - 1;
     if (prev_ex == -1)
         prev_ex = 'v'
@@ -577,7 +580,7 @@ function getPrevNotes() {
             }
         }
     }
-    prev_notes += "</ul>";
+    prev_notes += "</ul></div>";
     return prev_notes;
 }
 
@@ -782,8 +785,8 @@ function HAButton(props) {
         var needle_text_short = needle_text.substr(1); // ignore the $ vs d case, all vars are strictly more than 1 character
         if (t) { 
             if (codetoshow.includes(needle_text_short)) { // highlights means something
-                if (v_t_o_h.includes(needle_text)) return "Highlight";
-                else return "Highlight / Annotate";
+                if (v_t_o_h.includes(needle_text)) return "Highlight in Code";
+                else return "Highlight in Code / Annotate";
             }
             else {
                 if (!v_t_o_h.includes(needle_text)) return "Annotate";
@@ -795,13 +798,14 @@ function HAButton(props) {
         }
         return null;
     }
-     
+
     if (buttonText(toggle)) {
         return (
         <p><button className="habutton" id={props.id} onClick={handleClick}>
             {buttonText(toggle)}
-        </button> Note un/redoing can annotate new elements on the page.</p>
+        </button></p>
         );
+        // dont need this anymore after disabling buttons:  Note un/redoing "annotate" can annotate new elements on the page. 
     }
     else return null;
 }
