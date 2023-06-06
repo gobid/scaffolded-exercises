@@ -388,7 +388,6 @@ def get_reflection_questions(relationship_vars, reason):
         return """<div className="reflection-area">
                 <pre id="codetoshow"></pre>
                 <p>As you interact with the page, note what's happening to the variable values shown above. Note what is happening in the code, and how it shapes the visual output. Note the relationship between the various variables. <i>Hint: hover over the tool tips in the code. If you need more help, then feel free to use Chrome DevTools on this site as well: """ + site + """</i>. </p>
-                <!--<textarea id="codereflect" className="reflection-textarea" rows="18"></textarea>-->
             </div>"""
     return """<div className="reflection-area">
                 <p>As you interact with the page, what's happening to the variable values shown above?</p>
