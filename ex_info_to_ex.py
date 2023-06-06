@@ -565,7 +565,7 @@ function createHTMLArray(html_array) {
 
 function getPrevNotes() {
     """ + 
-    ("""var prev_notes = "<div style='position: fixed; left: 100px;'><u>Prior Notes</u><ul>";""" if j < len(ordering) - 1 else """var prev_notes = "<div style='position: fixed; left: 100px;'><ul>";""") + 
+    ("""var prev_notes = "<div style='position: fixed; left: 100px; width:700px;'><u>Prior Notes</u><ul>";""" if j < len(ordering) - 1 else """var prev_notes = "<div style='position: fixed; left: 100px;'><ul>";""") + 
     """
     var prev_ex = parseInt(window.location.href.at(-1)) - 1;
     if (prev_ex == -1)
