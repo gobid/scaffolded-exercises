@@ -11,6 +11,8 @@ npm start
 
 Navigate to `http://localhost:3000/xkcd.com/1110/index.html` to see an exact copy of an XKCD comic. Open developer tools to see more information about what's happening on the page.
 
+Here is the repository for the accompanying frontend: [scaffolded-exercises-interface](https://github.com/gobid/scaffolded-exercises-interface/tree/gobi-branch2).
+
 ## System Explanation
 
 Scaffolded Exercises (SE) analyzes and instruments unminified source code to track variable values, order of execution, and types of code elements in order to create a series of sequenced exercises based on that source code.
